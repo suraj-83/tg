@@ -3,8 +3,14 @@ import Select from 'react-select';
 import { zipCodeMapping } from "../data.js";
 import userImg from "../assets/userImg.png";
 import { Footer, Header } from '../components';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { RetailSignup } from '../redux/slices/authSlice.js';
 
 function RetailForm() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const initialFormData = {
         firstName: '',
         secondName: '',
@@ -14,11 +20,12 @@ function RetailForm() {
         zipCode: '',
         state: '',
         city: '',
-        phoneNumber: '',
+        phoneNo: '',
+        countryCode: '',
+        stateCode: '',
         username: '',
         password: '',
         residentialAddress: '',
-        countryCode: '',
         gender: '',
     };
 
@@ -68,14 +75,35 @@ function RetailForm() {
         setIsValid(validatePassword(newPassword));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         console.log(formData); // Log form data to the console
+        const response = await dispatch(RetailSignup({
+            city: formData.city,
+            country: formData.country,
+            countryCode: formData.countryCode,
+            email: formData.email,
+            firstName: formData.firstName,
+            gender: formData.gender,
+            lastName: formData.lastName,
+            password: formData.password,
+            phoneNo: formData.phoneNo,
+            residentialAddress: formData.residentialAddress,
+            secondName: formData.secondName,
+            state: formData.state,
+            stateCode: formData.stateCode,
+            username: formData.username,
+            zipCode: formData.zipCode,
+        }));
+        console.log(response);
+
+        if (response?.payload?.data?.success) {
+            navigate("/login");
+        }
+
         setFormData(initialFormData); // Reset form data to initial state
-        // if (isFormValid()) {
-        // } else {
-        //     alert('Invalid form submission. Please fix errors.');
-        // }
+
     };
 
     // const isFormValid = () => {
@@ -88,7 +116,7 @@ function RetailForm() {
     // };
 
     return (<>
-            {/* <div className='sticky top-0'><Header/></div> */}
+        {/* <div className='sticky top-0'><Header/></div> */}
         <div className='h-screen w-full mx-auto flex'>
             <div className='w-1/2 h-screen hidden md:block'>
                 <img src={userImg} alt="" className='bg-contain h-full' />
@@ -224,39 +252,41 @@ function RetailForm() {
                                     readOnly
                                     className="w-full p-2 border border-gray-300 rounded"
                                 />
-                            </div> 
+                            </div>
                             {/* Contact Number */}
                             <div className="mb-4">
                                 {/* <label htmlFor="phoneNumber" className="block mb-2 font-semibold">Phone Number</label> */}
                                 <div className="flex">
+                                    
                                 <input
                                             type="text"
                                             maxLength={4}
                                             minLength={3}
-                                            value={formData.phoneNumber.countryCode ? `+${formData.phoneNumber.countryCode}` : ''}
+                                            value={formData.phoneNumber?.countryCode ? `+${formData.phoneNumber.countryCode}` : ''}
+
                                             onChange={(e) => setFormData(prevState => ({
                                                 ...prevState,
                                                 phoneNumber: { ...prevState.phoneNumber, countryCode: e.target.value.replace(/^0+/, '+').replace(/\D/g, '') }
                                             }))}
-                                            className="w-28 p-2 border border-gray-300 rounded"
+                                            className="w-28 p-2 border border-gray-300 rounded mr-2"
                                             placeholder="CountryCode"
-                                        />
-                                        <input
-                                            type="text"
-                                            maxLength={2}
-                                            minLength={2}
-                                            value={formData.phoneNumber.stateCode || ''}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                phoneNumber: { ...(prevState.phoneNumber || {}), stateCode: e.target.value.replace(/^0+/, '').replace(/\D/g, '') }
-                                            }))}
-                                            className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                                            placeholder="StateCode"
                                         />
                                     <input
                                         type="text"
+                                        maxLength={2}
+                                        minLength={2}
+                                        value={formData.phoneNumber?.stateCode || ''}
+                                        onChange={(e) => setFormData(prevState => ({
+                                            ...prevState,
+                                            phoneNumber: { ...(prevState.phoneNumber || {}), stateCode: e.target.value.replace(/^0+/, '').replace(/\D/g, '') }
+                                        }))}
+                                        className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
+                                        placeholder="StateCode"
+                                    />
+                                    <input
+                                        type="text"
                                         maxLength={10}
-                                        value={formData.phoneNumber.number}
+                                        value={formData.phoneNumber?.number || ''}
                                         onChange={(e) => {
                                             setFormData(prevState => ({
                                                 ...prevState,
@@ -265,13 +295,17 @@ function RetailForm() {
                                         }}
                                         className="w-full p-2 border border-gray-300 rounded"
                                         placeholder="Phone Number"
-                                    />                                        
+                                    />
+                                    {/* {JSON.stringify(formData.phoneNumber) !== '{}'
+                                        ? <p className="text-red-600">{JSON.stringify(formData.phoneNumber)}</p>
+                                        : null
+                                    } */}
                                 </div>
                             </div>
                             {formData.phoneNumber && (
                                 <div className="mb-4">
                                     <div className="flex">
-                                    <input
+                                        <input
                                             type="text"
                                             maxLength={4}
                                             minLength={3}

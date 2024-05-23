@@ -8,20 +8,25 @@ function Form() {
     const initialFormData = {
         industry: '',
         companyName: '',
-        addresses: ['', '', '', ''],
+        address1: '',
+        address2: '',
+        address3: '',
+        address4: '',
         zipCode: '',
         country: '',
         cityCode:'',
         city: '',
         state: '',
-        contactPerson: {
+        contactPerson:'',
             firstName: '',
             SecondName: '',
-            lastName: ''
-        },
+            lastName: '',
         gender: '',
         phoneNumber: '',
-        landlineNumber: { countryCode: '', cityCode: '', number: '' },
+        landlineNumber:'',
+        countryCode: '',
+        cityCode: '',
+        number: '' ,
         email: '',
         website: '',
     };
@@ -137,70 +142,80 @@ function Form() {
                                 </div>
                                 </div>
                             </div>
-                            {/* Address 1 */}
-                            <div className="mb-4">
+                        {/* Address 1 */}
+                          {/* Address 1 */}
+                          <div className="mb-4">
                                 {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}
                                 <input
                                     type="text"
                                     id="address1"
                                     placeholder='Address-1'
-                                    value={formData.addresses[0]}
+                                    value={formData.address1 || ''}
                                     onChange={(e) => setFormData(prevState => ({
                                         ...prevState,
-                                        addresses: [
-                                            e.target.value,
-                                            formData.addresses[1],
-                                            formData.addresses[2],
-                                            formData.addresses[3]
-                                        ]
+                                        address1: e.target.value
                                     }))}
                                     className="w-full p-2 border border-gray-300 rounded"
                                 />
                             </div>
 
-                            {formData.addresses[0] && (
-                                <div className="mb-4">
-                                    {/* <label htmlFor="address2" className="block mb-2 font-semibold">Address Line 2</label> */}
-                                    <input
-                                        type="text"
-                                        id="address2"
-                                        placeholder='Address-2'
-                                        value={formData.addresses[1]}
-                                        onChange={(e) => setFormData(prevState => ({
-                                            ...prevState,
-                                            addresses: [
-                                                formData.addresses[0],
-                                                e.target.value,
-                                                formData.addresses[2],
-                                                formData.addresses[3]
-                                            ]
-                                        }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                            )}
+                            {formData.address1 && (
+                                <>
+                                    <div className="mb-4">
+                                        {/* <label htmlFor="address2" className="block mb-2 font-semibold">Address Line 2</label> */}
+                                        <input
+                                            type="text"
+                                            id="address2"
+                                            placeholder='Address-2'
+                                            value={formData.address2 || ''}
+                                            onChange={(e) => setFormData(prevState => ({
+                                                ...prevState,
+                                                address2: e.target.value
+                                            }))}
+                                            className="w-full p-2 border border-gray-300 rounded"
+                                        />
+                                    </div>
 
-                            {formData.addresses[1] && (
-                                <div className="mb-4">
-                                    {/* <label htmlFor="address3" className="block mb-2 font-semibold">Address Line 3</label> */}
-                                    <input
-                                        type="text"
-                                        id="address3"
-                                        placeholder='Address-3'
-                                        value={formData.addresses[2]}
-                                        onChange={(e) => setFormData(prevState => ({
-                                            ...prevState,
-                                            addresses: [
-                                                formData.addresses[0],
-                                                formData.addresses[1],
-                                                e.target.value,
-                                                formData.addresses[3]
-                                            ]
-                                        }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
+                                    {formData.address2 && (
+                                        <>
+                                            <div className="mb-4">
+                                                {/* <label htmlFor="address3" className="block mb-2 font-semibold">Address Line 3</label> */}
+                                                <input
+                                                    type="text"
+                                                    id="address3"
+                                                    placeholder='Address-3'
+                                                    value={formData.address3 || ''}
+                                                    onChange={(e) => setFormData(prevState => ({
+                                                        ...prevState,
+                                                        address3: e.target.value
+                                                    }))}
+                                                    className="w-full p-2 border border-gray-300 rounded"
+                                                />
+                                            </div>
+
+                                            {formData.address3 && (
+                                                <>
+                                                    <div className="mb-4">
+                                                        {/* <label htmlFor="address4" className="block mb-2 font-semibold">Address Line 4</label> */}
+                                                        <input
+                                                            type="text"
+                                                            id="address4"
+                                                            placeholder='Address-4'
+                                                            value={formData.address4 || ''}
+                                                            onChange={(e) => setFormData(prevState => ({
+                                                                ...prevState,
+                                                                address4: e.target.value
+                                                            }))}
+                                                            className="w-full p-2 border border-gray-300 rounded"
+                                                        />
+                                                    </div>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                </>
                             )}
+                        
                         </div>
                         <div className="flex items-center gap-3 w-full">
 
@@ -359,7 +374,7 @@ function Form() {
                                             type="text"
                                             maxLength={4}
                                             minLength={3}
-                                            value={`+${formData.landlineNumber.countryCode}`}
+                                            value={formData.landlineNumber.countryCode ? `+${formData.landlineNumber.countryCode}` : undefined}
                                             onChange={(e) => setFormData(prevState => ({
                                                 ...prevState,
                                                 landlineNumber: { ...prevState.landlineNumber, countryCode: e.target.value.replace(/^\+?/, '+').replace(/\D/g, '') }
@@ -369,6 +384,7 @@ function Form() {
                                             style={{ color: 'gray' }}
                                             aria-label="CountryCode" 
                                         />
+
 
                                         <input
                                             type="text"
