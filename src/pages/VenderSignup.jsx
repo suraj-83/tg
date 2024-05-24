@@ -3,8 +3,14 @@ import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/Image/y.jpg";
 import { Footer, Header } from "../components";
+import { VendorSignup } from "../redux/slices/authSlice.js";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialFormData = {
     areaOfWork: "",
     companyName: "",
@@ -46,11 +52,17 @@ function Form() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    const response = await dispatch(VendorSignup(formData));
+    console.log(response);
 
+    if (response?.payload?.data?.success) {
+      navigate("/vendor-login");
+    }
+
+    console.log(formData);
     // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
     setFormData(initialFormData); // Reset form data to initial state
   };
@@ -309,9 +321,9 @@ function Form() {
                       value={formData.contactPersonLastName || ""}
                       onChange={(e) =>
                         setFormData((prevState) => ({
-                            ...prevState,
-                            contactPersonLastName: e.target.value,
-                          }))
+                          ...prevState,
+                          contactPersonLastName: e.target.value,
+                        }))
                       }
                       className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -320,7 +332,7 @@ function Form() {
                 {/* Gender */}
                 <div className="mb-4">
                   <fieldset>
-                    {/* <legend className="block mb-2 font-semibold">Gender</legend> */}
+                    <legend className="sr-only">Gender</legend>
                     <div className="flex items-center justify-center gap-8">
                       <div className="flex items-center">
                         <input
@@ -386,21 +398,16 @@ function Form() {
                       type="checkbox"
                       checked={phoneNumberVisible}
                       onChange={() =>
-                        setPhoneNumberVisible(
-                          (prevVisible) => !prevVisible
-                        )
+                        setPhoneNumberVisible((prevVisible) => !prevVisible)
                       }
                       className="mr-2"
                     />
-                    
                     Mobile Number
                     <input
                       type="checkbox"
                       checked={formData.landlineNumberVisible}
                       onChange={() =>
-                        setLandLineNumberVisible(
-                          (prevVisible) => !prevVisible
-                        )
+                        setLandLineNumberVisible((prevVisible) => !prevVisible)
                       }
                       className="ml-4 mr-2"
                     />
@@ -415,8 +422,8 @@ function Form() {
                           minLength={3}
                           value={
                             formData.countryCode
-                            ? `+${formData.countryCode}`
-                            : ""
+                              ? `+${formData.countryCode}`
+                              : ""
                           }
                           onChange={(e) =>
                             setFormData((prevState) => ({
@@ -466,7 +473,7 @@ function Form() {
                         maxLength={4}
                         minLength={3}
                         value={
-                            formData.landlineCountryCode
+                          formData.landlineCountryCode
                             ? `+${formData.landlineCountryCode}`
                             : ""
                         }
@@ -492,7 +499,7 @@ function Form() {
                         onChange={(e) =>
                           setFormData((prevState) => ({
                             ...prevState,
-                            landlineCityCode: e.target.value
+                            landlineCityCode: e.target.value,
                           }))
                         }
                         className="w-20 p-2 border border-gray-300 rounded mr-2"
@@ -506,7 +513,7 @@ function Form() {
                         onChange={(e) =>
                           setFormData((prevState) => ({
                             ...prevState,
-                            landlineNumber: e.target.value
+                            landlineNumber: e.target.value,
                           }))
                         }
                         className="w-40 p-2 border border-gray-300 rounded"

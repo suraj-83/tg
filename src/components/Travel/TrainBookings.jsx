@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { createTrainTravel } from "../../redux/slices/travelSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const TrainBookingForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [numberOfPersons, setNumberOfPersons] = useState(1);
   const [formData, setFormData] = useState([
     {
-      fullName: '',
-      ageOrDOB: '',
-      gender: '',
-      contactNo: '',
-      email: '',
-      travelFrom: '',
-      travelTo: '',
-      classToTravel: '',
-      travelDate: '',
-      remarks: '',
-      trainNo: '',
-      timePreference: '',
+      fullName: "",
+      dob: "",
+      gender: "",
+      contactNo: "",
+      email: "",
+      travelFrom: "",
+      travelTo: "",
+      classOfTravel: "",
+      travelDate: "",
+      remarks: "",
+      trainNo: "",
+      timePreference: "",
     },
   ]);
 
@@ -32,18 +38,18 @@ const TrainBookingForm = () => {
     const updatedFormData = [...formData];
     while (updatedFormData.length < newNumberOfPersons) {
       updatedFormData.push({
-        fullName: '',
-        ageOrDOB: '',
-        gender: '',
-        contactNo: '',
-        email: '',
-        travelFrom: '',
-        travelTo: '',
-        classToTravel: '',
-        travelDate: '',
-        remarks: '',
-        trainNo: '',
-        timePreference: '',
+        fullName: "",
+        dob: "",
+        gender: "",
+        contactNo: "",
+        email: "",
+        travelFrom: "",
+        travelTo: "",
+        classOfTravel: "",
+        travelDate: "",
+        remarks: "",
+        trainNo: "",
+        timePreference: "",
       });
     }
     while (updatedFormData.length > newNumberOfPersons) {
@@ -52,8 +58,16 @@ const TrainBookingForm = () => {
     setFormData(updatedFormData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const response = await dispatch(createTrainTravel(formData));
+    console.log(response);
+
+    if (response?.payload?.data?.success) {
+      navigate("/");
+    }
+
     console.log(formData);
   };
 
@@ -105,7 +119,7 @@ const TrainBookingForm = () => {
                     <input
                       type="date"
                       name="ageOrDOB"
-                      value={person.ageOrDOB}
+                      value={person.dob}
                       onChange={(e) => handleChange(e, index)}
                       className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
                     />
@@ -167,8 +181,8 @@ const TrainBookingForm = () => {
                   </td>
                   <td>
                     <select
-                      name="classToTravel"
-                      value={person.classToTravel}
+                      name="classOfTravel"
+                      value={person.classOfTravel}
                       onChange={(e) => handleChange(e, index)}
                       className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
                     >
@@ -214,7 +228,10 @@ const TrainBookingForm = () => {
             </tbody>
           </table>
           <div className="flex flex-col justify-center">
-            <label className="w-full text-gray-700 font-bold mb-2" htmlFor="numberOfPersons">
+            <label
+              className="w-full text-gray-700 font-bold mb-2"
+              htmlFor="numberOfPersons"
+            >
               Number of Persons
             </label>
             <select
@@ -231,7 +248,10 @@ const TrainBookingForm = () => {
             </select>
           </div>
 
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
             Submit
           </button>
         </div>

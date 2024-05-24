@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { createVolvoBusTravel } from "../../redux/slices/travelSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const BusBookingForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [numberOfPersons, setNumberOfPersons] = useState(1);
   const [formData, setFormData] = useState([
     {
-      fullName: '',
-      ageOrDOB: '',
-      gender: '',
-      contactNo: '',
-      email: '',
-      pickupLocation: '',
-      destination: '',
-      travelDate: '',
-      seatType: '',
-      busNo: '',
+      fullName: "",
+      dob: "",
+      gender: "",
+      contactNo: "",
+      email: "",
+      pickupLocation: "",
+      destination: "",
+      travelDate: "",
+      seatType: "",
+      busNo: "",
     },
   ]);
 
@@ -30,16 +36,16 @@ const BusBookingForm = () => {
     const updatedFormData = [...formData];
     while (updatedFormData.length < newNumberOfPersons) {
       updatedFormData.push({
-        fullName: '',
-        ageOrDOB: '',
-        gender: '',
-        contactNo: '',
-        email: '',
-        pickupLocation: '',
-        destination: '',
-        travelDate: '',
-        seatType: '',
-        busNo: '',
+        fullName: "",
+        dob: "",
+        gender: "",
+        contactNo: "",
+        email: "",
+        pickupLocation: "",
+        destination: "",
+        travelDate: "",
+        seatType: "",
+        busNo: "",
       });
     }
     while (updatedFormData.length > newNumberOfPersons) {
@@ -48,11 +54,11 @@ const BusBookingForm = () => {
     setFormData(updatedFormData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const allFormData = formData.map(person => ({
+    const allFormData = formData.map((person) => ({
       fullName: person.fullName,
-      ageOrDOB: person.ageOrDOB,
+      dob: person.dob,
       gender: person.gender,
       contactNo: person.contactNo,
       email: person.email,
@@ -63,8 +69,14 @@ const BusBookingForm = () => {
       busNo: person.busNo,
     }));
     console.log(allFormData);
+
+    const response = await dispatch(createVolvoBusTravel(formData));
+    console.log(response);
+
+    if (response?.payload?.data?.success) {
+      navigate("/");
+    }
   };
-  
 
   return (
     <div className="min-h-screen">
@@ -112,8 +124,8 @@ const BusBookingForm = () => {
                   <td>
                     <input
                       type="date"
-                      name="ageOrDOB"
-                      value={person.ageOrDOB}
+                      name="dob"
+                      value={person.dob}
                       onChange={(e) => handleChange(e, index)}
                       className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
                     />
@@ -209,7 +221,10 @@ const BusBookingForm = () => {
             </tbody>
           </table>
           <div className="flex flex-col justify-center">
-            <label className="w-full text-gray-700 font-bold mb-2" htmlFor="numberOfPersons">
+            <label
+              className="w-full text-gray-700 font-bold mb-2"
+              htmlFor="numberOfPersons"
+            >
               Number of Persons
             </label>
             <select
@@ -226,7 +241,10 @@ const BusBookingForm = () => {
             </select>
           </div>
 
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
             Submit
           </button>
         </div>
@@ -236,4 +254,3 @@ const BusBookingForm = () => {
 };
 
 export default BusBookingForm;
-
