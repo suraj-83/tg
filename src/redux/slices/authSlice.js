@@ -28,6 +28,25 @@ export const RetailSignup = createAsyncThunk('auth/retail-signup', async (data) 
     }
 })
 
+export const VendorSignup = createAsyncThunk('auth/vendor-signup', async (data) => {
+    try {
+        const response = axiosInstance.post("/user/vendor-register", data)
+
+        console.log("Vendor User: ", (await response).data)
+
+        toast.promise(response, {
+            loading: 'Creating account...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create your account"
+        })
+
+        return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
 
 export const retailLogin = createAsyncThunk('auth/retail-login', async (data) => {
     try {

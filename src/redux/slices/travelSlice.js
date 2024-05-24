@@ -6,7 +6,7 @@ const initialState = {
 
 }
 
-export const trainTravel = createAsyncThunk('travel/train', async (data) => {
+export const createTrainTravel = createAsyncThunk('travel/create-train', async (data) => {
     try {
         console.log("Train : ", data)
 
@@ -26,7 +26,7 @@ export const trainTravel = createAsyncThunk('travel/train', async (data) => {
     }
 })
 
-export const airTravel = createAsyncThunk('travel/air', async (data) => {
+export const createAirTravel = createAsyncThunk('travel/create-air', async (data) => {
     try {
         const response = axiosInstance.post("/travel/air", data)
 
@@ -44,34 +44,61 @@ export const airTravel = createAsyncThunk('travel/air', async (data) => {
     }
 })
 
-export const getTravelDetails = createAsyncThunk('travel/getAllDetails', async (userId) => {
+export const createVolvoBusTravel = createAsyncThunk('travel/create-volvoBus', async (data) => {
     try {
-        const response = axiosInstance.get(`/travel/travel-all/${userId}`)
+        const response = axiosInstance.post("/travel/bus", data)
 
-        return (await response).data;
+        toast.promise(response, {
+            loading: 'Creating bus travel...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create bus travel"
+        })
+
+        return await response;
     } catch (error) {
-        toast.error(error?.message)
+        toast.error(error?.response?.data?.message)
     }
 })
 
-export const getCurrentUserTravelDetails = createAsyncThunk('travel/getCurrentUserTravelDetails', async () => {
+export const createCabTravel = createAsyncThunk('travel/create-cab', async (data) => {
     try {
-        const response = axiosInstance.get("/travel/travel-details")
+        const response = axiosInstance.post("/travel/cab", data)
 
-        console.log((await response).data);
+        toast.promise(response, {
+            loading: 'Creating cab travel...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create cab travel"
+        })
 
-        return (await response).data;
+        return await response;
     } catch (error) {
-        toast.error(error?.message)
+        toast.error(error?.response?.data?.message)
     }
 })
+
+
+// export const getCurrentUserTravelDetails = createAsyncThunk('travel/getCurrentUserTravelDetails', async () => {
+//     try {
+//         const response = axiosInstance.get("/travel/travel-details")
+
+//         console.log((await response).data);
+
+//         return (await response).data;
+//     } catch (error) {
+//         toast.error(error?.message)
+//     }
+// })
 
 const travelSlice = createSlice({
     name: 'travel',
     initialState,
     reducers: {},
     extraReducers: () => {
-    
+
     }
 })
 
