@@ -1,8 +1,7 @@
-// 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-const inputClasses = "mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm"
-const labelClasses = "block font-medium"
+const inputClasses = "mt-1 block w-full p-2 border border-zinc-300 rounded-md shadow-sm";
+const labelClasses = "block font-medium";
 
 const TourForm = () => {
     const [formData, setFormData] = useState({
@@ -16,25 +15,25 @@ const TourForm = () => {
         pickUpAddress: '',
         dropDate: '',
         dropAddress: '',
-        cabDuration: 0,
-        noOfCab: 0,
+        cabDuration: '',
+        noOfCab: '',
         typeOfCab: '',
-        noOfPersons: 0,
+        noOfPersons: '',
         travelingWithInfant: '',
         otherRequirements: '',
-    })
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
-        })
-    }
+        });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        console.log(JSON.stringify(formData, null, 2));
         setFormData({
             tourPlan: '',
             name: '',
@@ -46,22 +45,22 @@ const TourForm = () => {
             pickUpAddress: '',
             dropDate: '',
             dropAddress: '',
-            cabDuration: 0,
-            noOfCab: 0,
+            cabDuration: '',
+            noOfCab: '',
             typeOfCab: '',
-            noOfPersons: 0,
+            noOfPersons: '',
             travelingWithInfant: '',
             otherRequirements: '',
-        })
-    }
+        });
+    };
 
     return (      
         <div className="min-h-[90vh] w-full flex items-center justify-center py-16">
             <form onSubmit={handleSubmit} className="bg-blue-100 p-5 rounded-lg flex flex-wrap gap-7 w-full lg:w-1/2 shadow-[0_0_10px_black]">
-                    <div>
-                        <label htmlFor="tour-plan" className={labelClasses}>Tour Plan</label>
-                        <input type="text" id="tour-plan" name="tourPlan" className={inputClasses} value={formData.tourPlan} onChange={handleChange} />
-                    </div>
+                <div>
+                    <label htmlFor="tour-plan" className={labelClasses}>Tour Plan</label>
+                    <input type="text" id="tour-plan" name="tourPlan" className={inputClasses} value={formData.tourPlan} onChange={handleChange} />
+                </div>
                 <div>
                     <label htmlFor="name" className={labelClasses}>Name</label>
                     <input type="text" id="name" name="name" className={inputClasses} value={formData.name} onChange={handleChange} />
@@ -81,7 +80,7 @@ const TourForm = () => {
                 <div>
                     <label htmlFor="cab-required-for" className={labelClasses}>Cab Required For</label>
                     <select id="cab-required-for" name="cabRequiredFor" className={inputClasses} value={formData.cabRequiredFor} onChange={handleChange}>
-                    <option>Select</option>
+                        <option>Select</option>
                         <option value="Airport Transfer / Drop">Airport Transfer / Drop</option>
                         <option value="Outstation Travel">Outstation Travel</option>
                         <option value="One Way Drop">One Way Drop</option>
@@ -140,4 +139,4 @@ const TourForm = () => {
     );
 };
 
-export default TourForm
+export default TourForm;

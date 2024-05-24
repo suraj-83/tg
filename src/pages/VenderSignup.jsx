@@ -11,23 +11,15 @@ function Form() {
         address1: '',
         address2: '',
         address3: '',
-        address4: '',
         zipCode: '',
         country: '',
-        cityCode:'',
         city: '',
         state: '',
-        contactPerson:'',
-            firstName: '',
-            SecondName: '',
-            lastName: '',
         gender: '',
         phoneNumber: '',
         landlineNumber:'',
-        countryCode: '',
-        cityCode: '',
-        number: '' ,
         email: '',
+        password: '',
         website: '',
     };
 
@@ -44,17 +36,32 @@ function Form() {
         }));
     };
 
-    // Handler for industry/business type change
-    const handleIndustryChange = (selectedOption) => {
-        setFormData(prevState => ({
-            ...prevState,
-            industry: selectedOption.value
-        }));
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); // Log form data to the console
+        const formattedData = {
+            areaOfWork: formData.industry,
+            companyName: formData.companyName,
+            zipCode: formData.zipCode,
+            country: formData.country,
+            city: formData.city,
+            state: formData.state,
+            gender: formData.gender,
+            countryCode: formData.phoneNumber.countryCode,
+            stateCode: formData.phoneNumber.state,
+            phoneNumber: formData.phoneNumber.number,
+            // phoneNumber2: formData.landlineNumber,
+            // countryCode: formData.landlineNumber.countryCode,
+            cityCode: formData.landlineNumber.cityCode,
+            landlineNumber: formData.landlineNumber,
+            username: formData.email.split('@')[0], // Extract username from email
+            email: formData.email,
+            password: formData.password,
+            website: formData.website,
+            address1: formData.address1,
+            address2: formData.address2,
+            address3: formData.address3,
+        };
+        console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
         setFormData(initialFormData); // Reset form data to initial state
     };
 
@@ -101,7 +108,7 @@ function Form() {
                                 <div className="mb-4 w-[35vh]">
                                 <div className='flex gap-4 pb-4'>
                                     <select
-                                        value={formData.contactPerson.title}
+                                        value={formData?.contactPerson?.title || ''}
                                         onChange={(e) => {
                                             if (e.target.value === 'Other') {
                                                 setFormData(prevState => ({
@@ -144,7 +151,7 @@ function Form() {
                             </div>
                         {/* Address 1 */}
                           {/* Address 1 */}
-                          <div className="mb-4">
+                        <div className="mb-4">
                                 {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}
                                 <input
                                     type="text"
@@ -267,21 +274,21 @@ function Form() {
                                     <input
                                         type="text"
                                         placeholder="First Name"
-                                        value={formData.contactPerson.firstName}
+                                        value={formData.contactPerson?.firstName || ''}
                                         onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, firstName: e.target.value } }))}
                                         className="w-full p-2 border border-gray-300 rounded"
                                     />
                                     <input
                                         type="text"
                                         placeholder="Second Name"
-                                        value={formData.contactPerson.SecondName}
+                                        value={formData.contactPerson?.SecondName || ''}
                                         onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, SecondName: e.target.value } }))}
                                         className="w-full p-2 border border-gray-300 rounded"
                                     />
                                     <input
                                         type="text"
                                         placeholder="Last Name"
-                                        value={formData.contactPerson.lastName}
+                                        value={formData.contactPerson?.lastName || ''}
                                         onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, lastName: e.target.value } }))}
                                         className="w-full p-2 border border-gray-300 rounded"
                                     />

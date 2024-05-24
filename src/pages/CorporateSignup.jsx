@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { zipCodeMapping, industryOptions } from "../data.js"
+import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/img.jpg";
 import { Footer, Header } from '../components';
 
@@ -11,24 +11,34 @@ function Form() {
         address1: '',
         address2: '',
         address3: '',
-        address4: '',
         zipCode: '',
         country: '',
-        cityCode:'',
         city: '',
         state: '',
-        contactPerson: '',
+        contactPerson: {
+            title: '',
             firstName: '',
             SecondName: '',
             lastName: ''
-        ,
+        },
         gender: '',
-        phoneNumber: '',
-        phoneNumber2: '',
-        landlineNumber: '',
-        countryCode:'',    
-        number: '' ,
+        phoneNumber: {
+            countryCode: '',
+            stateCode: '',
+            number: ''
+        },
+        phoneNumber2: {
+            countryCode: '',
+            stateCode: '',
+            number: ''
+        },
+        landlineNumber: {
+            countryCode: '',
+            cityCode: '',
+            number: ''
+        },
         email: '',
+        password: '',
         website: '',
     };
 
@@ -55,61 +65,108 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); // Log form data to the console
-        setFormData(initialFormData); // Reset form data to initial state
+    
+        // Extracting relevant data from formData
+        const {
+            industry,
+            companyName,
+            zipCode,
+            country,
+            city,
+            state,
+            contactPerson,            
+            gender,
+            phoneNumber,
+            phoneNumber2,
+            landlineNumber,
+            email,
+            password,
+            website,
+            address1,
+            address2,
+            address3,
+        } = formData;
+    
+        // Creating a formatted string
+        const formattedData = `
+            Industry: ${industry}
+            Company Name: ${companyName}
+            ZIP Code: ${zipCode}
+            Country: ${country}
+            City: ${city}
+            State: ${state}
+            Contact Person: ${contactPerson.firstName} ${contactPerson.SecondName} ${contactPerson.lastName}
+            Gender: ${gender}
+            Phone Number 1: ${phoneNumber.countryCode}-${phoneNumber.stateCode}-${phoneNumber.number}
+            Phone Number 2: ${phoneNumber2.countryCode}-${phoneNumber2.stateCode}-${phoneNumber2.number}
+            Landline Number: ${landlineNumber.countryCode}-${landlineNumber.cityCode}-${landlineNumber.number}
+            Email: ${email}
+            Password: ${password}
+            Website: ${website}
+            Address 1: ${address1}
+            Address 2: ${address2}
+            Address 3: ${address3}
+        `;
+    
+        // Log the formatted data to the console
+        console.log(formattedData);
+    
+        // Reset form data to initial state
+        setFormData(initialFormData);
     };
-
+    
     return (
         <>
-        {/* <div className='sticky top-0'>            <Header/></div> */}
-        
-        <div className='h-screen w-full mx-auto flex'>
-            <div className='w-1/2 h-screen hidden md:block'>
-                <img src={corprateImg} alt="" className='bg-contain h-full' />
-            </div>
-            <div className='w-full  lg:w-1/2 h-screen overflow-y-scroll'>
-                <form onSubmit={handleSubmit} className="bg-gray-100 p-6 ">
-                    <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline">
-                        Corporate Sign Up
-                    </h1>
+            {/* <div className='sticky top-0'>            <Header/></div> */}
 
-                    <div className=" min-h-[90vh]">
-                        <div className="flex flex-wrap sm:flex-wrap gap-3">
-                            <div className='flex justify-between w-full gap-3'>
-                                <div className="mb-4">
-                                    {/* <label htmlFor="country" className="block mb-2 font-semibold">Country</label> */}
-                                    <input
-                                        type="text"
-                                        id="country"
-                                        placeholder='Country'
-                                        value={formData.country || 'India'}
-                                        readOnly
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
+            <div className='h-screen w-full mx-auto flex'>
+                <div className='w-1/2 h-screen hidden md:block'>
+                    <img src={corprateImg} alt="" className='bg-contain h-full' />
+                </div>
+                <div className='w-full  lg:w-1/2 h-screen overflow-y-scroll'>
+                    <form onSubmit={handleSubmit} className="bg-gray-100 p-6 ">
+                        <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline">
+                            Corporate Sign Up
+                        </h1>
+
+                        <div className=" min-h-[90vh]">
+                            <div className="flex flex-wrap sm:flex-wrap gap-3">
+                                <div className='flex justify-between w-full gap-3'>
+                                    <div className="mb-4">
+                                        {/* <label htmlFor="country" className="block mb-2 font-semibold">Country</label> */}
+                                        <input
+                                            type="text"
+                                            id="country"
+                                            placeholder='Country'
+                                            value={formData.country || 'India'}
+                                            readOnly
+                                            className="w-full p-2 border border-gray-300 rounded"
+                                        />
+                                    </div>
+                                    {/* Company Name */}
+                                    <div className="mb-4">
+                                        {/* <label htmlFor="companyName" className="block mb-2 font-semibold">Company Name</label> */}
+                                        <input
+                                            type="text"
+                                            id="companyName"
+                                            placeholder='Company Name'
+                                            value={formData.companyName}
+                                            onChange={(e) => setFormData(prevState => ({ ...prevState, companyName: e.target.value }))}
+                                            className="w-full p-2 border border-gray-300 rounded"
+                                        />
+                                    </div>
+                                    <div className="mb-4 w-[35vh]">
+                                        {/* <label htmlFor="industry" className="block mb-2 font-semibold">Type of Industry/Business</label> */}
+                                        <Select
+                                            id="industry"
+                                            placeholder="Type of Industry/Business"
+                                            value={industryOptions.find(option => option.value === formData.industry)}
+                                            onChange={handleIndustryChange}
+                                            options={industryOptions} className='rounded'
+                                        />
+                                    </div>
                                 </div>
-                                {/* Company Name */}
-                                <div className="mb-4">
-                                    {/* <label htmlFor="companyName" className="block mb-2 font-semibold">Company Name</label> */}
-                                    <input
-                                        type="text"
-                                        id="companyName"
-                                        placeholder='Company Name'
-                                        value={formData.companyName}
-                                        onChange={(e) => setFormData(prevState => ({ ...prevState, companyName: e.target.value }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4 w-[35vh]">
-                                    {/* <label htmlFor="industry" className="block mb-2 font-semibold">Type of Industry/Business</label> */}
-                                    <Select
-                                        id="industry"
-                                        placeholder="Type of Industry/Business"
-                                        value={industryOptions.find(option => option.value === formData.industry)}
-                                        onChange={handleIndustryChange}
-                                        options={industryOptions} className='rounded'
-                                    />
-                                </div>
-                            </div>
+                        
                             {/* Address 1 */}
                             <div className="mb-4">
                                 {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}
@@ -314,108 +371,110 @@ function Form() {
 
                         {/* Phone Number */}
                         <>
-                            <div className="mb-4">
-                                <div className="flex items-center">
-                                    <input
-                                        type="checkbox"
-                                        checked={formData.phoneNumberVisible}
-                                        onChange={() => setFormData(prevState => ({ ...prevState, phoneNumberVisible: !prevState.phoneNumberVisible }))}
-                                        className="mr-2"
-                                    />
-                                    Mobile Number
-                                    <input
-                                        type="checkbox"
-                                        checked={formData.landlineNumberVisible}
-                                        onChange={() => setFormData(prevState => ({ ...prevState, landlineNumberVisible: !prevState.landlineNumberVisible }))}
-                                        className="ml-4 mr-2"
-                                    />
-                                    Landline Number
-                                </div>
-                                {formData.phoneNumberVisible && (
-                            <div className='flex flex-wrap'>
-                                <div className="flex mt-2">
-                                        <input
-                                            type="text"
-                                            maxLength={4}
-                                            minLength={3}
-                                            value={formData.phoneNumber.countryCode ? `+${formData.phoneNumber.countryCode}` : ''}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                phoneNumber: { ...prevState.phoneNumber, countryCode: e.target.value.replace(/^0+/, '+').replace(/\D/g, '') }
-                                            }))}
-                                            className="w-28 p-2 border border-gray-300 rounded"
-                                            placeholder="CountryCode"
-                                        />
-                                        <input
-                                            type="text"
-                                            maxLength={2}
-                                            minLength={2}
-                                            value={formData.phoneNumber.stateCode || ''}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                phoneNumber: { ...prevState.phoneNumber, stateCode: e.target.value.replace(/^0+/, '').replace(/\D/g, '') }
-                                            }))}
-                                            className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                                            placeholder="StateCode"
-                                        />
-                                        <input
-                                            type="text"
-                                            maxLength={10}
-                                            value={formData.phoneNumber.number}
-                                            className="w-full p-2 border border-gray-300 rounded"
-                                            placeholder="Phone Number"
-                                        />
-                                    </div>
-                            </div>
-                                )}
-                                {formData.landlineNumberVisible && (
-                                    <div className="flex mt-2">
-                                        <input
-                                            type="text"
-                                            maxLength={4}
-                                            minLength={3}
-                                            value={formData.landlineNumber.countryCode ? `+${formData.landlineNumber.countryCode}` : ''}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                landlineNumber: { ...prevState.landlineNumber, countryCode: e.target.value.replace(/^\+?/, '+').replace(/\D/g, '') }
-                                            }))}
-                                            className="w-20 p-2 border border-gray-300 rounded mr-2"
-                                            placeholder="CountryCode" 
-                                            style={{ color: 'gray' }}
-                                            aria-label="CountryCode" 
-                                        />
+    <div className="mb-4">
+        <div className="flex items-center">
+            <input
+                type="checkbox"
+                checked={formData.phoneNumberVisible}
+                onChange={() => setFormData(prevState => ({ ...prevState, phoneNumberVisible: !prevState.phoneNumberVisible }))}
+                className="mr-2"
+            />
+            Mobile Number
+            <input
+                type="checkbox"
+                checked={formData.landlineNumberVisible}
+                onChange={() => setFormData(prevState => ({ ...prevState, landlineNumberVisible: !prevState.landlineNumberVisible }))}
+                className="ml-4 mr-2"
+            />
+            Landline Number
+        </div>
+        {formData.phoneNumberVisible && (
+            <div className='flex flex-wrap'>
+                <div className="flex mt-2">
+                    <input
+                        type="text"
+                        maxLength={4}
+                        minLength={3}
+                        value={formData.phoneNumber.countryCode ? `+${formData.phoneNumber.countryCode}` : ''}
+                        onChange={(e) => setFormData(prevState => ({
+                            ...prevState,
+                            phoneNumber: { ...prevState.phoneNumber, countryCode: e.target.value.replace(/^0+/, '+').replace(/\D/g, '') }
+                        }))}
+                        className="w-28 p-2 border border-gray-300 rounded"
+                        placeholder="CountryCode"
+                    />
+                    <input
+                        type="text"
+                        maxLength={2}
+                        minLength={2}
+                        value={formData.phoneNumber.stateCode || ''}
+                        onChange={(e) => setFormData(prevState => ({
+                            ...prevState,
+                            phoneNumber: { ...prevState.phoneNumber, stateCode: e.target.value.replace(/^0+/, '').replace(/\D/g, '') }
+                        }))}
+                        className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
+                        placeholder="StateCode"
+                    />
+                    <input
+                        type="text"
+                        maxLength={10}
+                        value={formData.phoneNumber.number}
+                        onChange={(e) => setFormData(prevState => ({
+                            ...prevState,
+                            phoneNumber: { ...prevState.phoneNumber, number: e.target.value.replace(/\D/g, '') }
+                        }))}
+                        className="w-full p-2 border border-gray-300 rounded"
+                        placeholder="Phone Number"
+                    />
+                </div>
+            </div>
+        )}
+        {formData.landlineNumberVisible && (
+            <div className="flex mt-2">
+                <input
+                    type="text"
+                    maxLength={4}
+                    minLength={3}
+                    value={formData.landlineNumber.countryCode ? `+${formData.landlineNumber.countryCode}` : ''}
+                    onChange={(e) => setFormData(prevState => ({
+                        ...prevState,
+                        landlineNumber: { ...prevState.landlineNumber, countryCode: e.target.value.replace(/^\+?/, '+').replace(/\D/g, '') }
+                    }))}
+                    className="w-20 p-2 border border-gray-300 rounded mr-2"
+                    placeholder="CountryCode"
+                    style={{ color: 'gray' }}
+                    aria-label="CountryCode"
+                />
 
-                                        <input
-                                            type="text"
-                                            maxLength={4}
-                                            minLength={3}
-                                            value={formData.landlineNumber.cityCode}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                landlineNumber: { ...prevState.landlineNumber, cityCode: e.target.value }
-                                            }))}
-                                            className="w-20 p-2 border border-gray-300 rounded mr-2"
-                                            placeholder="CityCode"
-                                        />
-                                        <input
-                                            type="text"
-                                            maxLength={7}
-                                            minLength={6}
-                                            value={formData.landlineNumber.number}
-                                            onChange={(e) => setFormData(prevState => ({
-                                                ...prevState,
-                                                landlineNumber: { ...prevState.landlineNumber, number: e.target.value.replace(/\D/g, '') }
-                                            }))}
-                                            className="w-40 p-2 border border-gray-300 rounded"
-                                            placeholder="Landline Number"
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                            {/* Email */}
+                <input
+                    type="text"
+                    maxLength={4}
+                    minLength={3}
+                    value={formData.landlineNumber.cityCode}
+                    onChange={(e) => setFormData(prevState => ({
+                        ...prevState,
+                        landlineNumber: { ...prevState.landlineNumber, cityCode: e.target.value }
+                    }))}
+                    className="w-20 p-2 border border-gray-300 rounded mr-2"
+                    placeholder="CityCode"
+                />
+                <input
+                    type="text"
+                    maxLength={7}
+                    minLength={6}
+                    value={formData.landlineNumber.number}
+                    onChange={(e) => setFormData(prevState => ({
+                        ...prevState,
+                        landlineNumber: { ...prevState.landlineNumber, number: e.target.value.replace(/\D/g, '') }
+                    }))}
+                    className="w-40 p-2 border border-gray-300 rounded"
+                    placeholder="Landline Number"
+                />
+            </div>
+        )}
+    </div>
+</>
 
-
-                        </>
 
                         <div className="mb-4 flex items-center gap-4 w-full">
                             {/* <label htmlFor="email" className="block mb-2 font-semibold">Email</label> */}
