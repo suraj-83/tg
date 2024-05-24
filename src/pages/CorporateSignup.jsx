@@ -7,112 +7,53 @@ import { Footer, Header } from '../components';
 function Form() {
     const initialFormData = {
         industry: '',
-        companyName: '',
-        address1: '',
-        address2: '',
-        address3: '',
-        zipCode: '',
-        country: '',
-        city: '',
-        state: '',
-        contactPerson: {
-            title: '',
-            firstName: '',
-            SecondName: '',
-            lastName: ''
-        },
-        gender: '',
-        phoneNumber: {
-            countryCode: '',
-            stateCode: '',
-            number: ''
-        },
-        phoneNumber2: {
-            countryCode: '',
-            stateCode: '',
-            number: ''
-        },
-        landlineNumber: {
-            countryCode: '',
-            cityCode: '',
-            number: ''
-        },
+        companyName: "",
+    zipCode: "",
+    country: "",
+    city: "",
+    state: "",    
+    address1: "",
+    address2: "",
+    address3: "",
+    address4: "",
+    phoneNumber: "",
+    countryCode: "",
+    stateCode: "",
+    landlineNumber: "",
+    landlineCountryCode: "",
+    landlineCityCode: "",
+    contactPersonFirstName: "",
+    contactPersonSecondName: "",
+    contactPersonLastName: "",
+    contactPersonGender: "",
         email: '',
         password: '',
         website: '',
     };
 
     const [formData, setFormData] = useState(initialFormData);
-
+    const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
+    const [landlineNumberVisible, setLandLineNumberVisible] = useState(false);
+  
     const handleZipCodeChange = (e) => {
-        const zipCode = e.target.value;
-        setFormData(prevState => ({
-            ...prevState,
-            zipCode: zipCode,
-            country: zipCodeMapping[zipCode]?.country || '',
-            city: zipCodeMapping[zipCode]?.city || '',
-            state: zipCodeMapping[zipCode]?.state || ''
-        }));
+      const zipCode = e.target.value;
+      setFormData((prevState) => ({
+        ...prevState,
+        zipCode: zipCode,
+        country: zipCodeMapping[zipCode]?.country || "",
+        city: zipCodeMapping[zipCode]?.city || "",
+        state: zipCodeMapping[zipCode]?.state || "",
+      }));
     };
-
-    // Handler for industry/business type change
-    const handleIndustryChange = (selectedOption) => {
-        setFormData(prevState => ({
-            ...prevState,
-            industry: selectedOption.value
-        }));
-    };
-
+  
     const handleSubmit = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+  
+      console.log(formData);
+  
+      // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
+      setFormData(initialFormData); // Reset form data to initial state
     
-        // Extracting relevant data from formData
-        const {
-            industry,
-            companyName,
-            zipCode,
-            country,
-            city,
-            state,
-            contactPerson,            
-            gender,
-            phoneNumber,
-            phoneNumber2,
-            landlineNumber,
-            email,
-            password,
-            website,
-            address1,
-            address2,
-            address3,
-        } = formData;
-    
-        // Creating a formatted string
-        const formattedData = `
-            Industry: ${industry}
-            Company Name: ${companyName}
-            ZIP Code: ${zipCode}
-            Country: ${country}
-            City: ${city}
-            State: ${state}
-            Contact Person: ${contactPerson.firstName} ${contactPerson.SecondName} ${contactPerson.lastName}
-            Gender: ${gender}
-            Phone Number 1: ${phoneNumber.countryCode}-${phoneNumber.stateCode}-${phoneNumber.number}
-            Phone Number 2: ${phoneNumber2.countryCode}-${phoneNumber2.stateCode}-${phoneNumber2.number}
-            Landline Number: ${landlineNumber.countryCode}-${landlineNumber.cityCode}-${landlineNumber.number}
-            Email: ${email}
-            Password: ${password}
-            Website: ${website}
-            Address 1: ${address1}
-            Address 2: ${address2}
-            Address 3: ${address3}
-        `;
-    
-        // Log the formatted data to the console
-        console.log(formattedData);
-    
-        // Reset form data to initial state
-        setFormData(initialFormData);
     };
     
     return (
@@ -161,7 +102,7 @@ function Form() {
                                             id="industry"
                                             placeholder="Type of Industry/Business"
                                             value={industryOptions.find(option => option.value === formData.industry)}
-                                            onChange={handleIndustryChange}
+                                            onChange={(e) => setFormData(prevState => ({ ...prevState, industry: e.value }))}
                                             options={industryOptions} className='rounded'
                                         />
                                     </div>
@@ -285,10 +226,10 @@ function Form() {
 
                             {/* Contact Person */}
                             <div className="mb-4">
-                                <p className="w-full py-2 font-semibold">Contact Details</p>
-                                <div className='flex gap-4 pb-4'>
+                  <p className="w-full py-2 font-semibold">Contact Details</p>
+                  <div className='flex gap-4 pb-4'>
                                     <select
-                                        value={formData.contactPerson.title}
+                                        value={formData.contactPerson ? formData.contactPerson.title : ''}
                                         onChange={(e) => {
                                             if (e.target.value === 'Other') {
                                                 setFormData(prevState => ({
@@ -309,7 +250,7 @@ function Form() {
                                         <option value="Other">Other</option>
                                     </select>
                                     {
-                                        formData.contactPerson.title === 'Other' &&
+                                        formData.contactPerson && formData.contactPerson.title === 'Other' &&
                                         <input
                                             type="text"
                                             placeholder="Other Department"
@@ -320,160 +261,246 @@ function Form() {
                                     }
 
                                 </div>
-                                <div className="grid grid-cols-3 gap-4 justify-between w-full">
-                                    <input
-                                        type="text"
-                                        placeholder="First Name"
-                                        value={formData.contactPerson.firstName}
-                                        onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, firstName: e.target.value } }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Second Name"
-                                        value={formData.contactPerson.SecondName}
-                                        onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, SecondName: e.target.value } }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Last Name"
-                                        value={formData.contactPerson.lastName}
-                                        onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, lastName: e.target.value } }))}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
+                  <div className="grid grid-cols-3 gap-4 justify-between w-full">
+                    <input
+                      type="text"
+                      placeholder="First Name"
+                      value={formData.contactPersonFirstName || ""}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          contactPersonFirstName: e.target.value,
+                        }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Second Name"
+                      value={formData.contactPersonSecondName || ""}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          contactPersonSecondName: e.target.value,
+                        }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Last Name"
+                      value={formData.contactPersonLastName || ""}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                            ...prevState,
+                            contactPersonLastName: e.target.value,
+                          }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                  </div>
+                </div>
+                {/* Gender */}
+                <div className="mb-4">
+                  <fieldset>
+                    {/* <legend className="block mb-2 font-semibold">Gender</legend> */}
+                    <div className="flex items-center justify-center gap-8">
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="contactPersonGender"
+                          id="gender-male"
+                          value="male"
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              contactPersonGender: e.target.value,
+                            }))
+                          }
+                        />
+                        <label htmlFor="gender-male" className="ml-2">
+                          Male
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="contactPersonGender"
+                          id="gender-female"
+                          value="female"
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              contactPersonGender: e.target.value,
+                            }))
+                          }
+                        />
+                        <label htmlFor="gender-female" className="ml-2">
+                          Female
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="radio"
+                          name="contactPersonGender"
+                          id="gender-transgender"
+                          value="transgender"
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              contactPersonGender: e.target.value,
+                            }))
+                          }
+                        />
+                        <label htmlFor="gender-transgender" className="ml-2">
+                          Transgender
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
 
-                                </div>
-                            </div>
-                            {/* Gender */}
-                            <div className="mb-4">
-                                <fieldset>
-                                    {/* <legend className="block mb-2 font-semibold">Gender</legend> */}
-                                    <div className='flex items-center justify-center gap-8'>
-                                        <div className="flex items-center">
-                                            <input type="radio" name="gender" id="gender-male" value="male" />
-                                            <label htmlFor="gender-male" className="ml-2">Male</label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input type="radio" name="gender" id="gender-female" value="female" />
-                                            <label htmlFor="gender-female" className="ml-2">Female</label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input type="radio" name="gender" id="gender-transgender" value="transgender" />
-                                            <label htmlFor="gender-transgender" className="ml-2">Transgender</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-
-                        </div>
 
                         {/* Phone Number */}
                         <>
-    <div className="mb-4">
-        <div className="flex items-center">
-            <input
-                type="checkbox"
-                checked={formData.phoneNumberVisible}
-                onChange={() => setFormData(prevState => ({ ...prevState, phoneNumberVisible: !prevState.phoneNumberVisible }))}
-                className="mr-2"
-            />
-            Mobile Number
-            <input
-                type="checkbox"
-                checked={formData.landlineNumberVisible}
-                onChange={() => setFormData(prevState => ({ ...prevState, landlineNumberVisible: !prevState.landlineNumberVisible }))}
-                className="ml-4 mr-2"
-            />
-            Landline Number
-        </div>
-        {formData.phoneNumberVisible && (
-            <div className='flex flex-wrap'>
-                <div className="flex mt-2">
+                <div className="mb-4">
+                  <div className="flex items-center">
                     <input
+                      type="checkbox"
+                      checked={phoneNumberVisible}
+                      onChange={() =>
+                        setPhoneNumberVisible(
+                          (prevVisible) => !prevVisible
+                        )
+                      }
+                      className="mr-2"
+                    />
+                    
+                    Mobile Number
+                    <input
+                      type="checkbox"
+                      checked={formData.landlineNumberVisible}
+                      onChange={() =>
+                        setLandLineNumberVisible(
+                          (prevVisible) => !prevVisible
+                        )
+                      }
+                      className="ml-4 mr-2"
+                    />
+                    Landline Number
+                  </div>
+                  {phoneNumberVisible && (
+                    <div className="flex flex-wrap">
+                      <div className="flex mt-2">
+                        <input
+                          type="text"
+                          maxLength={4}
+                          minLength={3}
+                          value={
+                            formData.countryCode
+                            ? `+${formData.countryCode}`
+                            : ""
+                          }
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              countryCode: e.target.value
+                                .replace(/^0+/, "")
+                                .replace(/\D/g, ""),
+                            }))
+                          }
+                          className="w-28 p-2 border border-gray-300 rounded"
+                          placeholder="CountryCode"
+                        />
+                        <input
+                          type="text"
+                          maxLength={2}
+                          minLength={2}
+                          value={formData.stateCode || ""}
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              stateCode: e.target.value,
+                            }))
+                          }
+                          className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
+                          placeholder="StateCode"
+                        />
+                        <input
+                          type="text"
+                          maxLength={10}
+                          value={formData.phoneNumber}
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              phoneNumber: e.target.value,
+                            }))
+                          }
+                          className="w-full p-2 border border-gray-300 rounded"
+                          placeholder="Phone Number"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {landlineNumberVisible && (
+                    <div className="flex mt-2">
+                      <input
                         type="text"
                         maxLength={4}
                         minLength={3}
-                        value={formData.phoneNumber.countryCode ? `+${formData.phoneNumber.countryCode}` : ''}
-                        onChange={(e) => setFormData(prevState => ({
+                        value={
+                            formData.landlineCountryCode
+                            ? `+${formData.landlineCountryCode}`
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
                             ...prevState,
-                            phoneNumber: { ...prevState.phoneNumber, countryCode: e.target.value.replace(/^0+/, '+').replace(/\D/g, '') }
-                        }))}
-                        className="w-28 p-2 border border-gray-300 rounded"
+                            landlineCountryCode: e.target.value
+                              .replace(/^0+/, "")
+                              .replace(/\D/g, ""),
+                          }))
+                        }
+                        className="w-20 p-2 border border-gray-300 rounded mr-2"
                         placeholder="CountryCode"
-                    />
-                    <input
-                        type="text"
-                        maxLength={2}
-                        minLength={2}
-                        value={formData.phoneNumber.stateCode || ''}
-                        onChange={(e) => setFormData(prevState => ({
-                            ...prevState,
-                            phoneNumber: { ...prevState.phoneNumber, stateCode: e.target.value.replace(/^0+/, '').replace(/\D/g, '') }
-                        }))}
-                        className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                        placeholder="StateCode"
-                    />
-                    <input
-                        type="text"
-                        maxLength={10}
-                        value={formData.phoneNumber.number}
-                        onChange={(e) => setFormData(prevState => ({
-                            ...prevState,
-                            phoneNumber: { ...prevState.phoneNumber, number: e.target.value.replace(/\D/g, '') }
-                        }))}
-                        className="w-full p-2 border border-gray-300 rounded"
-                        placeholder="Phone Number"
-                    />
-                </div>
-            </div>
-        )}
-        {formData.landlineNumberVisible && (
-            <div className="flex mt-2">
-                <input
-                    type="text"
-                    maxLength={4}
-                    minLength={3}
-                    value={formData.landlineNumber.countryCode ? `+${formData.landlineNumber.countryCode}` : ''}
-                    onChange={(e) => setFormData(prevState => ({
-                        ...prevState,
-                        landlineNumber: { ...prevState.landlineNumber, countryCode: e.target.value.replace(/^\+?/, '+').replace(/\D/g, '') }
-                    }))}
-                    className="w-20 p-2 border border-gray-300 rounded mr-2"
-                    placeholder="CountryCode"
-                    style={{ color: 'gray' }}
-                    aria-label="CountryCode"
-                />
+                        style={{ color: "gray" }}
+                        aria-label="CountryCode"
+                      />
 
-                <input
-                    type="text"
-                    maxLength={4}
-                    minLength={3}
-                    value={formData.landlineNumber.cityCode}
-                    onChange={(e) => setFormData(prevState => ({
-                        ...prevState,
-                        landlineNumber: { ...prevState.landlineNumber, cityCode: e.target.value }
-                    }))}
-                    className="w-20 p-2 border border-gray-300 rounded mr-2"
-                    placeholder="CityCode"
-                />
-                <input
-                    type="text"
-                    maxLength={7}
-                    minLength={6}
-                    value={formData.landlineNumber.number}
-                    onChange={(e) => setFormData(prevState => ({
-                        ...prevState,
-                        landlineNumber: { ...prevState.landlineNumber, number: e.target.value.replace(/\D/g, '') }
-                    }))}
-                    className="w-40 p-2 border border-gray-300 rounded"
-                    placeholder="Landline Number"
-                />
-            </div>
-        )}
-    </div>
-</>
+                      <input
+                        type="text"
+                        maxLength={4}
+                        minLength={3}
+                        value={formData.landlineCityCode}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            landlineCityCode: e.target.value
+                          }))
+                        }
+                        className="w-20 p-2 border border-gray-300 rounded mr-2"
+                        placeholder="CityCode"
+                      />
+                      <input
+                        type="text"
+                        maxLength={7}
+                        minLength={6}
+                        value={formData.landlineNumber}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            landlineNumber: e.target.value
+                          }))
+                        }
+                        className="w-40 p-2 border border-gray-300 rounded"
+                        placeholder="Landline Number"
+                      />
+                    </div>
+                  )}
+                </div>
+                {/* Email */}
+              </>
 
 
                         <div className="mb-4 flex items-center gap-4 w-full">
