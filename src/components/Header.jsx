@@ -17,6 +17,7 @@ const Header = () => {
                     </Link>
                     <ul className="flex space-x-6">
                         <li><Link to="/" className="text-gray-600 hover:text-gray-900">Home</Link></li>
+
                         <li className="relative">
                             <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={toggleDropdown}>
                                 Travel Mode <span className="right-0 text-gray-400">▾</span>
@@ -33,6 +34,30 @@ const Header = () => {
                         <li><Link to="#" className="text-gray-600 hover:text-gray-900">Destinations</Link></li>
                         <li><Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link></li>
                         <li><Link to="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link></li>
+                        <li className="relative">
+                            <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={toggleDropdown}>
+                                Login <span className="right-0 text-gray-400">▾</span>
+                            </button>
+                            {dropdownOpen && (
+                                <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
+                                    <li><Link to="/venderlogin" className="block px-5 py-2 hover:bg-gray-200">Vender</Link></li>
+                                    <li><Link to="/corporatelogin" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                    <li><Link to="/retaillogin" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                </ul>
+                            )}
+                        </li>
+                        <li className="relative">
+                            <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={toggleDropdown}>
+                                Register <span className="right-0 text-gray-400">▾</span>
+                            </button>
+                            {dropdownOpen && (
+                                <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
+                                    <li><Link to="/vender" className="block px-5 py-2 hover:bg-gray-200">Vender</Link></li>
+                                    <li><Link to="/retail" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                    <li><Link to="/corporate" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                </ul>
+                            )}
+                        </li>
                     </ul>
                 </div>
             </div>

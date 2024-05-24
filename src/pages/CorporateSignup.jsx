@@ -22,6 +22,7 @@ function Form() {
     landlineNumber: "",
     landlineCountryCode: "",
     landlineCityCode: "",
+    contactDeparment: "",
     contactPersonFirstName: "",
     contactPersonSecondName: "",
     contactPersonLastName: "",
@@ -229,15 +230,15 @@ function Form() {
                   <p className="w-full py-2 font-semibold">Contact Details</p>
                   <div className='flex gap-4 pb-4'>
                                     <select
-                                        value={formData.contactPerson ? formData.contactPerson.title : ''}
+                                        value={formData.contactDeparment ? formData.contactDeparment.title : ''}
                                         onChange={(e) => {
                                             if (e.target.value === 'Other') {
                                                 setFormData(prevState => ({
-                                                    ...prevState, contactPerson: { ...prevState.contactPerson, title: e.target.value, otherTitle: '' }
+                                                    ...prevState, contactDeparment: { ...prevState.contactDeparment, title: e.target.value, otherTitle: '' }
                                                 }))
                                             } else {
                                                 setFormData(prevState => ({
-                                                    ...prevState, contactPerson: { ...prevState.contactPerson, title: e.target.value }
+                                                    ...prevState, contactDeparment: { ...prevState.contactDeparment, title: e.target.value }
                                                 }))
                                             }
                                         }}
@@ -250,18 +251,18 @@ function Form() {
                                         <option value="Other">Other</option>
                                     </select>
                                     {
-                                        formData.contactPerson && formData.contactPerson.title === 'Other' &&
+                                        formData.contactDeparment && formData.contactDeparment.title === 'Other' &&
                                         <input
                                             type="text"
                                             placeholder="Other Department"
-                                            value={formData.contactPerson.otherTitle}
-                                            onChange={(e) => setFormData(prevState => ({ ...prevState, contactPerson: { ...prevState.contactPerson, otherTitle: e.target.value } }))}
+                                            value={formData.contactDeparment.otherTitle}
+                                            onChange={(e) => setFormData(prevState => ({ ...prevState, contactDeparment: { ...prevState.contactDeparment, otherTitle: e.target.value } }))}
                                             className=" p-2 border border-gray-300 rounded mt-2"
                                         />
-                                    }
+                                    } 
 
                                 </div>
-                  <div className="grid grid-cols-3 gap-4 justify-between w-full">
+                <div className="grid grid-cols-3 gap-4 justify-between w-full">
                     <input
                       type="text"
                       placeholder="First Name"
