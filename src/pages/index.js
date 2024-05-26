@@ -5,8 +5,8 @@ import AboutUs from "./AboutUs"
 import CorporateSignup from "./CorporateSignup"
 import CorporateLogin from "./CorporateLogin"
 import NotFound from "./NotFound"
-import VenderSignup from "./VenderSignup"
-import VenderLogin from "./VenderLogin"
+import VendorSignup from "./VendorSignup"
+import VendorLogin from "./VendorLogin"
 import FlightBookings from "../components/Travel/FlightBookings"
 import TrainBookings from "../components/Travel/TrainBookings"
 import CabBookings from "../components/Travel/CabBookings"
@@ -21,8 +21,8 @@ export {
     CorporateSignup,
     CorporateLogin,
     NotFound,
-    VenderSignup,
-    VenderLogin,
+    VendorSignup,
+    VendorLogin,
     FlightBookings,
     TrainBookings,
     CabBookings,
