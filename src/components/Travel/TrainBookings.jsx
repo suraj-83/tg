@@ -7,7 +7,7 @@ const TrainBookingForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [numberOfPersons, setNumberOfPersons] = useState(1);
+ 
   const [formData, setFormData] = useState([
     {
       fullName: "",
