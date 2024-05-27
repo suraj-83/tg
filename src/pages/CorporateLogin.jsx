@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { corprateLogin } from '../redux/slices/authSlice';
 
 function CorporateLogin() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialFormData = {
         email: '',
@@ -16,10 +18,10 @@ function CorporateLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await dispatch(CorporateLogin(formData));
+        const response = await dispatch(corprateLogin(formData));
 
         if (response?.payload?.data?.success) {
-            // Redirect to dashboard or wherever needed
+            navigate("/")
         } else {
             setIsValid(false);
         }

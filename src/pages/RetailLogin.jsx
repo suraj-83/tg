@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { retailLogin } from '../redux/slices/authSlice';
 
 
 function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialFormData = {
-        username: '',
+        email: '',
         password: ''
     };
 
@@ -25,10 +27,10 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await dispatch(RetailLogin(formData));
+        const response = await dispatch(retailLogin(formData));
 
         if (response?.payload?.data?.success) {
-            // Redirect to dashboard or wherever needed
+            navigate("/")
         } else {
             setIsValid(false);
         }
@@ -41,10 +43,10 @@ function Login() {
                 <div className="mb-4">
                     <input
                         type="text"
-                        id="username"
-                        placeholder='Username'
-                        value={formData.username}
-                        onChange={(e) => setFormData(prevState => ({ ...prevState, username: e.target.value }))}
+                        id="email"
+                        placeholder='email'
+                        value={formData.email}
+                        onChange={(e) => setFormData(prevState => ({ ...prevState, email: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
@@ -58,7 +60,7 @@ function Login() {
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
-                {!isValid && <p className="text-red-500 mt-1">Invalid username or password</p>}
+                {!isValid && <p className="text-red-500 mt-1">Invalid email or password</p>}
                 <div className="mb-4 flex justify-between items-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
                     <Link to="/signup" className="text-blue-500 hover:underline">Don't have an account? Sign up</Link>

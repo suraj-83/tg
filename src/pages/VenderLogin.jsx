@@ -1,24 +1,36 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { vendorLogin } from "../redux/slices/authSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
 
-    // Add your login logic here (e.g., API call to validate user credentials)
-    // If login is successful, navigate to the desired page, for example, dashboard or home
-    navigate("/dashboard"); // Replace with your desired route
+    const formData = { email, password };
+
+    const response = await dispatch(vendorLogin(formData));
+
+    if (response?.payload?.data?.success) {
+      navigate("/");
+    }
   };
 
   return (
-    <div className='h-screen w-full flex items-center justify-center bg-slate-950'>
-    <form onSubmit={handleSubmit} className="bg-blue-200 p-5 rounded-lg flex flex-col w-full md:w-1/2 lg:w-1/3 shadow-[0_0_10px_black]">
-    <h1 className="mb-3 font-bold  text-center uppercase text-2xl underline">Vender Login</h1>
+    <div className="h-screen w-full flex items-center justify-center bg-slate-950">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-blue-200 p-5 rounded-lg flex flex-col w-full md:w-1/2 lg:w-1/3 shadow-[0_0_10px_black]"
+      >
+        <h1 className="mb-3 font-bold  text-center uppercase text-2xl underline">
+          Vender Login
+        </h1>
         <div className="mb-4">
           <input
             type="email"

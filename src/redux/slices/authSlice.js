@@ -69,6 +69,48 @@ export const retailLogin = createAsyncThunk('auth/retail-login', async (data) =>
     }
 })
 
+export const corprateLogin = createAsyncThunk('auth/corprate-login', async (data) => {
+    try {
+        const response = axiosInstance.post("/user/corprate-login", data)
+
+        console.log("Corprate Login: ", (await response).data)
+
+        toast.promise(response, {
+            loading: 'Authenticating account...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Error Logging In"
+        })
+
+        return await response;
+    } catch (error) {
+        console.log(error)
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const vendorLogin = createAsyncThunk('auth/vendor-login', async (data) => {
+    try {
+        const response = axiosInstance.post("/user/vendor-login", data)
+
+        console.log("Vendor Login: ", (await response).data)
+
+        toast.promise(response, {
+            loading: 'Authenticating account...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Error Logging In"
+        })
+
+        return await response;
+    } catch (error) {
+        console.log(error)
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 export const logout = createAsyncThunk('auth/logout', async () => {
     try {
         const response = axiosInstance.post("/user/logout")
@@ -109,12 +151,38 @@ const authSlice = createSlice({
                 console.log("Login Details: ", action.payload.data)
 
                 if (action.payload.status === 200) {
-                    localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
                     localStorage.setItem("isLoggedIn", true);
-                    localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
+                    // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
                     state.isLoggedIn = true;
-                    state.role = action?.payload?.data?.data?.user?.role;
-                    state.data = action?.payload?.data?.data;
+                    // state.role = action?.payload?.data?.data?.user?.role;
+                    // state.data = action?.payload?.data?.data;
+                }
+            })
+            .addCase(corprateLogin.fulfilled, (state, action) => {
+
+                console.log("Login Details: ", action.payload.data)
+
+                if (action.payload.status === 200) {
+                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    localStorage.setItem("isLoggedIn", true);
+                    // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
+                    state.isLoggedIn = true;
+                    // state.role = action?.payload?.data?.data?.user?.role;
+                    // state.data = action?.payload?.data?.data;
+                }
+            })
+            .addCase(vendorLogin.fulfilled, (state, action) => {
+
+                console.log("Login Details: ", action.payload.data)
+
+                if (action.payload.status === 200) {
+                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    localStorage.setItem("isLoggedIn", true);
+                    // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
+                    state.isLoggedIn = true;
+                    // state.role = action?.payload?.data?.data?.user?.role;
+                    // state.data = action?.payload?.data?.data;
                 }
             })
             .addCase(logout.fulfilled, (state) => {
