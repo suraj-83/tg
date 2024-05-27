@@ -38,9 +38,9 @@ const Header = () => {
                             </button>
                             {login && (
                                 <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li><Link to="/vendorlogin" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
-                                    <li><Link to="/corporatelogin" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
-                                    <li><Link to="/retaillogin" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                    <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
+                                    <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                    <li><Link to="/retail-login" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
                                 </ul>
                             )}
                         </li>

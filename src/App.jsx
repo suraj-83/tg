@@ -12,9 +12,9 @@ function App() {
                 <Route path="retail" element={<SignUp />} />
                 <Route path="retail-login" element={<RetailLogin />} />
                 <Route path="corporate" element={<CorporateSignup />} />
-                <Route path="corporatelogin" element={<CorporateLogin />} />                
+                <Route path="corporate-login" element={<CorporateLogin />} />                
                 <Route path="vendor" element={<VendorSignup />} />
-                <Route path="vendorlogin" element={<VendorLogin />} />
+                <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
