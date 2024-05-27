@@ -339,20 +339,20 @@ const FlightBookingForm = () => {
                       </select>
                     </div>
                   </div>
-                  {formData.length < MAX_PERSONS && (
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                    onClick={handleAddPerson}
-                  >
-                    Add Person
-                  </button>
-                </div>
-              )}
                 </div>
               
             ))}
+            {formData.length < MAX_PERSONS && (
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              onClick={handleAddPerson}
+            >
+              Add Person
+            </button>
+          </div>
+        )}
 
             <button
               type="submit"
