@@ -30,27 +30,23 @@ const BusBookingForm = () => {
     setFormData(updatedFormData);
   };
 
-  const handleNumberOfPersonsChange = (e) => {
-    const newNumberOfPersons = parseInt(e.target.value, 10);
-    setNumberOfPersons(newNumberOfPersons);
+  let MAX_PERSONS=10
+
+  const handleAddPerson = () => {
     const updatedFormData = [...formData];
-    while (updatedFormData.length < newNumberOfPersons) {
-      updatedFormData.push({
-        fullName: "",
-        dob: "",
-        gender: "",
-        contactNo: "",
-        email: "",
-        pickupLocation: "",
-        destination: "",
-        travelDate: "",
-        seatType: "",
-        busNo: "",
-      });
-    }
-    while (updatedFormData.length > newNumberOfPersons) {
-      updatedFormData.pop();
-    }
+    updatedFormData.push({
+      fullName: "",
+      dob: "",
+      gender: "",
+      contactNo: "",
+      email: "",
+      travelFrom: "",
+      travelTo: "",
+      classOfTravel: "",
+      travelDate: "",
+      trainNo: "",
+      timePreference: "",
+    });
     setFormData(updatedFormData);
   };
 
@@ -76,28 +72,11 @@ const BusBookingForm = () => {
         <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">
             Volvo Bus Booking Request Form
           </h1>
-        </div>
-        <div className="mb-6 flex justify-between">
-          <label className="block w-full text-gray-700 font-bold mb-2" htmlFor="numberOfPersons">
-            Number of Persons
-          </label>
-          <select
-            name="numberOfPersons"
-            value={numberOfPersons}
-            onChange={handleNumberOfPersonsChange}
-            className="block w-full bg-white border border-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          >
-            {[...Array(50)].map((_, i) => (
-              <option key={i} value={i + 1} className="py-2 px-4">
-                {i + 1}
-              </option>
-            ))}
-          </select>
-        </div>
+        </div>        
         {formData.map((person, index) => (
           <div key={index} className="mb-6 border-b-2 border-gray-300 pb-4">
             <h3 className="text-xl font-semibold mb-4">Person {index + 1}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:gridd-col-3 gap-4">
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor={`fullName-${index}`}>
                   Full Name
@@ -233,6 +212,17 @@ const BusBookingForm = () => {
                 />
               </div>
             </div>
+              {formData.length < MAX_PERSONS && (
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                    onClick={handleAddPerson}
+                  >
+                    Add Person
+                  </button>
+                </div>
+              )}
           </div>
         ))}
         <button
