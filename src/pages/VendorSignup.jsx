@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/Image/y.jpg";
-import { Footer, Header } from "../components";
+import { Footer, Header } from "../components/index.js";
 import { VendorSignup } from "../redux/slices/authSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -78,7 +78,7 @@ function Form() {
         <div className="w-full lg:-ml-10 md:-ml-0  lg:w-1/2 h-screen overflow-y-scroll">
           <form onSubmit={handleSubmit} className="bg-gray-100 p-6 ">
             <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline">
-              Vender Sign Up
+              Vendor Sign Up
             </h1>
 
             <div className="min-h-[90vh]">
@@ -92,23 +92,6 @@ function Form() {
                       placeholder="Country"
                       value={formData.country || "India"}
                       readOnly
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
-                  </div>
-                  {/* Company Name */}
-                  <div className="mb-4">
-                    {/* <label htmlFor="companyName" className="block mb-2 font-semibold">Company Name</label> */}
-                    <input
-                      type="text"
-                      id="companyName"
-                      placeholder="Company Name"
-                      value={formData.companyName}
-                      onChange={(e) =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          companyName: e.target.value,
-                        }))
-                      }
                       className="w-full p-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -165,6 +148,24 @@ function Form() {
                       )}
                     </div>
                   </div>
+                  {/* Company Name */}
+                  <div className="mb-4">
+                    {/* <label htmlFor="companyName" className="block mb-2 font-semibold">Company Name</label> */}
+                    <input
+                      type="text"
+                      id="companyName"
+                      placeholder="Company Name"
+                      value={formData.companyName}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          companyName: e.target.value,
+                        }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                  </div>
+                  
                 </div>
                 {/* Address 1 */}
                 <div className="mb-4">

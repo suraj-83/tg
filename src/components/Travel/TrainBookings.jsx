@@ -18,8 +18,7 @@ const TrainBookingForm = () => {
       travelFrom: "",
       travelTo: "",
       classOfTravel: "",
-      travelDate: "",
-      remarks: "",
+      travelDate: "",      
       trainNo: "",
       timePreference: "",
     },
@@ -47,7 +46,6 @@ const TrainBookingForm = () => {
         travelTo: "",
         classOfTravel: "",
         travelDate: "",
-        remarks: "",
         trainNo: "",
         timePreference: "",
       });
@@ -72,190 +70,257 @@ const TrainBookingForm = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center justify-center">
-          <p className="bg-sky-900 p-2 text-white text-2xl font-bold w-full text-center">
+    <div className="bg-cover bg-center" style={{backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
+    
+    <div className="min-h-[100vh] flex items-center justify-center p-24">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
+    >
+        <div>
+        <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">
             Train Booking Request Form
-          </p>
-          <table className="w-full border border-black border-solid mb-5">
-            <thead className="text-white bg-sky-900">
-              <tr>
-                <th className="border px-4 py-2">Tour Plan</th>
-                <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Date of Birth</th>
-                <th className="border px-4 py-2">Gender</th>
-                <th className="border px-4 py-2">Contact Nos</th>
-                <th className="border px-4 py-2">Email Id</th>
-                <th className="border px-4 py-2">From</th>
-                <th className="border px-4 py-2">To</th>
-                <th className="border px-4 py-2">Class to Travel</th>
-                <th className="border px-4 py-2">Travel Date</th>
-                <th className="border px-4 py-2">Train No</th>
-                <th className="border px-4 py-2">Time Preference</th>
-              </tr>
-            </thead>
-            <tbody>
-              {formData.map((person, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="number"
-                      value={index + 1}
-                      readOnly
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={person.fullName}
-                      onChange={(e) => handleChange(e, index)}
-                      className="px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="date"
-                      name="dob"
-                      value={person.dob}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="gender"
-                      value={person.gender}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="gender"
-                      className="px-2 py-2 border border-gray-300 rounded focus:outline-none"
-                      list="genderOptions"
-                    />
-                    <datalist id="genderOptions">
-                      <option value="Male" />
-                      <option value="Female" />
-                      <option value="Other" />
-                    </datalist>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      maxLength="10"
-                      title="10 digit mobile number"
-                      pattern="[0-9]{10}"
-                      name="contactNo"
-                      value={person.contactNo}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="email"
-                      name="email"
-                      value={person.email}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="travelFrom"
-                      value={person.travelFrom}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="travelTo"
-                      value={person.travelTo}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <select
-                      name="classOfTravel"
-                      value={person.classOfTravel}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    >
-                      <option value="">--Select--</option>
-                      <option value="1AC">1AC</option>
-                      <option value="2AC">2AC</option>
-                      <option value="3AC">3AC</option>
-                      <option value="Sleeper">Sleeper</option>
-                      <option value="General">General</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="date"
-                      name="travelDate"
-                      value={person.travelDate}
-                      onChange={(e) => handleChange(e, index)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="trainNo"
-                      value={person.trainNo}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="Train No."
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="time"
-                      name="timePreference"
-                      value={person.timePreference}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="Time Preference"
-                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="flex flex-col justify-center">
-            <label
-              className="w-full text-gray-700 font-bold mb-2"
-              htmlFor="numberOfPersons"
-            >
-              Number of Persons
-            </label>
-            <select
-              name="numberOfPersons"
-              value={numberOfPersons}
-              onChange={handleNumberOfPersonsChange}
-              className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >
-              {[...Array(50)].map((_, i) => (
-                <option key={i} value={i + 1} className="py-2 px-4">
-                  {i + 1}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            Submit
-          </button>
+          </h1>
         </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="numberOfPersons"
+          >
+            Number of Persons
+          </label>
+          <select
+            name="numberOfPersons"
+            value={numberOfPersons}
+            onChange={handleNumberOfPersonsChange}
+            className="block w-full bg-white border border-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          >
+            {[...Array(50)].map((_, i) => (
+              <option key={i} value={i + 1} className="py-2 px-4">
+                {i + 1}
+              </option>
+            ))}
+          </select>
+        </div>
+        {formData.map((person, index) => (
+          <div key={index} className="mb-6">
+            <h3 className="text-xl font-semibold mb-2">Person {index + 1}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`fullName-${index}`}>
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={person.fullName}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`dob-${index}`}>
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  name="dob"
+                  value={person.dob}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`gender-${index}`}>
+                  Gender
+                </label>
+                <input
+                  type="text"
+                  name="gender"
+                  value={person.gender}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Gender"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  list="genderOptions"
+                />
+                <datalist id="genderOptions">
+                  <option value="Male" />
+                  <option value="Female" />
+                  <option value="Other" />
+                </datalist>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`contactNo-${index}`}>
+                  Contact No
+                </label>
+                <input
+                  type="text"
+                  maxLength="10"
+                  title="10 digit mobile number"
+                  pattern="[0-9]{10}"
+                  name="contactNo"
+                  value={person.contactNo}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`email-${index}`}>
+                  Email Id
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={person.email}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`travelFrom-${index}`}>
+                  From
+                </label>
+                <input
+                  type="text"
+                  name="travelFrom"
+                  value={person.travelFrom}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`travelTo-${index}`}>
+                  To
+                </label>
+                <input
+                  type="text"
+                  name="travelTo"
+                  value={person.travelTo}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`classOfTravel-${index}`}>
+                  Class to Travel
+                </label>
+                <select
+                  name="classOfTravel"
+                  value={person.classOfTravel}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="">--Select--</option>
+                  <option value="Anubhuti Class (EA)">Anubhuti Class (EA)</option>
+                  <option value="AC First Class (1A)">AC First Class (1A)</option>
+                  <option value="Vistadome AC (EV)">Vistadome AC (EV)</option>
+                  <option value="Exec. Chair Car (EC)">Exec. Chair Car (EC)</option>
+                  <option value="AC 2 Tier (2A)">AC 2 Tier (2A)</option>
+                  <option value="First Class (FC)">First Class (FC)</option>
+                  <option value="AC 3 Tier (3A)">AC 3 Tier (3A)</option>
+                  <option value="AC 3 Economy (3E)">AC 3 Economy (3E)</option>
+                  <option value="Vistadome Chair Car (VC)">Vistadome Chair Car (VC)</option>
+                  <option value="AC Chair car (CC)">AC Chair car (CC)</option>
+                  <option value="Sleeper (SL)">Sleeper (SL)</option>
+                  <option value="Vistadome Non AC (VS)">Vistadome Non AC (VS)</option>
+                  <option value="Second Sitting (2S)">Second Sitting (2S)</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`travelDate-${index}`}>
+                  Travel Date
+                </label>
+                <input
+                  type="date"
+                  name="travelDate"
+                  value={person.travelDate}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`trainNo-${index}`}>
+                  Train No
+                </label>
+                <input
+                  type="text"
+                  name="trainNo"
+                  value={person.trainNo}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Train No."
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`adult-${index}`}>
+                  Adult (12 Yrs and above)
+                </label>
+                <select
+                  name="adult"
+                  value={person.adult}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="">Select</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`children-${index}`}>
+                  Children (06-12 Yrs)
+                </label>
+                <select
+                  name="children"
+                  value={person.children}
+                  onChange={(e) => handleChange(e, index)}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="">Select</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor={`timePreference-${index}`}>
+                  Time Preference
+                </label>
+                <input
+                  type="time"
+                  name="timePreference"
+                  value={person.timePreference}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Time Preference"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />              
+              </div>              
+            </div>
+          </div>
+        ))}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+        >
+          Submit
+        </button>
       </form>
+    </div>
     </div>
   );
 };
