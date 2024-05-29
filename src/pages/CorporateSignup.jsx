@@ -3,8 +3,14 @@ import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/img.jpg";
 import { Footer, Header } from "../components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { CorprateSignup } from "../redux/slices/authSlice.js";
 
 function Form() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialFormData = {
     industry: "",
     companyName: "",
@@ -22,7 +28,7 @@ function Form() {
     landlineNumber: "",
     landlineCountryCode: "",
     landlineCityCode: "",
-    contactDeparment: "",
+    contactDepartment: "",
     contactPersonFirstName: "",
     contactPersonSecondName: "",
     contactPersonLastName: "",
@@ -47,12 +53,17 @@ function Form() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(formData);
 
-    // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
+    const response = await dispatch(CorprateSignup(formData));
+
+    if (response?.payload?.data?.success) {
+      navigate("/corporate-login");
+    }
+
     setFormData(initialFormData); // Reset form data to initial state
   };
 
@@ -248,16 +259,16 @@ function Form() {
                   <div className="flex gap-4 pb-4">
                     <select
                       value={
-                        formData.contactDeparment
-                          ? formData.contactDeparment.title
+                        formData.contactDepartment
+                          ? formData.contactDepartment.title
                           : ""
                       }
                       onChange={(e) => {
                         if (e.target.value === "Other") {
                           setFormData((prevState) => ({
                             ...prevState,
-                            contactDeparment: {
-                              ...prevState.contactDeparment,
+                            contactDepartment: {
+                              ...prevState.contactDepartment,
                               title: e.target.value,
                               otherTitle: "",
                             },
@@ -265,8 +276,8 @@ function Form() {
                         } else {
                           setFormData((prevState) => ({
                             ...prevState,
-                            contactDeparment: {
-                              ...prevState.contactDeparment,
+                            contactDepartment: {
+                              ...prevState.contactDepartment,
                               title: e.target.value,
                             },
                           }));
@@ -283,17 +294,17 @@ function Form() {
                       <option value="Travel Desk">Travel Desk</option>
                       <option value="Other">Other</option>
                     </select>
-                    {formData.contactDeparment &&
-                      formData.contactDeparment.title === "Other" && (
+                    {formData.contactDepartment &&
+                      formData.contactDepartment.title === "Other" && (
                         <input
                           type="text"
                           placeholder="Other Department"
-                          value={formData.contactDeparment.otherTitle}
+                          value={formData.contactDepartment.otherTitle}
                           onChange={(e) =>
                             setFormData((prevState) => ({
                               ...prevState,
-                              contactDeparment: {
-                                ...prevState.contactDeparment,
+                              contactDepartment: {
+                                ...prevState.contactDepartment,
                                 otherTitle: e.target.value,
                               },
                             }))
@@ -352,6 +363,7 @@ function Form() {
                           name="contactPersonGender"
                           id="gender-male"
                           value="male"
+                          checked={formData.contactPersonGender === "male"}
                           onChange={(e) =>
                             setFormData((prevState) => ({
                               ...prevState,
@@ -369,6 +381,7 @@ function Form() {
                           name="contactPersonGender"
                           id="gender-female"
                           value="female"
+                          checked={formData.contactPersonGender === "female"}
                           onChange={(e) =>
                             setFormData((prevState) => ({
                               ...prevState,
@@ -386,6 +399,9 @@ function Form() {
                           name="contactPersonGender"
                           id="gender-transgender"
                           value="transgender"
+                          checked={
+                            formData.contactPersonGender === "transgender"
+                          }
                           onChange={(e) =>
                             setFormData((prevState) => ({
                               ...prevState,
