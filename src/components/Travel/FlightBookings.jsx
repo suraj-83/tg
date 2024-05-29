@@ -359,6 +359,7 @@ const FlightBookingForm = () => {
               className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Submit
+              
             </button>
           </div>
         </form>
