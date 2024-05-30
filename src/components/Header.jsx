@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/TGESLogo.jpeg';
 
 const Header = () => {
     const [travelMode, setTravelMode] = useState(false)
@@ -11,7 +12,7 @@ const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center py-5">
                     <Link to="/">
-                        <img src="https://www.tgestravel.com/assets/images/logo/tges-logo.png" alt="TGES" className="w-24" />
+                        <img src={Logo} alt="TGES" className="w-24" />
                     </Link>
                     <ul className="flex space-x-6">
                         <li><Link to="/" className="text-gray-600 hover:text-gray-900">Home</Link></li>
