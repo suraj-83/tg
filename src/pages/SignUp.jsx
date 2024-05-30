@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import Select from "react-select";
 import { zipCodeMapping } from "../data.js";
 import userImg from "../assets/userImg.png";
-import { Footer, Header } from "../components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RetailSignup } from "../redux/slices/authSlice.js";
+import { retailSignup } from "../redux/slices/authSlice.js";
 
 function RetailForm() {
   const dispatch = useDispatch();
@@ -74,7 +72,7 @@ function RetailForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await dispatch(RetailSignup(formData));
+    const response = await dispatch(retailSignup(formData));
     console.log(response);
 
     if (response?.payload?.data?.success) {

@@ -8,7 +8,7 @@ const initialState = {
     data: JSON.parse(localStorage.getItem('user')) || {},
 }
 
-export const RetailSignup = createAsyncThunk('auth/retail-signup', async (data) => {
+export const retailSignup = createAsyncThunk('auth/retail-signup', async (data) => {
     try {
         const response = axiosInstance.post("/user/retail-register", data)
 
@@ -28,11 +28,11 @@ export const RetailSignup = createAsyncThunk('auth/retail-signup', async (data) 
     }
 })
 
-export const CorprateSignup = createAsyncThunk('auth/corprate-signup', async (data) => {
+export const corporateSignup = createAsyncThunk('auth/corporate-signup', async (data) => {
     try {
-        const response = axiosInstance.post("/user/corprate-register", data)
+        const response = axiosInstance.post("/user/corporate-register", data)
 
-        console.log("Corprate User: ", (await response).data)
+        console.log("Corporate User: ", (await response).data)
 
         toast.promise(response, {
             loading: 'Creating account...',
@@ -48,7 +48,7 @@ export const CorprateSignup = createAsyncThunk('auth/corprate-signup', async (da
     }
 })
 
-export const VendorSignup = createAsyncThunk('auth/vendor-signup', async (data) => {
+export const vendorSignup = createAsyncThunk('auth/vendor-signup', async (data) => {
     try {
         const response = axiosInstance.post("/user/vendor-register", data)
 
@@ -89,9 +89,9 @@ export const retailLogin = createAsyncThunk('auth/retail-login', async (data) =>
     }
 })
 
-export const corprateLogin = createAsyncThunk('auth/corprate-login', async (data) => {
+export const corporateLogin = createAsyncThunk('auth/corporate-login', async (data) => {
     try {
-        const response = axiosInstance.post("/user/corprate-login", data)
+        const response = axiosInstance.post("/user/corporate-login", data)
 
         console.log("Corprate Login: ", (await response).data)
 

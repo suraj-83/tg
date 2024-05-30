@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { corprateLogin } from '../redux/slices/authSlice';
+import { corporateLogin } from '../redux/slices/authSlice';
 
 function CorporateLogin() {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function CorporateLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await dispatch(corprateLogin(formData));
+        const response = await dispatch(corporateLogin(formData));
 
         if (response?.payload?.data?.success) {
             navigate("/")
