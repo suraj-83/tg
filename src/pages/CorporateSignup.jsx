@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/img.jpg";
-import { Footer, Header } from "../components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { CorprateSignup } from "../redux/slices/authSlice.js";
+import { corporateSignup } from "../redux/slices/authSlice.js";
 
 function Form() {
   const dispatch = useDispatch();
@@ -58,7 +57,7 @@ function Form() {
 
     console.log(formData);
 
-    const response = await dispatch(CorprateSignup(formData));
+    const response = await dispatch(corporateSignup(formData));
 
     if (response?.payload?.data?.success) {
       navigate("/corporate-login");

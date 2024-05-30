@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/Image/y.jpg";
-import { Footer, Header } from "../components/index.js";
-import { VendorSignup } from "../redux/slices/authSlice.js";
+import {  vendorSignup } from "../redux/slices/authSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -55,7 +54,7 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await dispatch(VendorSignup(formData));
+    const response = await dispatch(vendorSignup(formData));
     console.log(response);
 
     if (response?.payload?.data?.success) {
