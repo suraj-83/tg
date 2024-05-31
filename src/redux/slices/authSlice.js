@@ -179,7 +179,7 @@ const authSlice = createSlice({
                     // state.data = action?.payload?.data?.data;
                 }
             })
-            .addCase(corprateLogin.fulfilled, (state, action) => {
+            .addCase(corporateLogin.fulfilled, (state, action) => {
 
                 console.log("Login Details: ", action.payload.data)
 
