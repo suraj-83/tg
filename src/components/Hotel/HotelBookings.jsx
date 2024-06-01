@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { createHotelBooking } from "../../redux/slices/travelSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+const dispatch = useDispatch();
+  const navigate = useNavigate();
 const HotelBookingForm = () => {
   const [formData, setFormData] = useState({
     nationality: "Indian",
@@ -37,7 +42,7 @@ const HotelBookingForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate form
@@ -54,6 +59,11 @@ const HotelBookingForm = () => {
       setErrors(newErrors);
     } else {
       console.log("Form Data Submitted: ", formData);
+      const response = await dispatch(createHotelBooking(formData));
+
+      if (response?.payload?.data?.success) {
+        navigate("/");
+      }
       // Submit form logic here
     }
   };
