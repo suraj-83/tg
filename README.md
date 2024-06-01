@@ -1,4 +1,4 @@
-Sure, here is the full updated README based on the provided project structure and additional details about Tailwind CSS:
+
 
 # TGES Frontend
 
