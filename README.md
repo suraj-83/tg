@@ -66,7 +66,7 @@ tges-frontend/
     │   │   userImg.png
     │   │
     │   └───Image
-    │           IGNOU June-2024_ HALL TICKET_ADMIT CARD_SURAJ.pdf
+    │           
     │           image 10.png
     │           image3.png
     │           Rectangle 30.png
