@@ -69,30 +69,87 @@ const CabBookingForm = () => {
             Cab Booking Request Form
           </h1>
         </div>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-3">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-3  gap-3">
           <div className="mb-4">
             <label className="block text-gray-950 font-bold mb-2" htmlFor="pickupCountry">
               Pickup Country
             </label>
-            <input
-              type="text"
+            <select
               name="pickupCountry"
               value={formData.pickupCountry}
               onChange={handleChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-            />
+            >
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="UK">UK</option>
+              <option value="Australia">Australia</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="Spain">Spain</option>
+              <option value="Italy">Italy</option>
+              <option value="China">China</option>
+              <option value="Japan">Japan</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Russia">Russia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Egypt">Egypt</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="South Korea">South Korea</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Canada">Canada</option>              
+              {/* add more options here */}
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="nationality">
               Nationality
             </label>
-            <input
-              type="text"
+            <select
               name="nationality"
               value={formData.nationality}
               onChange={handleChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-            />
+            >
+              <option value="Indian">Indian</option>
+              <option value="American">American</option>
+              <option value="British">British</option>
+              <option value="Australian">Australian</option>
+              <option value="Brazilian">Brazilian</option>
+              <option value="German">German</option>
+              <option value="French">French</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Italian">Italian</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Mexican">Mexican</option>
+              <option value="Russian">Russian</option>
+              <option value="South African">South African</option>
+              <option value="Turkish">Turkish</option>
+              <option value="Egyptian">Egyptian</option>
+              <option value="Nepalese">Nepalese</option>
+              <option value="Bangladeshi">Bangladeshi</option>
+              <option value="South Korean">South Korean</option>
+              <option value="Vietnamese">Vietnamese</option>
+              <option value="Indonesian">Indonesian</option>
+              <option value="Filipino">Filipino</option>
+              <option value="Philippine">Philippine</option>
+              <option value="Malaysian">Malaysian</option>
+              <option value="Thai">Thai</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Sri Lankan">Sri Lankan</option>
+              <option value="Canadian">Canadian</option>              
+              {/* add more options here */}
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="tourPlan">
@@ -157,20 +214,45 @@ const CabBookingForm = () => {
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
             />
           </div>
-          <div className="mb-4 col-span-1 md:col-span-2">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredAt">
-              Cab Required at (State, City & Pin Code)
-            </label>
-            <input
-              type="text"
-              name="cabRequiredAt"
-              value={formData.cabRequiredAt}
-              onChange={handleChange}
-              className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-              placeholder="State, City & Pin Code"
-            />
+          <div className="grid w-38 grid-cols-3 md:grid-cols-3 gap-4 mb-4">
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredState">
+                State
+              </label>
+              <input
+                type="text"
+                name="cabRequiredState"
+                value={formData.cabRequiredState}
+                onChange={handleChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredCity">
+                City
+              </label>
+              <input
+                type="text"
+                name="cabRequiredCity"
+                value={formData.cabRequiredCity}
+                onChange={handleChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredPinCode">
+                PinCode
+              </label>
+              <input
+                type="text"
+                name="cabRequiredPinCode"
+                value={formData.cabRequiredPinCode}
+                onChange={handleChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+              />
+            </div>
           </div>
-          <div className="mb-4 col-span-1 md:col-span-2">
+          <div className="mb-4 w-38 ">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredFor">
               Cab Required For
             </label>
@@ -280,37 +362,54 @@ const CabBookingForm = () => {
             <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfCabsRequired">
               No of Cabs Required
             </label>
-            <input
-              type="number"
+            <select
               name="noOfCabsRequired"
               value={formData.noOfCabsRequired}
               onChange={handleChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-            />
+            >
+              {[...Array(11).keys()].map((number) => (
+                <option key={number} value={number}>
+                  {number}
+                </option>
+              ))}
+              <option value="custom">Custom</option>
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="typeOfCabRequired">
               Type of Cab Required
             </label>
-            <input
-              type="text"
+            <select
               name="typeOfCabRequired"
               value={formData.typeOfCabRequired}
               onChange={handleChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-            />
+            >
+              <option value="sedan">Sedan</option>
+              <option value="suv">SUV</option>
+              <option value="minivan">Minivan</option>
+              <option value="hatchback">Hatchback</option>
+              <option value="saloon">Saloon</option>
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfPersonsTravelling">
               No of Person(s) Travelling
             </label>
-            <input
-              type="number"
+            <select
               name="noOfPersonsTravelling"
               value={formData.noOfPersonsTravelling}
               onChange={handleChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-            />
+            >
+              {[...Array(51).keys()].map((number) => (
+                <option key={number} value={number}>
+                  {number}
+                </option>
+              ))}
+              <option value="custom">Custom</option>
+            </select>
           </div>
           <div className="mb-4 ">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfInfants">
