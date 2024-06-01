@@ -8,8 +8,8 @@ const CabBookingForm = () => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    pickupCountry: "",
-    nationality: "",
+    pickupCountry: "India",
+    nationality: "Indian",
     tourPlan: "",
     name: "",
     contactNo: "",
