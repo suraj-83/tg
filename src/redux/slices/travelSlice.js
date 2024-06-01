@@ -80,6 +80,23 @@ export const createCabTravel = createAsyncThunk('travel/create-cab', async (data
     }
 })
 
+export const createHotelBooking = createAsyncThunk('travel/create-hotel-booking', async (data) => {
+    try {
+        const response = axiosInstance.post("/travel/hotel", data)
+
+        toast.promise(response, {
+            loading: 'Creating hotel booking...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create hotel booking"
+        })
+
+        return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
 
 // export const getCurrentUserTravelDetails = createAsyncThunk('travel/getCurrentUserTravelDetails', async () => {
 //     try {
