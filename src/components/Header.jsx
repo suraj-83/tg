@@ -27,6 +27,7 @@ const Header = () => {
                                     <li><Link to="/trainbookings" className="block px-5 py-2 hover:bg-gray-200">Train</Link></li>
                                     <li><Link to="/cabbookings" className="block px-5 py-2 hover:bg-gray-200">Cab</Link></li>
                                     <li><Link to="/volvobusbookings" className="block px-5 py-2 hover:bg-gray-200">Volvo Bus</Link></li>
+                                    <li><Link to="/hotelbookings" className="block px-5 py-2 hover:bg-gray-200">Hotel</Link></li>
                                 </ul>
                             )}
                         </li>
@@ -39,9 +40,9 @@ const Header = () => {
                             </button>
                             {login && (
                                 <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
-                                    <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
                                     <li><Link to="/retail-login" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                    <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                    <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
                                 </ul>
                             )}
                         </li>
@@ -51,9 +52,9 @@ const Header = () => {
                             </button>
                             {register && (
                                 <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li><Link to="/vendor" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
                                     <li><Link to="/retail" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
                                     <li><Link to="/corporate" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                    <li><Link to="/vendor" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
                                 </ul>
                             )}
                         </li>

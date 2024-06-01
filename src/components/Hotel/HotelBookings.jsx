@@ -3,16 +3,19 @@ import { createHotelBooking } from "../../redux/slices/travelSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-const dispatch = useDispatch();
-  const navigate = useNavigate();
 const HotelBookingForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nationality: "Indian",
     name: "",
     contactNo1: "",
     contactNo2: "",
     email: "",
-    countryStateCity: "",
+    country: "",
+    state: "",
+    city: "",
     roomCategory: "",
     mealPlan: "",
     hotelCategory: "",
@@ -231,7 +234,6 @@ const HotelBookingForm = () => {
                 <option value="Myanmar">Myanmar</option>
                 <option value="Sri Lanka">Sri Lanka</option>
                 <option value="Canada">Canada</option>
-
               </select>
             </div>
             <div>
@@ -248,9 +250,7 @@ const HotelBookingForm = () => {
               />
             </div>
             <div>
-              <label className="block font-bold mb-2 text-gray-700">
-                City
-              </label>
+              <label className="block font-bold mb-2 text-gray-700">City</label>
               <input
                 type="text"
                 name="city"
@@ -446,7 +446,6 @@ const HotelBookingForm = () => {
                 min={0}
               />
             </div>
-           
           </div>
           <div className="text-center pt-4">
             <button
