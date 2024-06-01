@@ -199,4 +199,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ---
 
-This README provides a comprehensive overview of the `tges-frontend` project, focusing on the structure, setup, and core functionality based on the file structure you provided.
