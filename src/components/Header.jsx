@@ -4,6 +4,7 @@ import Logo from '../assets/TGESLogo.jpeg';
 
 const Header = () => {
     const [travelMode, setTravelMode] = useState(false)
+    const [services, setServices] = useState(false);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false)
 
@@ -27,13 +28,23 @@ const Header = () => {
                                     <li><Link to="/trainbookings" className="block px-5 py-2 hover:bg-gray-200">Train</Link></li>
                                     <li><Link to="/cabbookings" className="block px-5 py-2 hover:bg-gray-200">Cab</Link></li>
                                     <li><Link to="/volvobusbookings" className="block px-5 py-2 hover:bg-gray-200">Volvo Bus</Link></li>
-                                    <li><Link to="/hotelbookings" className="block px-5 py-2 hover:bg-gray-200">Hotel</Link></li>
                                 </ul>
                             )}
                         </li>
                         <li><Link to="#" className="text-gray-600 hover:text-gray-900">Destinations</Link></li>
                         <li><Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link></li>
                         <li><Link to="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link></li>
+                        <li className="relative">
+                            <button type="button" onClick={() => setServices(!services)} className="text-gray-600 w-28 hover:text-gray-900">
+                                Services <span className="right-0 text-gray-400">▾</span>
+                            </button>
+                            {services && (
+                                <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
+                                    <li className="relative"><Link to="/hotelbookings" className="text-gray-600 hover:text-gray-900">Hotel Bookings</Link></li>
+                                    <li className="relative"><Link to="/passport" className="text-gray-600 hover:text-gray-900">Passport</Link></li>
+                                </ul>
+                            )}
+                        </li>
                         <li className="relative">
                             <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={() => setLogin(!login)}>
                                 Login <span className="right-0 text-gray-400">▾</span>

@@ -12,6 +12,7 @@ import TrainBookings from "../components/Travel/TrainBookings"
 import CabBookings from "../components/Travel/CabBookings"
 import VolvoBusBookings from "../components/Travel/VolvoBusBookings"
 import HotelBookings from "../components/Hotel/HotelBookings"
+import Passport from "../components/Passport"
 
 export {
     Home,
@@ -27,5 +28,6 @@ export {
     TrainBookings,
     CabBookings,
     VolvoBusBookings,
-    HotelBookings
+    HotelBookings,
+    Passport
 }
