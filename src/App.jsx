@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin, CorporateSignup, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm } from "./pages";
+import { Home, AboutUs, SignUp, RetailLogin, CorporateSignup, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
                 <Route path="hotelbookings" element={<HotelBookings />} />
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
+                <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
                 <Route path="admin/*" element={<AdminDashboard />} /> {/* Add this line for admin route */}
                 {/* Other Routes */}
                 <Route path="*" element={<NotFound />} />
