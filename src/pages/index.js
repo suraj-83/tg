@@ -13,6 +13,7 @@ import CabBookings from "../components/Travel/CabBookings"
 import VolvoBusBookings from "../components/Travel/VolvoBusBookings"
 import HotelBookings from "../components/Hotel/HotelBookings"
 import Passport from "../components/Passport"
+import TravelInsuranceForm from "../components/TravelIsurance"
 
 export {
     Home,
@@ -29,5 +30,6 @@ export {
     CabBookings,
     VolvoBusBookings,
     HotelBookings,
-    Passport
+    Passport,
+    TravelInsuranceForm
 }

@@ -40,8 +40,9 @@ const Header = () => {
                             </button>
                             {services && (
                                 <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li className="relative"><Link to="/hotelbookings" className="text-gray-600 hover:text-gray-900">Hotel Bookings</Link></li>
-                                    <li className="relative"><Link to="/passport" className="text-gray-600 hover:text-gray-900">Passport</Link></li>
+                                    <li className="relative"><Link to="/hotelbookings" className="text-gray-600  hover:text-gray-900">Hotel Bookings</Link></li>
+                                    <li className="relative"><Link to="/passport" className="text-gray-600 px-5 py-2 hover:text-gray-900">Passport</Link></li>
+                                    <li className="relative"><Link to="/travelinsurance" className="text-gray-600 px-5 py-2 hover:text-gray-900">Travel Insurance</Link></li>
                                 </ul>
                             )}
                         </li>
