@@ -357,7 +357,20 @@ const HotelBookingForm = () => {
                 type="date"
                 name="checkInDate"
                 value={formData.checkInDate}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  const checkInDate = new Date(e.target.value);
+                  const checkOutDate = new Date(formData.checkOutDate);
+                  const timeDifference =
+                    checkOutDate.getTime() - checkInDate.getTime();
+                  const numberOfNights = Math.ceil(
+                    timeDifference / (1000 * 3600 * 24)
+                  );
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    numberOfNights,
+                  }));
+                }}
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -369,7 +382,20 @@ const HotelBookingForm = () => {
                 type="date"
                 name="checkOutDate"
                 value={formData.checkOutDate}
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  const checkOutDate = new Date(e.target.value);
+                  const checkInDate = new Date(formData.checkInDate);
+                  const timeDifference =
+                    checkOutDate.getTime() - checkInDate.getTime();
+                  const numberOfNights = Math.ceil(
+                    timeDifference / (1000 * 3600 * 24)
+                  );
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    numberOfNights,
+                  }));
+                }}
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -386,6 +412,22 @@ const HotelBookingForm = () => {
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter total number of nights"
                 min={0}
+                readOnly
+              />
+            </div>
+            <div>
+              <label className="block font-bold mb-2 text-gray-700">
+                Total No of Days
+              </label>
+              <input
+                type="number"
+                name="numberOfDays"
+                value={formData.numberOfNights ? formData.numberOfNights + 1 : 0}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter total number of days"
+                min={0}
+                readOnly
               />
             </div>
             <div>
