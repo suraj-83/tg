@@ -55,6 +55,7 @@ const HealthLifeInsuranceForm = () => {
         ? formData.proofOfBirthAndAddress.name
         : null,
     };
+    console.log("Form Data Submitted:", dataToSubmit);
     localStorage.setItem("formData", JSON.stringify(dataToSubmit));
     // Submit to backend here if needed
     history("/login");
