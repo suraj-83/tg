@@ -16,7 +16,6 @@ const HealthLifeInsuranceForm = () => {
     nomineeGender: "",
     nomineeRelationship: "",
     proofOfBirthAndAddress: null,
-    proofOfBirthAndAddressBase64: "", // Add a field for the base64 string
   });
 
   const history = useNavigate();
@@ -35,7 +34,7 @@ const HealthLifeInsuranceForm = () => {
       reader.onloadend = () => {
         setFormData((prevState) => ({
           ...prevState,
-          proofOfBirthAndAddressBase64: reader.result,
+          proofOfBirthAndAddress: reader.result,
         }));
       };
       reader.readAsDataURL(file);
@@ -52,7 +51,7 @@ const HealthLifeInsuranceForm = () => {
     const dataToSubmit = {
       ...formData,
       proofOfBirthAndAddress: formData.proofOfBirthAndAddress
-        ? formData.proofOfBirthAndAddress.name
+        ? formData.proofOfBirthAndAddress
         : null,
     };
     console.log("Form Data Submitted:", dataToSubmit);

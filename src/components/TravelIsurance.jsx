@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TravelInsuranceForm = () => {
 const [formData, setFormData] = useState({
@@ -20,22 +21,50 @@ const [formData, setFormData] = useState({
     nomineeName: "",
     nomineeGender: "",
     nomineeRelationship: "",
-    proofOfDateOfBirth: "",
-    proofOfAddress: "",
+    proofOfBirthAndAddress: null,
 });
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-    ...formData,
-    [name]: value,
-    });
-};
+const history = useNavigate();
 
-const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+    if (type === "file") {
+      const file = files[0];
+      setFormData({
+        ...formData,
+        [name]: file,
+      });
+
+      // Convert the file to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevState) => ({
+          ...prevState,
+          proofOfBirthAndAddress: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(formData, null, 2));
-};
+    const dataToSubmit = {
+      ...formData,
+      proofOfBirthAndAddress: formData.proofOfBirthAndAddress
+        ? formData.proofOfBirthAndAddress
+        : null,
+    };
+    console.log("Form Data Submitted:", dataToSubmit);
+    localStorage.setItem("formData", JSON.stringify(dataToSubmit));
+    // Submit to backend here if needed
+    history("/login");
+  };
 
 return (
     <div
@@ -310,24 +339,15 @@ return (
             </div>
             <div className="mb-4">
             <label className="block mb-1 font-medium">
-                Proof of Date of Birth
+              Upload the Proof of Date of Birth & Address
             </label>
             <input
-                type="file"
-                name="fileOfDOB"
-                className="w-full p-2 border rounded-md"
+              type="file"
+              name="proofOfBirthAndAddress"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
             />
-            </div>
-            <div className="mb-4">
-            <label className="block mb-1 font-medium">
-                Proof of Address
-            </label>
-            <input
-                type="file"
-                name="fileOfAddress"
-                className="w-full p-2 border rounded-md"
-            />
-            </div>
+          </div>
         </div>
         <button
             type="submit"

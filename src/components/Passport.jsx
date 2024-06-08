@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
   totalNoOfTravellers: "",
@@ -14,7 +15,7 @@ const initialFormData = {
   nomineeName: "",
   nomineeGender: "",
   addressWithPinCode: "",
-  passportFile: "",
+  passportFile: "", // Field for base64 string of the PDF file
   contactNo: "",
   email: "",
   holdPassportFrom: "",
@@ -28,16 +29,32 @@ const initialFormData = {
 
 const PassportForm = () => {
   const [formData, setFormData] = useState(initialFormData);
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value, type, files } = event.target;
+    if (type === "file") {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevData) => ({
+          ...prevData,
+          passportFile: reader.result, // Store base64 string directly in passportFile
+        }));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    const formObject = Object.fromEntries(data.entries());
-    formObject.travelDuration = {
-      entryDate: data.get("entryDate"),
-      exitDate: data.get("exitDate"),
-    };
-    console.log(JSON.stringify(formObject, null, 2));
+    localStorage.setItem("formData", JSON.stringify(formData));
+    navigate("/login");
   };
 
   return (
@@ -56,6 +73,7 @@ const PassportForm = () => {
             Traveller Information
           </h1>
           <div className="grid grid-cols-2 gap-4">
+            {/* Other form fields */}
             <div>
               <label className="block text-sm font-medium">
                 Total No of Travellers
@@ -64,6 +82,8 @@ const PassportForm = () => {
                 type="number"
                 name="totalNoOfTravellers"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.totalNoOfTravellers}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -72,6 +92,8 @@ const PassportForm = () => {
                 type="text"
                 name="name"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.name}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -79,44 +101,14 @@ const PassportForm = () => {
               <select
                 name="nationality"
                 value={formData.nationality}
-                onChange={(e) =>
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    nationality: e.target.value,
-                  }))
-                }
+                onChange={handleChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
               >
                 <option value="">Select Nationality</option>
                 <option value="Indian">Indian</option>
                 <option value="American">American</option>
                 <option value="British">British</option>
-                <option value="Australian">Australian</option>
-                <option value="Brazilian">Brazilian</option>
-                <option value="German">German</option>
-                <option value="French">French</option>
-                <option value="Spanish">Spanish</option>
-                <option value="Italian">Italian</option>
-                <option value="Chinese">Chinese</option>
-                <option value="Japanese">Japanese</option>
-                <option value="Mexican">Mexican</option>
-                <option value="Russian">Russian</option>
-                <option value="South African">South African</option>
-                <option value="Turkish">Turkish</option>
-                <option value="Egyptian">Egyptian</option>
-                <option value="Nepalese">Nepalese</option>
-                <option value="Bangladeshi">Bangladeshi</option>
-                <option value="South Korean">South Korean</option>
-                <option value="Vietnamese">Vietnamese</option>
-                <option value="Indonesian">Indonesian</option>
-                <option value="Filipino">Filipino</option>
-                <option value="Philippine">Philippine</option>
-                <option value="Malaysian">Malaysian</option>
-                <option value="Thai">Thai</option>
-                <option value="Myanmar">Myanmar</option>
-                <option value="Sri Lankan">Sri Lankan</option>
-                <option value="Canadian">Canadian</option>
-                {/* add more options here */}
+                {/* Add more options here */}
               </select>
             </div>
             <div>
@@ -125,6 +117,8 @@ const PassportForm = () => {
                 type="date"
                 name="dateOfBirth"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -132,6 +126,8 @@ const PassportForm = () => {
               <select
                 name="gender"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.gender}
+                onChange={handleChange}
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -145,6 +141,8 @@ const PassportForm = () => {
                 type="text"
                 name="passportNo"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.passportNo}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -155,6 +153,8 @@ const PassportForm = () => {
                 type="date"
                 name="passportIssueDate"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.passportIssueDate}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -165,6 +165,8 @@ const PassportForm = () => {
                 type="date"
                 name="passportExpiryDate"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.passportExpiryDate}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -175,6 +177,8 @@ const PassportForm = () => {
                 type="text"
                 name="passportValidityPeriod"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.passportValidityPeriod}
+                onChange={handleChange}
                 placeholder="Please mention Years Months & Day(s)"
               />
             </div>
@@ -186,6 +190,8 @@ const PassportForm = () => {
                 type="text"
                 name="placeOfIssue"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.placeOfIssue}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -194,6 +200,8 @@ const PassportForm = () => {
                 type="text"
                 name="nomineeName"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.nomineeName}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -203,6 +211,8 @@ const PassportForm = () => {
               <select
                 name="nomineeGender"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.nomineeGender}
+                onChange={handleChange}
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -218,6 +228,8 @@ const PassportForm = () => {
                 type="text"
                 name="addressWithPinCode"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.addressWithPinCode}
+                onChange={handleChange}
                 placeholder="As Mentioned on the Passport"
               />
             </div>
@@ -230,14 +242,17 @@ const PassportForm = () => {
                 name="passportFile"
                 accept="application/pdf"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                onChange={handleChange}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Contact No</label>
+              <label className="block text-sm font-medium">Contact No.</label>
               <input
                 type="text"
                 name="contactNo"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.contactNo}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -246,6 +261,8 @@ const PassportForm = () => {
                 type="email"
                 name="email"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -255,6 +272,8 @@ const PassportForm = () => {
               <select
                 name="holdPassportFrom"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.holdPassportFrom}
+                onChange={handleChange}
               >
                 <option value="">Select Country / Region</option>
                 {/* Add more options here */}
@@ -267,6 +286,8 @@ const PassportForm = () => {
               <select
                 name="applyFrom"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.applyFrom}
+                onChange={handleChange}
               >
                 <option value="">Select Country / Region</option>
                 {/* Add more options here */}
@@ -277,6 +298,8 @@ const PassportForm = () => {
               <select
                 name="goTo"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                value={formData.goTo}
+                onChange={handleChange}
               >
                 <option value="">Select Country</option>
                 {/* Add more options here */}
@@ -295,6 +318,16 @@ const PassportForm = () => {
                     type="date"
                     name="entryDate"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                    value={formData.travelDuration.entryDate}
+                    onChange={(e) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        travelDuration: {
+                          ...prevData.travelDuration,
+                          entryDate: e.target.value,
+                        },
+                      }))
+                    }
                   />
                 </div>
                 <div>
@@ -303,6 +336,16 @@ const PassportForm = () => {
                     type="date"
                     name="exitDate"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                    value={formData.travelDuration.exitDate}
+                    onChange={(e) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        travelDuration: {
+                          ...prevData.travelDuration,
+                          exitDate: e.target.value,
+                        },
+                      }))
+                    }
                   />
                 </div>
               </div>
