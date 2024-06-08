@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const HealthLifeInsuranceForm = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ const HealthLifeInsuranceForm = () => {
     proofOfBirthAndAddress: null,
   });
 
+  const history = useHistory();
+
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     setFormData({
@@ -33,7 +36,8 @@ const HealthLifeInsuranceForm = () => {
         ? formData.proofOfBirthAndAddress.name
         : null,
     };
-    console.log(JSON.stringify(dataToSubmit, null, 2));
+    localStorage.setItem("formData", JSON.stringify(dataToSubmit));
+    history.push("/login");
   };
 
   return (
@@ -81,28 +85,26 @@ const HealthLifeInsuranceForm = () => {
               </select>
             </div>
 
-            <>
-              <div>
-                <label className="block mb-1 font-medium">Date of Birth</label>
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  value={formData.dateOfBirth}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded-md"
-                />
-              </div>
-              <div>
-                <label className="block mb-1 font-medium">Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded-md"
-                />
-              </div>
-            </>
+            <div>
+              <label className="block mb-1 font-medium">Date of Birth</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Address</label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
 
             <div>
               <label className="block mb-1 font-medium">Contact No</label>
@@ -126,7 +128,7 @@ const HealthLifeInsuranceForm = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 p-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 p-4 ">
             <label className="block mb-1 font-medium">
               Pre-Existing Disease
             </label>
