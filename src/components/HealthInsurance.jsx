@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HealthLifeInsuranceForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +18,8 @@ const HealthLifeInsuranceForm = () => {
     proofOfBirthAndAddress: null,
   });
 
-  const history = useHistory();
+  const history = useNavigate(); // useNavigate is the correct hook for navigation
+
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -37,7 +38,9 @@ const HealthLifeInsuranceForm = () => {
         : null,
     };
     localStorage.setItem("formData", JSON.stringify(dataToSubmit));
-    history.push("/login");
+    if (typeof history.push === "function") {
+      history.push("/login");
+    }
   };
 
   return (
