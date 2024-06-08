@@ -16,17 +16,35 @@ const HealthLifeInsuranceForm = () => {
     nomineeGender: "",
     nomineeRelationship: "",
     proofOfBirthAndAddress: null,
+    proofOfBirthAndAddressBase64: "", // Add a field for the base64 string
   });
 
-  const history = useNavigate(); // useNavigate is the correct hook for navigation
-
+  const history = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "file" ? files[0] : value,
-    });
+    if (type === "file") {
+      const file = files[0];
+      setFormData({
+        ...formData,
+        [name]: file,
+      });
+
+      // Convert the file to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevState) => ({
+          ...prevState,
+          proofOfBirthAndAddressBase64: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -38,9 +56,8 @@ const HealthLifeInsuranceForm = () => {
         : null,
     };
     localStorage.setItem("formData", JSON.stringify(dataToSubmit));
-    if (typeof history.push === "function") {
-      history.push("/login");
-    }
+    // Submit to backend here if needed
+    history("/login");
   };
 
   return (
