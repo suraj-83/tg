@@ -58,7 +58,7 @@ const CabBookingForm = () => {
       <div className="min-h-[100vh] flex items-center justify-center p-[10%]">
         <form
           onSubmit={handleSubmit}
-          className="bg-blue-100 bg-opacity-95 p-5 rounded-lg w-full h-full shadow-[0_0_10px_black]"
+          className="bg-blue-100 bg-opacity-65 p-5 rounded-lg w-full h-full shadow-[0_0_10px_black]"
         >
           <div>
             <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">

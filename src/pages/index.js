@@ -15,6 +15,8 @@ import HotelBookings from "../components/Hotel/HotelBookings"
 import Passport from "../components/Passport"
 import TravelInsuranceForm from "../components/TravelIsurance"
 import HealthLifeInsuranceForm from "../components/HealthInsurance"
+import CorporateProfile from "../pages/CorporateProfile"
+import RetailProfile from "../pages/RetailProfile"
 
 export {
     Home,
@@ -33,5 +35,7 @@ export {
     HotelBookings,
     Passport,
     TravelInsuranceForm,
-    HealthLifeInsuranceForm
+    HealthLifeInsuranceForm,
+    CorporateProfile,
+    RetailProfile
 }

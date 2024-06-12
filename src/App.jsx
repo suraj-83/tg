@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin, CorporateSignup, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
+import { Home, AboutUs, SignUp, RetailLogin,RetailProfile, CorporateSignup,CorporateProfile, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -11,8 +11,10 @@ function App() {
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
                 <Route path="retail-login" element={<RetailLogin />} />
+                <Route path="retail-profile" element={<RetailProfile />} />
                 <Route path="corporate" element={<CorporateSignup />} />
-                <Route path="corporate-login" element={<CorporateLogin />} />                
+                <Route path="corporate-login" element={<CorporateLogin />} /> 
+                <Route path="corporate-profile" element={<CorporateProfile />} />               
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
