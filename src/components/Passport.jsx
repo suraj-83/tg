@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createPassport } from "../redux/slices/travelSlice";
 
 const initialFormData = {
   totalNoOfTravellers: "",
@@ -29,6 +31,7 @@ const initialFormData = {
 
 const PassportForm = () => {
   const [formData, setFormData] = useState(initialFormData);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -51,10 +54,16 @@ const PassportForm = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(formData);
     localStorage.setItem("formData", JSON.stringify(formData));
-    navigate("/login");
+
+    const response = await dispatch(createPassport(formData));
+
+    if (response?.payload?.data?.success) {
+      navigate("/");
+    }
   };
 
   return (

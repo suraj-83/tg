@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createHealthInsurance } from "../redux/slices/travelSlice";
 
 const HealthLifeInsuranceForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +20,8 @@ const HealthLifeInsuranceForm = () => {
     proofOfBirthAndAddress: null,
   });
 
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -46,7 +49,7 @@ const HealthLifeInsuranceForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const dataToSubmit = {
       ...formData,
@@ -56,8 +59,12 @@ const HealthLifeInsuranceForm = () => {
     };
     console.log("Form Data Submitted:", dataToSubmit);
     localStorage.setItem("formData", JSON.stringify(dataToSubmit));
-    // Submit to backend here if needed
-    history("/login");
+
+    const response = await dispatch(createHealthInsurance(formData));
+
+    if (response?.payload?.data?.success) {
+      navigate("/");
+    }
   };
 
   return (

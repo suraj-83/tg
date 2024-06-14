@@ -98,6 +98,60 @@ export const createHotelBooking = createAsyncThunk('travel/create-hotel-booking'
     }
 })
 
+export const createPassport = createAsyncThunk('travel/create-passport', async (data) => {
+    try {
+        const response = axiosInstance.post("/travel/passport", data)
+
+        toast.promise(response, {
+            loading: 'Creating passport booking...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create passport booking"
+        })
+
+        return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const createTravelInsurance = createAsyncThunk('travel/create-travel-insurance', async (data) => {
+    try {
+        const response = axiosInstance.post("/travel/travelInsurance", data)
+
+        toast.promise(response, {
+            loading: 'Creating travel insurance...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create travel insurance"
+        })
+
+        return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const createHealthInsurance = createAsyncThunk('travel/create-health-insurance', async (data) => {
+    try {
+        const response = axiosInstance.post("/travel/healthInsurance", data)
+
+        toast.promise(response, {
+            loading: 'Creating health insurance...',
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to create health insurance"
+        })
+
+        return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 // export const getCurrentUserTravelDetails = createAsyncThunk('travel/getCurrentUserTravelDetails', async () => {
 //     try {
 //         const response = axiosInstance.get("/travel/travel-details")
