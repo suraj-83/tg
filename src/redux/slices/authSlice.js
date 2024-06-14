@@ -5,7 +5,7 @@ import axiosInstance from "../../config/axiosInstance.js"
 const initialState = {
     isLoggedIn: localStorage.getItem('isLoggedIn') || false,
     role: localStorage.getItem('role') || 'USER',
-    data: JSON.parse(localStorage.getItem('user')) || {},
+    user: JSON.parse(localStorage.getItem('user')) || {},
 }
 
 export const retailSignup = createAsyncThunk('auth/retail-signup', async (data) => {
@@ -171,7 +171,7 @@ const authSlice = createSlice({
                 console.log("Login Details: ", action.payload.data)
 
                 if (action.payload.status === 200) {
-                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
                     localStorage.setItem("isLoggedIn", true);
                     // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
                     state.isLoggedIn = true;
@@ -184,7 +184,7 @@ const authSlice = createSlice({
                 console.log("Login Details: ", action.payload.data)
 
                 if (action.payload.status === 200) {
-                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
                     localStorage.setItem("isLoggedIn", true);
                     // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
                     state.isLoggedIn = true;
@@ -197,7 +197,7 @@ const authSlice = createSlice({
                 console.log("Login Details: ", action.payload.data)
 
                 if (action.payload.status === 200) {
-                    // localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
+                    localStorage.setItem("user", JSON.stringify(action?.payload?.data?.data));
                     localStorage.setItem("isLoggedIn", true);
                     // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
                     state.isLoggedIn = true;
