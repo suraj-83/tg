@@ -2,6 +2,8 @@ import React from 'react';
 import AdminHeader from '../AdminHeader';
 import AdminSidebar from '../AdminSidebar';
 import AdminMain from '../AdminMain';
+import Dashboard from './Dashboard';
+
 
 const AdminDashboard = () => {
     return (
@@ -11,6 +13,8 @@ const AdminDashboard = () => {
                 <AdminSidebar />
                 <main className="flex-1 p-6 bg-gray-100">
                     <AdminMain />
+                    <Dashboard />
+                    
                 </main>
             </div>
         </div>
