@@ -7,11 +7,11 @@ function Profile() {
   const user = useSelector((state) => state.auth.user);
 
   const initialProfileData = {
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
+    firstName: user?.retailUser?.firstName || "",
+    lastName: user?.retailUser?.lastName || "",
     email: user?.email || "",
-    phone: user?.phone || "",
-    address1: user?.address1 || "",
+    phone: user?.retailUser?.phoneNumber1 || "",
+    address1: user?.retailUser?.residentialAddress || "",
     address2: user?.address2 || "",
     city: user?.city || "",
     state: user?.state || "",
@@ -25,16 +25,16 @@ function Profile() {
   useEffect(() => {
     if (user) {
       setProfileData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        address1: user.address1,
-        address2: user.address2,
-        city: user.city,
-        state: user.state,
-        zipCode: user.zipCode,
-        country: user.country,
+        firstName: user?.retailUser?.firstName || "",
+        lastName: user?.retailUser?.lastName || "",
+        email: user?.email || "",
+        phone: user?.retailUser?.phoneNumber1 || "",
+        address1: user?.retailUser?.residentialAddress || "",
+        address2: user?.address2 || "",
+        city: user?.city || "",
+        state: user?.state || "",
+        zipCode: user?.zipCode || "",
+        country: user?.country || "",
       });
     }
   }, [user]);
