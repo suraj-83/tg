@@ -17,7 +17,8 @@ import TravelInsuranceForm from "../components/TravelIsurance"
 import HealthLifeInsuranceForm from "../components/HealthInsurance"
 import CorporateProfile from "../pages/CorporateProfile"
 import RetailProfile from "../pages/RetailProfile"
-import CorporateUsers from '../components/admin/CorporateUsers';
+import CorporateUsers from '../components/admin/CorporateUsers'
+import RetailUsers from '../components/admin/RetailUsers'
 
 export {
     Home,
@@ -39,5 +40,6 @@ export {
     HealthLifeInsuranceForm,
     CorporateProfile,
     RetailProfile,
-    CorporateUsers
+    CorporateUsers,
+    RetailUsers
 }
