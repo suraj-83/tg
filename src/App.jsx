@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
+import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
+                <Route path="flightbookingdetails" element={<FlightBookingDetails />} />
+                <Route path="trainbookingdetails" element={<TrainBookingDetails />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />

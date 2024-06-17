@@ -19,6 +19,8 @@ import CorporateProfile from "../pages/CorporateProfile"
 import RetailProfile from "../pages/RetailProfile"
 import CorporateUsers from '../components/admin/CorporateUsers'
 import RetailUsers from '../components/admin/RetailUsers'
+import TrainBookingDetails from "../components/admin/TrainBookingDetails"
+import FlightBookingDetails from "../components/admin/FlightBookingDetails"
 
 export {
     Home,
@@ -41,5 +43,7 @@ export {
     CorporateProfile,
     RetailProfile,
     CorporateUsers,
-    RetailUsers
+    RetailUsers,
+    TrainBookingDetails,
+    FlightBookingDetails
 }
