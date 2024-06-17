@@ -12,11 +12,11 @@ function App() {
                 <Route path="retail" element={<SignUp />} />
                 <Route path="retail-login" element={<RetailLogin />} />
                 <Route path="retail-profile" element={<RetailProfile />} />
-                <Route path="/admin/retail-users" element={<RetailUsers />} />
+                <Route path="retail-users" element={<RetailUsers />} />
                 <Route path="corporate" element={<CorporateSignup />} />
                 <Route path="corporate-login" element={<CorporateLogin />} /> 
                 <Route path="corporate-profile" element={<CorporateProfile />} />
-                <Route path="admin/corporate-users" element={<CorporateUsers />} />
+                <Route path="corporate-users" element={<CorporateUsers />} />
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
