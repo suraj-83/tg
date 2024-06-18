@@ -1,10 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-const UserDetails = () => {
-  // Assuming that the user details are stored in the Redux state under `userDetails`
-  const userDetails = useSelector((state) => state.userDetails);
-
+const UserDetails = ({ userDetails }) => {
   if (!userDetails || userDetails.length === 0) {
     return <div>Loading...</div>;
   }
