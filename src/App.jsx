@@ -11,17 +11,17 @@ function App() {
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
                 <Route path="retail-login" element={<RetailLogin />} />
-                <Route path="retail-profile" element={<RetailProfile />} />
-                <Route path="retail-users" element={<RetailUsers />} />
+                <Route path="admin/retail-profile" element={<RetailProfile />} />
+                <Route path="admin/retail-users" element={<RetailUsers />} />
                 <Route path="corporate" element={<CorporateSignup />} />
                 <Route path="corporate-login" element={<CorporateLogin />} /> 
                 <Route path="corporate-profile" element={<CorporateProfile />} />
-                <Route path="corporate-users" element={<CorporateUsers />} />
+                <Route path="admin/corporate-users" element={<CorporateUsers />} />
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
-                <Route path="flightbookingdetails" element={<FlightBookingDetails />} />
-                <Route path="trainbookingdetails" element={<TrainBookingDetails />} />
+                <Route path="admin/flightbookingdetails" element={<FlightBookingDetails />} />
+                <Route path="admin/trainbookingdetails" element={<TrainBookingDetails />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />
