@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings, VolvoBusBookings, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
+import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -24,7 +24,9 @@ function App() {
                 <Route path="admin/trainbookingdetails" element={<TrainBookingDetails />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
+                <Route path="admin/cabbookingdetails" element={<CabBookingDetails />} />
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />
+                <Route path="admin/volvobusbookingdetails" element={<VolvoBusBookingDetails />} />
                 <Route path="hotelbookings" element={<HotelBookings />} />
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
