@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchCabTravelDetails } from "../../redux/slices/travelSlice.js"; // Adjust the import as needed
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import AdminHeader from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 const CabBookingDetails = () => {
   const dispatch = useDispatch();
@@ -24,8 +25,12 @@ const CabBookingDetails = () => {
     });
   }, [dispatch]);
   return (
-            <div className="sticky">
-            <div className="w-full">
+<div className="flex flex-col h-screen">
+            <AdminHeader />
+        <div className="flex flex-1">
+                <AdminSidebar />
+
+            <main className="w-full">
           <table className="w-full bg-white ">
             <thead>
               <tr>
@@ -84,7 +89,9 @@ const CabBookingDetails = () => {
               ))}
             </tbody>
           </table>
+          </main>
           </div>
+
         </div>
       
   );

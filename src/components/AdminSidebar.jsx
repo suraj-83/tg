@@ -8,6 +8,7 @@ const AdminSidebar = () => {
                 <Link to="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
                 <Link to="corporate-users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Corporate Users</Link>
                 <Link to="retail-users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Retail Users</Link>
+                <Link to="vendor-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Vendor Details</Link>
                 <Link to="flightbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Flight Booking Details</Link>
                 <Link to="trainbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Train Booking Details</Link>
                 <Link to="cabbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Cab Booking Details</Link>
