@@ -1,33 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchBusBookings } from "../../redux/slices/travelSlice";
+import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
-  const { busBookings, status, error } = useSelector((state) => state.travel);
+  const [travelDetails, setTravelDetails] = useState([]);
+
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchBusBookings());
+    const fetchData = async () => {
+      let response = await dispatch(fetchBusDetails());
+    setTravelDetails(response.payload);
+
+    console.log(response);
+    console.log(travelDetails)
     }
-  }, [status, dispatch]);
-
-  if (status === 'loading') {
-    return <div>Loading...</div>;
-  }
-
-  if (status === 'failed') {
-    return <div>Error: {String(error)}</div>;
-  }
+    fetchData()
+  }, []);
     
 
   return (
     <div className="p-6 bg-gray-100">
       <h1 className="text-2xl font-bold mb-6">Volvo Bus Booking Details</h1>
-      {busBookings && busBookings.length === 0 ? (
+      {travelDetails.length === 0 ? (
         <div>No bookings available.</div>
       ) : (
-        busBookings && busBookings.map((booking, index) => (
+        travelDetails.map((booking, index) => (
           <div key={index} className="bg-white p-4 rounded shadow-md mb-4">
             <h3 className="text-xl font-semibold mb-4">Booking {index + 1}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

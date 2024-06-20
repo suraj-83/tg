@@ -19,7 +19,7 @@ const initialState = {
 export const fetchBusDetails = createAsyncThunk('dashboard/fetchBusDetails', async () => {
   try {
     const response = await axiosInstance.get('/dashboard/bus');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch bus details');
     throw error;
@@ -29,7 +29,9 @@ export const fetchBusDetails = createAsyncThunk('dashboard/fetchBusDetails', asy
 export const fetchAirDetails = createAsyncThunk('dashboard/fetchAirDetails', async () => {
   try {
     const response = await axiosInstance.get('/dashboard/air');
-    return response.data;
+
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch air details');
     throw error;
@@ -39,7 +41,7 @@ export const fetchAirDetails = createAsyncThunk('dashboard/fetchAirDetails', asy
 export const fetchTrainDetails = createAsyncThunk('dashboard/fetchTrainDetails', async () => {
   try {
     const response = await axiosInstance.get('/dashboard/train');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch train details');
     throw error;
@@ -49,7 +51,7 @@ export const fetchTrainDetails = createAsyncThunk('dashboard/fetchTrainDetails',
 export const fetchCabDetails = createAsyncThunk('dashboard/fetchCabDetails', async () => {
   try {
     const response = await axiosInstance.get('/dashboard/cab');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch cab details');
     throw error;
@@ -59,7 +61,7 @@ export const fetchCabDetails = createAsyncThunk('dashboard/fetchCabDetails', asy
 export const fetchHotelBookings = createAsyncThunk('dashboard/fetchHotelBookings', async () => {
   try {
     const response = await axiosInstance.get('/dashboard/hotelBookings');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch hotel bookings');
     throw error;

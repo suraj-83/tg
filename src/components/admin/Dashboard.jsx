@@ -52,14 +52,14 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Bus Details</h2>
+      {/* <h2>Bus Details</h2>
       <pre>{JSON.stringify(busDetails, null, 2)}</pre>
       <h2>Air Details</h2>
       <pre>{JSON.stringify(airDetails, null, 2)}</pre>
       <h2>Train Details</h2>
       <pre>{JSON.stringify(trainDetails, null, 2)}</pre>
       <h2>Cab Details</h2>
-      <pre>{JSON.stringify(cabDetails, null, 2)}</pre>
+      <pre>{JSON.stringify(cabDetails, null, 2)}</pre> */}
     </div>
   );
 };

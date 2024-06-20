@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchTrainDetails } from "../../redux/slices/dashboardSlice";
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
-  const { trainBookings, loading, error } = useSelector((state) => state.travel);
-  const [search, setSearch] = useState("");
+  const [travelDetails, setTravelDetails] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchTrainBookings());
-  }, [dispatch]);
+    const fetchData = async () => {
+      let response = await dispatch(fetchTrainDetails());
+      setTravelDetails(response.payload);
 
-  const filteredBookings = trainBookings.filter((booking) =>
-    booking.fullName.toLowerCase().includes(search.toLowerCase())
-  );
+      console.log(response);
+      console.log(travelDetails);
+    };
+    fetchData();
+  }, []);
+
+  // const filteredBookings = travelDetails.filter((booking) =>
+  //   booking.fullName.toLowerCase().includes(search.toLowerCase())
+  // );
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="container mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-6 text-center">Train Booking Details</h1>
-        <div className="mb-4">
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Train Booking Details
+        </h1>
+        {/* <div className="mb-4">
           <input
             type="text"
             placeholder="Search by Name"
@@ -26,12 +35,8 @@ const TrainBookingDetails = () => {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none"
           />
-        </div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error fetching bookings: {error}</p>
-        ) : (
+        </div> */}
+        
           <table className="min-w-full bg-white">
             <thead>
               <tr>
@@ -49,7 +54,7 @@ const TrainBookingDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredBookings.map((booking, index) => (
+              {travelDetails.map((booking, index) => (
                 <tr key={index}>
                   <td className="py-2 px-4 border-b">{booking.fullName}</td>
                   <td className="py-2 px-4 border-b">{booking.dob}</td>
@@ -58,15 +63,18 @@ const TrainBookingDetails = () => {
                   <td className="py-2 px-4 border-b">{booking.email}</td>
                   <td className="py-2 px-4 border-b">{booking.travelFrom}</td>
                   <td className="py-2 px-4 border-b">{booking.travelTo}</td>
-                  <td className="py-2 px-4 border-b">{booking.classOfTravel}</td>
+                  <td className="py-2 px-4 border-b">
+                    {booking.classOfTravel}
+                  </td>
                   <td className="py-2 px-4 border-b">{booking.travelDate}</td>
                   <td className="py-2 px-4 border-b">{booking.trainNo}</td>
-                  <td className="py-2 px-4 border-b">{booking.timePreference}</td>
+                  <td className="py-2 px-4 border-b">
+                    {booking.timePreference}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
       </div>
     </div>
   );
