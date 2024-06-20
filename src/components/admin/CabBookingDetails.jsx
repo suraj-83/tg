@@ -13,9 +13,6 @@ const CabBookingDetails = () => {
     const fetchData = async () => {
       let response = await dispatch(fetchCabDetails());
       setTravelDetails(response.payload);
-
-      console.log(response);
-      console.log(travelDetails);
     };
     fetchData();
   }, []);

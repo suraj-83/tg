@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllCorporateUsers } from "../../redux/slices/dashboardSlice";
 
-const UserDetails = ({ userDetails }) => {
+const UserDetails = () => {
+  const dispatch = useDispatch();
+  const [userDetails, setUserDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await dispatch(getAllCorporateUsers());
+      setUserDetails(response.payload.data);
+    };
+    fetchData();
+  }, []);
+  
   if (!userDetails || userDetails.length === 0) {
     return <div>Loading...</div>;
   }

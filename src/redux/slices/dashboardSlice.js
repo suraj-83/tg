@@ -98,6 +98,36 @@ export const fetchHealthInsurances = createAsyncThunk('dashboard/fetchHealthInsu
   }
 });
 
+export const getAllRetailUsers = createAsyncThunk('dashboard/getAllRetailUsers', async () => {
+  try {
+    const response = await axiosInstance.get('/dashboard/retail');
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Failed to fetch retail users');
+    throw error;
+  }
+});
+
+export const getAllCorporateUsers = createAsyncThunk('dashboard/getAllCorporateUsers', async () => {
+  try {
+    const response = await axiosInstance.get('/dashboard/corporate');
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Failed to fetch corporate users');
+    throw error;
+  }
+});
+
+export const getAllVendors = createAsyncThunk('dashboard/getAllVendors', async () => {
+  try {
+    const response = await axiosInstance.get('/dashboard/vendor');
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Failed to fetch vendors');
+    throw error;
+  }
+});
+
 const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState,

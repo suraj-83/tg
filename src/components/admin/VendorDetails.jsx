@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminHeader from '../AdminHeader';
 import AdminSidebar from '../AdminSidebar';
+import { getAllVendors } from '../../redux/slices/dashboardSlice';
 
 const VendorDetails = () => {
     const dispatch = useDispatch();
-    const state = useSelector((state) => state.vendors);
-    const { vendors = [], loading = false, error = null } = state || { vendors: [] };
+    const [userDetails, setUserDetails] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        let response = await dispatch(getAllVendors());
+        setUserDetails(response.payload.data);
+      };
+      fetchData();
+    }, []);
 
-    // useEffect(() => {
-    //     dispatch(vendorsSlice.actions.fetchVendors());
-    // }, [dispatch]);
-
-    if (loading) {
+    if (!userDetails) {
         return <p>Loading...</p>;
-    }
-
-    if (error) {
-        return <p>Error: {error}</p>;
     }
 
     return (
@@ -47,7 +47,7 @@ const VendorDetails = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {vendors.map((vendor) => (
+                        {userDetails.map((vendor) => (
                             <tr key={vendor.id}>
                                 <td className="py-2 px-4 border-b">{vendor.companyName}</td>
                                 <td className="py-2 px-4 border-b">{vendor.email}</td>

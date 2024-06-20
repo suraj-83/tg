@@ -10,9 +10,6 @@ const TrainBookingDetails = () => {
     const fetchData = async () => {
       let response = await dispatch(fetchTrainDetails());
       setTravelDetails(response.payload);
-
-      console.log(response);
-      console.log(travelDetails);
     };
     fetchData();
   }, []);

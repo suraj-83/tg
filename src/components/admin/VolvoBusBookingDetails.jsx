@@ -11,9 +11,6 @@ const VolvoBusBookingDetails = () => {
     const fetchData = async () => {
       let response = await dispatch(fetchBusDetails());
     setTravelDetails(response.payload);
-
-    console.log(response);
-    console.log(travelDetails)
     }
     fetchData()
   }, []);

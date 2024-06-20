@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllRetailUsers } from "../../redux/slices/dashboardSlice";
 
 const UserDetails = () => {
+  const dispatch = useDispatch();
+  const [userDetails, setUserDetails] = useState([]);
 
-  const context = React.useContext(React.createContext())
-  const { userDetails = [] } = context || {}
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await dispatch(getAllRetailUsers());
+      setUserDetails(response.payload.data);
+    };
+    fetchData();
+  }, []);
 
-  if (!userDetails || userDetails.length === 0) {
+  if (!userDetails) {
     return <div>Loading...</div>;
   }
 

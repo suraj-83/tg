@@ -10,9 +10,6 @@ const FlightBookingDetails = () => {
     const fetchData = async () => {
       let response = await dispatch(fetchAirDetails());
       setTravelDetails(response.payload);
-
-      console.log(response);
-      console.log(travelDetails);
     };
     fetchData();
   }, []);
