@@ -25,6 +25,7 @@ import CabBookingDetails from "../components/admin/CabBookingDetails"
 import VolvoBusBookingDetails from "../components/admin/VolvoBusBookingDetails"
 import VendorDetails from "../components/admin/VendorDetails"
 import HealthInsuranceDetails from "../components/admin/HealthInsuranceDetails"
+import TravelInsunranceDetails from "../components/admin/TravelInsunranceDetails"
 
 export {
     Home,
@@ -53,5 +54,6 @@ export {
     CabBookingDetails,
     VolvoBusBookingDetails,
     VendorDetails,
-    HealthInsuranceDetails
+    HealthInsuranceDetails,
+    TravelInsunranceDetails
 }

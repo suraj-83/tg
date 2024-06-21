@@ -1,30 +1,123 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const AdminSidebar = () => {
-    return (
-        <aside className="bg-gray-700 text-white w-64 space-y-6 py-7 px-2">
-            <nav>
-                <Link to="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
-                <Link to="corporate-users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Corporate Users</Link>
-                <Link to="retail-users" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Retail Users</Link>
-                <Link to="vendor-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Vendor Details</Link>
-                <Link to="flightbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Flight Booking Details</Link>
-                <Link to="trainbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Train Booking Details</Link>
-                <Link to="cabbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Cab Booking Details</Link>
-                <Link to="volvobusbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Volvo Bus Booking Details</Link>
-                <Link to="healthinsurance-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Health Insurance Details</Link>
-                {/* Add more links as needed */}
+  const [isUserDetailsOpen, setIsUserDetailsOpen] = useState(false);
+  const [allBookingsOpen, setAllBookingsOpen] = useState(false);
 
-                <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link>
+  return (
+    <aside className="bg-gray-700 text-white w-64 space-y-6 py-7 px-2">
+      <nav>
+        <Link to="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
+        
+        <div className="relative">
+          <button
+            type="button"
+            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
+            onClick={() => setIsUserDetailsOpen(!isUserDetailsOpen)}
+          >
+            All User Details
+            <svg
+              className="inline-block w-4 h-4 ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={isUserDetailsOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
+              />
+            </svg>
+          </button>
 
-                <Link to="retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link>
+          {isUserDetailsOpen && (
+            <div className="mt-2 bg-gray-600 rounded shadow-lg">
+              <Link
+                to="corporate-users"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Corporate Users
+              </Link>
+              <Link
+                to="retail-users"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Retail Users
+              </Link>
+              <Link
+                to="vendor-details"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Vendor Details
+              </Link>
+            </div>
+          )}
+        </div>
 
-                <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link>
-                <Link to="/admin/logout" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Logout</Link>
-            </nav>
-        </aside>
-    );
+        <div className="relative">
+          <button
+            type="button"
+            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
+            onClick={() => setAllBookingsOpen(!allBookingsOpen)}
+          >
+            All Booking Details
+            <svg
+              className="inline-block w-4 h-4 ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={allBookingsOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
+              />
+            </svg>
+          </button>
+
+          {allBookingsOpen && (
+            <div className="mt-2 bg-gray-600 rounded shadow-lg">
+              <Link
+                to="flightbookingdetails"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Flight Booking Details
+              </Link>
+              <Link
+                to="trainbookingdetails"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Train Booking Details
+              </Link>
+              <Link
+                to="cabbookingdetails"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Cab Booking Details
+              </Link>
+              <Link
+                to="volvobusbookingdetails"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Volvo Bus Booking Details
+              </Link>
+            </div>
+          )}
+        </div>
+        <Link to="healthinsurance-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Health Insurance Details</Link>
+        <Link to="travelinsurance-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Travel Insurance Details</Link>
+        <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link>
+        <Link to="retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link>
+        <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link>
+        <Link to="/admin/logout" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Logout</Link>
+      </nav>
+    </aside>
+  );
 };
 
 export default AdminSidebar;

@@ -33,7 +33,7 @@ const TravelInsuranceDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {travelInsurances.map((insurance) => (
+            {travelInsurances && travelInsurances.map((insurance) => (
               <tr key={insurance.id} className="hover:bg-gray-100">
                 <td className="border px-4 py-2">{insurance.name}</td>
                 <td className="border px-4 py-2">{insurance.gender}</td>
