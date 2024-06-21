@@ -13,6 +13,7 @@ const AdminSidebar = () => {
                 <Link to="trainbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Train Booking Details</Link>
                 <Link to="cabbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Cab Booking Details</Link>
                 <Link to="volvobusbookingdetails" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Volvo Bus Booking Details</Link>
+                <Link to="healthinsurance-details" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Health Insurance Details</Link>
                 {/* Add more links as needed */}
 
                 <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link>

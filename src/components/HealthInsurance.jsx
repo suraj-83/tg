@@ -80,7 +80,7 @@ const HealthLifeInsuranceForm = () => {
           className="bg-blue-100 bg-opacity-95 p-5 rounded-lg w-full lg:w-2/3 shadow-[0_0_10px_black]"
         >
           <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
-            Request Form for Health & Life Insurance
+            Request Form for Health Insurance
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
