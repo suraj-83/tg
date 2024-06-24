@@ -26,6 +26,7 @@ import VolvoBusBookingDetails from "../components/admin/VolvoBusBookingDetails"
 import VendorDetails from "../components/admin/VendorDetails"
 import HealthInsuranceDetails from "../components/admin/HealthInsuranceDetails"
 import TravelInsunranceDetails from "../components/admin/TravelInsunranceDetails"
+import HotelBookingDetails from "../components/admin/HotelBookingDetails"
 
 export {
     Home,
@@ -55,5 +56,6 @@ export {
     VolvoBusBookingDetails,
     VendorDetails,
     HealthInsuranceDetails,
-    TravelInsunranceDetails
+    TravelInsunranceDetails,
+    HotelBookingDetails
 }

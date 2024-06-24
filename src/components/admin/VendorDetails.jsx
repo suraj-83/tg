@@ -29,7 +29,7 @@ const VendorDetails = () => {
             <h1 className="text-2xl font-bold mb-4">Vendor Details</h1>
             <div className="overflow-x-auto">
                 
-                <table className="min-w-full bg-white">
+                <table className="min-w-full text-sm bg-white">
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b">Company Name</th>

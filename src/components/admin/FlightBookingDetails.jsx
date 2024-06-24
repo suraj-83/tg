@@ -26,7 +26,7 @@ const FlightBookingDetails = () => {
           <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
             Flight Booking Details
           </h1>
-          <table className="min-w-full bg-white">
+          <table className="min-w-full text-sm bg-white">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b border-gray-200">

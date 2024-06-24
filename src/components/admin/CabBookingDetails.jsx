@@ -24,7 +24,7 @@ const CabBookingDetails = () => {
         {/* <AdminSidebar /> */}
 
         <main className="w-full">
-          <table className="w-full bg-white ">
+          <table className="w-full text-sm bg-white ">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b border-gray-200">

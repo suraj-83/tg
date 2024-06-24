@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
                 <Route path="retail-login" element={<RetailLogin />} />
-                <Route path="admin/retail-profile" element={<RetailProfile />} />
+                <Route path="retail-profile" element={<RetailProfile />} />
                 <Route path="admin/retail-users" element={<RetailUsers />} />
                 <Route path="corporate" element={<CorporateSignup />} />
                 <Route path="corporate-login" element={<CorporateLogin />} /> 
@@ -29,6 +29,7 @@ function App() {
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />
                 <Route path="admin/volvobusbookingdetails" element={<VolvoBusBookingDetails />} />
                 <Route path="hotelbookings" element={<HotelBookings />} />
+                <Route path="admin/hotelbookingdetails" element={<HotelBookingDetails />} />
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
                 <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
