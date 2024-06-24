@@ -60,7 +60,10 @@ export const fetchCabDetails = createAsyncThunk('dashboard/fetchCabDetails', asy
 
 export const fetchHotelBookings = createAsyncThunk('dashboard/fetchHotelBookings', async () => {
   try {
-    const response = await axiosInstance.get('/dashboard/hotelBookings');
+    const response = await axiosInstance.get('/dashboard/hotel');
+
+    console.log(response.data.data);
+
     return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch hotel bookings');
@@ -70,7 +73,7 @@ export const fetchHotelBookings = createAsyncThunk('dashboard/fetchHotelBookings
 
 export const fetchPassports = createAsyncThunk('dashboard/fetchPassports', async () => {
   try {
-    const response = await axiosInstance.get('/dashboard/passports');
+    const response = await axiosInstance.get('/dashboard/passport');
     return response.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch passports');
@@ -80,7 +83,7 @@ export const fetchPassports = createAsyncThunk('dashboard/fetchPassports', async
 
 export const fetchTravelInsurances = createAsyncThunk('dashboard/fetchTravelInsurances', async () => {
   try {
-    const response = await axiosInstance.get('/dashboard/travelInsurances');
+    const response = await axiosInstance.get('/dashboard/travelInsurance');
     return response.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch travel insurances');
@@ -90,7 +93,7 @@ export const fetchTravelInsurances = createAsyncThunk('dashboard/fetchTravelInsu
 
 export const fetchHealthInsurances = createAsyncThunk('dashboard/fetchHealthInsurances', async () => {
   try {
-    const response = await axiosInstance.get('/dashboard/healthInsurances');
+    const response = await axiosInstance.get('/dashboard/healthInsurance');
     return response.data;
   } catch (error) {
     toast.error(error?.response?.data?.message || 'Failed to fetch health insurances');

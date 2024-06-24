@@ -4,16 +4,17 @@ import { fetchHotelBookings } from '../../redux/slices/dashboardSlice';
 
 const HotelBookingDetails = () => {
   const dispatch = useDispatch();
-  const bookings = useSelector((state) => state.travel.bookings);
+  const [travelDetails, setTravelDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookings = async () => {
-      await dispatch(fetchHotelBookings());
+      let response = await dispatch(fetchHotelBookings());
+      setTravelDetails(response.payload);
       setLoading(false);
     };
     fetchBookings();
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -49,7 +50,7 @@ const HotelBookingDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings && bookings.map((booking) => (
+            {travelDetails && travelDetails.map((booking) => (
               <tr key={booking.id}>
                 <td className="py-2 px-4 border-b">{booking.name}</td>
                 <td className="py-2 px-4 border-b">{booking.nationality}</td>
