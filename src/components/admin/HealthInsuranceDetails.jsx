@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchHealthInsurances } from "../../redux/slices/dashboardSlice";
 // import { fetchHealthInsurances } from "../../redux/slices/dashboardSlice";
 import AdminHeader from "../AdminHeader";
 import AdminSidebar from "../AdminSidebar";
 
 const HealthInsuranceDetails = () => {
   const dispatch = useDispatch();
-  const healthInsurances = useSelector((state) => state.travel.healthInsurances);
+  const [travelDetails, setTravelDetails] = useState([]);
   const [selectedInsurance, setSelectedInsurance] = useState(null);
 
-//   useEffect(() => {
-//     dispatch(fetchHealthInsurances());
-//   }, [dispatch]);
+  useEffect(() => {
+    const fetchBookings = async () => {
+      let response = await dispatch(fetchHealthInsurances());
+      setTravelDetails(response.payload.data);
+      setLoading(false);
+    };
+    fetchBookings();
+  }, []);
   const handleSelectInsurance = (insurance) => {
     setSelectedInsurance(insurance);
   };
@@ -41,7 +47,7 @@ const HealthInsuranceDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {healthInsurances && healthInsurances.map((insurance) => (
+            {travelDetails && travelDetails.map((insurance) => (
               <tr key={insurance.id} className="hover:bg-gray-100">
                 <td className="border px-4 py-2">{insurance.name}</td>
                 <td className="border px-4 py-2">{insurance.gender}</td>
