@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchHealthInsurances } from "../../redux/slices/dashboardSlice";
+import { fetchTravelInsurances } from "../../redux/slices/dashboardSlice";
+import AdminHeader from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 const TravelInsuranceDetails = () => {
   const dispatch = useDispatch();

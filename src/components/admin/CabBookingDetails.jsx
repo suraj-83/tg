@@ -22,7 +22,7 @@ const CabBookingDetails = () => {
       <AdminHeader />
       <div className="flex flex-1">
         <AdminSidebar />
-        <main className="min-h-screen bg-gray-100 w-screen">
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
           <table className=" text-sm bg-white ">
             <thead>
               <tr>
