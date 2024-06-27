@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHotelBookings } from '../../redux/slices/dashboardSlice';
-
+import AdminHeader from '../AdminHeader';
+import AdminSidebar from '../AdminSidebar';
 const HotelBookingDetails = () => {
   const dispatch = useDispatch();
   const bookings = useSelector((state) => state.travel.bookings);
@@ -20,7 +21,11 @@ const HotelBookingDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
+    <div className="flex flex-col">
+            <AdminHeader />
+        <div className="flex">
+                <AdminSidebar />
+    <main  className="h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
       <h1 className="text-3xl font-bold text-gray-950 p pt-5 bg-white  text-center uppercase">Hotel Booking Details</h1>
       <div className=" shadow-md min-w-full relative mx-auto bg-white rounded p-6">
         <h2 className="text-2xl font-bold mb-4 underline">Hotel Bookings</h2>
@@ -75,7 +80,10 @@ const HotelBookingDetails = () => {
           </tbody>
         </table>
       </div>
+    </main>
     </div>
+    </div>
+    
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchTrainDetails } from "../../redux/slices/dashboardSlice";
+import AdminHeader from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
@@ -19,9 +21,13 @@ const TrainBookingDetails = () => {
   // );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="container mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className="flex flex-col">
+            <AdminHeader />
+        <div className="flex">
+                <AdminSidebar />
+    <main className="min-h-screen bg-gray-100 w-screen"  style={{backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
+      <div className="container mx-auto bg-gray-100 shadow-md rounded-lg p-6">
+        <h1 className="text-2xl font-bold mb-6 text-center uppercase underline">
           Train Booking Details
         </h1>
         {/* <div className="mb-4">
@@ -34,7 +40,7 @@ const TrainBookingDetails = () => {
           />
         </div> */}
         
-          <table className="min-w-full bg-white">
+          <table className="min-w-full bg-gray-100 text-sm sm:w-[10%]">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b">Full Name</th>
@@ -51,7 +57,7 @@ const TrainBookingDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {travelDetails.map((booking, index) => (
+              {travelDetails && travelDetails.map((booking, index) => (
                 <tr key={index}>
                   <td className="py-2 px-4 border-b">{booking.fullName}</td>
                   <td className="py-2 px-4 border-b">{booking.dob}</td>
@@ -73,6 +79,8 @@ const TrainBookingDetails = () => {
             </tbody>
           </table>
       </div>
+    </main>
+    </div>
     </div>
   );
 };

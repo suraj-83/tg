@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllRetailUsers } from "../../redux/slices/dashboardSlice";
+import AdminHeader from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 const UserDetails = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,11 @@ const UserDetails = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100">
+    <div className="flex flex-col h-screen">
+    <AdminHeader />
+<div className="flex flex-1">
+        <AdminSidebar />
+    <main className="p-6 w-screen bg-gray-100">
       <h1 className="text-2xl font-bold mb-6">User Details</h1>
       {userDetails.map((user) => (
         <div key={user.id} className="bg-white p-4 rounded shadow-md mb-4">
@@ -66,6 +72,8 @@ const UserDetails = () => {
           </div>
         </div>
       ))}
+    </main>
+</div>
     </div>
   );
 };

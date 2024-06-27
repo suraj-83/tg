@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import AdminHeader from "../AdminHeader";
-import AdminSidebar from "../AdminSidebar";
-import { fetchCabDetails } from "../../redux/slices/dashboardSlice";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import AdminHeader from "../AdminHeader"
+import AdminSidebar from "../AdminSidebar"
+import { fetchCabDetails } from "../../redux/slices/dashboardSlice"
 
 const CabBookingDetails = () => {
-  const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]);
+  const dispatch = useDispatch()
+  const [travelDetails, setTravelDetails] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await dispatch(fetchCabDetails());
-      setTravelDetails(response.payload);
-    };
-    fetchData();
-  }, []);
+      let response = await dispatch(fetchCabDetails())
+      setTravelDetails(response.payload)
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="flex flex-col h-screen">
-      {/* <AdminHeader /> */}
+      <AdminHeader />
       <div className="flex flex-1">
-        {/* <AdminSidebar /> */}
-
-        <main className="w-full">
-          <table className="w-full text-sm bg-white ">
+        <AdminSidebar />
+        <main className="min-h-screen bg-gray-100 w-screen">
+          <table className=" text-sm bg-white ">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b border-gray-200">

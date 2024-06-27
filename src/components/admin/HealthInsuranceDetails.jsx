@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { fetchHealthInsurances } from "../../redux/slices/dashboardSlice";
+import AdminHeader from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 const HealthInsuranceDetails = () => {
   const dispatch = useDispatch();
@@ -15,12 +17,19 @@ const HealthInsuranceDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-8">
-      <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
+    <div className="flex flex-col">
+            <AdminHeader />
+        <div className="flex">
+                <AdminSidebar />
+    
+    <main className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-cover bg-center" style={{backgroundImage: 'url("https://www.paisabazaar.com/wp-content/uploads/2018/11/01-3-1.jpg")'}}>
+      <div className=" w-full bg-gray-100">
+      <h1 className="pb-4 pt-14 font-bold text-center text-3xl text-gray-700 bg-white uppercase">
         Health Insurance Details
       </h1>
-      <div className="w-full lg:w-2/3">
-        <table className="w-full table-auto border-collapse bg-white shadow-md">
+      </div>
+      <div>
+        <table className="w-[84vw] text-sm table-auto border-collapse bg-white shadow-md">
           <thead>
             <tr>
               <th className="border px-4 py-2">Name</th>
@@ -86,6 +95,8 @@ const HealthInsuranceDetails = () => {
           )}
         </div>
       )}
+    </main>
+    </div>
     </div>
   );
 };

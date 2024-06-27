@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAirDetails } from "../../redux/slices/dashboardSlice.js";
+import AdminSidebar from "../AdminSidebar.jsx";
+import AdminHeader from "../AdminHeader.jsx";
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
@@ -15,15 +17,17 @@ const FlightBookingDetails = () => {
   }, []);
 
   return (
-    <div
-      className="bg-cover bg-center"
+    <div className="flex flex-col">
+            <AdminHeader />
+        <div className="flex ">
+                <AdminSidebar />
+    <main   className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-cover w-screen"
       style={{
         backgroundImage: `url('https://images.unsplash.com/photo-1500857527770-d5289b39e342?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
     >
-      <div className="min-h-[100vh] flex items-center justify-center p-24">
-        <div className="bg-blue-100 bg-opacity-95 p-5 rounded-lg w-full lg:w-3/4 shadow-[0_0_10px_black]">
-          <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
+    
+          <h1 className="pb-4 font-bold text-center bg-white w-full pt-5 text-blue-700 uppercase text-2xl underline">
             Flight Booking Details
           </h1>
           <table className="min-w-full text-sm bg-white">
@@ -59,7 +63,7 @@ const FlightBookingDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {travelDetails.map((detail, index) => (
+              {travelDetails && travelDetails.map((detail, index) => (
                 <tr key={index}>
                   <td className="py-2 px-4 border-b border-gray-200">
                     {detail.fullName}
@@ -104,10 +108,13 @@ const FlightBookingDetails = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        
+    </main>
       </div>
     </div>
-  );
+    
+    
+    );
 };
 
 export default FlightBookingDetails;
