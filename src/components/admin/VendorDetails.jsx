@@ -25,7 +25,7 @@ const VendorDetails = () => {
             <AdminHeader />
         <div className="flex flex-1">
                 <AdminSidebar />
-        <main className="p-4">            
+        <main className="p-4 w-full  overflow-auto">            
             <h1 className="text-2xl font-bold mb-4">Vendor Details</h1>
             <div className="overflow-x-auto">
                 

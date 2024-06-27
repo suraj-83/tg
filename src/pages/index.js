@@ -7,6 +7,7 @@ import CorporateLogin from "./CorporateLogin"
 import NotFound from "./NotFound"
 import VendorSignup from "./VendorSignup"
 import VendorLogin from "./VendorLogin"
+import AdminLogin from "./AdminLogin"
 import FlightBookings from "../components/Travel/FlightBookings"
 import TrainBookings from "../components/Travel/TrainBookings"
 import CabBookings from "../components/Travel/CabBookings"
@@ -57,5 +58,6 @@ export {
     VendorDetails,
     HealthInsuranceDetails,
     TravelInsunranceDetails,
-    HotelBookingDetails
+    HotelBookingDetails,
+    AdminLogin,
 }

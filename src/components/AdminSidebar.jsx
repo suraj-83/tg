@@ -6,7 +6,7 @@ const AdminSidebar = () => {
   const [allBookingsOpen, setAllBookingsOpen] = useState(false);
   const [services, setServices] = useState(false);
   return (
-    <aside className="bg-gray-700 text-white min-w-64 space-y-6 py-7 px-2">
+    <aside className="bg-gray-800 text-white w-64 space-y-6 py-7 px-2">
       <nav>
         <Link to="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
         
@@ -36,19 +36,19 @@ const AdminSidebar = () => {
           {isUserDetailsOpen && (
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
               <Link
-                to="/admin/corporate-users"
+                to="corporate-users"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Corporate Users
               </Link>
               <Link
-                to="/admin/retail-users"
+                to="retail-users"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Retail Users
               </Link>
               <Link
-                to="/admin/vendor-details"
+                to="vendor-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Vendor Details
@@ -83,25 +83,25 @@ const AdminSidebar = () => {
           {allBookingsOpen && (
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
               <Link
-                to="/admin/flightbookingdetails"
+                to="flightbookingdetails"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Flight Booking Details
               </Link>
               <Link
-                to="/admin/trainbookingdetails"
+                to="trainbookingdetails"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Train Booking Details
               </Link>
               <Link
-                to="/admin/cabbookingdetails"
+                to="cabbookingdetails"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Cab Booking Details
               </Link>
               <Link
-                to="/admin/volvobusbookingdetails"
+                to="volvobusbookingdetails"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Volvo Bus Booking Details
@@ -135,19 +135,19 @@ const AdminSidebar = () => {
           {services && (
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
               <Link
-                to="/admin/hotelbookingdetails"
+                to="hotelbookingdetails"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Hotel Booking Details
               </Link>
               <Link
-                to="/admin/healthinsurance-details"
+                to="healthinsurance-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Health Insurance Details
               </Link>
               <Link
-                to="/admin/travelinsurance-details"
+                to="travelinsurance-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Travel Insurance Details
@@ -156,7 +156,7 @@ const AdminSidebar = () => {
           )}
         </div>
         <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link>
-        <Link to="/admin/profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link>
+        <Link to="retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link>
         <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link>
         <Link to="/admin/logout" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Logout</Link>
       </nav>
@@ -165,4 +165,3 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
-

@@ -21,7 +21,7 @@ const FlightBookingDetails = () => {
             <AdminHeader />
         <div className="flex ">
                 <AdminSidebar />
-    <main   className="min-h-screen flex flex-col items-center justify-start bg-no-repeat bg-cover w-screen"
+    <main   className="min-h-screen overflow-auto flex flex-col items-center bg-no-repeat bg-cover w-full"
       style={{
         backgroundImage: `url('https://images.unsplash.com/photo-1500857527770-d5289b39e342?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
