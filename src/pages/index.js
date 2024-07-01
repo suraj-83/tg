@@ -29,6 +29,8 @@ import HealthInsuranceDetails from "../components/admin/HealthInsuranceDetails"
 import TravelInsunranceDetails from "../components/admin/TravelInsunranceDetails"
 import HotelBookingDetails from "../components/admin/HotelBookingDetails"
 import ForgotPassword from "./ForgotPassword"
+import VerifyOtp from "./VerifyOtp"
+import ResetPassword from "./ResetPassword"
 
 export {
     Home,
@@ -61,5 +63,7 @@ export {
     TravelInsunranceDetails,
     HotelBookingDetails,
     AdminLogin,
-    ForgotPassword
+    ForgotPassword,
+    VerifyOtp,
+    ResetPassword
 }

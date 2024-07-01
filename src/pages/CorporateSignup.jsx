@@ -51,7 +51,6 @@ function Form() {
       state: zipCodeMapping[zipCode]?.state || "",
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

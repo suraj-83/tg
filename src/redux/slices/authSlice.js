@@ -197,6 +197,44 @@ export const forgotPassword = createAsyncThunk(
     }
   }
 );
+export const verifyOtp = createAsyncThunk('auth/verify-otp', async (data) => {
+    try {
+      const response = axiosInstance.post("/user/verify-otp", data);
+  
+      console.log("Verify OTP: ", (await response).data);
+  
+      toast.promise(response, {
+        loading: 'Verifying OTP...',
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to verify OTP"
+      });
+  
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  })
+export const resetPassword = createAsyncThunk('auth/reset-password', async (data) => {
+    try {
+      const response = axiosInstance.post("/user/reset-password", data);
+  
+      console.log("Reset Password: ", (await response).data);
+  
+      toast.promise(response, {
+        loading: 'Resetting password...',
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to reset password"
+      });
+  
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  })
 const authSlice = createSlice({
   name: "auth",
   initialState,

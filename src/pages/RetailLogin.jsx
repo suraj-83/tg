@@ -64,7 +64,7 @@ function Login() {
                 <div className="mb-4 flex justify-between items-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
                     <div className="flex items-center">
-                        <Link to="/forgot-password" className="text-blue-500 hover:underline mr-2">Forgot Password?</Link>
+                        <Link to="/forgot-password" className="text-blue-500 hover:underline mr-2">Forgot Password?</Link>                        
                     <Link to="/retail" className="text-blue-500 hover:underline">Don't have an account? Sign up</Link>
                     </div>
                 </div>
