@@ -28,6 +28,7 @@ import VendorDetails from "../components/admin/VendorDetails"
 import HealthInsuranceDetails from "../components/admin/HealthInsuranceDetails"
 import TravelInsunranceDetails from "../components/admin/TravelInsunranceDetails"
 import HotelBookingDetails from "../components/admin/HotelBookingDetails"
+import ForgotPassword from "./ForgotPassword"
 
 export {
     Home,
@@ -60,4 +61,5 @@ export {
     TravelInsunranceDetails,
     HotelBookingDetails,
     AdminLogin,
+    ForgotPassword
 }

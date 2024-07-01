@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp, RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword, RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="retail-login" element={<RetailLogin />} />
                 <Route path="retail-profile" element={<RetailProfile />} />
                 <Route path="admin/retail-users" element={<RetailUsers />} />

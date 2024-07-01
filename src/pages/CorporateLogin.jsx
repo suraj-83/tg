@@ -53,7 +53,10 @@ function CorporateLogin() {
                 {!isValid && <p className="text-red-500 mt-1">Invalid email or password</p>}
                 <div className="mb-4 flex justify-between items-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
-                    <Link to="/corporate/signup" className="text-blue-500 hover:underline">Don't have an account? Sign up</Link>
+                    <div className="flex items-center">
+                        <Link to="/forgot-password" className="text-blue-500 hover:underline mr-2">Forgot Password?</Link>
+                        <Link to="/corporate" className="text-blue-500 hover:underline">Don't have an account? Sign up</Link>
+                    </div>
                 </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { vendorLogin } from "../redux/slices/authSlice";
 
 function Login() {
@@ -49,20 +49,28 @@ function Login() {
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
-        <div className="flex items-center justify-between">
+        {/* Check if isValid is defined before rendering the error message */}
+        {typeof isValid !== 'undefined' && !isValid && (
+          <p className="text-red-500 mt-1">Invalid email or password</p>
+        )}
+        <div className="mb-4 flex justify-between items-center">
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
             Login
           </button>
-          <button
-            type="button"
-            onClick={() => navigate("/signup")}
-            className="text-blue-500 hover:underline"
-          >
-            Sign Up
-          </button>
+          <div className="flex items-center">
+            <Link
+              to="/forgot-password"
+              className="text-blue-500 hover:underline mr-2"
+            >
+              Forgot Password?
+            </Link>
+            <Link to="/vendor" className="text-blue-500 hover:underline">
+              Don't have an account? Sign up
+            </Link>
+          </div>
         </div>
       </form>
     </div>

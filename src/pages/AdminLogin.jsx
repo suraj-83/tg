@@ -29,7 +29,6 @@ function AdminLogin() {
             setIsValid(false);
         }
     };
-
     return (
         <div className='h-screen w-full flex items-center justify-center bg-gray-900'>
             <form onSubmit={handleSubmit} className="bg-white p-5 rounded-lg flex flex-col w-full md:w-1/2 lg:w-1/3 shadow-lg">
@@ -57,7 +56,10 @@ function AdminLogin() {
                 {!isValid && <p className="text-red-500 mt-1">Invalid email or password</p>}
                 <div className="mb-4 flex justify-between items-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
+                    <div className="flex items-center">
+                        <Link to="/forgot-password" className="text-blue-500 hover:underline mr-2">Forgot Password?</Link>
                     <Link to="/admin/signup" className="text-blue-500 hover:underline">Don't have an account? Sign up</Link>
+                    </div>
                 </div>
             </form>
         </div>
