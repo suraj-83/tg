@@ -155,10 +155,9 @@ const AdminSidebar = () => {
             </div>
           )}
         </div>
-        <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link>
-        <Link to="/admin/retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link>
-        <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link>
-        <Link to="/admin/logout" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Logout</Link>
+        {/* <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link> */}
+        {/* <Link to="/admin/retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link> */}
+        {/* <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link> */}
       </nav>
     </aside>
   );

@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifyOtp } from '../redux/slices/authSlice'; // Update the path accordingly
 import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState('');
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const navigate = useNavigate();
+  const email = useLocation().state?.email;
 
-  const handleVerifyOtp = () => {
-    if (otp.trim()) {
-      dispatch(verifyOtp({ otp }));
-    } else {
-      toast.error("Please enter the OTP");
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    const response = await dispatch(verifyOtp({ email, otp }));
+
+    console.log(response)
+
+    if (response?.payload?.data?.success) {
+      navigate("/reset-password", { state: { email } });
     }
   };
 
@@ -29,12 +34,10 @@ const VerifyOtp = () => {
       />
       <button
         onClick={handleVerifyOtp}
-        disabled={isLoading}
-        className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
+        className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition `}
       >
-        {isLoading ? 'Verifying...' : 'Verify OTP'}
+        {/* {isLoading ? 'Verifying...' : 'Verify OTP'} */}
+        Verify OTP
       </button>
     </form>
     </div>
