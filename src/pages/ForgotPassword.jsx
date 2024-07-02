@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from '../redux/slices/authSlice'
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -11,9 +13,10 @@ function ForgotPassword() {
     e.preventDefault();
     const response = await dispatch(forgotPassword({ email }));
     if (response?.payload?.data?.success) {
-      setMessage("Password reset link sent to your email.");
+      setMessage("Password reset otp sent to your email.");
+      navigate("/verify-otp", { state: { email } });
     } else {
-      setMessage("Error sending password reset link.");
+      setMessage("Error sending password reset otp.");
     }
   };
 
@@ -43,7 +46,7 @@ function ForgotPassword() {
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
-            Send Reset Link
+            Send OTP
           </button>
         </div>
       </form>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const AdminHeader = () => {
     return (
         <header className="bg-gradient-to-r from-black to-gray-950 text-white p-4 flex justify-between sticky top-0 items-center">
-            <Link to="/">
+            <Link to="/admin">
                         <img src={Logo} alt="TGES" className="w-16" />
                     </Link>
 
