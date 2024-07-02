@@ -31,6 +31,7 @@ import HotelBookingDetails from "../components/admin/HotelBookingDetails"
 import ForgotPassword from "./ForgotPassword"
 import VerifyOtp from "./VerifyOtp"
 import ResetPassword from "./ResetPassword"
+import PassportBookingsDetails from "../components/admin/PassportBookingsDetails"
 
 export {
     Home,
@@ -65,5 +66,6 @@ export {
     AdminLogin,
     ForgotPassword,
     VerifyOtp,
-    ResetPassword
+    ResetPassword,
+    PassportBookingsDetails
 }

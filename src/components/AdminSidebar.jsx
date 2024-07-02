@@ -152,6 +152,12 @@ const AdminSidebar = () => {
               >
                 Travel Insurance Details
               </Link>
+              <Link
+                to="/admin/passport-details"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Passport Booking Details
+              </Link>
             </div>
           )}
         </div>
