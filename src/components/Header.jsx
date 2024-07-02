@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/TGESLogo.jpeg';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/slices/authSlice';
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [travelMode, setTravelMode] = useState(false)
     const [services, setServices] = useState(false);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false)
+
+    const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+
+        const response = await dispatch(logout());
+
+        console.log(response)
+        if (response?.payload?.success) {
+            navigate("/");
+        }
+    };
 
     return (
         <nav className="bg-white shadow-md">
@@ -47,30 +65,42 @@ const Header = () => {
                                 </ul>
                             )}
                         </li>
-                        <li className="relative">
-                            <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={() => setLogin(!login)}>
-                                Login <span className="right-0 text-gray-400">▾</span>
-                            </button>
-                            {login && (
-                                <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li><Link to="/retail-login" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
-                                    <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
-                                    <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
-                                </ul>
-                            )}
-                        </li>
-                        <li className="relative">
-                            <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={() => setRegister(!register)}>
-                                Register <span className="right-0 text-gray-400">▾</span>
-                            </button>
-                            {register && (
-                                <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li><Link to="/retail" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
-                                    <li><Link to="/corporate" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
-                                    <li><Link to="/vendor" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
-                                </ul>
-                            )}
-                        </li>
+                        {
+                            isLoggedIn ? (
+                                <li>
+                                    <button type="button" onClick={handleLogout} className="text-white bg-red-600 rounded-md px-4 py-2 hover:bg-red-800">
+                                        Logout
+                                    </button>
+                                </li>
+                            ) : (
+                                <div className='flex'>
+                                    <li className="relative">
+                                        <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={() => setLogin(!login)}>
+                                            Login <span className="right-0 text-gray-400">▾</span>
+                                        </button>
+                                        {login && (
+                                            <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
+                                                <li><Link to="/retail-login" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                                <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                                <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
+                                            </ul>
+                                        )}
+                                    </li>
+                                    <li className="relative">
+                                        <button type="button" className="text-gray-600 w-28 hover:text-gray-900" onClick={() => setRegister(!register)}>
+                                            Register <span className="right-0 text-gray-400">▾</span>
+                                        </button>
+                                        {register && (
+                                            <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
+                                                <li><Link to="/retail" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
+                                                <li><Link to="/corporate" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
+                                                <li><Link to="/vendor" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
+                                            </ul>
+                                        )}
+                                    </li>
+                                </div>
+                            )
+                        }
                     </ul>
                 </div>
             </div>

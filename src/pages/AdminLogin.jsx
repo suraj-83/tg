@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import { adminLogin } from '../redux/slices/authSlice';
+import { loginAdmin } from '../redux/slices/dashboardSlice';
 
 function AdminLogin() {
     const dispatch = useDispatch();
@@ -21,14 +21,18 @@ function AdminLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await dispatch(adminLogin(formData));
+        const response = await dispatch(loginAdmin(formData));
 
-        if (response?.payload?.data?.success) {
+        console.log(response)
+        if (response?.payload?.success) {
+            console.log("inside if ")
+            navigate("/")
             navigate("/admin/dashboard");
         } else {
             setIsValid(false);
         }
     };
+    
     return (
         <div className='h-screen w-full flex items-center justify-center bg-gray-900'>
             <form onSubmit={handleSubmit} className="bg-white p-5 rounded-lg flex flex-col w-full md:w-1/2 lg:w-1/3 shadow-lg">
