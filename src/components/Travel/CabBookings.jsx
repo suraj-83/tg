@@ -462,7 +462,7 @@ const CabBookingForm = () => {
                 onChange={handleChange}
                 className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
               >
-                {[...Array(51).keys()].map((number) => (
+                {[...Array(11).keys()].map((number) => (
                   <option key={number} value={number}>
                     {number}
                   </option>

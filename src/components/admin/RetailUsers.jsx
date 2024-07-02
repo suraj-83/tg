@@ -14,7 +14,7 @@ const UserDetails = () => {
       setUserDetails(response.payload.data);
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   if (!userDetails) {
     return <div>Loading...</div>;
@@ -22,60 +22,66 @@ const UserDetails = () => {
 
   return (
     <div className="flex flex-col h-screen">
-    <AdminHeader />
-<div className="flex flex-1">
+      <AdminHeader />
+      <div className="flex flex-1">
         <AdminSidebar />
-    <main className="p-6 w-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-6">User Details</h1>
-      {userDetails.map((user) => (
-        <div key={user.id} className="bg-white p-4 rounded shadow-md mb-4">
-          <div className="mb-4">
-            <h2 className="font-semibold">Personal Information</h2>
-            <p><strong>First Name:</strong> {user.firstName}</p>
-            <p><strong>Second Name:</strong> {user.secondName}</p>
-            <p><strong>Last Name:</strong> {user.lastName}</p>
-            <p><strong>Gender:</strong> {user.gender}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            {user.Occupation && <p><strong>Occupation:</strong> {user.Occupation}</p>}
-          </div>
-
-          <div className="mb-4">
-            <h2 className="font-semibold">Address</h2>
-            <p><strong>Residential Address:</strong> {user.residentialAddress}</p>
-            <p><strong>ZIP Code:</strong> {user.zipCode}</p>
-            <p><strong>City:</strong> {user.city}</p>
-            <p><strong>State:</strong> {user.state}</p>
-            <p><strong>Country:</strong> {user.country}</p>
-          </div>
-
-          <div className="mb-4">
-            <h2 className="font-semibold">Contact Information</h2>
-            <p><strong>Phone Number:</strong> +{user.countryCode}-{user.stateCode}-{user.phoneNumber1}</p>
-            {user.phoneNumber2 && (
-              <p><strong>Alternate Phone Number:</strong> {user.phoneNumber2}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <h2 className="font-semibold">Account Details</h2>
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>How did you come to know about TGES:</strong> {user.howDidYouKnow}</p>
-            {user.preferredCurrency && <p><strong>Preferred Currency:</strong> {user.preferredCurrency}</p>}
-            {user.website && <p><strong>Website:</strong> {user.website}</p>}
-          </div>
-
-          <div className="mb-4">
-            <h2 className="font-semibold">Company Information</h2>
-            {user.companyName && <p><strong>Company Name:</strong> {user.companyName}</p>}
-            {user.designation && <p><strong>Designation:</strong> {user.designation}</p>}
-            {user.companyAddress && <p><strong>Company Address:</strong> {user.companyAddress}</p>}
-          </div>
-        </div>
-      ))}
-    </main>
-</div>
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+          <table className=" text-sm bg-white">
+            <thead>
+                <tr>
+                  <th className="py-2 px-4 border border-b border-white">FirstName</th>
+                  <th className="py-2 px-4 border border-b border-white">SecondName</th>
+                  <th className="py-2 px-4 border border-b border-white">LastName</th>
+                  <th className="py-2 px-4 border border-b border-white">Gender</th>
+                  <th className="py-2 px-4 border border-b border-white">Email</th>
+                  <th className="py-2 px-4 border border-b border-white">Occupation</th>
+                  <th className="py-2 px-4 border border-b border-white">Residential Address</th>
+                  <th className="py-2 px-4 border border-b border-white">ZIP Code</th>
+                  <th className="py-2 px-4 border border-b border-white">City</th>
+                  <th className="py-2 px-4 border border-b border-white">State</th>
+                  <th className="py-2 px-4 border border-b border-white">Country</th>
+                  <th className="py-2 px-4 border border-b border-white">Phone Number</th>
+                  <th className="py-2 px-4 border border-b border-white">Alternate Number</th>
+                  <th className="py-2 px-4 border border-b border-white">Username</th>
+                  <th className="py-2 px-4 border border-b text-sm border-white">HowDidYouKnowAboutTGES</th>
+                  <th className="py-2 px-4 border border-b border-white">Preferred Currency</th>
+                  <th className="py-2 px-4 border border-b border-white">Website</th>
+                  <th className="py-2 px-4 border border-b border-white">Company Name</th>
+                  <th className="py-2 px-4 border border-b border-white">Designation</th>
+                  <th className="py-2 px-4 border border-b border-white">Company Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userDetails.map((user) => (
+                  <tr key={user.id}>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.firstName}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.secondName}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.lastName}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.gender}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.email}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.Occupation || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.residentialAddress}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.zipCode}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.city}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.state}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.country}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">+{user.countryCode}-{user.stateCode}-{user.phoneNumber1}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.phoneNumber2 || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.username}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.howDidYouKnow}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.preferredCurrency || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.website || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.companyName || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.designation || "N/A"}</td>
+                    <td className="py-2 px-4 border border-b border-gray-200">{user.companyAddress || "N/A"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+           </main>
+            </div>
     </div>
-  );
+    );
 };
 
 export default UserDetails;
