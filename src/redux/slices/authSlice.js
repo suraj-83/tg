@@ -151,16 +151,10 @@ export const vendorLogin = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
-    const response = axiosInstance.post("/user/logout");
-    toast.promise(response, {
-      loading: "Logging out account...",
-      success: (data) => {
-        return data?.data?.message;
-      },
-      error: "Failed to Logout your account",
-    });
-
-    return await response;
+    const response = await axiosInstance.get("/user/logout");
+    console.log( response);
+    toast.success(response.data.message);
+    return response.data;
   } catch (error) {
     toast.error(error?.response?.data?.message);
   }

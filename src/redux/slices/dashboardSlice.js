@@ -3,17 +3,30 @@ import toast from 'react-hot-toast';
 import axiosInstance from '../../config/axiosInstance.js';
 
 const initialState = {
-  busDetails: [],
-  airDetails: [],
-  trainDetails: [],
-  cabDetails: [],
-  hotelBookings: [],
-  passports: [],
-  travelInsurances: [],
-  healthInsurances: [],
-  status: 'idle',
-  error: null,
+  isAdmin: localStorage.getItem("isAdmin") ||false,
 };
+
+export const loginAdmin = createAsyncThunk('dashboard/login', async (data) => {
+  try {
+    const response = await axiosInstance.post('/dashboard/login', data);
+    toast.success(response.data.message);
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Failed to login');
+    throw error;
+  }
+});
+
+export const logoutAdmin = createAsyncThunk('dashboard/logout', async () => {
+  try {
+    const response = await axiosInstance.get('/dashboard/logout');
+    toast.success(response.data.message);
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Failed to logout');
+    throw error;
+  }
+});
 
 // Async thunks for different travel types
 export const fetchBusDetails = createAsyncThunk('dashboard/fetchBusDetails', async () => {
@@ -137,6 +150,18 @@ const dashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(loginAdmin.fulfilled, (state, action) => {
+        console.log(action.payload)
+
+        if (action.payload.statusCode === 200) {
+          localStorage.setItem("isAdmin", true);
+          state.isAdmin = true;
+        }
+      })
+      .addCase(logoutAdmin.fulfilled, (state, action) => {
+        state.isAdmin = false;
+        localStorage.removeItem("isAdmin");
+      })
       .addCase(fetchBusDetails.pending, (state) => {
         state.status = 'loading';
       })
