@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,VerifyOtp,ResetPassword, PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,VerifyOtp,ResetPassword, RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
+// Import the RetailDashboard component
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
                 <Route path="admin/healthinsurance-details" element={<HealthInsuranceDetails />} />
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
+                <Route path="retaildashboard" element={<RetailDashboard />} />
                 {/* <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}

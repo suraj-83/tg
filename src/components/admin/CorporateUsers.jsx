@@ -11,7 +11,9 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       let response = await dispatch(getAllCorporateUsers());
-      setUserDetails(response.payload.data);
+      if (response && response.payload && response.payload.data) {
+        setUserDetails(response.payload.data);
+      }
     };
     fetchData();
   }, [dispatch]);

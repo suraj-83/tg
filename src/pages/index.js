@@ -32,6 +32,9 @@ import ForgotPassword from "./ForgotPassword"
 import VerifyOtp from "./VerifyOtp"
 import ResetPassword from "./ResetPassword"
 import PassportBookingsDetails from "../components/admin/PassportBookingsDetails"
+import RetailDashboard from "../components/RetailDashboard/RetailDashboard"
+
+
 
 export {
     Home,
@@ -67,5 +70,8 @@ export {
     ForgotPassword,
     VerifyOtp,
     ResetPassword,
-    PassportBookingsDetails
+    PassportBookingsDetails,
+    RetailDashboard
+    
+    
 }
