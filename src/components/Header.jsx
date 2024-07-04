@@ -30,7 +30,7 @@ const Header = () => {
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center py-5">
-                    <Link to="/">
+                    <Link to="/admin">
                         <img src={Logo} alt="TGES" className="w-16" />
                     </Link>
                     <ul className="flex space-x-6">

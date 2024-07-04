@@ -33,7 +33,7 @@ import VerifyOtp from "./VerifyOtp"
 import ResetPassword from "./ResetPassword"
 import PassportBookingsDetails from "../components/admin/PassportBookingsDetails"
 import RetailDashboard from "../components/RetailDashboard/RetailDashboard"
-
+import CabDetails from "../components/RetailDashboard/CabDetails"
 
 
 export {
@@ -71,7 +71,7 @@ export {
     VerifyOtp,
     ResetPassword,
     PassportBookingsDetails,
-    RetailDashboard
-    
+    RetailDashboard,
+    CabDetails   
     
 }

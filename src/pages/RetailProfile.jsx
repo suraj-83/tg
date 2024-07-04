@@ -55,7 +55,8 @@ function Profile() {
   return (
     <div className="h-screen w-full flex items-center justify-center bg-slate-950">
       <div className="bg-white mt-10 p-6 rounded shadow-md max-w-md mx-auto opacity-85">
-        <h2 className="text-2xl font-bold mb-4 text-center">Profile</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          <a href="retaildashboard">Profile</a></h2>
         <div className=" grid grid-cols-3  gap-5">
           <div className="mb-4">
             <label className="block text-gray-700">First Name</label>
