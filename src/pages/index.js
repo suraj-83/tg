@@ -34,7 +34,8 @@ import ResetPassword from "./ResetPassword"
 import PassportBookingsDetails from "../components/admin/PassportBookingsDetails"
 import RetailDashboard from "../components/RetailDashboard/RetailDashboard"
 import CabDetails from "../components/RetailDashboard/CabDetails"
-
+import CorporateDashboard from "../components/CorporateDashboard/CorporateDashboard"
+import CabBookingDetail from "../components/CorporateDashboard/CabDetails"
 
 export {
     Home,
@@ -72,6 +73,8 @@ export {
     ResetPassword,
     PassportBookingsDetails,
     RetailDashboard,
-    CabDetails   
+    CabDetails,
+    CorporateDashboard,
+    CabBookingDetail   
     
 }

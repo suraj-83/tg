@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,VerifyOtp,ResetPassword,CabDetails,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,CorporateDashboard,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 // Import the RetailDashboard component
 
@@ -42,6 +42,8 @@ function App() {
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
                 <Route path="retaildashboard" element={<RetailDashboard />} />
                 <Route path="retaildashboard/cab-details" element={<CabDetails />} />
+                <Route path="corporatedashboard" element={<CorporateDashboard />} />
+                <Route path="corporatedashboard/corporate-cab-details" element={<CabBookingDetail />} />
                 {/* <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}
