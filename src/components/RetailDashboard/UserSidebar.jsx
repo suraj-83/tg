@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 export function UserSidebar() {
   const [allBookingsOpen, setAllBookingsOpen] = React.useState(false);
   return (
-    <aside className="bg-gray-700 text-white w-64 min-h-screen">
-      <nav className="p-4">
+    <aside className="bg-gray-700 text-white min-w-64 space-y-6 py-7 px-2``">
+      <nav>
       <Link to="retaildashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
         
       <div className="relative">
