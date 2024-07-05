@@ -240,10 +240,10 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           state.isLoggedIn = true;
+          state.user = action?.payload?.data?.data;
+          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           // state.role = action?.payload?.data?.data?.user?.role;
-          // state.data = action?.payload?.data?.data;
         }
       })
       .addCase(corporateLogin.fulfilled, (state, action) => {
@@ -255,10 +255,10 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           state.isLoggedIn = true;
+          state.user = action?.payload?.data?.data;
+          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           // state.role = action?.payload?.data?.data?.user?.role;
-          // state.data = action?.payload?.data?.data;
         }
       })
       .addCase(vendorLogin.fulfilled, (state, action) => {
@@ -270,10 +270,10 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           state.isLoggedIn = true;
+          state.user = action?.payload?.data?.data;
+          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
           // state.role = action?.payload?.data?.data?.user?.role;
-          // state.data = action?.payload?.data?.data;
         }
       })
       .addCase(logout.fulfilled, (state) => {
