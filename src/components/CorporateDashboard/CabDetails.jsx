@@ -2,47 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import UserHeader from "./CorporateHeader";
 import UserSidebar from "./CorporateSidebar";
-
-// Mock actions (replace these with actual redux actions)
-const fetchCabDetails = () => async (dispatch) => {
-  const mockData = [
-    {
-      id: 1,
-      pickupCountry: "USA",
-      nationality: "American",
-      tourPlan: "City Tour",
-      name: "John Doe",
-      contactNo: "1234567890",
-      alternateContactNo: "0987654321",
-      email: "john.doe@example.com",
-      cabRequiredAt: "Airport",
-      cabRequiredFor: "Full Day",
-      localTravelKmsLimit: "50",
-      pickupDateTime: "2024-07-10 10:00 AM",
-      pickupAddress: "123 Main St",
-      pickupLandmark: "Near Central Park",
-      dropDateTime: "2024-07-10 06:00 PM",
-      dropAddress: "456 Elm St",
-      dropLandmark: "Near Times Square",
-      cabDuration: "8 hours",
-      noOfCabsRequired: 1,
-      typeOfCabRequired: "Sedan",
-      noOfPersonsTravelling: 2,
-      noOfInfants: 0,
-      noOfChildren: 0,
-      otherRequirements: "None",
-      status: "Upcoming",
-    },
-    // Add more mock data as needed
-  ];
-  dispatch({ type: "FETCH_CAB_DETAILS_SUCCESS", payload: mockData });
-  return { payload: mockData };
-};
-
-const cancelCabBooking = (id) => async (dispatch) => {
-  console.log(`Booking with ID ${id} canceled.`);
-  dispatch({ type: "CANCEL_CAB_BOOKING_SUCCESS", payload: id });
-};
+import { getCabTravelDetails } from "../../redux/slices/travelSlice";
 
 const CabBookingDetails = () => {
   const dispatch = useDispatch();
@@ -50,16 +10,14 @@ const CabBookingDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await dispatch(fetchCabDetails());
-      setTravelDetails(response.payload);
+      const response = await dispatch(getCabTravelDetails());
+      setTravelDetails(response.payload.data);
     };
     fetchData();
-  }, [dispatch]);
+  }, []);
 
   const cancelBooking = async (id) => {
-    await dispatch(cancelCabBooking(id));
-    const response = await dispatch(fetchCabDetails());
-    setTravelDetails(response.payload);
+    // TODO: Implement cancel booking logic
   };
 
   return (
