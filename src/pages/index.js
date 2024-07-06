@@ -36,6 +36,9 @@ import RetailDashboard from "../components/RetailDashboard/RetailDashboard"
 import CabDetails from "../components/RetailDashboard/CabDetails"
 import CorporateDashboard from "../components/CorporateDashboard/CorporateDashboard"
 import CabBookingDetail from "../components/CorporateDashboard/CabDetails"
+import VendorDashboard from "../components/VendorDashboard/VendorDashboard"
+import VendorCabManagement from "../components/VendorDashboard/CabDetails"
+import AddCabs from "../components/VendorDashboard/addCabs"
 
 export {
     Home,
@@ -75,6 +78,9 @@ export {
     RetailDashboard,
     CabDetails,
     CorporateDashboard,
-    CabBookingDetail   
-    
+    CabBookingDetail,
+    VendorDashboard,
+    VendorCabManagement,  
+    AddCabs,
+     
 }
