@@ -10,7 +10,7 @@ const VendorSidebar = () => {
     return (
         <aside className="bg-gray-700 text-white min-w-64 space-y-6 py-7 px-2">
             <nav>
-                <Link to="/vendor-dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
+                <Link to="/vendordashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
 
                 <div className="relative">
                     <button
@@ -81,6 +81,12 @@ const VendorSidebar = () => {
                                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
                             >
                                Cab Bookings Details
+                            </Link>
+                            <Link
+                                to="vendor-flight-management"
+                                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                            >
+                               Flight Details
                             </Link>
                         </div>
                     </div>

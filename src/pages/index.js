@@ -39,6 +39,9 @@ import CabBookingDetail from "../components/CorporateDashboard/CabDetails"
 import VendorDashboard from "../components/VendorDashboard/VendorDashboard"
 import VendorCabManagement from "../components/VendorDashboard/CabDetails"
 import AddCabs from "../components/VendorDashboard/addCabs"
+import Flights from "../components/RetailDashboard/Flights"
+import FlightDetails from "../components/CorporateDashboard/Flight"
+import VendorFlightManagement from "../components/VendorDashboard/FlightDetails"
 
 export {
     Home,
@@ -82,5 +85,7 @@ export {
     VendorDashboard,
     VendorCabManagement,  
     AddCabs,
-     
+    Flights, 
+    FlightDetails,  
+    VendorFlightManagement,   
 }
