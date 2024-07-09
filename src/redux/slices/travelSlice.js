@@ -44,6 +44,20 @@ export const createAirTravel = createAsyncThunk('travel/create-air', async (data
     }
 })
 
+export const getAirTravelDetails = createAsyncThunk('travel/getAirTravelDetails', async () => {
+    try {
+        const response = await axiosInstance.get("/travel/air")
+        console.log(response.data)
+        if (response?.data?.data?.success) {
+            toast.success(response?.data?.data?.message)
+        }
+
+        return response?.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 export const createVolvoBusTravel = createAsyncThunk('travel/create-volvoBus', async (data) => {
     try {
         const response = axiosInstance.post("/travel/bus", data)

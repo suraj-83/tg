@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { fetchAirDetails, cancelAirBooking } from "../../redux/slices/dashboardSlice.js";
 import UserSidebar from "./UserSidebar.jsx";
 import UserHeader from "./UserHeader.jsx";
+import { getAirTravelDetails } from "../../redux/slices/travelSlice.js";
 
 const FlightBookingDetails = () => {
-//     const [travelDetails, setTravelDetails] = useState([]);
-const [travelDetails, setTravelDetails] = useState([]);
-
-useEffect(() => {
-  setTravelDetails(mockAirDetails);
-}, []);
-
-  const mockAirDetails = [
-    { id: 1, fullName: 'John Doe', dob: '1990-01-01', gender: 'Male', contactNo: '1234567890', email: 'john@example.com', travelFrom: 'NYC', travelTo: 'LA', classOfTravel: 'Economy', travelDate: '2023-08-01', flightNo: 'AA100', timePreference: 'Morning', adult: 1, children: 0 },
-    { id: 2, fullName: 'Jane Smith', dob: '1985-05-10', gender: 'Female', contactNo: '0987654321', email: 'jane@example.com', travelFrom: 'SF', travelTo: 'CHI', classOfTravel: 'Business', travelDate: '2023-08-15', flightNo: 'UA200', timePreference: 'Evening', adult: 1, children: 2 },
-    // Add more mock data as needed
-  ];
+  const dispatch = useDispatch();
+  const [travelDetails, setTravelDetails] = useState([]);
 
   useEffect(() => {
-    // Simulate fetching data
-    setTravelDetails(mockAirDetails);
+    const fetchData = async () => {
+      const response = await dispatch(getAirTravelDetails());
+      setTravelDetails(response.payload.data);
+    };
+    fetchData();
   }, []);
 
   const handleCancel = (bookingId) => {
     // Simulate canceling a booking
-    setTravelDetails(travelDetails.filter(detail => detail.id !== bookingId));
+    // setTravelDetails(travelDetails.filter(detail => detail.id !== bookingId));
   };
 
 
