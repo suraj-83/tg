@@ -44,13 +44,13 @@ export function UserSidebar() {
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
 
               <Link
-                to="cab-details"
+                to="/retaildashboard/cab-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
               Cab Booking Details
               </Link>
               <Link
-                to="flightbooking-details"
+                to="/retaildashboard/flightbooking-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
               Flight Booking Details

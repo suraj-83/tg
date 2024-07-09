@@ -38,13 +38,13 @@ const CorporateSidebar = () => {
         {allUserOpen && (
           <div className="mt-2 bg-gray-600 rounded shadow-lg">
             <Link
-              to="corporate-cab-details"
+              to="/corporatedashboard/corporate-cab-details"
               className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
             >
               Corporate Cab Details
             </Link>
             <Link
-              to="flight-details"
+              to="/corporatedashboard/flight-details"
               className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
             >
               Corporate Flight Details
