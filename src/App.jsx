@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword, VendorFlightManagement,AddCabs,Flights,FlightDetails,CorporateDashboard,VendorCabManagement,VendorDashboard,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,VendorTrainManagement,TrainStatus,TrainDetails, VendorFlightManagement,AddCabs,Flights,FlightDetails,CorporateDashboard,VendorCabManagement,VendorDashboard,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 // Import the RetailDashboard component
 
@@ -24,7 +24,8 @@ function App() {
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="admin/vendor-details" element={<VendorDetails />} />
-                <Route path="vendordashboard/vendor-flight-management" element={<VendorFlightManagement />} />  
+                <Route path="vendordashboard/vendor-flight-management" element={<VendorFlightManagement />} /> 
+                <Route path="vendordashboard/vendor-train-management" element={<VendorTrainManagement />} /> 
                 <Route path="flightbookings" element={<FlightBookings />} />
                 <Route path="admin/flightbookingdetails" element={<FlightBookingDetails />} />
                 <Route path="admin/trainbookingdetails" element={<TrainBookingDetails />} />
@@ -43,13 +44,16 @@ function App() {
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
                 <Route path="retaildashboard" element={<RetailDashboard />} />
                 <Route path="retaildashboard/cab-details" element={<CabDetails />} />
+                <Route path="retaildashboard/train-status" element={<TrainStatus />} />
                 <Route path="corporatedashboard" element={<CorporateDashboard />} />
                 <Route path="corporatedashboard/corporate-cab-details" element={<CabBookingDetail />} />
+                <Route path="corporatedashboard/train-details" element={<TrainDetails />} />
                 <Route path="vendordashboard"element={<VendorDashboard />} /> 
                 <Route path="vendordashboard/vendor-cab-management" element={<VendorCabManagement />} />
                 <Route path="retaildashboard/flightbooking-details" element={<Flights />} />
                 <Route path="addcabs" element={<AddCabs />} />
                 <Route path="corporatedashboard/flight-details" element={<FlightDetails />} />
+
                 {/* <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}

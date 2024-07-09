@@ -39,7 +39,7 @@ const VendorSidebar = () => {
                   Flight Details
                 </Link>
                 <Link
-                  to="/vendordashboard//vendor-train-management"
+                  to="/vendordashboard/vendor-train-management"
                   className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
                 >
                   Train Details

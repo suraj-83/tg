@@ -55,6 +55,12 @@ export function UserSidebar() {
               >
               Flight Booking Details
               </Link>
+              <Link
+                to="/retaildashboard/train-status"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+              Train Status
+              </Link>
             </div>
           )}
         </div>
