@@ -55,6 +55,12 @@ const CorporateSidebar = () => {
             >
               Corporate Train Details
             </Link>
+            <Link
+              to="/corporatedashboard/volvobusdetails"
+              className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+            >
+              Corporate Volvo Bus Details
+            </Link>
           </div>
         )}
       </nav>

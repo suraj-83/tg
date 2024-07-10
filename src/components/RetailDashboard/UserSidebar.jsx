@@ -61,6 +61,12 @@ export function UserSidebar() {
               >
               Train Status
               </Link>
+              <Link
+                to="/retaildashboard/volvobus-details"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+              Volvo Bus Details
+              </Link>
             </div>
           )}
         </div>
