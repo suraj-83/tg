@@ -4,6 +4,7 @@ import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
 import Img from "../../assets/volvo-bus.webp";
 import CorporateHeader from "./CorporateHeader";
 import CorporateSidebar from "./CorporateSidebar";
+import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
@@ -11,59 +12,11 @@ const VolvoBusBookingDetails = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Replace with real data fetching when ready
-    const mockData = [
-      {
-        fullName: "John Doe",
-        dob: "1990-01-01",
-        gender: "Male",
-        contactNo: "1234567890",
-        email: "john@example.com",
-        pickupLocation: "City A",
-        destination: "City B",
-        travelDate: "2024-07-15",
-        seatType: "VIP",
-        busNo: "123",
-        status: "Confirmed"
-      },
-      {
-        fullName: "Jane Smith",
-        dob: "1992-02-02",
-        gender: "Female",
-        contactNo: "0987654321",
-        email: "jane@example.com",
-        pickupLocation: "City C",
-        destination: "City D",
-        travelDate: "2024-07-16",
-        seatType: "Regular",
-        busNo: "456",
-        status: "Pending"
-      },
-      {
-        fullName: "Bob Johnson",
-        dob: "1985-03-03",
-        gender: "Male",
-        contactNo: "5555555555",
-        email: "bI9kx@example.com",
-        pickupLocation: "City E",
-        destination: "City F",
-        travelDate: "2024-07-17",
-        seatType: "Premium",
-        busNo: "789",
-        status: "Cancelled"
-      }
-    ];
-
-    setTravelDetails(mockData);
-
-    // Uncomment this section to use real data fetching
-    /*
     const fetchData = async () => {
-      let response = await dispatch(fetchBusDetails());
-      setTravelDetails(response.payload);
+      let response = await dispatch(getVolvoBusTravelDetails());
+      setTravelDetails(response.payload.data);
     };
     fetchData();
-    */
   }, [dispatch]);
 
   const handleCancel = (index) => {
