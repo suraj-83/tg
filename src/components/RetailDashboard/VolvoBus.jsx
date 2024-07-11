@@ -4,52 +4,18 @@ import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
 import Img from "../../assets/volvo-bus.webp";
 import UserHeader from "./UserHeader";
 import UserSidebar from "./UserSidebar";
+import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
   const [travelDetails, setTravelDetails] = useState([]);
 
   useEffect(() => {
-    // Replace with real data fetching when ready
-    const mockData = [
-      {
-        fullName: "John Doe",
-        dob: "1990-01-01",
-        gender: "Male",
-        contactNo: "1234567890",
-        email: "john@example.com",
-        pickupLocation: "City A",
-        destination: "City B",
-        travelDate: "2024-07-15",
-        seatType: "VIP",
-        busNo: "123",
-        status: "Confirmed"
-      },
-      {
-        fullName: "Jane Smith",
-        dob: "1992-02-02",
-        gender: "Female",
-        contactNo: "0987654321",
-        email: "jane@example.com",
-        pickupLocation: "City C",
-        destination: "City D",
-        travelDate: "2024-07-16",
-        seatType: "Regular",
-        busNo: "456",
-        status: "Pending"
-      }
-    ];
-
-    setTravelDetails(mockData);
-
-    // Uncomment this section to use real data fetching
-    /*
     const fetchData = async () => {
-      let response = await dispatch(fetchBusDetails());
-      setTravelDetails(response.payload);
+      let response = await dispatch(getVolvoBusTravelDetails());
+      setTravelDetails(response.payload.data);
     };
     fetchData();
-    */
   }, [dispatch]);
 
   const handleCancel = (index) => {
@@ -67,7 +33,10 @@ const VolvoBusBookingDetails = () => {
       <UserHeader />
       <div className="flex">
         <UserSidebar />
-        <main className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover" style={{ backgroundImage: `url('${Img}')` }}>             
+        <main
+          className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover"
+          style={{ backgroundImage: `url('${Img}')` }}
+        >
           <h1 className="text-2xl w-full bg-white text-center pb-4 uppercase pt-3 font-bold ">
             Volvo Bus Booking Details
           </h1>
@@ -102,8 +71,12 @@ const VolvoBusBookingDetails = () => {
                       <td className="py-2 px-4 border">{booking.gender}</td>
                       <td className="py-2 px-4 border">{booking.contactNo}</td>
                       <td className="py-2 px-4 border">{booking.email}</td>
-                      <td className="py-2 px-4 border">{booking.pickupLocation}</td>
-                      <td className="py-2 px-4 border">{booking.destination}</td>
+                      <td className="py-2 px-4 border">
+                        {booking.pickupLocation}
+                      </td>
+                      <td className="py-2 px-4 border">
+                        {booking.destination}
+                      </td>
                       <td className="py-2 px-4 border">{booking.travelDate}</td>
                       <td className="py-2 px-4 border">{booking.seatType}</td>
                       <td className="py-2 px-4 border">{booking.busNo}</td>

@@ -26,6 +26,20 @@ export const createTrainTravel = createAsyncThunk('travel/create-train', async (
     }
 })
 
+export const getTrainTravelDetails = createAsyncThunk('travel/getTrainTravelDetails', async () => {
+    try {
+        const response = await axiosInstance.get("/travel/train")
+
+        if (response?.data?.data?.success) {
+            toast.success(response?.data?.data?.message)
+        }
+
+        return response?.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 export const createAirTravel = createAsyncThunk('travel/create-air', async (data) => {
     try {
         const response = axiosInstance.post("/travel/air", data)
@@ -71,6 +85,20 @@ export const createVolvoBusTravel = createAsyncThunk('travel/create-volvoBus', a
         })
 
         return await response;
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const getVolvoBusTravelDetails = createAsyncThunk('travel/getVolvoBusTravelDetails', async () => {
+    try {
+        const response = await axiosInstance.get("/travel/bus")
+
+        if (response?.data?.data?.success) {
+            toast.success(response?.data?.data?.message)
+        }
+
+        return response?.data;
     } catch (error) {
         toast.error(error?.response?.data?.message)
     }

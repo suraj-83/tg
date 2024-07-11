@@ -1,46 +1,17 @@
 import React, { useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
 import UserSidebar from "./UserSidebar";
-
-const mockTrainDetails = [
-  {
-    id: 1,
-    fullName: "John Doe",
-    dob: "1990-01-01",
-    gender: "Male",
-    contactNo: "1234567890",
-    email: "john@example.com",
-    travelFrom: "City A",
-    travelTo: "City B",
-    classOfTravel: "First Class",
-    travelDate: "2024-07-15",
-    trainNo: "12345",
-    timePreference: "11:00 AM",
-  },
-  {
-    id: 2,
-    fullName: "Jane Smith",
-    dob: "1985-05-15",
-    gender: "Female",
-    contactNo: "0987654321",
-    email: "jane@example.com",
-    travelFrom: "City C",
-    travelTo: "City D",
-    classOfTravel: "Second Class",
-    travelDate: "2024-07-20",
-    trainNo: "67890",
-    timePreference: "10:00 PM",
-  },
-  // Add more mock data as needed
-];
+import { getTrainTravelDetails } from "../../redux/slices/travelSlice";
+import { useDispatch } from "react-redux";
 
 const TrainBookingDetails = () => {
+  const dispatch = useDispatch();
   const [travelDetails, setTravelDetails] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Simulate fetching data
-      setTravelDetails(mockTrainDetails);
+      const response = await dispatch(getTrainTravelDetails());
+      setTravelDetails(response.payload.data);
     };
     fetchData();
   }, []);
