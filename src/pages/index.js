@@ -48,6 +48,9 @@ import VendorTrainManagement from "../components/VendorDashboard/Trains"
 import VolvoBus from "../components/RetailDashboard/VolvoBus"
 import VolvoBusDetails from "../components/CorporateDashboard/VolvoBus"
 import VendorBusManagement from "../components/VendorDashboard/Volvobus"
+import HotelStatus from "../components/RetailDashboard/HotelStatus"
+import HotelDetails from "../components/CorporateDashboard/HotelStatus"
+import VendorHotelManagement from "../components/VendorDashboard/HotelDetails"
 
 export {
     Home,
@@ -100,4 +103,7 @@ export {
     VolvoBus,
     VolvoBusDetails,
     VendorBusManagement,
+    HotelStatus,
+    HotelDetails,
+    VendorHotelManagement,
 }

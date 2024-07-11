@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CorporateSidebar = () => {
   const [allUserOpen, setAllUserOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   return (
     <aside className="bg-gray-700 text-white min-w-64 space-y-6 py-7 px-2">
       <nav>
@@ -62,7 +63,41 @@ const CorporateSidebar = () => {
               Corporate Volvo Bus Details
             </Link>
           </div>
-        )}
+          )}
+            <div className="relative">
+          <button
+            type="button"
+            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
+            onClick={() => setServicesOpen(!servicesOpen)}
+          >
+            Services
+            <svg
+              className="inline-block w-4 h-4 ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={servicesOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
+              />
+            </svg>
+          </button>
+
+          {servicesOpen && (
+            <div className="mt-2 bg-gray-600 rounded shadow-lg">
+              <Link
+                to="/corporatedashboard/hoteldetails"
+                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+              >
+                Hotel Booking Details
+              </Link>
+            </div>
+          )}
+        </div>
       </nav>
     </aside>
   );
