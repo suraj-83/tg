@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,VendorTrainManagement,TrainStatus,TrainDetails, VendorFlightManagement,AddCabs,Flights,FlightDetails,CorporateDashboard,VendorCabManagement,VendorDashboard,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,  VendorBusManagement,VolvoBusDetails,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,CorporateDashboard,VendorCabManagement,VendorDashboard,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,RetailDashboard,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 // Import the RetailDashboard component
 
@@ -34,6 +34,8 @@ function App() {
                 <Route path="admin/cabbookingdetails" element={<CabBookingDetails />} />
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />
                 <Route path="admin/volvobusbookingdetails" element={<VolvoBusBookingDetails />} />
+                <Route path="corporatedashboard/volvobusdetails" element={<VolvoBusDetails />} />
+                <Route path="vendordashboard/vendor-bus-management" element={<VendorBusManagement />} />
                 <Route path="hotelbookings" element={<HotelBookings />} />
                 <Route path="admin/hotelbookingdetails" element={<HotelBookingDetails />} />
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
@@ -45,6 +47,7 @@ function App() {
                 <Route path="retaildashboard" element={<RetailDashboard />} />
                 <Route path="retaildashboard/cab-details" element={<CabDetails />} />
                 <Route path="retaildashboard/train-status" element={<TrainStatus />} />
+                <Route path="retaildashboard/volvobus-details" element={<VolvoBus />} />
                 <Route path="corporatedashboard" element={<CorporateDashboard />} />
                 <Route path="corporatedashboard/corporate-cab-details" element={<CabBookingDetail />} />
                 <Route path="corporatedashboard/train-details" element={<TrainDetails />} />
