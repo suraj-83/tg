@@ -1,5 +1,4 @@
 
-
 # TGES Frontend
 
 ## Table of Contents
@@ -11,15 +10,17 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction
-Welcome to the TGES Frontend documentation. This repository contains the frontend codebase for the TGES project. TGES is a traveling platform aiming to provide users with a seamless traveling experience.
+---
 
-This documentation aims to provide an overview of the project structure, setup instructions, and any other relevant information necessary for developers to understand and contribute to the project.
+## Introduction
+Welcome to the TGES Frontend repository. This project serves as the frontend application for TGES, a traveling platform designed to offer users a seamless travel experience. This documentation provides an in-depth overview of the project structure, functionality, technologies used, setup instructions, contributing guidelines, and licensing details.
+
+---
 
 ## Project Structure
+
 The project structure is organized as follows:
 
-```
 tges-frontend/
 │   .eslintrc.cjs
 │   .gitignore
@@ -45,6 +46,7 @@ tges-frontend/
     │   │   image 10.png
     │   │   image 3.png
     │   │   img.jpg
+    │   │   new.jpg
     │   │   react.svg
     │   │   Rectangle 30.png
     │   │   Rectangle 32.png
@@ -64,9 +66,9 @@ tges-frontend/
     │   │   TGESLogo.jpeg
     │   │   TGESLogo.png
     │   │   userImg.png
+    │   │   volvo-bus.webp
     │   │
     │   └───Image
-    │           
     │           image 10.png
     │           image3.png
     │           Rectangle 30.png
@@ -92,78 +94,177 @@ tges-frontend/
     │   │   AdminSidebar.jsx
     │   │   Footer.jsx
     │   │   Header.jsx
+    │   │   HealthInsurance.jsx
     │   │   index.js
+    │   │   Passport.jsx
+    │   │   TravelIsurance.jsx
     │   │
     │   ├───admin
     │   │       AdminDashboard.jsx
+    │   │       CabBookingDetails.jsx
+    │   │       CorporateUsers.jsx
+    │   │       Dashboard.jsx
+    │   │       FlightBookingDetails.jsx
+    │   │       HealthInsuranceDetails.jsx
+    │   │       HotelBookingDetails.jsx
+    │   │       PassportBookingsDetails.jsx
+    │   │       RetailUsers.jsx
+    │   │       TrainBookingDetails.jsx
+    │   │       TravelInsunranceDetails.jsx
+    │   │       VendorDetails.jsx
+    │   │       VolvoBusBookingDetails.jsx
+    │   │
+    │   ├───CorporateDashboard
+    │   │       CabDetails.jsx
+    │   │       CorporateDashboard.jsx
+    │   │       CorporateHeader.jsx
+    │   │       CorporateSidebar.jsx
+    │   │       Flight.jsx
+    │   │       HotelStatus.jsx
+    │   │       TrainStatus.jsx
+    │   │       VolvoBus.jsx
     │   │
     │   ├───Hotel
     │   │       HotelBookings.jsx
     │   │
-    │   └───Travel
-    │           CabBookings.jsx
-    │           FlightBookings.jsx
-    │           TrainBookings.jsx
-    │           TravelMode.jsx
-    │           VolvoBusBookings.jsx
+    │   ├───RetailDashboard
+    │   │       CabDetails.jsx
+    │   │       Flights.jsx
+    │   │       HotelStatus.jsx
+    │   │       RetailDashboard.jsx
+    │   │       TrainStatus.jsx
+    │   │       UserHeader.jsx
+    │   │       UserSidebar.jsx
+    │   │       VolvoBus.jsx
+    │   │
+    │   ├───Travel
+    │   │       CabBookings.jsx
+    │   │       FlightBookings.jsx
+    │   │       TrainBookings.jsx
+    │   │       TravelMode.jsx
+    │   │       VolvoBusBookings.jsx
+    │   │
+    │   └───VendorDashboard
+    │           addCabs.jsx
+    │           CabDetails.jsx
+    │           FlightDetails.jsx
+    │           HotelDetails.jsx
+    │           Trains.jsx
+    │           VendorDashboard.jsx
+    │           VendorHeader.jsx
+    │           VendorSidebar.jsx
+    │           Volvobus.jsx
     │
     ├───config
     │       axiosInstance.js
     │
     ├───pages
     │       AboutUs.jsx
+    │       AdminLogin.jsx
     │       CorporateLogin.jsx
+    │       CorporateProfile.jsx
     │       CorporateSignup.jsx
+    │       ForgotPassword.jsx
     │       Home.jsx
     │       index.js
     │       NotFound.jsx
+    │       ResetPassword.jsx
     │       RetailLogin.jsx
+    │       RetailProfile.jsx
     │       SignUp.jsx
     │       VendorLogin.jsx
     │       VendorSignup.jsx
+    │       VerifyOtp.jsx
     │
     └───redux
         │   store.js
         │
         └───slices
                 authSlice.js
+                dashboardSlice.js
                 travelSlice.js
-```
 
-## Functionality
-### User Interface Components
-- **Header.jsx & Footer.jsx**: Common components used across different pages for navigation and footer content.
-- **AdminHeader.jsx, AdminMain.jsx, AdminSidebar.jsx**: Components used in the admin dashboard.
-- **HotelBookings.jsx, CabBookings.jsx, FlightBookings.jsx, TrainBookings.jsx, VolvoBusBookings.jsx, TravelMode.jsx**: Components related to different travel modes and bookings.
 
-### Pages
-- **Home.jsx**: The landing page of the application.
-- **AboutUs.jsx**: The page that provides information about the platform.
-- **CorporateLogin.jsx & CorporateSignup.jsx**: Pages for corporate users to log in and sign up.
-- **RetailLogin.jsx & SignUp.jsx**: Pages for retail users to log in and sign up.
-- **VendorLogin.jsx & VendorSignup.jsx**: Pages for vendors to log in and sign up.
-- **NotFound.jsx**: A 404 page for handling non-existent routes.
+### Root Directory
+- **Configuration Files**: Includes `.eslintrc.cjs`, `.gitignore`, `package-lock.json`, `package.json`, `postcss.config.js`, `README.md`, `tailwind.config.js`, `vercel.json`, `vite.config.js`.
+  - These files manage project configuration, dependencies, linting rules, Tailwind CSS setup, deployment configurations, and more.
 
-### Configuration
-- **axiosInstance.js**: Configuration file for Axios to handle HTTP requests.
+- **Public Directory**: Contains `vite.svg` used for public assets.
 
-### Redux
-- **store.js**: Sets up the Redux store.
-- **authSlice.js & travelSlice.js**: Slices for handling authentication and travel-related state management.
+### `src` Directory
+- **Entry Files**: `App.jsx`, `data.js`, `index.css`, `main.jsx`.
+  - `App.jsx`: Main application component.
+  - `data.js`: Stores application data.
+  - `index.css`: Global CSS styles.
+  - `main.jsx`: Entry point for rendering the application.
 
-### Utilities
-- **data.js**: Contains data used across the application.
-- **index.css**: Contains global styles, including those from Tailwind CSS.
+- **Assets Directory**: Contains images (`*.png`, `*.jpg`, `*.svg`) used in the application.
 
-## Technologies Used
-- **React.js**: For building user interfaces.
-- **Redux**: For state management.
-- **React Router**: For client-side routing.
-- **Axios**: For making HTTP requests to the backend.
-- **Tailwind CSS**: For styling the components.
-- **Vite**: For fast frontend tooling.
-- **ESLint**: For code linting.
-- **PostCSS**: For transforming CSS with JavaScript plugins.
+- **Components Directory**: Reusable UI components.
+  - **Global Components**: `Header.jsx`, `Footer.jsx`.
+  - **Admin Components**: `AdminHeader.jsx`, `AdminMain.jsx`, `AdminSidebar.jsx`.
+  - **Travel Components**: `CabBookings.jsx`, `FlightBookings.jsx`, `TrainBookings.jsx`, `VolvoBusBookings.jsx`, `TravelMode.jsx`.
+  - **Additional Components**: `HealthInsurance.jsx`, `Passport.jsx`, `TravelIsurance.jsx`.
+
+- **Admin Directory**: Specific admin-related components and pages.
+
+- **CorporateDashboard Directory**: Components and pages specific to corporate users.
+
+- **Hotel Directory**: Components related to hotel bookings.
+
+- **RetailDashboard Directory**: Components and pages specific to retail users.
+
+- **Travel Directory**: Components related to different travel modes and bookings.
+
+- **VendorDashboard Directory**: Components and pages specific to vendors.
+
+- **Config Directory**: `axiosInstance.js` for Axios HTTP requests configuration.
+
+- **Pages Directory**: Contains React components representing different pages.
+  - **Main Pages**: `Home.jsx`, `AboutUs.jsx`, `NotFound.jsx`.
+  - **User Authentication Pages**: `CorporateLogin.jsx`, `CorporateSignup.jsx`, `RetailLogin.jsx`, `SignUp.jsx`, `VendorLogin.jsx`, `VendorSignup.jsx`.
+  - **Additional Pages**: `AdminLogin.jsx`, `CorporateProfile.jsx`, `ForgotPassword.jsx`, `ResetPassword.jsx`, `VerifyOtp.jsx`.
+
+- **Redux Directory**: State management setup using Redux.
+  - **Store Configuration**: `store.js`.
+  - **Redux Slices**: `authSlice.js`, `dashboardSlice.js`, `travelSlice.js` for handling authentication, dashboard data, and travel-related state.
+
+### Functionality
+#### User Interface Components
+- **Header.jsx & Footer.jsx**: Components for consistent navigation and footer across pages.
+- **AdminHeader.jsx, AdminMain.jsx, AdminSidebar.jsx**: Components specific to admin dashboard layout.
+- **HealthInsurance.jsx, Passport.jsx, TravelIsurance.jsx**: Additional components for specific functionalities.
+- **Booking Components**: `HotelBookings.jsx`, `CabBookings.jsx`, `FlightBookings.jsx`, `TrainBookings.jsx`, `VolvoBusBookings.jsx`, `TravelMode.jsx` for managing bookings related to different travel modes.
+
+#### Pages
+- **Home.jsx**: Landing page.
+- **AboutUs.jsx**: Information about the platform.
+- **User Authentication Pages**: Login and signup pages for corporate, retail, and vendor users.
+- **AdminLogin.jsx, CorporateProfile.jsx**: Pages specific to admin and corporate user profiles.
+- **NotFound.jsx**: Custom 404 page for handling non-existent routes.
+
+#### Configuration
+- **axiosInstance.js**: Configuration file for Axios HTTP requests.
+
+#### Redux
+- **store.js**: Redux store setup.
+- **Redux Slices**: `authSlice.js`, `dashboardSlice.js`, `travelSlice.js` for managing authentication, dashboard data, and travel-related state.
+
+#### Utilities
+- **data.js**: Contains application data.
+- **index.css**: Global CSS styles, including those from Tailwind CSS.
+
+### Technologies Used
+- **React.js**: Frontend library for building user interfaces.
+- **Redux**: State management library for predictable state containers.
+- **React Router**: Library for declarative routing in React applications.
+- **Axios**: Promise-based HTTP client for making requests to the backend.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Vite**: Fast frontend tooling for development.
+- **ESLint**: JavaScript linting utility for maintaining code quality.
+- **PostCSS**: CSS post-processor tool for transforming styles with JavaScript plugins.
+
+---
 
 ## Setup Instructions
 To set up the project locally, follow these steps:
@@ -171,6 +272,7 @@ To set up the project locally, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/suraj-83/tg.git
+
    ```
 
 2. **Navigate into the project directory:**
