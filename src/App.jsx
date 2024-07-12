@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails, VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
@@ -73,12 +73,12 @@ function App() {
                 <Route path="addcabs" element={<AddCabs />} />
                 
 
-                {/* <Route
+                <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}
                     
-                />  */}
-                <Route path="admin" element={<AdminDashboard />} />
+                /> 
+                {/* <Route path="admin" element={<AdminDashboard />} /> */}
                 <Route path="admin/login" element={<AdminLogin />} />
                 {/* Other Routes */}
                 <Route path="*" element={<NotFound />} />
@@ -87,9 +87,9 @@ function App() {
     );
 }
 
-// // const RequireAuth = ({ children }) => {
-// //     const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
-// //     return isAdmin ? children : <Navigate to="/admin/login" replace />;
-// };
+const RequireAuth = ({ children }) => {
+    const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
+    return isAdmin ? children : <Navigate to="/admin/login" replace />;
+};
 
 export default App;
