@@ -17,10 +17,11 @@ Welcome to the TGES Frontend repository. This project serves as the frontend app
 
 ---
 
-## Project Structure
-
+Project Structure
 The project structure is organized as follows:
 
+mathematica
+Copy code
 tges-frontend/
 │   .eslintrc.cjs
 │   .gitignore
