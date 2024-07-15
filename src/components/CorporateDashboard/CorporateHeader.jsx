@@ -1,5 +1,5 @@
 import React from "react";
-// import { logoutCorporate } from "../../redux/slices/dashboardSlice";
+import { logout } from "../../redux/slices/authSlice"
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const CorporateHeader = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
 
-    const response = await dispatch(logoutCorporate());
+    const response = await dispatch(logout());
     console.log("Logout")
 
     console.log(response)
