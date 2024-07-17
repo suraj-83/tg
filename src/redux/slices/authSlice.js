@@ -53,7 +53,28 @@ export const corporateSignup = createAsyncThunk(
     }
   }
 );
+export const employeeSignup = createAsyncThunk(
+  "auth/employee-signup",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("/user/employee-register", data);
 
+      console.log("Employee User: ", (await response).data);
+
+      toast.promise(response, {
+        loading: "Creating account...",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to create your account",
+      });
+
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
 export const vendorSignup = createAsyncThunk(
   "auth/vendor-signup",
   async (data) => {
@@ -124,7 +145,29 @@ export const corporateLogin = createAsyncThunk(
     }
   }
 );
+export const employeeLogin = createAsyncThunk(
+  "auth/employee-login",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("/user/employee-login", data);
 
+      console.log("Employee Login: ", (await response).data);
+
+      toast.promise(response, {
+        loading: "Authenticating account...",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Error Logging In",
+      });
+
+      return await response;
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
 export const vendorLogin = createAsyncThunk(
   "auth/vendor-login",
   async (data) => {

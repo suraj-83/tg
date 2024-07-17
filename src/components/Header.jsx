@@ -83,6 +83,7 @@ const Header = () => {
                                                 <li><Link to="/retail-login" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
                                                 <li><Link to="/corporate-login" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
                                                 <li><Link to="/vendor-login" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
+                                                <li><Link to="/employeelogin" className="block px-5 py-2 hover:bg-gray-200">Employee</Link></li>
                                             </ul>
                                         )}
                                     </li>
@@ -95,6 +96,7 @@ const Header = () => {
                                                 <li><Link to="/retail" className="block px-5 py-2 hover:bg-gray-200">Retail</Link></li>
                                                 <li><Link to="/corporate" className="block px-5 py-2 hover:bg-gray-200">Corporate</Link></li>
                                                 <li><Link to="/vendor" className="block px-5 py-2 hover:bg-gray-200">Vendor</Link></li>
+                                                <li><Link to="/employee" className="block px-5 py-2 hover:bg-gray-200">Employee</Link></li>
                                             </ul>
                                         )}
                                     </li>
