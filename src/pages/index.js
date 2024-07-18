@@ -51,6 +51,9 @@ import VendorBusManagement from "../components/VendorDashboard/Volvobus"
 import HotelStatus from "../components/RetailDashboard/HotelStatus"
 import HotelDetails from "../components/CorporateDashboard/HotelStatus"
 import VendorHotelManagement from "../components/VendorDashboard/HotelDetails"
+import EmployeeForm from "./EmployeeRegister"
+import EmployeeLogin from "./EmployeeLogin"
+import EmployeeDashboard from "../components/EmployeeDashboard/EmployeeDashboard"
 
 export {
     Home,
@@ -106,4 +109,7 @@ export {
     HotelStatus,
     HotelDetails,
     VendorHotelManagement,
+    EmployeeForm,
+    EmployeeLogin,
+    EmployeeDashboard
 }

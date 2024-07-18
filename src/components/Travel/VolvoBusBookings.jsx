@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { createVolvoBusTravel } from "../../redux/slices/travelSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Img from "../../assets/volvo-bus.webp"
 
 const BusBookingForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
   const [formData, setFormData] = useState([
     {
       fullName: "",
@@ -30,7 +30,7 @@ const BusBookingForm = () => {
     setFormData(updatedFormData);
   };
 
-  let MAX_PERSONS=10
+  let MAX_PERSONS = 10;
 
   const handleAddPerson = () => {
     const updatedFormData = [...formData];
@@ -40,12 +40,11 @@ const BusBookingForm = () => {
       gender: "",
       contactNo: "",
       email: "",
-      travelFrom: "",
-      travelTo: "",
-      classOfTravel: "",
+      pickupLocation: "",
+      destination: "",
       travelDate: "",
-      trainNo: "",
-      timePreference: "",
+      seatType: "",
+      busNo: "",
     });
     setFormData(updatedFormData);
   };
@@ -61,9 +60,169 @@ const BusBookingForm = () => {
   };
 
   return (
-    <div className="bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}}>
-    
-    <div className="min-h-[100vh] flex items-center justify-center p-24">
+      <div className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover" style={{ backgroundImage: `url('${Img}')` }}>
+        {/* Larges Screens */}
+      <div className="hidden lg:block">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-blue-100 bg-opacity-75  rounded-lg min-w-screen min-h-screen shadow-[0_0_10px_black]"
+        >
+          <div>
+            <h1 className="pb-4 font-bold pt-4 text-center bg-blue-100 text-blue-700 uppercase text-2xl underline">
+              Volvo Bus Booking Request Form
+            </h1>
+          </div>
+          <div className="overflow-auto">
+              <table className="min-w-full bg-blue-100  text-sm">
+              <thead>
+                <tr>
+                  <th className="border px-4 border-gray-300 py-2">Full Name</th>
+                  <th className="border px-4 border-gray-300 py-2">Date of Birth</th>
+                  <th className="border px-4 border-gray-300 py-2">Gender</th>
+                  <th className="border px-4 border-gray-300 py-2">Contact No</th>
+                  <th className="border px-4 border-gray-300 py-2">Email Id</th>
+                  <th className="border px-4 border-gray-300 py-2">Pickup Location</th>
+                  <th className="border px-4 border-gray-300 py-2">Destination</th>
+                  <th className="border px-4 border-gray-300 py-2">Travel Date</th>
+                  <th className="border px-4 border-gray-300 py-2">Seat Type</th>
+                  <th className="border px-4 border-gray-300 py-2">Bus No</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formData.map((person, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={person.fullName}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-3 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="date"
+                        name="dob"
+                        value={person.dob}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        name="gender"
+                        value={person.gender}
+                        onChange={(e) => handleChange(e, index)}
+                        placeholder="Gender"
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                        list="genderOptions"
+                      />
+                      <datalist id="genderOptions">
+                        <option value="Male" />
+                        <option value="Female" />
+                        <option value="Other" />
+                      </datalist>
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        maxLength="10"
+                        title="10 digit mobile number"
+                        pattern="[0-9]{10}"
+                        name="contactNo"
+                        value={person.contactNo}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="email"
+                        name="email"
+                        value={person.email}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 border bg-blue-100 border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        name="pickupLocation"
+                        value={person.pickupLocation}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 border bg-blue-100 border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        name="destination"
+                        value={person.destination}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="date"
+                        name="travelDate"
+                        value={person.travelDate}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <select
+                        name="seatType"
+                        value={person.seatType}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      >
+                        <option value="">--Select--</option>
+                        <option value="Sleeper">Sleeper</option>
+                        <option value="Semi-Sleeper">Semi-Sleeper</option>
+                        <option value="Regular">Regular</option>
+                      </select>
+                    </td>
+                    <td className="border border-gray-300 px-2 py-2">
+                      <input
+                        type="text"
+                        name="busNo"
+                        value={person.busNo}
+                        onChange={(e) => handleChange(e, index)}
+                        className="block w-full px-2 py-2 bg-blue-100 border border-gray-300 rounded focus:outline-none"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex bg-blue-100 w-full justify-between">
+          {formData.length < MAX_PERSONS && (
+              <button
+                type="button"
+                className="bg-blue-500 text-white px-4 py-2 mt-4 mb-4 ml-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                onClick={handleAddPerson}
+              >
+                Add Person
+              </button>
+          )}
+          <button
+            type="submit"
+            className="bg-blue-500 uppercase
+            text-white px-4 py-2 mt-4 mb-4 mr-3 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          >
+            Book Now
+          </button>
+          </div>
+        </form>
+      </div>
+      {/* Smaller and medium screens */}
+      <div className="block lg:hidden">
+      <div className="min-h-[100vh] flex items-center justify-center p-24">
     <form
       onSubmit={handleSubmit}
       className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
@@ -233,7 +392,11 @@ const BusBookingForm = () => {
         </button>
       </form>
     </div>
-    </div>
+    
+      </div>
+      </div>
+      
+    
   );
 };
 

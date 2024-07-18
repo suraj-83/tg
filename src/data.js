@@ -108,3 +108,37 @@ export const industryOptions = [{ value: 'Auto Components', label: 'Auto Compone
 { value: 'Textiles', label: 'Textiles' },
 { value: 'Tourism and Hospitality', label: 'Tourism and Hospitality' }
 ];
+export const branchOptions = [
+  { value: 'IT', label: 'IT' },
+  { value: 'HR', label: 'HR' },
+  { value: 'Finance', label: 'Finance' },
+  { value: 'Marketing', label: 'Marketing' },
+  { value: 'Sales', label: 'Sales' },
+  { value: 'Operations', label: 'Operations' },
+];
+
+export const departmentOptions = [
+  { value: 'Software Development', label: 'Software Development' },
+  { value: 'Quality Assurance', label: 'Quality Assurance' },
+  { value: 'Data Science', label: 'Data Science' },
+  { value: 'Product Management', label: 'Product Management' },
+  { value: 'DevOps', label: 'DevOps' },
+  { value: 'Customer Support', label: 'Customer Support' },
+  { value: 'Accounting', label: 'Accounting' },
+  { value: 'Procurement', label: 'Procurement' },
+  { value: 'Logistics', label: 'Logistics' },
+  { value: 'Supply Chain Management', label: 'Supply Chain Management' },
+];
+
+export const positionOptions = [
+  { value: 'Software Engineer', label: 'Software Engineer' },
+  { value: 'QA Engineer', label: 'QA Engineer' },
+  { value: 'Data Scientist', label: 'Data Scientist' },
+  { value: 'Product Manager', label: 'Product Manager' },
+  { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+  { value: 'Customer Support Engineer', label: 'Customer Support Engineer' },
+  { value: 'Accountant', label: 'Accountant' },
+  { value: 'Procurement Officer', label: 'Procurement Officer' },
+  { value: 'Logistics Officer', label: 'Logistics Officer' },
+  { value: 'Supply Chain Manager', label: 'Supply Chain Manager' },
+];
