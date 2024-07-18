@@ -45,13 +45,13 @@ export function UserSidebar() {
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
 
               <Link
-                to="/employeedashboard/cab-details"
+                to="/employeedashboard/employee-cab-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
               Cab Booking Details
               </Link>
               <Link
-                to="/employeedashboard/flightbooking-details"
+                to="/employeedashboard/employee-flight-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
               Flight Booking Details
@@ -98,7 +98,7 @@ export function UserSidebar() {
           {servicesOpen && (
             <div className="mt-2 bg-gray-600 rounded shadow-lg">
               <Link
-                to="/employeedashboard/hotelstatus"
+                to="/employeedashboard/employee-hotel-details"
                 className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
               >
                 Hotel Booking Details
