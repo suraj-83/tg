@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/TGESLogo.jpeg';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
+import { FaAngleRight } from "react-icons/fa6";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const Header = () => {
 
     const [travelMode, setTravelMode] = useState(false)
     const [services, setServices] = useState(false);
+    const [insurance, setInsurance] = useState(false);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false)
 
@@ -58,10 +60,19 @@ const Header = () => {
                             </button>
                             {services && (
                                 <ul className="absolute w-full bg-white text-gray-600 border mt-2 right-0">
-                                    <li className="relative"><Link to="/hotelbookings" className="text-gray-600 p-2 hover:text-gray-900">Hotel_Bookings</Link></li>
-                                    <li className="relative"><Link to="/passport" className="text-gray-600 px-5 py-2 hover:text-gray-900">Passport</Link></li>
-                                    <li className="relative"><Link to="/travelinsurance" className="text-gray-600 p-2 hover:text-gray-900">Travel_Insurance</Link></li>
-                                    <li className="relative"><Link to="/healthlifeinsurance" className="text-gray-600 p-2 hover:text-gray-900">Health_Insurance</Link></li>
+                                    <li><Link to="/hotelbookings" className="block px-5 py-2 hover:bg-gray-200">Hotel</Link></li>
+                                    <li><Link to="/passport" className="block px-5 py-2 hover:bg-gray-200">Passport</Link></li>
+                                    <li>
+                                        <button type="button" className="flex flex-row items-center justify-center px-5 py-2 hover:bg-gray-200 w-full" onClick={() => setInsurance(!insurance)}>
+                                            Insurance <span>&#9656;</span>
+                                        </button>
+                                        {insurance && (
+                                            <ul className="w-full absolute left-full top-20 bg-white text-gray-600 border">
+                                                <li><Link to="/travelinsurance" className="flex w-full px-5 py-2 hover:bg-gray-200">Travel</Link></li>
+                                                <li><Link to="/healthlifeinsurance" className="flex px-5 py-2 hover:bg-gray-200">Health</Link></li>
+                                            </ul>
+                                        )}
+                                    </li>
                                 </ul>
                             )}
                         </li>
