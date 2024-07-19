@@ -7,12 +7,14 @@ import CorporateDashboard from './components/CorporateDashboard/CorporateDashboa
 import VendorDashboard from './components/VendorDashboard/VendorDashboard' // Import the VendorDashboard component
 import EmployeeForm from './pages/EmployeeRegister'
 import EmployeeDashboard  from './components/EmployeeDashboard/EmployeeDashboard';
+import Dashboard from './components/Sidebar';
 
 function App() {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
