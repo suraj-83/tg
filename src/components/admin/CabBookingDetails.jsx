@@ -32,13 +32,11 @@ const CabBookingDetails = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <AdminHeader />
-      <div className="flex flex-1">
+      <div className="flex">
         <AdminSidebar />
         <main className="min-h-screen bg-gray-100 w-full overflow-auto">
-          <div className="flex justify-between p-4">
-            <h1 className="text-2xl font-bold uppercase" style={{ fontFamily: 'Intro Rust Free Super Family'}}>Cab Booking Details</h1>
+          <div className="flex justify-between p-5">
+            <h1 className="w-full text-2xl font-bold uppercase text-center">Cab Booking Details</h1>
             <select
               value={filter}
               onChange={e => setFilter(e.target.value)}
@@ -122,7 +120,6 @@ const CabBookingDetails = () => {
           </table>
         </main>
       </div>
-    </div>
   );
 };
 

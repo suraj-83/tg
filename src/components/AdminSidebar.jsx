@@ -27,8 +27,8 @@ function AdminDashboard() {
 
   return (
     <aside
-      className={`fixed top-0 left-0 bottom-0 z-10 w-72 text-white font-semibold bg-gradient-to-r from-black from-45% to-[#1f1f2e] to-55% p-4 space-y-6 transition-all duration-300 ${
-        isSidebarCollapsed ? "-ml-72" : ""
+      className={`relative top-0 left-0 bottom-0 h-screen min-w-[20%] text-white bg-slate-900 font-semibold p-4 space-y-6 transition-all duration-300 ${
+        isSidebarCollapsed ? "-ml-[20%]" : ""
       }`}
     >
       <div className="flex items-center space-x-2 p-4">
@@ -37,7 +37,7 @@ function AdminDashboard() {
           <span className="text-xl font-bold">TGES TRAVEL</span>
         </div>
         <span
-          className={`absolute h-16 w-16 z-20 rounded-full bg-[#1f1f2e] flex items-center justify-center cursor-pointer ${
+          className={`absolute h-16 w-16 z-20 top-2 rounded-full bg-slate-800 flex items-center justify-center cursor-pointer ${
             isSidebarCollapsed ? "-right-20" : "-right-8"
           }`}
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
