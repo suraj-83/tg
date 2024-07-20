@@ -21,11 +21,13 @@ const UserDetails = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen">
-      <AdminHeader />
-      <div className="flex flex-1">
+    <div className="flex">
         <AdminSidebar />
         <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-4">            
+        <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">   Retail Users
+          </h1>
+          </div>
           <table className=" text-sm bg-white">
             <thead>
                 <tr>
@@ -80,7 +82,6 @@ const UserDetails = () => {
             </table>
            </main>
             </div>
-    </div>
     );
 };
 

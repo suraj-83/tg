@@ -18,19 +18,19 @@ const VolvoBusBookingDetails = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col">
-      <AdminHeader />
-      <div className="flex">
-        <AdminSidebar />
-        <main className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover" style={{ backgroundImage: `url('${Img}')` }}>             
-          <h1 className="text-2xl w-full bg-white text-center pb-4 uppercase pt-3 font-bold ">
+    <div className="flex">
+      <AdminSidebar />
+      <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-6 bg-white">
+          <h1 className="w-full text-2xl font-bold p-2 uppercase text-center">
             Volvo Bus Booking Details
           </h1>
+        </div>
           {travelDetails && travelDetails.length === 0 ? (
             <div>No bookings available.</div>
           ) : (
             <div className="overflow-auto">
-              <table className="min-w-full bg-white">
+              <table className="min-w-full text-sm bg-white">
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border">Booking</th>
@@ -68,8 +68,7 @@ const VolvoBusBookingDetails = () => {
             </div>
           )}
         </main>
-      </div>
-    </div>
+      </div>    
   );
 };
 

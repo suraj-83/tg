@@ -21,12 +21,13 @@ const VendorDetails = () => {
     }
 
     return (
-        <div className="flex flex-col h-screen">
-            <AdminHeader />
-        <div className="flex flex-1">
-                <AdminSidebar />
-        <main className="p-4 w-full  overflow-auto">            
-            <h1 className="text-2xl font-bold mb-4">Vendor Details</h1>
+        <div className="flex">
+            <AdminSidebar />
+            <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+            <div className="flex justify-between p-5  bg-white">            
+            <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">   Flight Booking Details
+              </h1>
+              </div>
             <div className="overflow-x-auto">
                 
                 <table className="min-w-full text-sm bg-white">
@@ -79,8 +80,6 @@ const VendorDetails = () => {
             </div>
         </main>
         </div>
-    </div>
-   
     );
 };
 

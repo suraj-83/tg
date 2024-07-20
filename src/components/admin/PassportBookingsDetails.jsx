@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { getAllPassportBookings } from "../../redux/slices/dashboardSlice";
-import AdminHeader from "../AdminHeader";
 import AdminSidebar from "../AdminSidebar";
 
 const PassportBookingDetails = () => {
@@ -21,12 +20,12 @@ const PassportBookingDetails = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen">
-      <AdminHeader />
-      <div className="flex flex-1">
+    <div className="flex">
         <AdminSidebar />
-        <main className="bg-gray-100 w-full overflow-auto">
-          {/* <h1 className="text-2xl font-bold  mb-6">Passport Booking Details</h1> */}
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-5">            
+        <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">   Passport Booking Details</h1>
+          </div>
           <table className="min-w-full text-sm bg-white">
             <thead>
               <tr>
@@ -79,7 +78,7 @@ const PassportBookingDetails = () => {
           </table>
         </main>
       </div>
-    </div>
+    
   );
 };
 

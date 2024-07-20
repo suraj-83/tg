@@ -17,19 +17,13 @@ const FlightBookingDetails = () => {
   }, []);
 
   return (
-    <div className="flex flex-col">
-            <AdminHeader />
-        <div className="flex ">
-                <AdminSidebar />
-    <main   className="min-h-screen overflow-auto flex flex-col items-center bg-no-repeat bg-cover w-full"
-      style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1500857527770-d5289b39e342?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-      }}
-    >
-    
-          <h1 className="pb-4 font-bold text-center bg-white w-full pt-5 text-blue-700 uppercase text-2xl underline">
-            Flight Booking Details
+    <div className="flex">
+        <AdminSidebar />
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-5  bg-white">            
+        <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">   Flight Booking Details
           </h1>
+          </div>
           <table className="min-w-full text-sm bg-white">
             <thead>
               <tr>
@@ -109,8 +103,8 @@ const FlightBookingDetails = () => {
             </tbody>
           </table>
         
+     
     </main>
-      </div>
     </div>
     
     

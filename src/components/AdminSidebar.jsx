@@ -27,7 +27,7 @@ function AdminDashboard() {
 
   return (
     <aside
-      className={`relative top-0 left-0 bottom-0 h-screen min-w-[20%] text-white bg-slate-900 font-semibold p-4 space-y-6 transition-all duration-300 ${
+      className={`relative top-0 left-0 bottom-0 h-screen min-w-[20%] text-white bg-gradient-to-r from-black from-20% to-slate-900 font-semibold p-4 space-y-6 transition-all duration-300 ${
         isSidebarCollapsed ? "-ml-[20%]" : ""
       }`}
     >

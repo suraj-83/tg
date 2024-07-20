@@ -23,34 +23,35 @@ const UserDetails = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen">
-      <AdminHeader />
-      <div className="flex flex-1">
+    <div className="flex">
         <AdminSidebar />
-        <main className="overflow-auto bg-gray-200 w-full">
-          {/* <h1 className="text-2xl font-bold mb-6">User Details</h1> */}
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-5">            
+        <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">   Corporate Users
+          </h1>
+          </div>
           <table className="min-w-full text-sm bg-white">
             <thead>
               <tr>
-                <th className="py-2 px-4 border">Company Name</th>
-                <th className="py-2 px-4 border">Industry</th>
-                <th className="py-2 px-4 border">Website</th>
-                <th className="py-2 px-4 border">Country</th>
-                <th className="py-2 px-4 border">State</th>
-                <th className="py-2 px-4 border">City</th>
-                <th className="py-2 px-4 border">ZIP Code</th>
-                <th className="py-2 px-4 border">Address1</th>
-                <th className="py-2 px-4 border">Address2</th>
-                <th className="py-2 px-4 border">Address3</th>
-                <th className="py-2 px-4 border">Address4</th>
-                <th className="py-2 px-4 border">First Name</th>
-                <th className="py-2 px-4 border">Second Name</th>
-                <th className="py-2 px-4 border">Last Name</th>
-                <th className="py-2 px-4 border">Gender</th>
-                <th className="py-2 px-4 border">Department</th>
-                <th className="py-2 px-4 border">Mobile Number</th>
-                <th className="py-2 px-4 border">Landline Number</th>
-                <th className="py-2 px-4 border">Email</th>
+                <th className="py-2 px-10 border">CompanyName</th>
+                <th className="py-2 px-10 border">Industry</th>
+                <th className="py-2 px-10 border">Website</th>
+                <th className="py-2 px-10 border">Country</th>
+                <th className="py-2 px-10 border">State</th>
+                <th className="py-2 px-10 border">City</th>
+                <th className="py-2 px-10 border">ZIPCode</th>
+                <th className="py-2 px-10 border">Address1</th>
+                <th className="py-2 px-10 border">Address2</th>
+                <th className="py-2 px-10 border">Address3</th>
+                <th className="py-2 px-10 border">Address4</th>
+                <th className="py-2 px-10 border">FirstName</th>
+                <th className="py-2 px-10 border">SecondName</th>
+                <th className="py-2 px-10 border">LastName</th>
+                <th className="py-2 px-10 border">Gender</th>
+                <th className="py-2 px-10 border">Department</th>
+                <th className="py-2 px-10 border">MobileNumber</th>
+                <th className="py-2 px-10 border">LandlineNumber</th>
+                <th className="py-2 px-10 border">Email</th>
               </tr>
             </thead>
             <tbody>
@@ -93,7 +94,6 @@ const UserDetails = () => {
           </table>
         </main>
       </div>
-    </div>
   );
 };
 

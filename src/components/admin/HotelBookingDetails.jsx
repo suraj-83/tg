@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHotelBookings } from '../../redux/slices/dashboardSlice';
-import AdminHeader from '../AdminHeader';
 import AdminSidebar from '../AdminSidebar';
 const HotelBookingDetails = () => {
   const dispatch = useDispatch();
@@ -17,71 +16,69 @@ const HotelBookingDetails = () => {
     fetchBookings();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  
 
   return (
-    <div className="flex flex-col">
-            <AdminHeader />
-        <div className="flex">
-                <AdminSidebar />
-    <main  className="min-h-screen bg-cover bg-gray-100 w-full overflow-auto bg-center" style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
-              <table className="text-sm bg-white">
+    <div className="flex">
+        <AdminSidebar />
+        <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+        <div className="flex justify-between p-5">            
+        <h1 className="w-full text-2xl p-2 font-bold uppercase text-center">Hotel Booking Details</h1>
+          </div>
+      <div className="overflow-auto">
+      <table className="min-w-full text-sm bg-white">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b">Nationality</th>
-              <th className="py-2 px-4 border-b">Contact No 1</th>
-              <th className="py-2 px-4 border-b">Contact No 2</th>
-              <th className="py-2 px-4 border-b">Email</th>
-              <th className="py-2 px-4 border-b">Country</th>
-              <th className="py-2 px-4 border-b">State</th>
-              <th className="py-2 px-4 border-b">City</th>
-              <th className="py-2 px-4 border-b">Room Category</th>
-              <th className="py-2 px-4 border-b">Meal Plan</th>
-              <th className="py-2 px-4 border-b">Hotel Category</th>
-              <th className="py-2 px-4 border-b">Price Range</th>
-              <th className="py-2 px-4 border-b">Check In Date</th>
-              <th className="py-2 px-4 border-b">Check Out Date</th>
-              <th className="py-2 px-4 border-b">Number of Nights</th>
-              <th className="py-2 px-4 border-b">Number of Rooms</th>
-              <th className="py-2 px-4 border-b">Adults</th>
-              <th className="py-2 px-4 border-b">Children</th>
-              <th className="py-2 px-4 border-b">Infants</th>
+              <th className="border px-10 py-1">Name</th>
+              <th className="border px-10 py-1">Nationality</th>
+              <th className="border px-10 py-1">Contact No 1</th>
+              <th className="border px-10 py-1">Contact No 2</th>
+              <th className="border px-10 py-1">Email</th>
+              <th className="border px-10 py-1">Country</th>
+              <th className="border px-10 py-1">State</th>
+              <th className="border px-10 py-1">City</th>
+              <th className="border px-10 py-1">Room Category</th>
+              <th className="border px-10 py-1">Meal Plan</th>
+              <th className="border px-10 py-1">Hotel Category</th>
+              <th className="border px-10 py-1">Price Range</th>
+              <th className="border px-10 py-1">Check In Date</th>
+              <th className="border px-10 py-1">Check Out Date</th>
+              <th className="border px-10 py-1">Number of Nights</th>
+              <th className="border px-10 py-1">Number of Rooms</th>
+              <th className="border px-10 py-1">Adults</th>
+              <th className="border px-10 py-1">Children</th>
+              <th className="border px-10 py-1">Infants</th>
             </tr>
           </thead>
           <tbody>
             {travelDetails && travelDetails.map((booking) => (
               <tr key={booking.id}>
-                <td className="py-2 px-4 border-b">{booking.name}</td>
-                <td className="py-2 px-4 border-b">{booking.nationality}</td>
-                <td className="py-2 px-4 border-b">{booking.contactNo1}</td>
-                <td className="py-2 px-4 border-b">{booking.contactNo2}</td>
-                <td className="py-2 px-4 border-b">{booking.email}</td>
-                <td className="py-2 px-4 border-b">{booking.country}</td>
-                <td className="py-2 px-4 border-b">{booking.state}</td>
-                <td className="py-2 px-4 border-b">{booking.city}</td>
-                <td className="py-2 px-4 border-b">{booking.roomCategory}</td>
-                <td className="py-2 px-4 border-b">{booking.mealPlan}</td>
-                <td className="py-2 px-4 border-b">{booking.hotelCategory}</td>
-                <td className="py-2 px-4 border-b">{booking.priceRange}</td>
-                <td className="py-2 px-4 border-b">{booking.checkInDate}</td>
-                <td className="py-2 px-4 border-b">{booking.checkOutDate}</td>
-                <td className="py-2 px-4 border-b">{booking.numberOfNights}</td>
-                <td className="py-2 px-4 border-b">{booking.numberOfRooms}</td>
-                <td className="py-2 px-4 border-b">{booking.adults}</td>
-                <td className="py-2 px-4 border-b">{booking.children}</td>
-                <td className="py-2 px-4 border-b">{booking.infants}</td>
+                <td className="border px-10 py-1">{booking.name}</td>
+                <td className="border px-10 py-1">{booking.nationality}</td>
+                <td className="border px-10 py-1">{booking.contactNo1}</td>
+                <td className="border px-10 py-1">{booking.contactNo2}</td>
+                <td className="border px-10 py-1">{booking.email}</td>
+                <td className="border px-10 py-1">{booking.country}</td>
+                <td className="border px-10 py-1">{booking.state}</td>
+                <td className="border px-10 py-1">{booking.city}</td>
+                <td className="border px-10 py-1">{booking.roomCategory}</td>
+                <td className="border px-10 py-1">{booking.mealPlan}</td>
+                <td className="border px-10 py-1">{booking.hotelCategory}</td>
+                <td className="border px-10 py-1">{booking.priceRange}</td>
+                <td className="border px-10 py-1">{booking.checkInDate}</td>
+                <td className="border px-10 py-1">{booking.checkOutDate}</td>
+                <td className="border px-10 py-1">{booking.numberOfNights}</td>
+                <td className="border px-10 py-1">{booking.numberOfRooms}</td>
+                <td className="border px-10 py-1">{booking.adults}</td>
+                <td className="border px-10 py-1">{booking.children}</td>
+                <td className="border px-10 py-1">{booking.infants}</td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
     </main>
       </div>
-    </div>
-    
-    
   );
 };
 
