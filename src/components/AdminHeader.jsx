@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from '../assets/TGESLogo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutAdmin } from '../redux/slices/dashboardSlice';
@@ -21,9 +20,9 @@ const AdminHeader = () => {
     };
 
     return (
-        <header className="bg-gradient-to-r from-black to-gray-950 text-white p-4 flex justify-between sticky top-0 items-center">
+        <header className="bg-gradient-to-r from-black to-gray-950 text-white p-7 flex justify-between sticky top-0 items-center">
             <Link to="/">
-                        <img src={Logo} alt="TGES" className="w-16" />
+                        <img className="w-16 bg-black" />
                     </Link>
 
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>

@@ -22,28 +22,29 @@ function App() {
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="retail-login" element={<RetailLogin />} />
                 <Route path="retail-profile" element={<RetailProfile />} />
-                <Route path="admin/retail-users" element={<RetailUsers />} />
                 <Route path="corporate" element={<CorporateSignup />} />
                 <Route path="corporate-login" element={<CorporateLogin />} /> 
                 <Route path="corporate-profile" element={<CorporateProfile />} />
-                <Route path="admin/corporate-users" element={<CorporateUsers />} />
                 <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
-                <Route path="admin/vendor-details" element={<VendorDetails />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
-                <Route path="admin/flightbookingdetails" element={<FlightBookingDetails />} />
-                <Route path="admin/trainbookingdetails" element={<TrainBookingDetails />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
-                <Route path="admin/cabbookingdetails" element={<CabBookingDetails />} />
                 <Route path="volvobusbookings" element={<VolvoBusBookings />} />
-                <Route path="admin/volvobusbookingdetails" element={<VolvoBusBookingDetails />} />
                 <Route path="hotelbookings" element={<HotelBookings />} />
-                <Route path="admin/hotelbookingdetails" element={<HotelBookingDetails />} />
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
-                <Route path="admin/passport-details" element={<PassportBookingsDetails />} />
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
                 <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
+                {/* Admin */}
+                <Route path="admin/corporate-users" element={<CorporateUsers />} />
+                <Route path="admin/vendor-details" element={<VendorDetails />} />
+                <Route path="admin/retail-users" element={<RetailUsers />} />
+                <Route path="admin/flightbookingdetails" element={<FlightBookingDetails />} />
+                <Route path="admin/hotelbookingdetails" element={<HotelBookingDetails />} />
+                <Route path="admin/trainbookingdetails" element={<TrainBookingDetails />} />
+                <Route path="admin/passport-details" element={<PassportBookingsDetails />} />
+                <Route path="admin/cabbookingdetails" element={<CabBookingDetails />} />
+                <Route path="admin/volvobusbookingdetails" element={<VolvoBusBookingDetails />} />
                 <Route path="admin/healthinsurance-details" element={<HealthInsuranceDetails />} />
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
                 {/* retaildashboard    */}

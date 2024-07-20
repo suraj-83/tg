@@ -1,173 +1,205 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutAdmin } from "../redux/slices/dashboardSlice";
+import logo from "../assets/TGESLogo.png";
+import {MdAnalytics,MdLogout,MdMiscellaneousServices,MdSpaceDashboard} from "react-icons/md";
+import { FaUsers,FaUser,FaChevronLeft,FaBuilding,FaAngleRight,FaBus, FaHandHoldingMedical,FaUserCircle} from "react-icons/fa";
+import {FaShop,FaEarthAsia,FaTrainSubway,FaCarRear,FaPassport,FaHotel, FaUserShield} from "react-icons/fa6";
+import { IoMenu, IoAirplane } from "react-icons/io5";
 
-const AdminSidebar = () => {
-  const [isUserDetailsOpen, setIsUserDetailsOpen] = useState(false);
-  const [allBookingsOpen, setAllBookingsOpen] = useState(false);
-  const [services, setServices] = useState(false);
+function AdminDashboard() {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    const response = await dispatch(logoutAdmin());
+    console.log("Logout")
+
+    console.log(response)
+    if (response?.payload?.success) {
+        navigate("/")
+    }
+};
+
   return (
-    <aside className="bg-gray-800 text-white min-w-64 space-y-6 py-7 px-2">
-      <nav>
-        <Link to="/admin" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
-        
-        <div className="relative">
-          <button
-            type="button"
-            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
-            onClick={() => setIsUserDetailsOpen(!isUserDetailsOpen)}
+    <aside
+      className={`fixed top-0 left-0 bottom-0 z-10 w-72 text-white font-semibold bg-gradient-to-r from-black from-45% to-[#1f1f2e] to-55% p-4 space-y-6 transition-all duration-300 ${
+        isSidebarCollapsed ? "-ml-72" : ""
+      }`}
+    >
+      <div className="flex items-center space-x-2 p-4">
+        <div className="flex items-center space-x-2">
+          <img src={logo} alt="TGES" className="w-16 object-contain" />
+          <span className="text-xl font-bold">TGES TRAVEL</span>
+        </div>
+        <span
+          className={`absolute h-16 w-16 z-20 rounded-full bg-[#1f1f2e] flex items-center justify-center cursor-pointer ${
+            isSidebarCollapsed ? "-right-20" : "-right-8"
+          }`}
+          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        >
+          {isSidebarCollapsed ? <IoMenu size={30} /> : <FaChevronLeft />}
+        </span>
+      </div>
+      <div className="space-y-4">
+        <nav className="space-y-2">
+          <Link
+            to="/admin"
+            className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
           >
-            All User Details
-            <svg
-              className="inline-block w-4 h-4 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <MdSpaceDashboard size={25} />
+            <span>Dashboard</span>
+          </Link>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isUserDetailsOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-              />
-            </svg>
-          </button>
-
-          {isUserDetailsOpen && (
-            <div className="mt-2 bg-gray-600 rounded shadow-lg">
-              <Link
-                to="/admin/corporate-users"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
-              >
-                Corporate Users
-              </Link>
+              <div className="flex items-center space-x-2">
+                <FaUsers size={25} />
+                <span>Users</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
               <Link
                 to="/admin/retail-users"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Retail Users
+                <FaUser size={22} />
+                <span>Retail</span>
+              </Link>
+              <Link
+                to="/admin/corporate-users"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaBuilding size={22} />
+                <span>Corporate</span>
               </Link>
               <Link
                 to="/admin/vendor-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Vendor Details
+                <FaShop size={22} />
+                <span>Vendor</span>
               </Link>
             </div>
-          )}
-        </div>
-
-        <div className="relative">
-          <button
-            type="button"
-            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
-            onClick={() => setAllBookingsOpen(!allBookingsOpen)}
-          >
-            All Booking Details
-            <svg
-              className="inline-block w-4 h-4 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          </div>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={allBookingsOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-              />
-            </svg>
-          </button>
-
-          {allBookingsOpen && (
-            <div className="mt-2 bg-gray-600 rounded shadow-lg">
-              <Link
-                to="/admin/flightbookingdetails"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
-              >
-                Flight Booking Details
-              </Link>
+              <div className="flex items-center space-x-2">
+                <FaEarthAsia size={22} />
+                <span>Travel</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
               <Link
                 to="/admin/trainbookingdetails"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Train Booking Details
+                <FaTrainSubway size={22} />
+                <span>Train</span>
               </Link>
               <Link
-                to="/admin/cabbookingdetails"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                to="/admin/flightbookingdetails"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Cab Booking Details
+                <IoAirplane size={22} />
+                <span>Flight</span>
               </Link>
               <Link
                 to="/admin/volvobusbookingdetails"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Volvo Bus Booking Details
+                <FaBus size={22} />
+                <span>Bus</span>
+              </Link>
+              <Link
+                to="/admin/cabbookingdetails"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaCarRear size={22} />
+                <span>Cab</span>
               </Link>
             </div>
-          )}
-        </div>
-        <div className="relative">
-          <button
-            type="button"
-            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
-            onClick={() => setServices(!services)}
-          >
-            Services
-            <svg
-              className="inline-block w-4 h-4 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          </div>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={services ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-              />
-            </svg>
-          </button>
-
-          {services && (
-            <div className="mt-2 bg-gray-600 rounded shadow-lg">
+              <div className="flex items-center space-x-2">
+                <MdMiscellaneousServices size={22} />
+                <span>Services</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
               <Link
                 to="/admin/hotelbookingdetails"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Hotel Booking Details
-              </Link>
-              <Link
-                to="/admin/healthinsurance-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
-              >
-                Health Insurance Details
-              </Link>
-              <Link
-                to="/admin/travelinsurance-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
-              >
-                Travel Insurance Details
+                <FaHotel size={22} />
+                <span>Hotel</span>
               </Link>
               <Link
                 to="/admin/passport-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Passport Booking Details
+                <FaPassport size={22} />
+                <span>Passport</span>
+              </Link>
+              <Link
+                to="/admin/travelinsurance-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaHandHoldingMedical size={22} />
+                <span>Travel Insurance</span>
+              </Link>
+              <Link
+                to="/admin/healthinsurance-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaUserShield size={22} />
+                <span>Health Insurance</span>
               </Link>
             </div>
-          )}
-        </div>
-        {/* <Link to="/admin/reports" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Reports</Link> */}
-        {/* <Link to="/admin/retail-profile" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Profile</Link> */}
-        {/* <Link to="/admin/settings" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Settings</Link> */}
-      </nav>
+          </div>
+          <Link
+            to="#"
+            className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+          >
+            <MdAnalytics size={22} />
+            <span>Analytics</span>
+          </Link>
+        </nav>
+      </div>
+      <div className="space-y-2">
+        <Link
+          to="#"
+          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+        >
+          <FaUserCircle size={22} />
+          <span>Profile</span>
+        </Link>
+        <Link
+          to="/admin/logout"
+          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+        >
+          <MdLogout size={22} />
+          <span>Logout</span>
+        </Link>
+      </div>
     </aside>
   );
-};
+}
 
-export default AdminSidebar;
-
+export default AdminDashboard;
