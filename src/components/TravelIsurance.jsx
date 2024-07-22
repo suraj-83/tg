@@ -81,17 +81,17 @@ const TravelInsuranceForm = () => {
         backgroundImage: `url('https://plus.unsplash.com/premium_photo-1684407617181-275e50374e95?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
     >
-      <div className="min-h-[100vh] w-full flex items-end justify-end p-24">
+      <div className="min-h-[100vh] w-full flex items-center justify-center p-5">
         <form
           onSubmit={handleSubmit}
-          className="bg-blue-100  bg-opacity-95 p-5 rounded-lg w-full lg:w-1/2 shadow-[0_0_10px_black]"
+          className="bg-blue-100  bg-opacity-95 p-5 rounded-lg w-full shadow-[0_0_10px_black]"
         >
-          <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
+          <h1 className="pb-3 font-bold text-center text-blue-700 uppercase text-2xl underline">
             Request Form for Travel Insurance
           </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2  gap-4 mb-4">
-            <div>
+          <div className="min-w-full grid grid-cols-3 text-sm md:grid-cols-5 gap-3 md:gap-6">
+              <div>
               <label className="block mb-1 font-medium">
                 Name of Person to be Insured
               </label>

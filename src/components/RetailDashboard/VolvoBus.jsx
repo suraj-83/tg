@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
 import Img from "../../assets/volvo-bus.webp";
-import UserHeader from "./UserHeader";
 import UserSidebar from "./UserSidebar";
 import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
 
@@ -29,15 +28,13 @@ const VolvoBusBookingDetails = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <UserHeader />
-      <div className="flex">
+          <div className="flex">
         <UserSidebar />
         <main
-          className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover"
+          className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover overflow-auto"
           style={{ backgroundImage: `url('${Img}')` }}
         >
-          <h1 className="text-2xl w-full bg-white text-center pb-4 uppercase pt-3 font-bold ">
+          <h1 className="text-2xl w-full bg-white text-center pb-8 uppercase pt-4 font-bold ">
             Volvo Bus Booking Details
           </h1>
           {travelDetails && travelDetails.length === 0 ? (
@@ -48,16 +45,16 @@ const VolvoBusBookingDetails = () => {
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border">Booking</th>
-                    <th className="py-2 px-4 border">Full Name</th>
-                    <th className="py-2 px-4 border">Date of Birth</th>
+                    <th className="py-2 px-4 border">Full_Name</th>
+                    <th className="py-2 px-4 border">Date_of_Birth</th>
                     <th className="py-2 px-4 border">Gender</th>
-                    <th className="py-2 px-4 border">Contact No</th>
+                    <th className="py-2 px-4 border">Contact_No</th>
                     <th className="py-2 px-4 border">Email</th>
-                    <th className="py-2 px-4 border">Pickup Location</th>
+                    <th className="py-2 px-4 border">Pickup_Location</th>
                     <th className="py-2 px-4 border">Destination</th>
-                    <th className="py-2 px-4 border">Travel Date</th>
-                    <th className="py-2 px-4 border">Seat Type</th>
-                    <th className="py-2 px-4 border">Bus No</th>
+                    <th className="py-2 px-4 border">Travel_Date</th>
+                    <th className="py-2 px-4 border">Seat_Type</th>
+                    <th className="py-2 px-4 border">Bus_No</th>
                     <th className="py-2 px-4 border">Status</th>
                     <th className="py-2 px-4 border">Action</th>
                   </tr>
@@ -99,8 +96,7 @@ const VolvoBusBookingDetails = () => {
           )}
         </main>
       </div>
-    </div>
-  );
+    );
 };
 
 export default VolvoBusBookingDetails;

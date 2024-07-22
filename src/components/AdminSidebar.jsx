@@ -33,7 +33,9 @@ function AdminDashboard() {
     >
       <div className="flex items-center space-x-2 p-4">
         <div className="flex items-center space-x-2">
+          <Link to="/">
           <img src={logo} alt="TGES" className="w-16 object-contain" />
+          </Link>
           <span className="text-xl font-bold">TGES TRAVEL</span>
         </div>
         <span
