@@ -6,12 +6,14 @@ import { getTrainTravelDetails } from "../../redux/slices/travelSlice";
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]);
+  const [travelDetails, setTravelDetails] = useState([ ]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getTrainTravelDetails());
-      setTravelDetails(response.payload.data);
+      if (response?.payload?.data) {
+        setTravelDetails(response.payload.data);
+      }
     };
     fetchData();
   }, []);
@@ -29,12 +31,10 @@ const TrainBookingDetails = () => {
   // );
 
   return (
-    <div className="flex flex-col">
-      <CorporateHeader />
       <div className="flex">
         <CorporateSidebar />
         <main
-          className="min-h-screen bg-gray-100 w-screen"
+          className="min-h-screen bg-gray-100 w-screen overflow-auto"
           style={{
             backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
           }}
@@ -50,6 +50,7 @@ const TrainBookingDetails = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             /> */}
+            <div className="overflow-auto">
             <table className="min-w-full bg-gray-100 text-sm">
               <thead>
                 <tr>
@@ -93,11 +94,11 @@ const TrainBookingDetails = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         </main>
       </div>
-    </div>
-  );
+      );
 };
 
 export default TrainBookingDetails;

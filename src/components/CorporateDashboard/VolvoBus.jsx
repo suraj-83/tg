@@ -40,8 +40,6 @@ const VolvoBusBookingDetails = () => {
   );
 
   return (
-    <div className="flex flex-col">
-      <CorporateHeader />
       <div className="flex">
         <CorporateSidebar />
         <main
@@ -115,7 +113,7 @@ const VolvoBusBookingDetails = () => {
           )}
         </main>
       </div>
-    </div>
+
   );
 };
 

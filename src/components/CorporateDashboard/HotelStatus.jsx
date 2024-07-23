@@ -5,10 +5,10 @@ import CorporateSidebar from './CorporateSidebar'; // Replace AdminSidebar with 
 const mockHotelBookings = [
   {
     id: 1,
-    name: 'John Doe',
+    name: 'John hhhdgg Doe',
     nationality: 'American',
-    contactNo1: '123-456-7890',
-    contactNo2: '098-765-4321',
+    contactNo1: '1234567890',
+    contactNo2: '0987654321',
     email: 'john.doe@example.com',
     country: 'USA',
     state: 'California',
@@ -29,8 +29,8 @@ const mockHotelBookings = [
     id: 2,
     name: 'Jane Smith',
     nationality: 'British',
-    contactNo1: '234-567-8901',
-    contactNo2: '987-654-3210',
+    contactNo1: '2345678901',
+    contactNo2: '9876543210',
     email: 'jane.smith@example.com',
     country: 'UK',
     state: 'England',
@@ -47,6 +47,51 @@ const mockHotelBookings = [
     children: 0,
     infants: 1,
   },
+  {
+    id: 3,
+    name: 'Mike Johnson',
+    nationality: 'Canadian',
+    contactNo1: '3456789012',
+    contactNo2: '9012345678',
+    email: 'mike.johnson@example.com',
+    country: 'Canada',
+    state: 'Ontario',
+    city: 'Toronto',
+    roomCategory: 'Single',
+    mealPlan: 'Room Only',
+    hotelCategory: '3 Star',
+    priceRange: '$150 - $200',
+    checkInDate: '2024-06-01',
+    checkOutDate: '2024-06-05',
+    numberOfNights: 4,
+    numberOfRooms: 1,
+    adults: 1,
+    children: 0,
+    infants: 0,
+  },
+  {
+    id: 4,
+    name: 'Emma Brown',
+    nationality: 'Australian',
+    contactNo1: '4567890123',
+    contactNo2: '8765432109',
+    email: 'emma.brown@example.com',
+    country: 'Australia',
+    state: 'New South Wales',
+    city: 'Sydney',
+    roomCategory: 'Standard',
+    mealPlan: 'Full Board',
+    hotelCategory: '5 Star',
+    priceRange: '$500 - $600',
+    checkInDate: '2024-07-06',
+    checkOutDate: '2024-07-10',
+    numberOfNights: 4,
+    numberOfRooms: 1,
+    adults: 2,
+    children: 0,
+    infants: 0,
+  },
+  
   // Add more mock bookings as needed
 ];
 
@@ -108,46 +153,45 @@ const HotelBookingDetails = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <CorporateHeader />
       <div className="flex">
         <CorporateSidebar />
         <main 
           className="min-h-screen bg-cover bg-gray-100 w-full overflow-auto bg-center"
           style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}
         >
-          <div className="p-4">
+          <div className="p-4 bg-white border boarder-gray-200">
           <input
               type="text"
               placeholder="Search by name or email"
-              className="mb-4 p-3 ml-5 border rounded-full"
+              className="mb-4 p-3 ml-20 border rounded-full"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <table className="text-sm bg-white">
+          <div className='overflow-auto'>            
+          <table className="text-sm text-center bg-white">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b">Name</th>
-                <th className="py-2 px-4 border-b">Nationality</th>
-                <th className="py-2 px-4 border-b">Contact No 1</th>
-                <th className="py-2 px-4 border-b">Contact No 2</th>
-                <th className="py-2 px-4 border-b">Email</th>
-                <th className="py-2 px-4 border-b">Country</th>
-                <th className="py-2 px-4 border-b">State</th>
-                <th className="py-2 px-4 border-b">City</th>
-                <th className="py-2 px-4 border-b">Room Category</th>
-                <th className="py-2 px-4 border-b">Meal Plan</th>
-                <th className="py-2 px-4 border-b">Hotel Category</th>
-                <th className="py-2 px-4 border-b">Price Range</th>
-                <th className="py-2 px-4 border-b">Check In Date</th>
-                <th className="py-2 px-4 border-b">Check Out Date</th>
-                <th className="py-2 px-4 border-b">Number of Nights</th>
-                <th className="py-2 px-4 border-b">Number of Rooms</th>
-                <th className="py-2 px-4 border-b">Adults</th>
-                <th className="py-2 px-4 border-b">Children</th>
-                <th className="py-2 px-4 border-b">Infants</th>
-                <th className="py-2 px-4 border-b">Actions</th>
+                <th className="py-2 px-10 border">Name</th>
+                <th className="py-2 px-4 border border-gray-300">Nationality</th>
+                <th className="py-2 px-4 border border-gray-300">Contact_No</th>
+                <th className="py-2 px-4 border border-gray-300">Alternative_No</th>
+                <th className="py-2 px-4 border border-gray-300">Email</th>
+                <th className="py-2 px-4 border border-gray-300">Country</th>
+                <th className="py-2 px-16 border border-gray-300">State</th>
+                <th className="py-2 px-4 border border-gray-300">City</th>
+                <th className="py-2 px-4 border border-gray-300">Room_Category</th>
+                <th className="py-2 px-4 border border-gray-300">Meal_Plan</th>
+                <th className="py-2 px-4 border border-gray-300">Hotel_Category</th>
+                <th className="py-2 px-4 border border-gray-300">Price_Range</th>
+                <th className="py-2 px-4 border border-gray-300">Check_n_Date</th>
+                <th className="py-2 px-4 border border-gray-300">Check_Out_Date</th>
+                <th className="py-2 px-4 border border-gray-300">Number_of_Nights</th>
+                <th className="py-2 px-4 border border-gray-300">Number_of_Rooms</th>
+                <th className="py-2 px-4 border border-gray-300">Adults</th>
+                <th className="py-2 px-4 border border-gray-300">Children</th>
+                <th className="py-2 px-4 border border-gray-300">Infants</th>
+                <th className="py-2 px-4 border border-gray-300">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -157,40 +201,40 @@ const HotelBookingDetails = () => {
                 return name.includes(search.toLowerCase()) || email.includes(search.toLowerCase());
               }).map((booking) => (
                 <tr key={booking.id}>
-                  <td className="py-2 px-4 border-b">{booking.name}</td>
-                  <td className="py-2 px-4 border-b">{booking.nationality}</td>
-                  <td className="py-2 px-4 border-b">{booking.contactNo1}</td>
-                  <td className="py-2 px-4 border-b">{booking.contactNo2}</td>
-                  <td className="py-2 px-4 border-b">{booking.email}</td>
-                  <td className="py-2 px-4 border-b">{booking.country}</td>
-                  <td className="py-2 px-4 border-b">{booking.state}</td>
-                  <td className="py-2 px-4 border-b">{booking.city}</td>
-                  <td className="py-2 px-4 border-b">{booking.roomCategory}</td>
-                  <td className="py-2 px-4 border-b">{booking.mealPlan}</td>
-                  <td className="py-2 px-4 border-b">{booking.hotelCategory}</td>
-                  <td className="py-2 px-4 border-b">{booking.priceRange}</td>
-                  <td className="py-2 px-4 border-b">{booking.checkInDate}</td>
-                  <td className="py-2 px-4 border-b">{booking.checkOutDate}</td>
-                  <td className="py-2 px-4 border-b">{booking.numberOfNights}</td>
-                  <td className="py-2 px-4 border-b">{booking.numberOfRooms}</td>
-                  <td className="py-2 px-4 border-b">{booking.adults}</td>
-                  <td className="py-2 px-4 border-b">{booking.children}</td>
-                  <td className="py-2 px-4 border-b">{booking.infants}</td>
-                  <td className="py-2 px-4 border-b">
+                  <td className="py-2  border-b">{booking.name}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.nationality}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.contactNo1}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.contactNo2}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.email}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.country}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.state}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.city}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.roomCategory}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.mealPlan}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.hotelCategory}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.priceRange}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.checkInDate}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.checkOutDate}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.numberOfNights}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.numberOfRooms}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.adults}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.children}</td>
+                  <td className="py-2 px-4 border border-gray-300">{booking.infants}</td>
+                  <td className="py-2 px-4 border border-gray-300">
                     <button 
                       onClick={() => handleCancelBooking(booking.id)} 
-                      className="bg-red-500 text-white py-1 px-2 rounded"
+                      className="text-red-500 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm px-4  py-0.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 uppercase"
                     >
-                      Cancel Booking
+                      CancelBooking
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          </div>
         </main>
       </div>
-    </div>
   );
 };
 
