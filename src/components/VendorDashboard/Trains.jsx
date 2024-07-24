@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import VendorHeader from "./VendorHeader";
-import VendorSidebar from "./VendorSidebar";
+import React, { useEffect, useState } from "react"
+import VendorSidebar from "./VendorSidebar"
 
 const VendorTrainManagement = () => {
   const [trains, setTrains] = useState([]);
@@ -51,13 +50,11 @@ const VendorTrainManagement = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <VendorHeader />
       <div className="flex flex-1">
         <VendorSidebar />
         <main className="min-h-screen bg-gray-100 w-full overflow-auto">
           <div className="p-4">
-            <h1 className="text-2xl font-bold uppercase">Vendor Train Management</h1>
+            <h1 className="text-2xl pl-20 font-bold uppercase">Vendor Train Management</h1>
           </div>
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/4 p-4">
@@ -133,7 +130,7 @@ const VendorTrainManagement = () => {
           </div>
         </main>
       </div>
-    </div>
+
   );
 };
 

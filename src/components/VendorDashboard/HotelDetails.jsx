@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import VendorHeader from "./VendorHeader";
+import React, { useEffect, useState } from "react"
 import VendorSidebar from "./VendorSidebar";
 
 const VendorHotelManagement = () => {
@@ -53,13 +52,11 @@ const VendorHotelManagement = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <VendorHeader />
       <div className="flex flex-1">
         <VendorSidebar />
         <main className="min-h-screen bg-gray-100 w-full overflow-auto">
           <div className="p-4">
-            <h1 className="text-2xl font-bold uppercase">Vendor Hotel Management</h1>
+            <h1 className="text-2xl font-bold pl-20 uppercase">Vendor Hotel Management</h1>
           </div>
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/4 p-4">
@@ -138,7 +135,7 @@ const VendorHotelManagement = () => {
           </div>
         </main>
       </div>
-    </div>
+
   );
 };
 

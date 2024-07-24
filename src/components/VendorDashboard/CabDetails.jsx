@@ -78,13 +78,11 @@ const VendorCabManagement = () => {
     };
   
   return (
-    <div className="flex flex-col h-screen">
-      <VendorHeader />
-      <div className="flex flex-1">
+      <div className="flex">
         <VendorSidebar />
         <main className="min-h-screen bg-gray-100 w-full overflow-auto">
           <div className="p-4">
-            <h1 className="text-2xl font-bold uppercase">Vendor Cab Management</h1>
+            <h1 className="text-2xl font-bold pl-20 uppercase">Vendor Cab Management</h1>
           </div>
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/4 p-4">
@@ -104,7 +102,7 @@ const VendorCabManagement = () => {
             <div className="w-full lg:w-3/4 p-4">
               {selectedCab && (
                 <>
-                  <h2 className="text-xl font-bold mb-4">Cab Details</h2>
+                  <h2 className="text-xl font-bold mb-4 ">Cab Details</h2>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-300">
                       <tbody>
@@ -188,7 +186,7 @@ const VendorCabManagement = () => {
           </div>
         </main>
       </div>
-    </div>
+
   );
 };
 
