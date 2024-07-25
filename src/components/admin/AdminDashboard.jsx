@@ -8,7 +8,7 @@ import Dashboard from './Dashboard';
 const AdminDashboard = () => {
     return (
         <div className="flex flex-col h-screen">
-            <AdminHeader />
+            {/* <AdminHeader /> */}
             <div className="flex flex-2">
                 <AdminSidebar />
                 <main className="flex-1 p-6 bg-gray-100">

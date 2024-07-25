@@ -1,29 +1,51 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutAdmin } from "../redux/slices/dashboardSlice";
 import logo from "../assets/TGESLogo.png";
-import {MdAnalytics,MdLogout,MdMiscellaneousServices,MdSpaceDashboard} from "react-icons/md";
-import { FaUsers,FaUser,FaChevronLeft,FaBuilding,FaAngleRight,FaBus, FaHandHoldingMedical,FaUserCircle} from "react-icons/fa";
-import {FaShop,FaEarthAsia,FaTrainSubway,FaCarRear,FaPassport,FaHotel, FaUserShield} from "react-icons/fa6";
+import {
+  MdAnalytics,
+  MdLogout,
+  MdMiscellaneousServices,
+  MdSpaceDashboard,
+} from "react-icons/md";
+import {
+  FaUsers,
+  FaUser,
+  FaChevronLeft,
+  FaBuilding,
+  FaAngleRight,
+  FaBus,
+  FaHandHoldingMedical,
+  FaUserCircle,
+} from "react-icons/fa";
+import {
+  FaShop,
+  FaEarthAsia,
+  FaTrainSubway,
+  FaCarRear,
+  FaPassport,
+  FaHotel,
+  FaUserShield,
+} from "react-icons/fa6";
 import { IoMenu, IoAirplane } from "react-icons/io5";
 
 function AdminDashboard() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = async (e) => {
     e.preventDefault();
 
     const response = await dispatch(logoutAdmin());
-    console.log("Logout")
+    console.log("Logout");
 
-    console.log(response)
+    console.log(response);
     if (response?.payload?.success) {
-        navigate("/")
+      navigate("/");
     }
-};
+  };
 
   return (
     <aside
@@ -34,7 +56,7 @@ function AdminDashboard() {
       <div className="flex items-center space-x-2 p-4">
         <div className="flex items-center space-x-2">
           <Link to="/">
-          <img src={logo} alt="TGES" className="w-16 object-contain" />
+            <img src={logo} alt="TGES" className="w-16 object-contain" />
           </Link>
           <span className="text-xl font-bold">TGES TRAVEL</span>
         </div>
@@ -192,13 +214,13 @@ function AdminDashboard() {
           <FaUserCircle size={22} />
           <span>Profile</span>
         </Link>
-        <Link
-          to="/admin/logout"
-          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+        <div
+          onClick={handleLogout}
+          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded cursor-pointer"
         >
           <MdLogout size={22} />
           <span>Logout</span>
-        </Link>
+        </div>
       </div>
     </aside>
   );
