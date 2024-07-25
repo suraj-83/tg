@@ -1,114 +1,151 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { logout } from "../../redux/slices/authSlice"
+import { MdAnalytics, MdLogout, MdSpaceDashboard, MdMiscellaneousServices } from "react-icons/md"
+import { FaChevronLeft, FaHotel, FaAngleRight, FaUserCircle } from "react-icons/fa"
+import { FaTrainSubway, FaBus, FaCarRear, FaEarthAsia } from "react-icons/fa6"
+import { IoMenu, IoAirplane } from "react-icons/io5"
 
-import { Link } from "react-router-dom";
+function EmployeeDashboard() {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-export function UserSidebar() {
-  const [allBookingsOpen, setAllBookingsOpen] = React.useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const handleLogout = async (e) => {
+    e.preventDefault()
+
+    const response = await dispatch(logout());
+    console.log("Logout")
+
+    console.log(response)
+    if (response?.payload?.success) {
+      navigate("/")
+    }
+  }
+
   return (
-    <aside className="bg-gray-700 text-white min-w-64 space-y-6 py-7 px-2``">
-      <nav>
-      <Link to="/employeedashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600">Dashboard</Link>
-        
-      <div className="relative">
-          <button
-            type="button"
-            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
-            onClick={() => setAllBookingsOpen(!allBookingsOpen)}
-          >
-            All Booking Details
-            <svg
-              className="inline-block w-4 h-4 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={allBookingsOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-              />
-            </svg>
-          </button>
+    <aside
+      className={`relative top-0 left-0 bottom-0 min-h-screen min-w-[20%] text-white bg-gradient-to-r from-black from-20% to-slate-900 font-semibold p-4 space-y-6 transition-all duration-300 ${
+        isSidebarCollapsed ? "-ml-[20%]" : ""
+      }`}
+    >
+      <div className="flex items-center space-x-2 p-4">
+        <div className="flex items-center space-x-2">
+          <Link to="/">
+            {/* <img src={logo} alt="Corporate Logo" className="w-16 object-contain" /> */}
+          <span className="text-xl font-bold">Employee Dashboard</span>
+          </Link>
+        </div>
+        <span
+          className={`absolute h-16 w-16 z-20 top-2 rounded-full bg-slate-800 flex items-center justify-center cursor-pointer ${
+            isSidebarCollapsed ? "-right-20" : "-right-8"
+          }`}
+          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        >
+          {isSidebarCollapsed ? <IoMenu size={30} /> : <FaChevronLeft />}
+        </span>
       </div>
-
-      {/* Add state variable */}
-      {/* This will be toggled on click */}
-      {/* Define state variable */}
-              
-
-        <div className="relative">
-
-          {allBookingsOpen && (
-            <div className="mt-2 bg-gray-600 rounded shadow-lg">
-
+      <div className="space-y-4">
+        <nav className="space-y-2">
+          <Link
+            to="/employeedashboard"
+            className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+            >
+            <MdSpaceDashboard size={25} />
+            <span>Dashboard</span>
+          </Link>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+            >
+              <div className="flex items-center space-x-2">
+                <FaEarthAsia size={22} />
+                <span>Travel</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
               <Link
-                to="/employeedashboard/employee-cab-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                to="/employeedashboard/employee-train-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-              Cab Booking Details
+                <FaTrainSubway size={22} />
+                <span>Train</span>
               </Link>
               <Link
                 to="/employeedashboard/employee-flight-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-              Flight Booking Details
+                <IoAirplane size={22} />
+                <span>Flight</span>
               </Link>
               <Link
-                to="/employeedashboard/train-status"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                to="/employeedashboard/employee-volvobus-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-              Train Status
+                <FaBus size={22} />
+                <span>Bus</span>
               </Link>
               <Link
-                to="/employeedashboard/volvobus-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                to="/employeedashboard/employee-cab-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-              Volvo Bus Details
+                <FaCarRear size={22} />
+                <span>Cab</span>
               </Link>
             </div>
-
-          )}
-        </div>
-        <div className="relative">
-          <button
-            type="button"
-            className="block w-full text-left py-2.5 px-4 rounded transition duration-200 hover:bg-gray-600"
-            onClick={() => setServicesOpen(!servicesOpen)}
-          >
-            Services
-            <svg
-              className="inline-block w-4 h-4 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          </div>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={servicesOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-              />
-            </svg>
-          </button>
-
-          {servicesOpen && (
-            <div className="mt-2 bg-gray-600 rounded shadow-lg">
+              <div className="flex items-center space-x-2">
+                <MdMiscellaneousServices size={22} />
+                <span>Services</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
               <Link
                 to="/employeedashboard/employee-hotel-details"
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-500"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
               >
-                Hotel Booking Details
+                <FaHotel size={22} />
+                <span>Hotel Status</span>
               </Link>
             </div>
-          )}
-        </div>
-      </nav>
+          </div>
+          <Link
+            to="#"
+            className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+          >
+            <MdAnalytics size={22} />
+            <span>Analytics</span>
+          </Link>
+        </nav>
+      </div>
+      <div className="space-y-2">
+        <Link
+          to="#"
+          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+        >
+          <FaUserCircle size={22} />
+          <span>Profile</span>
+        </Link>
+        <Link
+          to="/employee/logout"
+          className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+          onClick={handleLogout}
+        >
+          <MdLogout size={22} />
+          <span>Logout</span>
+        </Link>
+      </div>
     </aside>
   );
-};
+}
 
-export default UserSidebar;
+export default EmployeeDashboard

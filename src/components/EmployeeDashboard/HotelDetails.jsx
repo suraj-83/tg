@@ -105,8 +105,6 @@ const HotelBookingDetails = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <EmployeeHeader />
       <div className="flex">
         <EmployeeSidebar />
         <main 
@@ -174,7 +172,7 @@ const HotelBookingDetails = () => {
           </table>          
         </main>
       </div>
-    </div>
+
   );
 };
 
