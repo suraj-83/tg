@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
-import Img from "../../assets/volvo-bus.webp";
-// import CorporateHeader from "./CorporateHeader";
-import EmployeeSidebar from "./EmployeeSidebar";
 import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
+import Img from "../../assets/volvo-bus.webp";
+import EmployeeSidebar from "./EmployeeSidebar";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
   const [travelDetails, setTravelDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +42,28 @@ const VolvoBusBookingDetails = () => {
       booking.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const totalPages = Math.ceil(filteredDetails.length / rowsPerPage);
+  const lastItemIndex = currentPage * rowsPerPage;
+  const firstItemIndex = lastItemIndex - rowsPerPage;
+  const currentBookings = filteredDetails.slice(firstItemIndex, lastItemIndex);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1);
+  };
+
   return (
     <div className="flex">
       <EmployeeSidebar />
@@ -66,22 +89,22 @@ const VolvoBusBookingDetails = () => {
             <thead>
               <tr>
                 <th className="py-2 px-4 border">Booking</th>
-                <th className="py-2 px-4 border">Full_Name</th>
-                <th className="py-2 px-4 border">Date_of_Birth</th>
+                <th className="py-2 px-4 border">Full Name</th>
+                <th className="py-2 px-4 border">Date of Birth</th>
                 <th className="py-2 px-4 border">Gender</th>
-                <th className="py-2 px-4 border">Contact_No</th>
+                <th className="py-2 px-4 border">Contact No</th>
                 <th className="py-2 px-4 border">Email</th>
-                <th className="py-2 px-4 border">Pickup_Location</th>
+                <th className="py-2 px-4 border">Pickup Location</th>
                 <th className="py-2 px-4 border">Destination</th>
-                <th className="py-2 px-4 border">Travel_Date</th>
-                <th className="py-2 px-4 border">Seat_Type</th>
-                <th className="py-2 px-4 border">Bus_No</th>
+                <th className="py-2 px-4 border">Travel Date</th>
+                <th className="py-2 px-4 border">Seat Type</th>
+                <th className="py-2 px-4 border">Bus No</th>
                 <th className="py-2 px-4 border">Status</th>
                 <th className="py-2 px-4 border">Action</th>
               </tr>
             </thead>
             <tbody>
-              {filteredDetails.map((booking, index) => (
+              {currentBookings.map((booking, index) => (
                 <tr key={index}>
                   <td className="py-2 px-4 border">{index + 1}</td>
                   <td className="py-2 px-4 border">{booking.fullName}</td>
@@ -109,6 +132,43 @@ const VolvoBusBookingDetails = () => {
               ))}
             </tbody>
           </table>
+        <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+      <div className="flex items-center bg-white gap-4 px-2 select-none">
+          <p>Rows per page:</p>
+          <select
+            className="mx-2 px-2 py-1 border rounded"
+            value={rowsPerPage}
+            onChange={handleRowsPerPageChange}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value={20}>20</option>
+          </select>
+          <FaAngleLeft
+            size={25}
+            className={`${
+              currentPage === 1
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-black cursor-pointer"
+            }`}
+            onClick={handlePreviousPage}
+          />
+          <FaAngleRight
+            size={25}
+            className={`${
+              currentPage === totalPages
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-black cursor-pointer"
+            }`}
+            onClick={handleNextPage}
+          />
+          <span className="mx-2">
+            Page {currentPage} of {totalPages}
+          </span>
+        </div>
+
+        </div>
         </div>
       </main>
     </div>

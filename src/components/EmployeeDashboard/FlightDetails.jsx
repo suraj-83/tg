@@ -90,42 +90,42 @@ const FlightBookingDetails = () => {
             Flight Booking Details
           </h1>
             <div className="overflow-auto">
-            <table className="min-w-full text-sm bg-white">
+            <table className="min-w-full text-center text-sm bg-white">
               <thead>
                 <tr>
-                  <th className="py-2 px-4 border-b border-gray-200">Full_Name</th>
-                  <th className="py-2 px-4 border-b border-gray-200">DOB</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Gender</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Contact_No</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Email</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Travel_From</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Travel_To</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Class</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Travel_Date</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Flight_No</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Time_Preference</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Adult</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Children</th>
-                  <th className="py-2 px-4 border-b border-gray-200">Actions</th>
+                  <th className="py-2 px-4 border border-gray-200">Full_Name</th>
+                  <th className="py-2 px-16 border border-gray-200">DOB</th>
+                  <th className="py-2 px-4 border border-gray-200">Gender</th>
+                  <th className="py-2 px-4 border border-gray-200">Contact_No</th>
+                  <th className="py-2 px-4 border border-gray-200">Email</th>
+                  <th className="py-2 px-4 border border-gray-200">Travel_From</th>
+                  <th className="py-2 px-4 border border-gray-200">Travel_To</th>
+                  <th className="py-2 px-4 border border-gray-200">Class</th>
+                  <th className="py-2 px-4 border border-gray-200">Travel_Date</th>
+                  <th className="py-2 px-4 border border-gray-200">Flight_No</th>
+                  <th className="py-2 px-4 border border-gray-200">Time_Preference</th>
+                  <th className="py-2 px-4 border border-gray-200">Adult</th>
+                  <th className="py-2 px-4 border border-gray-200">Children</th>
+                  <th className="py-2 px-4 border border-gray-200">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {travelDetails.map((detail, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.fullName}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.dob}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.gender}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.contactNo}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.email}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.travelFrom}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.travelTo}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.classOfTravel}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.travelDate}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.flightNo}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.timePreference}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.adult}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">{detail.children}</td>
-                    <td className="py-2 px-4 border-b border-gray-200">
+                    <td className="py-2 px-4 border border-gray-200">{detail.fullName}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.dob}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.gender}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.contactNo}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.email}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.travelFrom}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.travelTo}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.classOfTravel}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.travelDate}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.flightNo}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.timePreference}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.adult}</td>
+                    <td className="py-2 px-4 border border-gray-200">{detail.children}</td>
+                    <td className="py-2 px-4 border border-gray-200">
                       <button
                         className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-700"
                         onClick={() => handleCancel(detail.id)}

@@ -87,12 +87,12 @@ function App() {
                 <Route path="addcabs" element={<AddCabs />} />
                 
 
-                <Route
+                {/* <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}
                     
-                /> 
-                {/* <Route path="admin" element={<AdminDashboard />} /> */}
+                />  */}
+                <Route path="admin" element={<AdminDashboard />} />
                 <Route path="admin/login" element={<AdminLogin />} />
                 {/* Other Routes */}
                 <Route path="*" element={<NotFound />} />
@@ -101,9 +101,9 @@ function App() {
     );
 }
 
-const RequireAuth = ({ children }) => {
-    const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
-    return isAdmin ? children : <Navigate to="/admin/login" replace />;
-};
+// const RequireAuth = ({ children }) => {
+//     const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
+//     return isAdmin ? children : <Navigate to="/admin/login" replace />;
+// };
 
 export default App;
