@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import {
-  zipCodeMapping,
-  branchOptions,
-  departmentOptions,
-  positionOptions,
-} from "../data.js";
-import empImg from "../assets/img.jpg";
+import {zipCodeMapping,branchOptions,departmentOptions, positionOptions,} from "../data.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { employeeSignup } from "../redux/slices/authSlice.js";
+import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 
 function EmployeeForm() {
   const dispatch = useDispatch();
@@ -55,11 +50,9 @@ function EmployeeForm() {
   };
 
   return (
-    <div className="h-screen w-full mx-auto flex">
-      <div className="w-1/2 h-screen hidden md:block">
-        <img src={empImg} alt="" className="bg-contain h-full" />
-      </div>
-      <div className="w-full lg:w-1/2 min-h-screen overflow-y-scroll">
+    <div className="flex">
+      <CorporateSidebar />
+      <main className="w-full min-h-screen">
         <form onSubmit={handleSubmit} className="bg-gray-100 p-6">
           <h1 className="pb-9 font-bold text-center uppercase text-2xl underline">
             Employee Sign Up
@@ -284,7 +277,7 @@ function EmployeeForm() {
             </div>
           </div>
         </form>
-      </div>
+      </main>
     </div>
   );
 }

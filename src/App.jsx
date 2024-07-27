@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,EmployeeLogin,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,AddBranchForm,EmployeeLogin,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
 import CorporateDashboard from './components/CorporateDashboard/CorporateDashboard' // Import the CorporateDashboard component
@@ -68,7 +68,7 @@ function App() {
                 <Route path="corporatedashboard/volvobusdetails" element={<VolvoBusDetails />} />
                 <Route path="corporatedashboard/hoteldetails" element={<HotelDetails />} />
                 {/* EmployeeDashboard  */}
-                <Route path="employee" element={<EmployeeForm />} />
+                <Route path="corporatedashboard/employee" element={<EmployeeForm />} />
                 <Route path="employeelogin" element={<EmployeeLogin />} />
                 <Route path="employeedashboard" element={<EmployeeDashboard />} />
                 <Route path="employeedashboard/employee-cab-details" element={<EmployeeCabDetails />} />
@@ -76,6 +76,7 @@ function App() {
                 <Route path="employeedashboard/employee-hotel-details" element={<EmployeeHotelDetails />} />
                 <Route path="employeedashboard/employee-train-details" element={<EmployeeTrainDetails />} />
                 <Route path="employeedashboard/employee-volvobus-details" element={<EmployeeVolvoBusDetails />} />
+                <Route path="corporatedashboard/add-branch" element={<AddBranchForm />} />
                 {/* VendorDashboard */}
                 {/* <Route path="vendordashboard/*" element={<RequireAuth><VendorDashboard /></RequireAuth>} /> */}
                 <Route path="vendordashboard"element={<VendorDashboard />} /> 
