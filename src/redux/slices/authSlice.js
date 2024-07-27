@@ -75,6 +75,28 @@ export const employeeSignup = createAsyncThunk(
     }
   }
 );
+export const branchSignup = createAsyncThunk(
+  "auth/branch-signup",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("/user/branch-register", data);
+
+      console.log("Branch User: ", (await response).data);
+
+      toast.promise(response, {
+        loading: "Creating account...",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to create your account",
+      });
+
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
 export const vendorSignup = createAsyncThunk(
   "auth/vendor-signup",
   async (data) => {
@@ -175,6 +197,30 @@ export const vendorLogin = createAsyncThunk(
       const response = axiosInstance.post("/user/vendor-login", data);
 
       console.log("Vendor Login: ", (await response).data);
+
+      toast.promise(response, {
+        loading: "Authenticating account...",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Error Logging In",
+      });
+
+      return await response;
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
+
+export const branchLogin = createAsyncThunk(
+  "auth/branch-login",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("/user/branch-login", data);
+
+      console.log("Branch Login: ", (await response).data);
 
       toast.promise(response, {
         loading: "Authenticating account...",

@@ -1,40 +1,55 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { addBranch } from "../redux/slices/authSlice.js";
+import { branchSignup } from "../redux/slices/authSlice.js"
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
+import { zipCodeMapping } from "../data";
 
 function AddBranchForm() {
   const dispatch = useDispatch();
   const initialFormData = {
     name: "",
-    address: {
-      city: "",
-      state: "",
-      zipcode: "",
-      addLine1: "",
-      addLine2: "",
-    },
+    address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    addLine1: "",
+    addLine2: "",
     contactNo: "",
     email: "",
+    countryCode: "",
+    stateCode: "",
+    phoneNumber: "",
+    landlineCountryCode: "",
+    landlineCityCode: "",
+    landlineNumber: ""
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
+  const [landlineNumberVisible, setLandLineNumberVisible] = useState(false);
 
-  const handleAddressChange = (e) => {
+  const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      address: {
-        ...prevState.address,
-        [id]: value,
-      },
+      [id]: value,
+    }));
+  };
+
+  const handleZipCodeChange = (e) => {
+    const zipCode = e.target.value;
+    setFormData((prevState) => ({
+      ...prevState,
+      zipcode: zipCode,
+      city: zipCodeMapping[zipCode]?.city || "",
+      state: zipCodeMapping[zipCode]?.state || "",
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const response = await dispatch(addBranch(formData));
+    const response = await dispatch(branchSignup(formData))
     if (response?.payload?.data?.success) {
       alert("Branch added successfully!");
     }
@@ -57,32 +72,7 @@ function AddBranchForm() {
                   id="name"
                   placeholder="Branch Name"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData((prevState) => ({
-                      ...prevState,
-                      name: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-              <div className="mb-4 w-full">
-                <input
-                  type="text"
-                  id="city"
-                  placeholder="City"
-                  value={formData.address.city}
-                  onChange={handleAddressChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-              <div className="mb-4 w-full">
-                <input
-                  type="text"
-                  id="state"
-                  placeholder="State"
-                  value={formData.address.state}
-                  onChange={handleAddressChange}
+                  onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
@@ -91,8 +81,28 @@ function AddBranchForm() {
                   type="text"
                   id="zipcode"
                   placeholder="ZIP/PIN Code"
-                  value={formData.address.zipcode}
-                  onChange={handleAddressChange}
+                  value={formData.zipcode}
+                  onChange={handleZipCodeChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <input
+                  type="text"
+                  id="state"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
@@ -101,8 +111,8 @@ function AddBranchForm() {
                   type="text"
                   id="addLine1"
                   placeholder="Address Line 1"
-                  value={formData.address.addLine1}
-                  onChange={handleAddressChange}
+                  value={formData.addLine1}
+                  onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
@@ -111,26 +121,97 @@ function AddBranchForm() {
                   type="text"
                   id="addLine2"
                   placeholder="Address Line 2"
-                  value={formData.address.addLine2}
-                  onChange={handleAddressChange}
+                  value={formData.addLine2}
+                  onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-              <div className="mb-4 w-full">
+              <div className="flex items-center mb-4 w-full">
                 <input
-                  type="text"
-                  id="contactNo"
-                  placeholder="Contact Number"
-                  value={formData.contactNo}
-                  onChange={(e) =>
-                    setFormData((prevState) => ({
-                      ...prevState,
-                      contactNo: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border border-gray-300 rounded"
+                  type="checkbox"
+                  checked={phoneNumberVisible}
+                  onChange={() => setPhoneNumberVisible((prevVisible) => !prevVisible)}
+                  className="mr-2"
                 />
+                Mobile Number
+                <input
+                  type="checkbox"
+                  checked={landlineNumberVisible}
+                  onChange={() => setLandLineNumberVisible((prevVisible) => !prevVisible)}
+                  className="ml-4 mr-2"
+                />
+                Landline Number
               </div>
+              {phoneNumberVisible && (
+                <div className="mb-4 w-full flex flex-wrap">
+                  <div className="flex mt-2 w-full">
+                    <input
+                      type="text"
+                      id="countryCode"
+                      maxLength={4}
+                      minLength={3}
+                      value={formData.countryCode ? `+${formData.countryCode}` : ""}
+                      onChange={handleInputChange}
+                      className="w-28 p-2 border border-gray-300 rounded"
+                      placeholder="Country Code"
+                    />
+                    <input
+                      type="text"
+                      id="stateCode"
+                      maxLength={2}
+                      minLength={2}
+                      value={formData.stateCode || ""}
+                      onChange={handleInputChange}
+                      className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
+                      placeholder="State Code"
+                    />
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      maxLength={10}
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border border-gray-300 rounded"
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                </div>
+              )}
+              {landlineNumberVisible && (
+                <div className="mb-4 w-full flex mt-2">
+                  <input
+                    type="text"
+                    id="landlineCountryCode"
+                    maxLength={4}
+                    minLength={3}
+                    value={formData.landlineCountryCode ? `+${formData.landlineCountryCode}` : ""}
+                    onChange={handleInputChange}
+                    className="w-20 p-2 border border-gray-300 rounded mr-2"
+                    placeholder="Country Code"
+                    aria-label="Country Code"
+                  />
+                  <input
+                    type="text"
+                    id="landlineCityCode"
+                    maxLength={4}
+                    minLength={3}
+                    value={formData.landlineCityCode}
+                    onChange={handleInputChange}
+                    className="w-20 p-2 border border-gray-300 rounded mr-2"
+                    placeholder="City Code"
+                  />
+                  <input
+                    type="text"
+                    id="landlineNumber"
+                    maxLength={7}
+                    minLength={6}
+                    value={formData.landlineNumber}
+                    onChange={handleInputChange}
+                    className="w-40 p-2 border border-gray-300 rounded"
+                    placeholder="Landline Number"
+                  />
+                </div>
+              )}
               <div className="mb-4 w-full">
                 <input
                   type="email"
