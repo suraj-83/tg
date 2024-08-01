@@ -19,7 +19,6 @@ function RetailForm() {
     state: "",
     city: "",
     countryCode: "",
-    stateCode: "",
     phoneNumber1: "",
     phoneNumber2: "",
     username: "",
@@ -261,22 +260,6 @@ function RetailForm() {
                       }
                       className="w-28 p-2 border border-gray-300 rounded mr-2"
                       placeholder="Country Code"
-                    />
-                    <input
-                      type="text"
-                      maxLength={2}
-                      minLength={2}
-                      value={formData.stateCode || ""}
-                      onChange={(e) =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          stateCode: e.target.value
-                            .replace(/^0+/, "")
-                            .replace(/\D/g, ""),
-                        }))
-                      }
-                      className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                      placeholder="State Code"
                     />
                     <input
                       type="text"

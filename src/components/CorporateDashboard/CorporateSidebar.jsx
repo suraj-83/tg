@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { logout } from "../../redux/slices/authSlice"
 import { MdAnalytics, MdLogout, MdSpaceDashboard, MdMiscellaneousServices } from "react-icons/md"
 import { FaChevronLeft, FaHotel, FaAngleRight, FaUsersCog,FaUserCircle } from "react-icons/fa"
-import { FaTrainSubway, FaBus, FaCarRear, FaEarthAsia } from "react-icons/fa6"
+import { FaTrainSubway,FaBullseye,FaUserPlus, FaBus, FaCarRear, FaEarthAsia } from "react-icons/fa6"
 import { IoMenu, IoAirplane } from "react-icons/io5"
 import { LuGitBranchPlus } from "react-icons/lu";
 import { ImUserPlus } from "react-icons/im";
@@ -126,6 +126,20 @@ function CorporateDashboard() {
               >
                 <ImUserPlus size={22} />
                 <span>Add User</span>
+              </Link>
+              <Link
+                to="/corporatedashboard/branch-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaBullseye size={22} />
+                <span>Branch Details</span>
+              </Link>
+              <Link
+                to="/corporatedashboard/employee-details"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaUserPlus size={22} />
+                <span>Employee Details</span>
               </Link>
             </div>
           </div>

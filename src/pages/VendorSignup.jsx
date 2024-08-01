@@ -26,7 +26,6 @@ function Form() {
     address4: "",
     phoneNumber: "",
     countryCode: "",
-    stateCode: "",
     landlineNumber: "",
     landlineCountryCode: "",
     landlineCityCode: "",
@@ -415,7 +414,7 @@ function Form() {
                   </div>
                   {phoneNumberVisible && (
                     <div className="flex flex-wrap">
-                      <div className="flex mt-2">
+                      <div className="flex gap-2 mt-2">
                         <input
                           type="text"
                           maxLength={4}
@@ -435,20 +434,6 @@ function Form() {
                           }
                           className="w-28 p-2 border border-gray-300 rounded"
                           placeholder="CountryCode"
-                        />
-                        <input
-                          type="text"
-                          maxLength={2}
-                          minLength={2}
-                          value={formData.stateCode || ""}
-                          onChange={(e) =>
-                            setFormData((prevState) => ({
-                              ...prevState,
-                              stateCode: e.target.value,
-                            }))
-                          }
-                          className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                          placeholder="StateCode"
                         />
                         <input
                           type="text"

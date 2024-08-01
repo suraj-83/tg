@@ -17,7 +17,6 @@ function AddBranchForm() {
     contactNo: "",
     email: "",
     countryCode: "",
-    stateCode: "",
     phoneNumber: "",
     landlineCountryCode: "",
     landlineCityCode: "",
@@ -144,27 +143,27 @@ function AddBranchForm() {
               </div>
               {phoneNumberVisible && (
                 <div className="mb-4 w-full flex flex-wrap">
-                  <div className="flex mt-2 w-full">
-                    <input
-                      type="text"
-                      id="countryCode"
-                      maxLength={4}
-                      minLength={3}
-                      value={formData.countryCode ? `+${formData.countryCode}` : ""}
-                      onChange={handleInputChange}
-                      className="w-28 p-2 border border-gray-300 rounded"
-                      placeholder="Country Code"
-                    />
-                    <input
-                      type="text"
-                      id="stateCode"
-                      maxLength={2}
-                      minLength={2}
-                      value={formData.stateCode || ""}
-                      onChange={handleInputChange}
-                      className="w-28 p-2 border border-gray-300 rounded ml-2 mr-2"
-                      placeholder="State Code"
-                    />
+                  <div className="flex mt-2 gap-2 w-full">
+                  <input
+                          type="text"
+                          maxLength={4}
+                          minLength={3}
+                          value={
+                            formData.countryCode
+                              ? `+${formData.countryCode}`
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setFormData((prevState) => ({
+                              ...prevState,
+                              countryCode: e.target.value
+                                .replace(/^0+/, "")
+                                .replace(/\D/g, ""),
+                            }))
+                          }
+                          className="w-28 p-2 border border-gray-300 rounded"
+                          placeholder="CountryCode"
+                        />
                     <input
                       type="text"
                       id="phoneNumber"
@@ -180,16 +179,27 @@ function AddBranchForm() {
               {landlineNumberVisible && (
                 <div className="mb-4 w-full flex mt-2">
                   <input
-                    type="text"
-                    id="landlineCountryCode"
-                    maxLength={4}
-                    minLength={3}
-                    value={formData.landlineCountryCode ? `+${formData.landlineCountryCode}` : ""}
-                    onChange={handleInputChange}
-                    className="w-20 p-2 border border-gray-300 rounded mr-2"
-                    placeholder="Country Code"
-                    aria-label="Country Code"
-                  />
+                        type="text"
+                        maxLength={4}
+                        minLength={3}
+                        value={
+                          formData.landlineCountryCode
+                            ? `+${formData.landlineCountryCode}`
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            landlineCountryCode: e.target.value
+                              .replace(/^0+/, "")
+                              .replace(/\D/g, ""),
+                          }))
+                        }
+                        className="w-20 p-2 border border-gray-300 rounded mr-2"
+                        placeholder="CountryCode"
+                        style={{ color: "gray" }}
+                        aria-label="CountryCode"
+                      />
                   <input
                     type="text"
                     id="landlineCityCode"
@@ -207,7 +217,7 @@ function AddBranchForm() {
                     minLength={6}
                     value={formData.landlineNumber}
                     onChange={handleInputChange}
-                    className="w-40 p-2 border border-gray-300 rounded"
+                    className="w-52 p-2 border border-gray-300 rounded"
                     placeholder="Landline Number"
                   />
                 </div>

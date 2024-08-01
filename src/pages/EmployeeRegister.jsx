@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import {zipCodeMapping,branchOptions,departmentOptions, positionOptions,} from "../data.js";
+import {
+  zipCodeMapping,
+  branchOptions,
+  departmentOptions,
+  positionOptions,
+} from "../data.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { employeeSignup } from "../redux/slices/authSlice.js";
@@ -20,6 +25,7 @@ function EmployeeForm() {
     state: "",
     email: "",
     password: "",
+    countryCode: "",
     phoneNo: "",
     branch: "",
     department: "",
@@ -191,7 +197,23 @@ function EmployeeForm() {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-              <div className="mb-4 w-full">
+              <div className="mb-4 gap-2 flex w-full">
+                <input
+                  type="text"
+                  maxLength={4}
+                  minLength={3}
+                  value={formData.countryCode ? `+${formData.countryCode}` : ""}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      countryCode: e.target.value
+                        .replace(/^0+/, "")
+                        .replace(/\D/g, ""),
+                    }))
+                  }
+                  className="w-28 p-2 border border-gray-300 rounded"
+                  placeholder="CountryCode"
+                />{" "}
                 <input
                   type="text"
                   id="phoneNo"

@@ -60,6 +60,8 @@ import EmployeeHotelDetails from "../components/EmployeeDashboard/HotelDetails"
 import EmployeeTrainDetails from "../components/EmployeeDashboard/TrainDetails"
 import EmployeeVolvoBusDetails from "../components/EmployeeDashboard/VolvoBus"
 import AddBranchForm from "./AddBranch"
+import BranchDetails from "./Branches"
+import EmployeeDetails from "./Employees"
 
 export {
     Home,
@@ -124,4 +126,6 @@ export {
     EmployeeTrainDetails,
     EmployeeVolvoBusDetails,
     AddBranchForm,
+    BranchDetails,
+    EmployeeDetails,
 }
