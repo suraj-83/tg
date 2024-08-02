@@ -89,7 +89,7 @@ const EmployeeDetails = () => {
         <h1 className="pb-9 font-bold text-center text-white uppercase text-2xl underline">
           Employee Details
         </h1>
-        <div className="mb-6text-sm ml-[80%]">
+        <div className="mb-6 text-sm ml-[80%]">
           <input
             type="text"
             placeholder="Search Name or Employee ID"
