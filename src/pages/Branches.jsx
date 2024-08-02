@@ -80,106 +80,106 @@ const BranchDetails = () => {
               <h2 className="text-xl mb-4">Edit Branch</h2>
               <form className="mb-8 grid grid-cols-3 gap-2">
                 <label className="block mb-2">
-                  Branch Name:
+                  Branch Name
                   <input
                     type="text"
                     name="name"
                     value={editBranch.name}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Address Line 1:
+                  Address Line 1
                   <input
                     type="text"
                     name="addLine1"
                     value={editBranch.addLine1}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Address Line 2:
+                  Address Line 2
                   <input
                     type="text"
                     name="addLine2"
                     value={editBranch.addLine2}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  City:
+                  City
                   <input
                     type="text"
                     name="city"
                     value={editBranch.city}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  State:
+                  State
                   <input
                     type="text"
                     name="state"
                     value={editBranch.state}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Zipcode:
+                  Zipcode
                   <input
                     type="text"
                     name="zipcode"
                     value={editBranch.zipcode}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Email:
+                  Email
                   <input
                     type="text"
                     name="email"
                     value={editBranch.email}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Phone Number:
+                  Phone Number
                   <input
                     type="text"
                     name="phoneNumber"
                     value={editBranch.phoneNumber}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <label className="block mb-2">
-                  Landline Number:
+                  Landline Number
                   <input
                     type="text"
                     name="landlineNumber"
                     value={editBranch.landlineNumber}
                     onChange={handleChange}
-                    className="border bg-[#20354b] text-white rounded px-2 py-1 w-full"
+                    className="border bg-gray-900 text-white rounded px-2 py-1 w-full"
                   />
                 </label>
                 <button
                   type="button"
                   onClick={handleSave}
-                  className="px-4 py-2 bg-blue-500 text-white"
+                  className="px-4 py-2 border border-blue-500 text-white"
                 >
                   Save
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditBranch(null)}
-                  className="px-4 py-2 bg-gray-500 text-white ml-4"
+                  className="px-4 py-2 border border-gray-500 text-white ml-4"
                 >
                   Cancel
                 </button>
