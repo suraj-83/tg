@@ -95,7 +95,7 @@ const EmployeeDetails = () => {
             placeholder="Search Name or Employee ID"
             value={searchQuery}
             onChange={handleSearch}
-            className="px-4 w-full mx-auto bg-[#20354b] border border-gray-400 rounded-2xl py-2 shadow-lg"
+            className="px-4 w-full mx-auto bg-[#20354b] text-white border border-gray-400 rounded-2xl py-2 shadow-lg"
           />
         </div>
         <div className="min-h-[60vh] overflow-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

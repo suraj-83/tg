@@ -352,13 +352,13 @@ const TrainBookingForm = () => {
 
       {/* Smaller and medium screens */}
       <div className="block lg:hidden">
-        <div className="min-h-[100vh] flex items-center justify-center p-24">
+        <div className="min-h-[90vh] flex text-sm items-center justify-center md:p-24">
           <form
             onSubmit={handleSubmit}
             className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
           >
             <div>
-              <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">
+              <h1 className="pb-4 font-bold sm:text-sm text-center text-blue-700 uppercase text-2xl underline">
                 Train Booking Request Form
               </h1>
             </div>
@@ -367,7 +367,7 @@ const TrainBookingForm = () => {
                 <h3 className="text-xl font-semibold mb-2">
                   Person {index + 1}
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 font-bold mb-2"
@@ -380,7 +380,7 @@ const TrainBookingForm = () => {
                       name="fullName"
                       value={person.fullName}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border border-gray-300 bg-blue-100 opacity-95 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -395,7 +395,7 @@ const TrainBookingForm = () => {
                       name="dob"
                       value={person.dob}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -411,7 +411,7 @@ const TrainBookingForm = () => {
                       value={person.gender}
                       onChange={(e) => handleChange(e, index)}
                       placeholder="Gender"
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                       list="genderOptions"
                     />
                     <datalist id="genderOptions">
@@ -435,7 +435,7 @@ const TrainBookingForm = () => {
                       name="contactNo"
                       value={person.contactNo}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -450,7 +450,7 @@ const TrainBookingForm = () => {
                       name="email"
                       value={person.email}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -465,7 +465,7 @@ const TrainBookingForm = () => {
                       name="travelFrom"
                       value={person.travelFrom}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -480,7 +480,7 @@ const TrainBookingForm = () => {
                       name="travelTo"
                       value={person.travelTo}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -494,7 +494,7 @@ const TrainBookingForm = () => {
                       name="classOfTravel"
                       value={person.classOfTravel}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     >
                       <option value="">--Select--</option>
                       <option value="Anubhuti Class (EA)">
@@ -542,7 +542,7 @@ const TrainBookingForm = () => {
                       name="travelDate"
                       value={person.travelDate}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -558,7 +558,7 @@ const TrainBookingForm = () => {
                       value={person.trainNo}
                       onChange={(e) => handleChange(e, index)}
                       placeholder="Train No."
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                   <div className="mb-4">
@@ -572,7 +572,7 @@ const TrainBookingForm = () => {
                       name="adult"
                       value={person.adult}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     >
                       <option value="">Select</option>
                       <option value="1">1</option>
@@ -598,7 +598,7 @@ const TrainBookingForm = () => {
                       name="children"
                       value={person.children}
                       onChange={(e) => handleChange(e, index)}
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     >
                       <option value="">Select</option>
                       <option value="1">1</option>
@@ -626,12 +626,25 @@ const TrainBookingForm = () => {
                       value={person.timePreference}
                       onChange={(e) => handleChange(e, index)}
                       placeholder="Time Preference"
-                      className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                      className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
                 </div>
               </div>
             ))}
+            
+            {formData.length > 1 && (
+            <div className="flex justify-start absolute m:top-[139%]">
+                <button
+                  type="button"
+                  className="border-red-500 text-red-500 px-4 py-1.5 mt-4 border  hover:border-red-900 focus:outline-none focus:bg-red-600"
+                  onClick={() => handleRemovePerson(formData.length - 1)}
+                >
+                  Remove Person
+                </button>
+            
+            </div>
+              )}
             {formData.length < MAX_PERSONS && (
               <div className="flex justify-end">
                 <button
