@@ -352,13 +352,13 @@ const TrainBookingForm = () => {
 
       {/* Smaller and medium screens */}
       <div className="block lg:hidden">
-        <div className="min-h-[90vh] flex text-sm items-center justify-center md:p-24">
+        <div className="min-h-[40vh] flex text-sm items-center justify-center md:p-24">
           <form
             onSubmit={handleSubmit}
-            className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
+            className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full shadow-[0_0_10px_black]"
           >
             <div>
-              <h1 className="pb-4 font-bold sm:text-sm text-center text-blue-700 uppercase text-2xl underline">
+              <h1 className="pb-4 font-bold text-sm text-center text-blue-700 uppercase md:text-2xl underline">
                 Train Booking Request Form
               </h1>
             </div>
@@ -367,7 +367,7 @@ const TrainBookingForm = () => {
                 <h3 className="text-xl font-semibold mb-2">
                   Person {index + 1}
                 </h3>
-                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                <div>
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 font-bold mb-2"
@@ -383,6 +383,8 @@ const TrainBookingForm = () => {
                       className="block w-full px-3 py-2 border border-gray-300 bg-blue-100 opacity-95 rounded focus:outline-none"
                     />
                   </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 font-bold mb-2"
@@ -419,7 +421,7 @@ const TrainBookingForm = () => {
                       <option value="Female" />
                       <option value="Other" />
                     </datalist>
-                  </div>
+                  </div>                    
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 font-bold mb-2"
@@ -483,6 +485,8 @@ const TrainBookingForm = () => {
                       className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
                   </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 font-bold mb-2"
@@ -628,6 +632,7 @@ const TrainBookingForm = () => {
                       placeholder="Time Preference"
                       className="block w-full px-3 py-2 border bg-blue-100 opacity-95 border-gray-300 rounded focus:outline-none"
                     />
+                  </div>
                   </div>
                 </div>
               </div>

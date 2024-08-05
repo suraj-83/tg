@@ -298,13 +298,13 @@ const FlightBookingForm = () => {
       </div>
       {/* Smaller and medium screens */}
       <div className="block lg:hidden">
-      <div className="min-h-[100vh] flex items-center justify-center p-24">
+      <div className="md:min-h-[40vh] flex items-center text-sm justify-center md:p-24">
         <form
           onSubmit={handleSubmit}
-          className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
+          className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full shadow-[0_0_10px_black]"
         >
           <div>
-            <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">
+            <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase sm:text-sm md:text-2xl underline">
               Flight Booking Request Form
             </h1>            
             {formData.map((person, index) => (
@@ -312,12 +312,12 @@ const FlightBookingForm = () => {
                 key={index}
                 className="border border-gray-300 p-4 mb-4 w-full"
               >
-                <h2 className="text-xl font-bold mb-4">
+                <h2 className="text-md font-medium mb-4">
                   Passenger {index + 1}
                 </h2>
-                <div className="mb-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 justify-between">
+                <div className="min-h-[60vh]">
                 
-                    <div className="mb-4">
+                    <div className="mb-4 grid grid-cols-1">
                       <label
                         className="block text-gray-700 mb-2"
                         htmlFor={`fullName-${index}`}
@@ -330,9 +330,10 @@ const FlightBookingForm = () => {
                         name="fullName"
                         value={person.fullName}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
+                    <div className="grid grid-cols-2 gap-4">
                     <div className="mb-4">
                       <label
                         className="block text-gray-700 mb-2"
@@ -346,7 +347,7 @@ const FlightBookingForm = () => {
                         name="dob"
                         value={person.dob}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
@@ -363,7 +364,7 @@ const FlightBookingForm = () => {
                         value={person.gender}
                         onChange={(e) => handleChange(e, index)}
                         placeholder="Gender"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                         list="genderOptions"
                       />
                       <datalist id="genderOptions">
@@ -388,7 +389,7 @@ const FlightBookingForm = () => {
                         pattern="[0-9]{10}"
                         value={person.contactNo}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
@@ -404,7 +405,7 @@ const FlightBookingForm = () => {
                         name="email"
                         value={person.email}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
@@ -412,7 +413,7 @@ const FlightBookingForm = () => {
                         className="block text-gray-700 mb-2"
                         htmlFor={`travelFrom-${index}`}
                       >
-                        Travel From
+                      Travel From
                       </label>
                       <input
                         type="text"
@@ -420,17 +421,15 @@ const FlightBookingForm = () => {
                         name="travelFrom"
                         value={person.travelFrom}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
-                    </div>
-                  
-                  
-                    <div className="mb-4">
+                    </div>                
+                  <div className="mb-4">
                       <label
                         className="block text-gray-700 mb-2"
                         htmlFor={`travelTo-${index}`}
                       >
-                        Travel To
+                      Travel To
                       </label>
                       <input
                         type="text"
@@ -438,22 +437,24 @@ const FlightBookingForm = () => {
                         name="travelTo"
                         value={person.travelTo}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
+                    </div> 
+                    <div className="grid grid-cols-3 gap-4">
                     <div className="mb-4">
                       <label
                         className="block text-gray-700 mb-2"
                         htmlFor={`classOfTravel-${index}`}
                       >
-                        Travellers & Class
+                      Travel Class
                       </label>
                       <select
                         id={`classOfTravel-${index}`}
                         name="classOfTravel"
                         value={person.classOfTravel}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       >
                         <option value="">--Select--</option>
                         <option value="Economy">Economy</option>
@@ -475,7 +476,7 @@ const FlightBookingForm = () => {
                         name="travelDate"
                         value={person.travelDate}
                         onChange={(e) => handleChange(e, index)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
@@ -492,7 +493,7 @@ const FlightBookingForm = () => {
                         value={person.flightNo}
                         onChange={(e) => handleChange(e, index)}
                         placeholder="Flight No."
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
@@ -500,7 +501,7 @@ const FlightBookingForm = () => {
                         className="block text-gray-700 mb-2"
                         htmlFor={`timePreference-${index}`}
                       >
-                        Time Preference
+                        Time preference
                       </label>
                       <input
                         type="time"
@@ -509,21 +510,21 @@ const FlightBookingForm = () => {
                         value={person.timePreference}
                         onChange={(e) => handleChange(e, index)}
                         placeholder="Time Preference"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       />
                     </div>
                     <div className="mb-4">
                       <label
-                        className="block text-gray-700 font-bold mb-2"
+                        className="block text-gray-700 mb-2"
                         htmlFor={`adult-${index}`}
                       >
-                        Adult (12 Yrs and above)
+                        Adult(12+ Years)
                       </label>
                       <select
                         name="adult"
                         value={person.adult}
                         onChange={(e) => handleChange(e, index)}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="block w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       >
                         <option value="">Select</option>
                         <option value="1">1</option>
@@ -540,16 +541,16 @@ const FlightBookingForm = () => {
                     </div>
                     <div className="mb-4">
                       <label
-                        className="block text-gray-700 font-bold mb-2"
+                        className="block text-gray-700 mb-2"
                         htmlFor={`children-${index}`}
                       >
-                        Children (06-12 Yrs)
+                        Children (2-12 Years)
                       </label>
                       <select
                         name="children"
                         value={person.children}
                         onChange={(e) => handleChange(e, index)}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                        className="block w-full px-3 bg-blue-100 opacity-90 py-2 border border-gray-300 rounded focus:outline-none"
                       >
                         <option value="">Select</option>
                         <option value="1">1</option>
@@ -566,20 +567,32 @@ const FlightBookingForm = () => {
                     </div>
                   </div>
                 </div>
-              
-            ))}
-            {formData.length < MAX_PERSONS && (
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              onClick={handleAddPerson}
-            >
-              Add Person
-            </button>
-          </div>
-        )}
+                </div>                
+        ))}
 
+{formData.length > 1 && (
+            <div className="flex justify-start absolute m:top-[139%]">
+                <button
+                  type="button"
+                  className="border-red-500 text-red-500 px-4 py-1.5 mt-4 border  hover:border-red-900 focus:outline-none focus:bg-red-600"
+                  onClick={() => handleRemovePerson(formData.length - 1)}
+                >
+                  Remove Person
+                </button>
+            
+            </div>
+              )}
+            {formData.length < MAX_PERSONS && (
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                  onClick={handleAddPerson}
+                >
+                  Add Person
+                </button>
+              </div>
+            )}
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"

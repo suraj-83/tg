@@ -48,6 +48,11 @@ const BusBookingForm = () => {
     });
     setFormData(updatedFormData);
   };
+  const handleRemovePerson = (index) => {
+    const updatedFormData = [...formData];
+    updatedFormData.splice(index, 1);
+    setFormData(updatedFormData);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -222,20 +227,20 @@ const BusBookingForm = () => {
       </div>
       {/* Smaller and medium screens */}
       <div className="block lg:hidden">
-      <div className="min-h-[100vh] flex items-center justify-center p-24">
+      <div className="min-h-[40vh] flex items-center text-sm justify-center md:p-24">
     <form
       onSubmit={handleSubmit}
-      className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full lg:w-1/2 shadow-[0_0_10px_black]"
+      className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w shadow-[0_0_10px_black]"
     >
         <div>
-        <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase text-2xl underline">
-            Volvo Bus Booking Request Form
+        <h1 className="pb-4 font-bold text-sm text-center text-blue-700 uppercase md:text-2xl underline">
+        Volvo Bus Booking Request Form
           </h1>
         </div>        
         {formData.map((person, index) => (
           <div key={index} className="mb-6 border-b-2 border-gray-300 pb-4">
             <h3 className="text-xl font-semibold mb-4">Person {index + 1}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:gridd-col-3 gap-4">
+            <div>
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor={`fullName-${index}`}>
                   Full Name
@@ -245,9 +250,10 @@ const BusBookingForm = () => {
                   name="fullName"
                   value={person.fullName}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
+              <div className="grid grid-cols-2 gap-4">
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor={`dob-${index}`}>
                   Date of Birth
@@ -257,7 +263,7 @@ const BusBookingForm = () => {
                   name="dob"
                   value={person.dob}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
               <div className="mb-4">
@@ -270,7 +276,7 @@ const BusBookingForm = () => {
                   value={person.gender}
                   onChange={(e) => handleChange(e, index)}
                   placeholder="Gender"
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                   list="genderOptions"
                 />
                 <datalist id="genderOptions">
@@ -281,7 +287,7 @@ const BusBookingForm = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor={`contactNo-${index}`}>
-                  Contact Nos
+                  Contact No
                 </label>
                 <input
                   type="text"
@@ -291,7 +297,7 @@ const BusBookingForm = () => {
                   name="contactNo"
                   value={person.contactNo}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
               <div className="mb-4">
@@ -303,7 +309,7 @@ const BusBookingForm = () => {
                   name="email"
                   value={person.email}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
               <div className="mb-4">
@@ -315,7 +321,7 @@ const BusBookingForm = () => {
                   name="pickupLocation"
                   value={person.pickupLocation}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
               <div className="mb-4">
@@ -327,9 +333,12 @@ const BusBookingForm = () => {
                   name="destination"
                   value={person.destination}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2" htmlFor={`travelDate-${index}`}>
                   Travel Date
@@ -339,7 +348,7 @@ const BusBookingForm = () => {
                   name="travelDate"
                   value={person.travelDate}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
               <div className="mb-4">
@@ -350,7 +359,7 @@ const BusBookingForm = () => {
                   name="seatType"
                   value={person.seatType}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 >
                   <option value="">--Select--</option>
                   <option value="Sleeper">Sleeper</option>
@@ -367,23 +376,37 @@ const BusBookingForm = () => {
                   name="busNo"
                   value={person.busNo}
                   onChange={(e) => handleChange(e, index)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                  className="block w-full px-3 bg-blue-100 opacity-95 py-2 border border-gray-300 rounded focus:outline-none"
                 />
+              </div>
               </div>
             </div>
           </div>
         ))}
-        {formData.length < MAX_PERSONS && (
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              onClick={handleAddPerson}
-            >
-              Add Person
-            </button>
-          </div>
-        )}
+        
+        {formData.length > 1 && (
+            <div className="flex justify-start absolute m:top-[139%]">
+                <button
+                  type="button"
+                  className="border-red-500 text-red-500 px-4 py-1.5 mt-4 border  hover:border-red-900 focus:outline-none focus:bg-red-600"
+                  onClick={() => handleRemovePerson(formData.length - 1)}
+                >
+                  Remove Person
+                </button>
+            
+            </div>
+              )}
+            {formData.length < MAX_PERSONS && (
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                  onClick={handleAddPerson}
+                >
+                  Add Person
+                </button>
+              </div>
+            )}
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
