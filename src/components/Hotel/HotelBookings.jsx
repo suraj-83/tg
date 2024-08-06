@@ -78,12 +78,12 @@ const HotelBookingForm = () => {
         backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
     >
-      <div className=" flex items-center justify-center px-[5%] py-[4%]">
+      <div className=" flex items-center justify-center lg:px-[5%] md:px[5%] lg:py-[4%] md:py-[4%]">
         <form
           onSubmit={handleSubmit}
-          className="bg-blue-100 bg-opacity-95 p-5 rounded-lg shadow-[0_0_10px_black]"
+          className="bg-blue-100  text-sm bg-opacity-95 p-5 rounded-lg shadow-[0_0_10px_black]"
         >
-          <h1 className="pb-3 font-bold  text-center text-blue-700 uppercase text-2xl underline">
+          <h1 className="pb-3 font-bold  text-center text-blue-700 uppercase lg:text-2xl underline">
             Hotel Booking Request
           </h1>
 
