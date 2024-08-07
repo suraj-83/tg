@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { createHotelBooking } from "../../redux/slices/travelSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Mobileview1 from "./HotelBookingMobileview1"
-import Mobileview2 from "./HotelBookingMobileview2"
 
 const HotelBookingForm = () => {
   const dispatch = useDispatch();
@@ -80,8 +78,6 @@ const HotelBookingForm = () => {
         backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
     >
-      {/*Desktop view*/}
-      <div className="hidden lg:block">
       <div className=" flex items-center justify-center lg:px-[5%] md:px[5%] lg:py-[4%] md:py-[4%]">
         <form
           onSubmit={handleSubmit}
@@ -91,7 +87,7 @@ const HotelBookingForm = () => {
             Hotel Booking Request
           </h1>
 
-          <div className="min-w-full grid grid-cols-3 text-sm md:grid-cols-5 gap-3 md:gap-6">
+          <div className="min-w-full text-sm gap-3 mb-4 grid lg:grid-cols-3">
             <div>
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -136,6 +132,7 @@ const HotelBookingForm = () => {
                 {/* add more options here */}
               </select>
             </div>
+
             <div>
               <label className="block font-bold mb-2 text-gray-700">Name</label>
               <input
@@ -147,6 +144,22 @@ const HotelBookingForm = () => {
                 placeholder="Enter your name"
               />
             </div>
+            <div>
+              <label className="block font-bold mb-2 text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+<div className="grid lg:grid-cols-5 grid-cols-3 gap-3">
+
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Contact No
@@ -185,21 +198,6 @@ const HotelBookingForm = () => {
                 <p className="text-red-500 text-sm mt-2">{errors.contactNo2}</p>
               )}
             </div>
-
-            <div>
-              <label className="block font-bold mb-2 text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your email"
-              />
-            </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Country
@@ -282,7 +280,6 @@ const HotelBookingForm = () => {
                 <option value="Presidential Room">Presidential Room</option>
               </select>
             </div>
-
             <div className="mb-4">
               <label className="block font-bold mb-2 text-gray-700">
                 Meal Plan
@@ -327,7 +324,6 @@ const HotelBookingForm = () => {
                 <option value="5 Star">5 Star</option>
               </select>
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Price Range
@@ -352,7 +348,6 @@ const HotelBookingForm = () => {
                 <option value="Rs 10,000/- & above">Rs 10,000/- & above</option>
               </select>
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Check In Date
@@ -403,7 +398,6 @@ const HotelBookingForm = () => {
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Total No of Nights
@@ -448,7 +442,6 @@ const HotelBookingForm = () => {
                 min={0}
               />
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Adults
@@ -477,7 +470,6 @@ const HotelBookingForm = () => {
                 min={0}
               />
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Infants
@@ -492,7 +484,8 @@ const HotelBookingForm = () => {
                 min={0}
               />
             </div>
-          </div>
+</div>
+         
           <div className="text-center pt-4">
             <button
               type="submit"
@@ -503,12 +496,6 @@ const HotelBookingForm = () => {
           </div>
         </form>
       </div>
-      </div>
-      {/* Mobile view */}
-      <div className="block lg:hidden">
-      {/* <Mobileview1/> */}
-      <Mobileview2/>
-     </div>
       </div>
   );
 };

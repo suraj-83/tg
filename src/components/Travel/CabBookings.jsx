@@ -58,54 +58,68 @@ const CabBookingForm = () => {
     switch (step) {
       case 1:
         return (
-          <div className="grid grid-cols-3 text-sm md:grid-cols-4 lg:grid-cols-3 gap-3">
-            <div className="mb-4">
-              <label className="block text-gray-950 font-bold mb-2" htmlFor="pickupCountry">
-                Pickup Country
-              </label>
-              <select
-                name="pickupCountry"
-                value={formData.pickupCountry}
-                onChange={handleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-              >
-                <option value="India">India</option>
-                <option value="USA">USA</option>
-                {/* Add more options here */}
-              </select>
+          <div className="text-sm">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="mb-4">
+                <label
+                  className="block text-gray-950 font-bold mb-2"
+                  htmlFor="pickupCountry"
+                >
+                  Pickup Country
+                </label>
+                <select
+                  name="pickupCountry"
+                  value={formData.pickupCountry}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  {/* Add more options here */}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="nationality"
+                >
+                  Nationality
+                </label>
+                <select
+                  name="nationality"
+                  value={formData.nationality}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="Indian">Indian</option>
+                  <option value="American">American</option>
+                  {/* Add more options here */}
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="tourPlan"
+                >
+                  Tour Plan
+                </label>
+                <select
+                  name="tourPlan"
+                  value={formData.tourPlan}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                >
+                  <option value="">--Select--</option>
+                  <option value="Local">Local</option>
+                  <option value="Outstation">Outstation</option>
+                </select>
+              </div>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="nationality">
-                Nationality
-              </label>
-              <select
-                name="nationality"
-                value={formData.nationality}
-                onChange={handleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="name"
               >
-                <option value="Indian">Indian</option>
-                <option value="American">American</option>
-                {/* Add more options here */}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="tourPlan">
-                Tour Plan
-              </label>
-              <select
-                name="tourPlan"
-                value={formData.tourPlan}
-                onChange={handleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-              >
-                <option value="">--Select--</option>
-                <option value="Local">Local</option>
-                <option value="Outstation">Outstation</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
                 Name
               </label>
               <input
@@ -116,32 +130,12 @@ const CabBookingForm = () => {
                 className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
               />
             </div>
+
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="contactNo">
-                Contact No
-              </label>
-              <input
-                type="text"
-                name="contactNo"
-                value={formData.contactNo}
-                onChange={handleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="alternateContactNo">
-                Alternate No
-              </label>
-              <input
-                type="text"
-                name="alternateContactNo"
-                value={formData.alternateContactNo}
-                onChange={handleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="email"
+              >
                 Email Address
               </label>
               <input
@@ -152,6 +146,38 @@ const CabBookingForm = () => {
                 className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
               />
             </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="contactNo"
+                >
+                  Contact No
+                </label>
+                <input
+                  type="text"
+                  name="contactNo"
+                  value={formData.contactNo}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="alternateContactNo"
+                >
+                  Alternate No
+                </label>
+                <input
+                  type="text"
+                  name="alternateContactNo"
+                  value={formData.alternateContactNo}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
+                />
+              </div>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 font-bold mb-2"
@@ -196,7 +222,8 @@ const CabBookingForm = () => {
                   onChange={handleChange}
                   className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
                 />
-              </div>            
+              </div>
+            </div>
             <div className="mb-4 col-span-3 text-center">
               <button
                 type="button"
@@ -210,10 +237,13 @@ const CabBookingForm = () => {
         );
       case 2:
         return (
-          <div className="text-sm grid lg:grid-cols-2 gap-3">
+          <div className="text-sm gap-3">
             <div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredAt">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="cabRequiredAt"
+                >
                   Cab Required At
                 </label>
                 <select
@@ -230,7 +260,10 @@ const CabBookingForm = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="cabRequiredFor">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="cabRequiredFor"
+                >
                   Cab Required For
                 </label>
                 <select
@@ -246,7 +279,10 @@ const CabBookingForm = () => {
               </div>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="localTravelKmsLimit">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="localTravelKmsLimit"
+              >
                 Local Travel Limit
               </label>
               <select
@@ -282,10 +318,13 @@ const CabBookingForm = () => {
         );
       case 3:
         return (
-          <div className="text-sm grid lg:p-0 grid-cols-2 gap-3">
-            <div>
+          <div className="text-sm">
+            <div className=" grid grid-cols-1 lg:grid-cols-2 gap-3">
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="pickupDateTime">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="pickupDateTime"
+                >
                   Pickup Date & Time
                 </label>
                 <input
@@ -297,7 +336,10 @@ const CabBookingForm = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="pickupAddress">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="pickupAddress"
+                >
                   Pickup Address
                 </label>
                 <input
@@ -309,7 +351,10 @@ const CabBookingForm = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="pickupLandmark">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="pickupLandmark"
+                >
                   Pickup Landmark
                 </label>
                 <input
@@ -320,10 +365,11 @@ const CabBookingForm = () => {
                   className="block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none"
                 />
               </div>
-            </div>
-            <div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="dropDateTime">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="dropDateTime"
+                >
                   Drop Date & Time
                 </label>
                 <input
@@ -335,7 +381,10 @@ const CabBookingForm = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="dropAddress">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="dropAddress"
+                >
                   Drop Address
                 </label>
                 <input
@@ -347,7 +396,10 @@ const CabBookingForm = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="dropLandmark">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="dropLandmark"
+                >
                   Drop Landmark
                 </label>
                 <input
@@ -379,10 +431,13 @@ const CabBookingForm = () => {
         );
       case 4:
         return (
-          <div className="text-sm grid lg:grid-cols-2 gap-3">
+          <div className="text-sm">
             <div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="cabDuration">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="cabDuration"
+                >
                   Cab Duration
                 </label>
                 <select
@@ -400,7 +455,10 @@ const CabBookingForm = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfCabsRequired">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="noOfCabsRequired"
+                >
                   Number of Cabs Required
                 </label>
                 <input
@@ -414,7 +472,10 @@ const CabBookingForm = () => {
             </div>
             <div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="typeOfCabRequired">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="typeOfCabRequired"
+                >
                   Type of Cab Required
                 </label>
                 <select
@@ -430,7 +491,10 @@ const CabBookingForm = () => {
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfPersonsTravelling">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="noOfPersonsTravelling"
+                >
                   Number of Persons Travelling
                 </label>
                 <input
@@ -462,9 +526,12 @@ const CabBookingForm = () => {
         );
       case 5:
         return (
-          <div className="text-sm grid lg:grid-cols-2 gap-3">
+          <div className="text-sm">
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfInfants">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="noOfInfants"
+              >
                 Number of Infants
               </label>
               <input
@@ -476,7 +543,10 @@ const CabBookingForm = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="noOfChildren">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="noOfChildren"
+              >
                 Number of Children
               </label>
               <input
@@ -488,7 +558,10 @@ const CabBookingForm = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2" htmlFor="otherRequirements">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="otherRequirements"
+              >
                 Other Requirements
               </label>
               <textarea
@@ -521,7 +594,6 @@ const CabBookingForm = () => {
   };
 
   return (
-    
     <div
       className="bg-cover  bg-center"
       style={{
@@ -532,9 +604,15 @@ const CabBookingForm = () => {
         <form
           onSubmit={handleSubmit}
           className="bg-blue-100 bg-opacity-65 p-5 rounded-lg w-full h-full shadow-[0_0_10px_black]"
-        >{renderStep()}
-    </form>
-    </div>
+        >
+          <div>
+            <h1 className="pb-4 font-bold text-sm text-center text-blue-700 uppercase md:text-2xl underline">
+              Cab Booking
+            </h1>
+          </div>
+          {renderStep()}
+        </form>
+      </div>
     </div>
   );
 };

@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { createHotelBooking } from "../../redux/slices/travelSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Mobileview1 from "./HotelBookingMobileview1"
-import Mobileview2 from "./HotelBookingMobileview2"
 
 const HotelBookingForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     nationality: "Indian",
     name: "",
@@ -72,27 +70,52 @@ const HotelBookingForm = () => {
       // Submit form logic here
     }
   };
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+    const [adults, setAdults] = useState(0);
+    const [children, setChildren] = useState(0);
+    const [infants, setInfants] = useState(0);
 
-  return (
-    <div
-      className="bg-cover bg-center min-h-screen"
-      style={{
-        backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-      }}
-    >
-      {/*Desktop view*/}
-      <div className="hidden lg:block">
-      <div className=" flex items-center justify-center lg:px-[5%] md:px[5%] lg:py-[4%] md:py-[4%]">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-blue-100  text-sm bg-opacity-95 p-5 rounded-lg shadow-[0_0_10px_black]"
-        >
-          <h1 className="pb-3 font-bold  text-center text-blue-700 uppercase lg:text-2xl underline">
-            Hotel Booking Request
-          </h1>
+    const handleIncrementAdults = () => {
+      if (adults < 8) setAdults(adults + 1);
+    };
 
-          <div className="min-w-full grid grid-cols-3 text-sm md:grid-cols-5 gap-3 md:gap-6">
-            <div>
+    const handleDecrementAdults = () => {
+      if (adults > 0) setAdults(adults - 1);
+    };
+
+    const handleIncrementChildren = () => {
+      if (children < 8) setChildren(children + 1);
+    };
+
+    const handleDecrementChildren = () => {
+      if (children > 0) setChildren(children - 1);
+    };
+
+    const handleIncrementInfants = () => {
+      if (infants < 8) setInfants(infants + 1);
+    };
+
+    const handleDecrementInfants = () => {
+      if (infants > 0) setInfants(infants - 1);
+    };
+  
+    // const handleIncrement = (setter, value) => {
+    //   setter(value + 1);
+    // };
+  
+    // const handleDecrement = (setter, value) => {
+    //   if (value > 0) {
+    //     setter(value - 1);
+    //   }
+    // };
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <div className="text-sm">
+             <div>
+      <div>
               <label
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="nationality"
@@ -264,7 +287,24 @@ const HotelBookingForm = () => {
                 placeholder="Enter the city"
               />
             </div>
-            <div>
+            <div className="m-4 col-span-3 text-center">
+              <button
+                type="button"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                onClick={nextStep}
+              >
+                Next
+              </button>
+            </div>
+    </div>
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="text-sm gap-3">
+        
+        <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Room Category
               </label>
@@ -282,7 +322,6 @@ const HotelBookingForm = () => {
                 <option value="Presidential Room">Presidential Room</option>
               </select>
             </div>
-
             <div className="mb-4">
               <label className="block font-bold mb-2 text-gray-700">
                 Meal Plan
@@ -327,7 +366,6 @@ const HotelBookingForm = () => {
                 <option value="5 Star">5 Star</option>
               </select>
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Price Range
@@ -352,8 +390,28 @@ const HotelBookingForm = () => {
                 <option value="Rs 10,000/- & above">Rs 10,000/- & above</option>
               </select>
             </div>
-
-            <div>
+            <div className="m-4 col-span-3 text-center">
+              <button
+                type="button"
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none mr-2"
+                onClick={prevStep}
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                onClick={nextStep}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="text-sm">
+             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Check In Date
               </label>
@@ -403,7 +461,6 @@ const HotelBookingForm = () => {
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
             <div>
               <label className="block font-bold mb-2 text-gray-700">
                 Total No of Nights
@@ -448,69 +505,129 @@ const HotelBookingForm = () => {
                 min={0}
               />
             </div>
-
             <div>
-              <label className="block font-bold mb-2 text-gray-700">
-                Adults
-              </label>
-              <input
-                type="number"
-                name="adults"
-                value={formData.adults || 0}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter number of adults"
-                min={0}
-              />
-            </div>
-            <div>
-              <label className="block font-bold mb-2 text-gray-700">
-                Children
-              </label>
-              <input
-                type="number"
-                name="children"
-                value={formData.children || 0}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter number of children"
-                min={0}
-              />
-            </div>
-
-            <div>
-              <label className="block font-bold mb-2 text-gray-700">
-                Infants
-              </label>
-              <input
-                type="number"
-                name="infants"
-                value={formData.infants || 0}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter number of infants"
-                min={0}
-              />
-            </div>
-          </div>
-          <div className="text-center pt-4">
-            <button
-              type="submit"
-              className="bg-blue-600 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      <div className="flex gap-2 mt-2">
+      <div className="mb-4">
+        <label className="block font-bold mb-2 text-gray-700">
+          Adults <span className="text-sm text-gray-500">(12+ years)</span>
+        </label>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => handleDecrementAdults(setAdults, adults)}
+            className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            name="adults"
+            value={adults}
+            readOnly
+            className="w-12 text-center p-3 border-t border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={() => handleIncrementAdults(setAdults, adults)}
+            className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div>
+        <label className="block font-bold mb-2 text-gray-700">
+          Children <span className="text-sm text-gray-500">(1 - 11 years)</span>
+        </label>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => handleDecrementChildren(setChildren, children)}
+            className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              Submit Booking Request
-            </button>
-          </div>
-        </form>
+            -
+          </button>
+          <input
+            type="number"
+            name="children"
+            value={children}
+            readOnly
+            className="w-12 text-center p-3 border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={() => handleIncrementChildren(setChildren, children)}
+            className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            +
+          </button>
+        </div>
       </div>
+    </div>
+    <div>
+      <label className="block font-bold mb-2 text-gray-700">
+        Infants
+        <span className="text-sm text-gray-500">(0+ years)</span>
+      </label>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => handleDecrementInfants(setInfants, infants)}
+          className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          -
+        </button>
+        <input
+          type="number"
+          name="infants"
+          value={infants}
+          readOnly
+          className="w-12 text-center p-3 border-t border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={() => handleIncrementInfants(setInfants, infants)}
+          className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+          +
+        </button>
       </div>
-      {/* Mobile view */}
-      <div className="block lg:hidden">
-      {/* <Mobileview1/> */}
-      <Mobileview2/>
-     </div>
+    </div>
       </div>
-  );
+
+            <div className="m-4 col-span-3 text-center">
+              <button
+                type="button"
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none mr-2"
+                onClick={prevStep}
+              >
+                Previous
+              </button>
+              <button
+                type="submit"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none"
+              >
+                Submit
+              </button>
+            </div>
+            </div>          
+        )
+        default:
+          return null;
+      }
+    };
+    return (
+      <div className="min-h-[100vh] flex items-center justify-center lg:p-[10%]">
+    <form
+        onSubmit={handleSubmit}
+        className="bg-blue-100 bg-opacity-95 p-5 rounded-lg w-full h-full shadow-[0_0_10px_black]"
+      >
+        <div>
+          <h1 className="pb-4 font-bold text-sm text-center text-blue-700 uppercase md:text-2xl underline">
+            Hotel Booking
+          </h1>
+        </div>
+        {renderStep()}
+      </form>
+      </div>
+    )
+
+        
+      
 };
 
 export default HotelBookingForm;
