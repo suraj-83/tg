@@ -506,69 +506,68 @@ const HotelBookingForm = () => {
               />
             </div>
             <div>
-      <div className="flex gap-2 mt-2">
-      <div className="mb-4">
-        <label className="block font-bold mb-2 text-gray-700">
-          Adults <span className="text-sm text-gray-500">(12+ years)</span>
-        </label>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleDecrementAdults(setAdults, adults)}
-            className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            -
-          </button>
-          <input
-            type="number"
-            name="adults"
-            value={adults}
-            readOnly
-            className="w-12 text-center p-3 border-t border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            onClick={() => handleIncrementAdults(setAdults, adults)}
-            className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            +
-          </button>
-        </div>
-      </div>
-      <div>
-        <label className="block font-bold mb-2 text-gray-700">
-          Children <span className="text-sm text-gray-500">(1 - 11 years)</span>
-        </label>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleDecrementChildren(setChildren, children)}
-            className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-            -
-          </button>
-          <input
-            type="number"
-            name="children"
-            value={children}
-            readOnly
-            className="w-12 text-center p-3 border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            onClick={() => handleIncrementChildren(setChildren, children)}
-            className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            +
-          </button>
-        </div>
-      </div>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+  <div className="mb-4">
+    <label className="block font-bold mb-2 text-gray-700">
+      Adults <span className="text-sm text-gray-500">(12+ years)</span>
+    </label>
+    <div className="flex items-center">
+      <button
+        onClick={() => handleDecrementAdults(setAdults, adults)}
+        className="px-4 py-2 border-2 rounded-l-full border-blue-400 text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        -
+      </button>
+      <input
+        type="number"
+        name="adults"
+        value={adults}
+        readOnly
+        className="w-12 text-center p-2 border-2 border-blue-400 text-blue-600"
+      />
+      <button
+        onClick={() => handleIncrementAdults(setAdults, adults)}
+        className="px-4 py-2 border-2 rounded-r-full border-blue-400 text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        +
+      </button>
     </div>
+  </div>
+  <div>
+    <label className="block font-bold mb-2 text-gray-700">
+      Children <span className="text-sm text-gray-500">(1 - 11 years)</span>
+    </label>
+    <div className="flex items-center">
+      <button
+        onClick={() => handleDecrementChildren(setChildren, children)}
+        className="px-4 py-2 border-2 border-blue-400 rounded-l-full text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        -
+      </button>
+      <input
+        type="number"
+        name="children"
+        value={children}
+        readOnly
+        className="w-12 text-center p-2 border-2 border-blue-400 text-blue-600"
+      />
+      <button
+        onClick={() => handleIncrementChildren(setChildren, children)}
+        className="px-4 py-2 border-2 border-blue-400 rounded-r-full text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        +
+      </button>
+    </div>
+  </div>
     <div>
       <label className="block font-bold mb-2 text-gray-700">
         Infants
         <span className="text-sm text-gray-500">(0+ years)</span>
       </label>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <button
           onClick={() => handleDecrementInfants(setInfants, infants)}
-          className="px-4 py-3 border-l  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border-2 border-blue-400 text-blue-600 rounded-l-full hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           -
         </button>
@@ -577,16 +576,18 @@ const HotelBookingForm = () => {
           name="infants"
           value={infants}
           readOnly
-          className="w-12 text-center p-3 border-t border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 w-12 py-2 border-2 border-blue-400 text-blue-600"
         />
         <button
           onClick={() => handleIncrementInfants(setInfants, infants)}
-          className="px-4 py-3 border-r  rounded-full border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border-2 border-blue-400 rounded-r-full text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
           +
         </button>
       </div>
     </div>
+</div>
+
       </div>
 
             <div className="m-4 col-span-3 text-center">
