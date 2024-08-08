@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux"
 import { logout } from "../../redux/slices/authSlice"
 import { MdAnalytics, MdLogout, MdSpaceDashboard, MdMiscellaneousServices } from "react-icons/md"
 import { FaChevronLeft, FaHotel, FaAngleRight, FaUserCircle } from "react-icons/fa"
-import { FaTrainSubway, FaBus, FaCarRear, FaEarthAsia } from "react-icons/fa6"
+import { FaTrainSubway, FaBus, FaCarRear,FaCar, FaEarthAsia } from "react-icons/fa6"
 import { IoMenu, IoAirplane } from "react-icons/io5"
+import { TbSettingsPlus } from "react-icons/tb";
 
 function VendorDashboard() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
@@ -117,6 +118,35 @@ function VendorDashboard() {
                 <span>Hotel Status</span>
               </Link>
             </div>
+          </div>
+          <div className="group">
+            <Link
+              to="#"
+              className="flex items-center justify-between space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+            >
+              <div className="flex items-center space-x-2">
+                <TbSettingsPlus size={22} />
+                <span>Mangement</span>
+              </div>
+              <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
+            </Link>
+            <div className="ml-4 space-y-2 hidden group-hover:block">
+              <Link
+                to="/vendordashboard/vendor-addcabrate"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaCar size={22} />
+                <span>AddCabRate</span>
+              </Link>
+              <Link
+                to="/vendordashboard/vendor-CabRateCard"
+                className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+              >
+                <FaCar size={22} />
+                <span>CabRateCard</span>
+              </Link>
+            </div>
+
           </div>
           <Link
             to="#"

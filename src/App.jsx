@@ -8,6 +8,9 @@ import VendorDashboard from './components/VendorDashboard/VendorDashboard' // Im
 import EmployeeForm from './pages/EmployeeRegister'
 import EmployeeDashboard  from './components/EmployeeDashboard/EmployeeDashboard';
 import Dashboard from './components/Sidebar';
+import CabRateCard from './components/VendorDashboard/CabRateCrad';
+import CabRateForm from './components/VendorDashboard/CabRateForm';
+
 
 function App() {
     return (
@@ -81,14 +84,17 @@ function App() {
                 <Route path="employeedashboard/employee-volvobus-details" element={<EmployeeVolvoBusDetails />} />
                 <Route path="corporatedashboard/add-branch" element={<AddBranchForm />} />
                 {/* VendorDashboard */}
-                <Route path="vendordashboard/*" element={<RequireAuth><VendorDashboard /></RequireAuth>} />
-                {/* <Route path="vendordashboard"element={<VendorDashboard />} />  */}
+                {/* <Route path="vendordashboard/*" element={<RequireAuth><VendorDashboard /></RequireAuth>} /> */}
+                <Route path="vendordashboard"element={<VendorDashboard />} /> 
                 <Route path="vendordashboard/vendor-cab-management" element={<VendorCabManagement />} />
                 <Route path="vendordashboard/vendor-bus-management" element={<VendorBusManagement />} />
                 <Route path="vendordashboard/vendor-hotel-management" element={<VendorHotelManagement />} /> 
                 <Route path="vendordashboard/vendor-flight-management" element={<VendorFlightManagement />} /> 
                 <Route path="vendordashboard/vendor-train-management" element={<VendorTrainManagement />} /> 
-                <Route path="addcabs" element={<AddCabs />} />
+                <Route path="vendordashboard/addcabs" element={<AddCabs />} />
+                <Route path="vendordashboard/vendor-cabratecard" element={<CabRateCard />} />
+                <Route path="vendordashboard/vendor-addcabrate" element={<CabRateForm />} />
+
                 
 
                 <Route
