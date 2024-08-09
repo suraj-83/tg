@@ -3,28 +3,49 @@ import userImg from "../../assets/new.jpg";
 import VendorSidebar from "./VendorSidebar";
 
 const RateCardForm = () => {
-  const [formData, setFormData] = useState({
-    vehicleType: "",
-    fourHours: "",
-    eightHours: "",
-    extraHour: "",
-    extraKm: "",
-    nightCharge: "",
-    outstationKm: "",
-    driverAllowance: "",
-  });
+  const [formData, setFormData] = useState([
+    {
+      vehicleType: "",
+      fourHours: "",
+      eightHours: "",
+      extraHour: "",
+      extraKm: "",
+      nightCharge: "",
+      outstationKm: "",
+      driverAllowance: "",
+    },
+  ]);
 
-  const handleChange = (e) => {
+  const handleChange = (index, e) => {
     const { name, value } = e.target;
-    setFormData({
+    const newFormData = [...formData];
+    newFormData[index][name] = value;
+    setFormData(newFormData);
+  };
+
+  const handleAddVehicle = () => {
+    setFormData([
       ...formData,
-      [name]: value,
-    });
+      {
+        vehicleType: "",
+        fourHours: "",
+        eightHours: "",
+        extraHour: "",
+        extraKm: "",
+        nightCharge: "",
+        outstationKm: "",
+        driverAllowance: "",
+      },
+    ]);
+  };
+
+  const handleRemoveVehicle = (index) => {
+    const newFormData = formData.filter((_, i) => i !== index);
+    setFormData(newFormData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log("Form data:", formData);
   };
 
@@ -36,41 +57,77 @@ const RateCardForm = () => {
       }}
     >
       <VendorSidebar />
-      <main className="min-h-screen w-full overflow-auto">
-        <div className="min-h-[90vh] flex items-center justify-center">
+      <main className="min-h-screen w-full overscroll-y-auto">
+        <>
           <form
             onSubmit={handleSubmit}
-            className="font-extrabold bg-opacity-95 rounded-lg"
+            className="font-extrabold bg-opacity-95 rounded-lg w-full"
           >
-            <div class="py-8 px-6 max-w-md bg-white bg-opacity-40 rounded-lg shadow-lg backdrop-blur-xl backdrop-filter">
-              <div>
-                <h1 className="text-2xl font-bold text-center mb-4 uppercase">
-                  Add Rate Card
-                </h1>
+            <div className="p-6 overflow-y-auto bg-white bg-opacity-40 rounded-lg shadow-lg backdrop-blur-xl backdrop-filter">
+              <h1 className="text-2xl font-bold text-center mb-4 uppercase">
+                Add Rate Card
+              </h1>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th className="border p-2">Vehicle Type</th>
+                    <th className="border p-2">4 Hours</th>
+                    <th className="border p-2">8 Hours</th>
+                    <th className="border p-2">Extra Hour</th>
+                    <th className="border p-2">Extra Km</th>
+                    <th className="border p-2">Night Charge</th>
+                    <th className="border p-2">Outstation Km</th>
+                    <th className="border p-2">Driver Allowance</th>
+                    <th className="border p-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {formData.map((data, index) => (
+                    <tr key={index} className="text-center">
+                      {Object.keys(data).map((field) => (
+                        <td key={field} className="border p-2">
+                          <input
+                            type="text"
+                            name={field}
+                            value={data[field]}
+                            onChange={(e) => handleChange(index, e)}
+                            className="border p-2 rounded bg-white text-extrabold text-black opacity-40 w-full"
+                          />
+                        </td>
+                      ))}
+                      <td className="border p-2">
+                        {formData.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVehicle(index)}
+                            className="bg-red-500 text-white py-2 px-4 rounded"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="flex justify-between mt-4">
+                <button
+                  type="button"
+                  onClick={handleAddVehicle}
+                  className="bg-green-500 text-white py-2 px-4 rounded"
+                >
+                  Add Vehicle
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white py-2 px-4 rounded"
+                >
+                  Submit
+                </button>
               </div>
-              {Object.keys(formData).map((field) => (
-                <div key={field} className="grid grid-cols-2 mb-4">
-                  <label className="block mb-2 capitalize">
-                    {field.replace(/([A-Z])/g, " $1")}
-                  </label>
-                  <input
-                    type="text"
-                    name={field}
-                    value={formData[field]}
-                    onChange={handleChange}
-                    className="border p-2 rounded bg-white text-extrabold text-black opacity-40 w-full"
-                  />
-                </div>
-              ))}
-              <button
-                type="submit"
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-              >
-                Submit
-              </button>
             </div>
           </form>
-        </div>
+        </>
       </main>
     </div>
   );
