@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const BranchDetails = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,50 @@ const BranchDetails = () => {
       phoneNumber: "9876543210",
       landlineNumber: "0123456789",
     },
+    {
+      id: 3,
+      name: "Branch 3",
+      addLine1: "789 Oak St",
+      addLine2: "Apt 3",
+      city: "City",
+      state: "State",
+      zipcode: "67890",
+      contactNo: "1234567890",
+      email: "branch3@example.com",
+      phoneNumber: "1234567890",
+      landlineNumber: "0987654321",
+    },
+    {
+      id: 4,
+      name: "Branch 4",
+      addLine1: "321 Pine St",
+      addLine2: "Apt 4",
+      city: "City",
+      state: "State",
+      zipcode: "98765",
+      contactNo: "9876543210",
+      email: "branch4@example.com",
+      phoneNumber: "9876543210",
+      landlineNumber: "0123456789",
+    },
+    {
+      id: 5,
+      name: "Branch 5",
+      addLine1: "654 Cedar St",
+      addLine2: "Apt 5",
+      city: "City",
+      state: "State",
+      zipcode: "54321",
+      contactNo: "1234567890",
+      email: "branch5@example.com",
+      phoneNumber: "1234567890",
+      landlineNumber: "0987654321",
+    },
   ]);
 
   const [editBranch, setEditBranch] = useState(null);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,19 +104,38 @@ const BranchDetails = () => {
     );
   };
 
+  const totalPages = Math.ceil(branches.length / rowsPerPage);
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to the first page when rows per page changes
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditBranch({ ...editBranch, [name]: value });
   };
 
+  // Calculate the branches to display on the current page
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const currentBranches = branches.slice(startIndex, startIndex + rowsPerPage);
+
   return (
     <div className="flex">
       <CorporateSidebar />
-      <main className="w-full p-6 bg-gray-900 overflow-auto text-white">      
+      <main className="w-full p-6 bg-gray-900 overflow-auto text-white">
         <h1 className="pb-9 font-bold text-center uppercase text-2xl underline">
           Branch Details
         </h1>
-        <div className="min-h-[90vh]">
+        <div className="max-h-[120vh] overflow-auto">
           {editBranch ? (
             <div>
               <h2 className="text-xl mb-4">Edit Branch</h2>
@@ -203,7 +264,7 @@ const BranchDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {branches.map((branch) => (
+                {currentBranches.map((branch) => (
                   <tr key={branch.id}>
                     <td className="border px-4 py-2">{branch.name}</td>
                     <td className="border px-4 py-2">{branch.addLine1}</td>
@@ -216,16 +277,16 @@ const BranchDetails = () => {
                     <td className="border px-4 py-2">{branch.landlineNumber}</td>
                     <td className="border px-4 py-2">
                       <button
-                        className="px-2 py-1 border border-blue-500 text-blue-500"
                         onClick={() => handleEdit(branch)}
+                        className="text-blue-500 hover:underline"
                       >
                         Edit
                       </button>
                     </td>
                     <td className="border px-4 py-2">
                       <button
-                        className="px-2 py-1 border border-red-500 text-red-500"
                         onClick={() => handleRemove(branch.id)}
+                        className="text-red-500 hover:underline"
                       >
                         Remove
                       </button>
@@ -235,6 +296,44 @@ const BranchDetails = () => {
               </tbody>
             </table>
           )}
+             {/* Pagination controls */}
+             <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+          <div className="flex items-center gap-4 px-5 select-none">
+            <p className='text-white'>Rows per page</p>
+            <select
+              className="px-2 py-1 rounded-md border border-[#BEBEBE]"
+              value={rowsPerPage}
+              onChange={handleRowsPerPageChange}
+            >
+              <option value={1}>1</option>
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+            </select>
+            <FaAngleLeft
+              size={25}
+              className={`${
+                currentPage === 1
+                  ? "text-gray-100 cursor-not-allowed"
+                  : "text-gray-400 cursor-pointer"
+              }`}
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+            />
+            <FaAngleRight
+              size={25}
+              className={`${
+                currentPage === totalPages
+                  ? "text-gray-100 cursor-not-allowed"
+                  : "text-gray-400 cursor-pointer"
+              }`}
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            />
+            <span className='text-white'>
+              Page {currentPage} of {totalPages}
+            </span>
+          </div>
+        </div>
         </div>
       </main>
     </div>

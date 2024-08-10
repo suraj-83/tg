@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import CorporateHeader from './CorporateHeader'; // Replace AdminHeader with UserHeader
-import CorporateSidebar from './CorporateSidebar'; // Replace AdminSidebar with UserSidebar
+import CorporateHeader from './CorporateHeader';
+import CorporateSidebar from './CorporateSidebar';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const mockHotelBookings = [
   {
     id: 1,
-    name: 'John hhhdgg Doe',
+    name: 'John Doe',
     nationality: 'American',
     contactNo1: '1234567890',
     contactNo2: '0987654321',
@@ -91,8 +92,28 @@ const mockHotelBookings = [
     children: 0,
     infants: 0,
   },
-  
-  // Add more mock bookings as needed
+  {
+    id: 5,
+    name: 'David Kim',
+    nationality: 'South Korean',
+    contactNo1: '5678901234',
+    contactNo2: '5432109876',
+    email: 'david.kim@example.com',
+    country: 'South Korea',
+    state: 'Seoul',
+    city: 'Seoul',
+    roomCategory: 'Deluxe',
+    mealPlan: 'Half Board',
+    hotelCategory: '4 Star',
+    priceRange: '$300 - $400',
+    checkInDate: '2024-07-01',
+    checkOutDate: '2024-07-05',
+    numberOfNights: 4,
+    numberOfRooms: 1,
+    adults: 2,
+    children: 1,
+    infants: 0,
+  },
 ];
 
 const HotelBookingDetails = () => {
@@ -101,11 +122,22 @@ const HotelBookingDetails = () => {
   const [error, setError] = useState(null);
   const [isCancelled, setIsCancelled] = useState(false);
   const [search, setSearch] = useState("");
-
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    setFilteredBookings(
+      mockHotelBookings.filter(
+        (booking) =>
+          booking.name.toLowerCase().includes(query) ||
+          booking.email.toLowerCase().includes(query)
+      )
+    );
+  };
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        // Simulate a fetch call with mock data
         if (!isCancelled) {
           setTravelDetails(mockHotelBookings);
           setLoading(false);
@@ -130,14 +162,33 @@ const HotelBookingDetails = () => {
   };
 
   const handleCancelBooking = (id) => {
-    setTravelDetails(prevDetails => prevDetails.filter(booking => booking.id !== id));
+    setTravelDetails((prevDetails) => prevDetails.filter((booking) => booking.id !== id));
   };
 
-  const filteredDetails = travelDetails
-    ?.filter((booking) =>
-      booking.fullName?.toLowerCase().includes(search.toLowerCase()) ||
-      booking.email?.toLowerCase().includes(search.toLowerCase())
-    ) || [];
+  const filteredDetails = travelDetails.filter(
+    (booking) =>
+      booking.name.toLowerCase().includes(search.toLowerCase()) ||
+      booking.email.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredDetails.length / rowsPerPage);
+  const paginatedBookings = filteredDetails.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to the first page when rows per page changes
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
 
   if (loading) {
     return (
@@ -151,25 +202,26 @@ const HotelBookingDetails = () => {
   if (error) {
     return <div>{error}</div>;
   }
-
   return (
-      <div className="flex">
-        <CorporateSidebar />
-        <main 
-          className="min-h-screen bg-cover bg-gray-100 w-full overflow-auto bg-center"
-          style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}
-        >
-          <div className="p-4 bg-white border boarder-gray-200">
+    <div className="flex">
+      <CorporateSidebar />
+      <main 
+        className="min-h-screen bg-cover bg-gray-100 w-full overflow-auto bg-center"
+        style={{ backgroundImage: `url('https://plus.unsplash.com/premium_photo-1663093806285-d905ca96c661?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}
+      >
+        <div className="p-4 bg-white border border-gray-200">
           <input
-              type="text"
-              placeholder="Search by name or email"
-              className="mb-4 p-3 ml-20 border rounded-full"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className='overflow-auto'>            
-          <table className="text-sm text-center bg-white">
+            type="text"
+            placeholder="Search by name or email"
+            className="p-2 ml-20 border rounded-full"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="max-h-[80vh] overflow-auto">
+          <table 
+
+          className="text-sm text-center bg-white">
             <thead>
               <tr>
                 <th className="py-2 px-10 border">Name</th>
@@ -184,57 +236,92 @@ const HotelBookingDetails = () => {
                 <th className="py-2 px-4 border border-gray-300">Meal_Plan</th>
                 <th className="py-2 px-4 border border-gray-300">Hotel_Category</th>
                 <th className="py-2 px-4 border border-gray-300">Price_Range</th>
-                <th className="py-2 px-4 border border-gray-300">Check_n_Date</th>
+                <th className="py-2 px-4 border border-gray-300">Check_In_Date</th>
                 <th className="py-2 px-4 border border-gray-300">Check_Out_Date</th>
                 <th className="py-2 px-4 border border-gray-300">Number_of_Nights</th>
                 <th className="py-2 px-4 border border-gray-300">Number_of_Rooms</th>
                 <th className="py-2 px-4 border border-gray-300">Adults</th>
                 <th className="py-2 px-4 border border-gray-300">Children</th>
                 <th className="py-2 px-4 border border-gray-300">Infants</th>
-                <th className="py-2 px-4 border border-gray-300">Actions</th>
+                <th className="py-2 px-8 border border-gray-300">Cancel</th>
               </tr>
             </thead>
             <tbody>
-              {(travelDetails || []).filter((booking) => {
-                const name = booking.name.toLowerCase();
-                const email = booking.email.toLowerCase();
-                return name.includes(search.toLowerCase()) || email.includes(search.toLowerCase());
-              }).map((booking) => (
+              {paginatedBookings.map((booking) => (
                 <tr key={booking.id}>
-                  <td className="py-2  border-b">{booking.name}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.nationality}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.contactNo1}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.contactNo2}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.email}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.country}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.state}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.city}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.roomCategory}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.mealPlan}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.hotelCategory}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.priceRange}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.checkInDate}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.checkOutDate}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.numberOfNights}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.numberOfRooms}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.adults}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.children}</td>
-                  <td className="py-2 px-4 border border-gray-300">{booking.infants}</td>
-                  <td className="py-2 px-4 border border-gray-300">
-                    <button 
-                      onClick={() => handleCancelBooking(booking.id)} 
-                      className="text-red-500 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm px-4  py-0.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 uppercase"
+                  <td className="py-2 px-4 border">{booking.name}</td>
+                  <td className="py-2 px-4 border">{booking.nationality}</td>
+                  <td className="py-2 px-4 border">{booking.contactNo1}</td>
+                  <td className="py-2 px-4 border">{booking.contactNo2}</td>
+                  <td className="py-2 px-4 border">{booking.email}</td>
+                  <td className="py-2 px-4 border">{booking.country}</td>
+                  <td className="py-2 px-4 border">{booking.state}</td>
+                  <td className="py-2 px-4 border">{booking.city}</td>
+                  <td className="py-2 px-4 border">{booking.roomCategory}</td>
+                  <td className="py-2 px-4 border">{booking.mealPlan}</td>
+                  <td className="py-2 px-4 border">{booking.hotelCategory}</td>
+                  <td className="py-2 px-4 border">{booking.priceRange}</td>
+                  <td className="py-2 px-4 border">{booking.checkInDate}</td>
+                  <td className="py-2 px-4 border">{booking.checkOutDate}</td>
+                  <td className="py-2 px-4 border">{booking.numberOfNights}</td>
+                  <td className="py-2 px-4 border">{booking.numberOfRooms}</td>
+                  <td className="py-2 px-4 border">{booking.adults}</td>
+                  <td className="py-2 px-4 border">{booking.children}</td>
+                  <td className="py-2 px-4 border">{booking.infants}</td>
+                  <td className="py-2 px-4 border">
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded-full"
+                      onClick={() => handleCancelBooking(booking.id)}
                     >
-                      CancelBooking
+                      Cancel
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+   {/* Pagination controls */}
+   <div className="absolute right-0 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+          <div className="flex items-center gap-4 px-5 select-none">
+            <p>Rows per page</p>
+            <select
+              className="px-2 py-1 rounded-md border border-[#BEBEBE]"
+              value={rowsPerPage}
+              onChange={handleRowsPerPageChange}
+            >
+              <option value={1}>1</option>
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+            </select>
+            <FaAngleLeft
+              size={25}
+              className={`${
+                currentPage === 1
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-black cursor-pointer"
+              }`}
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+            />
+            <FaAngleRight
+              size={25}
+              className={`${
+                currentPage === totalPages
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-black cursor-pointer"
+              }`}
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            />
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
+    </div>
   );
 };
 

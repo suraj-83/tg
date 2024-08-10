@@ -30,10 +30,11 @@ function CorporateDashboard() {
 
   return (
     <aside
-      className={`relative top-0 left-0 bottom-0 min-h-screen min-w-[20%] text-white bg-gradient-to-r from-black from-20% to-slate-900 font-semibold p-4 space-y-6 transition-all duration-300 ${
+      className={`relative top-0  min-h-screen min-w-[20%] z-50 text-white bg-gradient-to-r from-black from-20% to-slate-900 font-semibold space-y-6 transition-all duration-300 ${
         isSidebarCollapsed ? "-ml-[20%]" : ""
       }`}
     >
+      <div className="sticky top-0 p-4">
       <div className="flex items-center space-x-2 p-4">
         <div className="flex items-center space-x-2">
           <Link to="/">
@@ -189,6 +190,7 @@ function CorporateDashboard() {
           <MdLogout size={22} />
           <span>Logout</span>
         </Link>
+      </div>
       </div>
     </aside>
   );
