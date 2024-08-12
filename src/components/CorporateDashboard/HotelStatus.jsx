@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CorporateHeader from './CorporateHeader';
 import CorporateSidebar from './CorporateSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -124,17 +123,7 @@ const HotelBookingDetails = () => {
   const [search, setSearch] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    setFilteredBookings(
-      mockHotelBookings.filter(
-        (booking) =>
-          booking.name.toLowerCase().includes(query) ||
-          booking.email.toLowerCase().includes(query)
-      )
-    );
-  };
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -202,6 +191,7 @@ const HotelBookingDetails = () => {
   if (error) {
     return <div>{error}</div>;
   }
+
   return (
     <div className="flex">
       <CorporateSidebar />
@@ -219,31 +209,29 @@ const HotelBookingDetails = () => {
           />
         </div>
         <div className="max-h-[80vh] overflow-auto">
-          <table 
-
-          className="text-sm text-center bg-white">
+          <table className="text-sm text-center bg-white">
             <thead>
               <tr>
                 <th className="py-2 px-10 border">Name</th>
-                <th className="py-2 px-4 border border-gray-300">Nationality</th>
-                <th className="py-2 px-4 border border-gray-300">Contact_No</th>
-                <th className="py-2 px-4 border border-gray-300">Alternative_No</th>
-                <th className="py-2 px-4 border border-gray-300">Email</th>
-                <th className="py-2 px-4 border border-gray-300">Country</th>
-                <th className="py-2 px-16 border border-gray-300">State</th>
-                <th className="py-2 px-4 border border-gray-300">City</th>
-                <th className="py-2 px-4 border border-gray-300">Room_Category</th>
-                <th className="py-2 px-4 border border-gray-300">Meal_Plan</th>
-                <th className="py-2 px-4 border border-gray-300">Hotel_Category</th>
-                <th className="py-2 px-4 border border-gray-300">Price_Range</th>
-                <th className="py-2 px-4 border border-gray-300">Check_In_Date</th>
-                <th className="py-2 px-4 border border-gray-300">Check_Out_Date</th>
-                <th className="py-2 px-4 border border-gray-300">Number_of_Nights</th>
-                <th className="py-2 px-4 border border-gray-300">Number_of_Rooms</th>
-                <th className="py-2 px-4 border border-gray-300">Adults</th>
-                <th className="py-2 px-4 border border-gray-300">Children</th>
-                <th className="py-2 px-4 border border-gray-300">Infants</th>
-                <th className="py-2 px-8 border border-gray-300">Cancel</th>
+                <th className="py-2 px-4 border">Nationality</th>
+                <th className="py-2 px-4 border">Contact_No</th>
+                <th className="py-2 px-4 border">Alternative_No</th>
+                <th className="py-2 px-4 border">Email</th>
+                <th className="py-2 px-4 border">Country</th>
+                <th className="py-2 px-16 border">State</th>
+                <th className="py-2 px-4 border">City</th>
+                <th className="py-2 px-4 border">Room_Category</th>
+                <th className="py-2 px-4 border">Meal_Plan</th>
+                <th className="py-2 px-4 border">Hotel_Category</th>
+                <th className="py-2 px-4 border">Price_Range</th>
+                <th className="py-2 px-4 border">Check_In_Date</th>
+                <th className="py-2 px-4 border">Check_Out_Date</th>
+                <th className="py-2 px-4 border">Number_of_Nights</th>
+                <th className="py-2 px-4 border">Number_of_Rooms</th>
+                <th className="py-2 px-4 border">Adults</th>
+                <th className="py-2 px-4 border">Children</th>
+                <th className="py-2 px-4 border">Infants</th>
+                <th className="py-2 px-4 border">Cancel</th>
               </tr>
             </thead>
             <tbody>
@@ -281,8 +269,8 @@ const HotelBookingDetails = () => {
             </tbody>
           </table>
         </div>
-   {/* Pagination controls */}
-   <div className="absolute right-0 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+        {/* Pagination controls */}
+        <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
           <div className="flex items-center gap-4 px-5 select-none">
             <p>Rows per page</p>
             <select
