@@ -106,7 +106,7 @@ function Form() {
                         className=" p-2 border border-gray-300 rounded"
                       >
                         <option value="">Select Area of Work*</option>
-                        <option value="Cab Vendor">Cab Vendor</option>
+                        <option value="Cab Vendor">Cab / Tampo traveles</option>
                         <option value="Hotel Vendor">Hotel Vendor</option>
                         <option value="Air Vendor">Air Vendor</option>
                         <option value="Train Vendor">Train Vendor</option>

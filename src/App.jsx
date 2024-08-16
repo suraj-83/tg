@@ -97,13 +97,13 @@ function App() {
 
                 
 
-                <Route
+                {/* <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}
                     
-                /> 
-                {/* <Route path="admin" element={<AdminDashboard />} /> */}
-                <Route path="admin/login" element={<AdminLogin />} />
+                />  */}
+                <Route path="admin" element={<AdminDashboard />} />
+                {/* <Route path="admin/login" element={<AdminLogin />} /> */}
                 {/* Other Routes */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

@@ -131,7 +131,11 @@ const BranchDetails = () => {
   return (
     <div className="flex">
       <CorporateSidebar />
-      <main className="w-full p-6 bg-gray-900 overflow-auto text-white">
+      <main className="w-full p-6
+      bg-gray-900
+        overflow-auto
+      
+      text-gray-100">
         <h1 className="pb-9 font-bold text-center uppercase text-2xl underline">
           Branch Details
         </h1>

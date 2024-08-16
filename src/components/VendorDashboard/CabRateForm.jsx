@@ -70,15 +70,15 @@ const RateCardForm = () => {
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="border p-2">Vehicle Type</th>
-                    <th className="border p-2">4 Hours</th>
-                    <th className="border p-2">8 Hours</th>
-                    <th className="border p-2">Extra Hour</th>
-                    <th className="border p-2">Extra Km</th>
-                    <th className="border p-2">Night Charge</th>
-                    <th className="border p-2">Outstation Km</th>
-                    <th className="border p-2">Driver Allowance</th>
-                    <th className="border p-2">Actions</th>
+                  <th className="py-2 px-4 border min-w-[100px]">Vehicle Type</th>
+                    <th className="py-2 px-4 border min-w-[100px]">4 Hrs / 40 Kms</th>
+                    <th className="py-2 px-4 border min-w-[100px]">8 Hrs / 80 Kms</th>
+                    <th className="py-2 px-4 border min-w-[100px]">Extra Hour</th>
+                    <th className="py-2 px-4 border min-w-[100px]">Extra Km</th>
+                    <th className="py-2 px-4 border min-w-[100px]">Night Charge</th>
+                    <th className="py-2 px-4 border min-w-[100px]">Outstation Km</th>
+                    <th className="py-2 px-4 border min-w-[100px]">Driver Allowance</th>
+                 <th className="border p-2">Actions</th>
                   </tr>
                 </thead>
                 <tbody>

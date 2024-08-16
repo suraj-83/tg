@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchCabDetails, rejectCabBooking } from "../../redux/slices/dashboardSlice";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import AdminHeader from "../AdminHeader";
 import AdminSidebar from "../AdminSidebar";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+// import { fetchCabDetails, rejectCabBooking } from "../../redux/slices/dashboardSlice";
 
 const CabBookingDetails = () => {
   const dispatch = useDispatch();
@@ -12,20 +12,22 @@ const CabBookingDetails = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await dispatch(fetchCabDetails());
+        const response = await dispatch(fetchCabDetails(currentPage, rowsPerPage));
         if (response.payload) {
-          setTravelDetails(response.payload);
+          setTravelDetails(response.payload.data);
+          setTotalPages(response.payload.pagination.total_pages);
         }
       } catch (error) {
         console.error("Failed to fetch cab details:", error);
       }
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, currentPage, rowsPerPage]);
 
   useEffect(() => {
     const filteredDetails = travelDetails.filter(detail => detail.status === filter && detail.name.toLowerCase().includes(search.toLowerCase()));
@@ -33,33 +35,28 @@ const CabBookingDetails = () => {
     setCurrentPage(1);
   }, [filter, search, travelDetails]);
 
-  const totalPages = Math.ceil(travelDetails.length / rowsPerPage);
-  const LastItemIndex = currentPage * rowsPerPage;
-  const FirstItemIndex = LastItemIndex - rowsPerPage;
-  const currentDetails = travelDetails.slice(FirstItemIndex, LastItemIndex);
-
-  function handlePreviousPage() {
+  const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
-  function handleNextPage() {
+  const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
-  }
+  };
 
-  function handleRowsPerPageChange(e) {
+  const handleRowsPerPageChange = (e) => {
     setRowsPerPage(Number(e.target.value));
     setCurrentPage(1);
-  }
+  };
 
   const rejectBooking = async (id) => {
     await dispatch(rejectCabBooking(id));
     // Refresh the cab details after rejecting a booking
-    const response = await dispatch(fetchCabDetails());
-    setTravelDetails(response.payload);
+    const response = await dispatch(fetchCabDetails(currentPage, rowsPerPage));
+    setTravelDetails(response.payload.data);
   };
 
   return (
@@ -120,7 +117,7 @@ const CabBookingDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {currentDetails.map((detail, index) => (
+              {travelDetails.map((detail, index) => (
                 <tr key={index} className="hover:bg-gray-100">
                   <td className="py-2 px-4 border min-w-[100px]">{detail.pickupCountry}</td>
                   <td className="py-2 px-4 border min-w-[100px]">{detail.nationality}</td>
@@ -159,28 +156,28 @@ const CabBookingDetails = () => {
           </table>
           <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
             <div className="flex items-center gap-4 px-5 select-none">
-            <label>
-              Rows per page:{" "}
-              <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={20}>20</option>
-              </select>
-            </label>
+              <label>
+                Rows per page:{" "}
+                <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={15}>15</option>
+                  <option value={20}>20</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                <FaAngleLeft />
+              </button>
+              <span className="px-2">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                <FaAngleRight />
+              </button>
+            </div>
           </div>
-          <div>
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-              <FaAngleLeft />
-            </button>
-            <span className="px-2">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-              <FaAngleRight />
-            </button>
-          </div>
-        </div>
         </div>
       </main>
     </div>

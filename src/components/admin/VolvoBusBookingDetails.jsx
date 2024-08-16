@@ -6,38 +6,61 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
-  const [travelDetails, setTravelDetails] = useState([]);
+  const [data, setData] = useState([
+    {
+      id: 1,
+      fullName: "John Doe",
+      phoneNumber: "1234567890",
+      email: "jdoe@me.com",
+      busNumber: "1234",  
+      busType: "Volvo",
+      seatNumber: "A1",
+      pickupDate: "2023-06-01",
+      pickupTime: "10:00 AM",
+      pickupLocation: "123 Main St",
+      destination: "456 Oak Ave",
+      numberOfPassengers: 2,
+      status: "Confirmed",
+    },
+    {
+      id: 2,
+      fullName: "Jane Smith",
+      phoneNumber: "9876543210",
+      email: "jsmith@me.com",
+      busNumber: "5678",
+      busType: "Volvo",
+      seatNumber: "B2",
+      pickupDate: "2023-06-02",
+      pickupTime: "11:00 AM",
+      pickupLocation: "789 Elm St",
+      destination: "321 Pine Ave",
+      numberOfPassengers: 1,
+      status: "Confirmed",
+    },
+  ]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await dispatch(fetchBusDetails());
+        let response = await dispatch(fetchBusDetails({ page: currentPage, limit: rowsPerPage }));
         if (response.payload) {
-          setData(response.payload);
+          setData(response.payload.data);
+          setTotalPages(response.payload.pagination.total_pages);
         }
       } catch (error) {
         console.error("Failed to fetch bus details:", error);
       }
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, currentPage, rowsPerPage]);
 
-  useEffect(() => {
-    const filteredBookings = data.filter((booking) =>
-      booking.fullName.toLowerCase().includes(search.toLowerCase())
-    );
-    setTravelDetails(filteredBookings);
-    setCurrentPage(1);
-  }, [search, data]);
-
-  const totalPages = Math.ceil(travelDetails.length / rowsPerPage);
-  const LastItemIndex = currentPage * rowsPerPage;
-  const FirstItemIndex = LastItemIndex - rowsPerPage;
-  const currentBookings = travelDetails.slice(FirstItemIndex, LastItemIndex);
+  const filteredBookings = data.filter((booking) =>
+    booking.fullName.toLowerCase().includes(search.toLowerCase())
+  );
 
   function handlePreviousPage() {
     if (currentPage > 1) {
@@ -90,7 +113,7 @@ const VolvoBusBookingDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {currentBookings.map((booking, index) => (
+              {filteredBookings.map((booking, index) => (
                 <tr key={index} className="hover:bg-gray-100">
                   <td className="py-2 px-4 border min-w-[100px]">{index + 1}</td>
                   <td className="py-2 px-4 border min-w-[100px]">{booking.fullName}</td>
@@ -115,6 +138,7 @@ const VolvoBusBookingDetails = () => {
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
               >
+                <option value={1}>1</option>
                 <option value={5}>5</option>
                 <option value={10}>10</option>
                 <option value={15}>15</option>

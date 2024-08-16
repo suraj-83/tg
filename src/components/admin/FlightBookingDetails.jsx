@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAirDetails } from "../../redux/slices/dashboardSlice";
-import AdminHeader from "../AdminHeader";
 import AdminSidebar from "../AdminSidebar";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
@@ -16,16 +15,17 @@ const FlightBookingDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await dispatch(fetchAirDetails());
+        let response = await dispatch(fetchAirDetails({ page: currentPage, limit: rowsPerPage }));
         if (response.payload) {
-          setData(response.payload);
+          setData(response.payload.data);
+          setTravelDetails(response.payload.data);
         }
       } catch (error) {
         console.error("Failed to fetch flight details:", error);
       }
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, currentPage, rowsPerPage]);
 
   useEffect(() => {
     const filteredBookings = data.filter((booking) =>
