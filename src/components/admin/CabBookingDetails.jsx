@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import AdminHeader from "../AdminHeader";
 import AdminSidebar from "../AdminSidebar";
 // import { fetchCabDetails, rejectCabBooking } from "../../redux/slices/dashboardSlice";
 
@@ -17,10 +16,10 @@ const CabBookingDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await dispatch(fetchCabDetails(currentPage, rowsPerPage));
-        if (response.payload) {
-          setTravelDetails(response.payload.data);
-          setTotalPages(response.payload.pagination.total_pages);
+        const response = await dispatch(fetchCabDetails({ page: currentPage, limit: rowsPerPage })).unwrap();
+        if (response.data) {
+          setTravelDetails(response.data);
+          setTotalPages(response.pagination.total_pages);
         }
       } catch (error) {
         console.error("Failed to fetch cab details:", error);
@@ -30,10 +29,12 @@ const CabBookingDetails = () => {
   }, [dispatch, currentPage, rowsPerPage]);
 
   useEffect(() => {
-    const filteredDetails = travelDetails.filter(detail => detail.status === filter && detail.name.toLowerCase().includes(search.toLowerCase()));
+    const filteredDetails = travelDetails.filter(detail =>
+      detail.status === filter && detail.name.toLowerCase().includes(search.toLowerCase())
+    );
     setTravelDetails(filteredDetails);
     setCurrentPage(1);
-  }, [filter, search, travelDetails]);
+  }, [filter, search]);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -53,11 +54,15 @@ const CabBookingDetails = () => {
   };
 
   const rejectBooking = async (id) => {
-    await dispatch(rejectCabBooking(id));
-    // Refresh the cab details after rejecting a booking
-    const response = await dispatch(fetchCabDetails(currentPage, rowsPerPage));
-    setTravelDetails(response.payload.data);
+    try {
+      await dispatch(rejectCabBooking(id)).unwrap();
+      const response = await dispatch(fetchCabDetails({ page: currentPage, limit: rowsPerPage })).unwrap();
+      setTravelDetails(response.data);
+    } catch (error) {
+      console.error("Failed to reject cab booking:", error);
+    }
   };
+
 
   return (
     <div className="flex">
@@ -159,6 +164,7 @@ const CabBookingDetails = () => {
               <label>
                 Rows per page:{" "}
                 <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
+                  <option value="1">1</option>
                   <option value={5}>5</option>
                   <option value={10}>10</option>
                   <option value={15}>15</option>
