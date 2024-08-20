@@ -49,7 +49,13 @@ const HotelRateCardForm = () => {
       rooms: newRooms,
     });
   };
-
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      filePath: file,
+    });
+  };
   const handleAddRoom = () => {
     setFormData({
       ...formData,
@@ -113,32 +119,14 @@ const HotelRateCardForm = () => {
   </div>
 
   <div>
-    <label htmlFor="filePath" className="block text-sm font-medium text-gray-700">File Path</label>
+    <label htmlFor="filePath" className="block text-sm font-medium text-gray-700"> Upload File</label>
     <input
-      type="text"
-      name="filePath"
-      id="filePath"
-      value={formData.filePath}
-      onChange={handleChange}
-      placeholder="File Path"
-      className="border p-2 rounded mt-1 block w-full"
-    />
+                type="file"
+                name="filePath"
+                onChange={handleFileChange}
+                className="border p-2 rounded"
+              />
   </div>
-
-  <div>
-    <label htmlFor="fileExists" className="block text-sm font-medium text-gray-700">File Exists</label>
-    <select
-      name="fileExists"
-      id="fileExists"
-      value={formData.fileExists}
-      onChange={handleChange}
-      className="border p-2 rounded mt-1 block w-full"
-    >
-      <option value={false}>File does not exist</option>
-      <option value={true}>File exists</option>
-    </select>
-  </div>
-
   <div>
     <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
     <input
