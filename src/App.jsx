@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
 import CorporateDashboard from './components/CorporateDashboard/CorporateDashboard' // Import the CorporateDashboard component
@@ -10,6 +10,9 @@ import EmployeeDashboard  from './components/EmployeeDashboard/EmployeeDashboard
 import Dashboard from './components/Sidebar';
 import CabRateCard from './components/VendorDashboard/CabRateCrad';
 import CabRateForm from './components/VendorDashboard/CabRateForm';
+import HotelRateCardForm from './components/VendorDashboard/HotelRateForm';
+import EventRateCardForm from './components/VendorDashboard/EventRateForm';
+import EventRateCard from './components/VendorDashboard/EventRateCard';
 
 
 function App() {
@@ -94,16 +97,19 @@ function App() {
                 <Route path="vendordashboard/addcabs" element={<AddCabs />} />
                 <Route path="vendordashboard/vendor-cabratecard" element={<CabRateCard />} />
                 <Route path="vendordashboard/vendor-addcabrate" element={<CabRateForm />} />
-
+                <Route path="vendordashboard/vendor-addhotelratecard" element={<HotelRateCardForm />} />              
+                <Route path="vendordashboard/vendor-hotelratecard" element={<HotelRateCard />} />
+                <Route path="vendordashboard/vendor-eventratecardform" element={<EventRateCardForm />} />
+                <Route path="vendordashboard/vendor-eventratecard" element={<EventRateCard />} />
                 
 
-                {/* <Route
+                <Route
                     path="admin/*"
                     element={<RequireAuth><AdminDashboard /></RequireAuth>}
                     
-                />  */}
-                <Route path="admin" element={<AdminDashboard />} />
-                {/* <Route path="admin/login" element={<AdminLogin />} /> */}
+                /> 
+                {/* <Route path="admin" element={<AdminDashboard />} /> */}
+                <Route path="admin/login" element={<AdminLogin />} />
                 {/* Other Routes */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

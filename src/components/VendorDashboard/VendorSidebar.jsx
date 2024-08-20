@@ -5,7 +5,7 @@ import { logout } from "../../redux/slices/authSlice";
 import {
   MdAnalytics,
   MdLogout,
-  MdSpaceDashboard,
+  MdSpaceDashboard,MdEventAvailable,
   MdMiscellaneousServices,
 } from "react-icons/md";
 import {
@@ -161,6 +161,34 @@ function VendorDashboard() {
                 >
                   <FaCar size={22} />
                   <span>CabRateCard</span>
+                </Link>
+                <Link
+                  to="/vendordashboard/vendor-addhotelratecard"
+                  className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+                >
+                  <FaHotel size={22} />
+                  <span>HotelRateCardForm</span>
+                </Link>
+                <Link
+                  to="/vendordashboard/vendor-hotelratecard"
+                  className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+                >
+                  <FaHotel size={22} />
+                  <span>HotelRateCard</span>
+                </Link>
+                <Link
+                  to="/vendordashboard/vendor-eventratecardform"
+                  className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+                >
+                  <MdEventAvailable size={22} />
+                  <span>EventRateCardForm</span>
+                </Link>
+                <Link
+                  to="/vendordashboard/vendor-eventratecard"
+                  className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
+                >
+                  <MdEventAvailable size={22} />
+                  <span>EventRateCard</span>
                 </Link>
               </div>
             </div>
