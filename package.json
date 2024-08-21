@@ -1,5 +1,6 @@
 {
   "name": "tges-frontend",
+  "homepage": "http://v1.tgestravel.com/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
