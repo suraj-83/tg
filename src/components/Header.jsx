@@ -79,7 +79,7 @@ const Header = () => {
                                 Services <span className="right-0 text-gray-400">▾</span>
                             </button>
                             {services && (
-                                <ul className="w-full absolute bg-white text-gray-600 text-extrabold border pt-2 left-0 md:right-0 md:w-auto md:left-auto">
+                                <ul className="w-full lg:absolute bg-white text-gray-600 text-extrabold border pt-2 left-0 md:right-0 md:w-auto md:left-auto">
                                     <li><Link to="/hotelbookings" onClick={closeMobileMenu} className="block px-5 py-2 hover:bg-gray-200">Hotel</Link></li>
                                     <li><Link to="/passport" onClick={closeMobileMenu} className="block px-5 py-2 hover:bg-gray-200">Passport</Link></li>
                                     <li className="relative" onMouseEnter={() => setInsurance(true)} onMouseLeave={() => setTimeout(() => setInsurance(false), 100)}>
