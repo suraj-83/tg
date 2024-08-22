@@ -1,89 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEventRateCard } from '../../redux/slices/vendorDashboardSlice';
 import FileUpload from './FileUpload';
 import VendorSidebar from './VendorSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const EventRateCard = () => {
+  const dispatch = useDispatch();
+  const eventData = useSelector((state) => state.vendorDashboard.eventRateCards);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const eventData = [
-    {
-      id: 1,
-      userId: 201,
-      filePath: "/uploads/event1.pdf",
-      fileExists: true,
-      type: "Event Rate Card",
-      submissionDate: "2024-08-01",
-      noOfConfHall: 2,
-      confHall: [
-        {
-          id: 1,
-          eventid: 1,
-          noOfConferenceHall: 2,
-          typeOfConferenceHall: "Oval",
-          conferenceHallStrength: 200,
-          conferenceHallCharges: 10000,
-          createdAt: "2024-07-01",
-          updatedAt: "2024-08-01",
-        },
-        {
-          id: 2,
-          eventid: 1,
-          noOfConferenceHall: 1,
-          typeOfConferenceHall: "Round",
-          conferenceHallStrength: 150,
-          conferenceHallCharges: 8000,
-          createdAt: "2024-07-01",
-          updatedAt: "2024-08-01",
-        },
-      ],
-      highTeaOneTimeCharges: 1500,
-      highTeaTwoTimeCharges: 2500,
-      highTeaWithCookiesOneTimeCharges: 2000,
-      highTeaWithCookiesTwoTimeCharges: 3000,
-      cocktailCharges: 5000,
-      perDayChargesForProjectors: 2000,
-      djCharges: 4000,
-      otherActivities: "Photography, Videography",
-      complementaryServices: "WiFi, Parking",
-      createdAt: "2024-07-01",
-      updatedAt: "2024-08-01",
-    },
-    {
-      id: 2,
-      userId: 202,
-      filePath: "/uploads/event2.pdf",
-      fileExists: true,
-      type: "Event Rate Card",
-      submissionDate: "2024-08-02",
-      noOfConfHall: 1,
-      confHall: [
-        {
-          id: 3,
-          eventid: 2,
-          noOfConferenceHall: 1,
-          typeOfConferenceHall: "Oval",
-          conferenceHallStrength: 100,
-          conferenceHallCharges: 7000,
-          createdAt: "2024-07-15",
-          updatedAt: "2024-08-02",
-        },
-      ],
-      highTeaOneTimeCharges: 1200,
-      highTeaTwoTimeCharges: 2200,
-      highTeaWithCookiesOneTimeCharges: 1700,
-      highTeaWithCookiesTwoTimeCharges: 2700,
-      cocktailCharges: 4500,
-      perDayChargesForProjectors: 1800,
-      djCharges: 3500,
-      otherActivities: "Live Music, Sound System",
-      complementaryServices: "Security, Valet Parking",
-      createdAt: "2024-07-15",
-      updatedAt: "2024-08-02",
-    },
-  ];
-  
-  const totalPages = Math.ceil(eventData.length / rowsPerPage);
+
+  useEffect(() => {
+    dispatch(fetchEventRateCard());
+  }, [dispatch]);
+
+  const totalPages = eventData ? Math.ceil(eventData.length / rowsPerPage) : 1;
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -104,7 +36,7 @@ const EventRateCard = () => {
 
   const startIdx = (currentPage - 1) * rowsPerPage;
   const endIdx = startIdx + rowsPerPage;
-  const paginatedData = eventData.slice(startIdx, endIdx);
+  const paginatedData = eventData ? eventData.slice(startIdx, endIdx) : [];
 
   return (
     <div className="flex">

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import VendorSidebar from "./VendorSidebar";
 import Img from "../../assets/event.jpg";
+import { submitEventRateCard } from "../../redux/slices/vendorDashboardSlice";
 
 const EventRateCardForm = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +28,8 @@ const EventRateCardForm = () => {
       },
     ],
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -78,8 +82,17 @@ const EventRateCardForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form data:", formData);
+
+    // Dispatch the thunk to submit the form data
+    dispatch(submitEventRateCard(formData))
+      .unwrap()
+      .then((response) => {
+        toast.success("Event rate card submitted successfully!");
+        // You can reset the form or navigate away here if needed
+      })
+      .catch((error) => {
+        toast.error(error || "Failed to submit event rate card");
+      });
   };
 
   return (
@@ -261,11 +274,11 @@ const EventRateCardForm = () => {
                             className="border p-2 rounded w-full"
                           />
                         </td>
-                        <td className="border p-2 text-center">
+                        <td className="border p-2">
                           <button
                             type="button"
                             onClick={() => handleRemoveConfHall(index)}
-                            className="bg-red-500 text-white rounded px-3 py-1"
+                            className="bg-red-500 text-white py-1 px-2 rounded"
                           >
                             Remove
                           </button>
@@ -277,7 +290,7 @@ const EventRateCardForm = () => {
                 <button
                   type="button"
                   onClick={handleAddConfHall}
-                  className="bg-blue-500 text-white rounded px-4 py-2 mt-4"
+                  className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
                 >
                   Add Conference Hall
                 </button>
@@ -285,12 +298,12 @@ const EventRateCardForm = () => {
             )}
 
             {/* Submit Button */}
-            <div className="text-center mt-6">
+            <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="bg-green-500 text-white rounded px-4 py-2"
+                className="bg-green-500 text-white py-2 px-4 rounded"
               >
-                Submit
+                Submit Event Rate Card
               </button>
             </div>
           </div>

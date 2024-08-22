@@ -23,15 +23,15 @@ function App() {
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
+                <Route path="corporate" element={<CorporateSignup />} />
+                <Route path="vendor" element={<VendorSignup />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="verify-otp" element={<VerifyOtp />} />
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="retail-login" element={<RetailLogin />} />
                 <Route path="retail-profile" element={<RetailProfile />} />
-                <Route path="corporate" element={<CorporateSignup />} />
                 <Route path="corporate-login" element={<CorporateLogin />} /> 
                 <Route path="corporate-profile" element={<CorporateProfile />} />
-                <Route path="vendor" element={<VendorSignup />} />
                 <Route path="vendor-login" element={<VendorLogin />} />
                 <Route path="flightbookings" element={<FlightBookings />} />
                 <Route path="trainbookings" element={<TrainBookings />} />

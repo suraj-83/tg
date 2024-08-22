@@ -81,90 +81,83 @@ function Form() {
 
             <div className="min-h-[90vh]">
               <div className="flex flex-wrap sm:flex-wrap gap-3">
-                <div className="flex justify-between w-full gap-3">
-                  <div className="mb-4">
-                    {/* <label htmlFor="country" className="block mb-2 font-semibold">Country</label> */}
-                    <input
-                      type="text"
-                      id="country"
-                      placeholder="Country"
-                      value={formData.country || "India"}
-                      readOnly
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
-                  </div>
-                  <div className="mb-4 w-[35vh]">
-                    <div className="flex gap-4 pb-4">
-                      <select
-                        value={formData?.areaOfWork || ""}
-                        onChange={(e) => {
-                          setFormData((prevState) => ({
-                            ...prevState,
-                            areaOfWork: e.target.value,
-                          }));
-                        }}
-                        className=" p-2 border border-gray-300 rounded"
-                      >
-                        <option value="">Select Area of Work*</option>
-                        <option value="Cab Vendor">Cab / Tampo traveles</option>
-                        <option value="Hotel Vendor">Hotel Vendor</option>
-                        <option value="Air Vendor">Air Vendor</option>
-                        <option value="Train Vendor">Train Vendor</option>
-                        <option value="Visa Vendor">Visa Vendor</option>
-                        <option value="Insurance Vendor">
-                          Insurance Vendor
-                        </option>
-                        <option value="Volvo Bus Vendor">
-                          Volvo Bus Vendor
-                        </option>
-                        <option value="Foreign Exchange Vendor">
-                          Foreign Exchange Vendor
-                        </option>
-                        <option value="Tour Guide Vendor">
-                          Tour Guide Vendor
-                        </option>
-                        <option value="Travel DMC">
-                          DMC (Direct marketing Company)
-                        </option>
-                        <option value="Travel agents">Travel agents</option>
-                        <option value="Other">Other</option>
-                      </select>
+              <div className="grid lg:grid-cols-3 gap-2">
+  {/* Country Field */}
+  <div className="mb-4">
+    <input
+      type="text"
+      id="country"
+      placeholder="Country"
+      value={formData.country || "India"}
+      readOnly
+      className="w-full p-2 border border-gray-300 rounded"
+    />
+  </div>
 
-                      {formData.areaOfWork.trim() === "Other" && (
-                        <input
-                          type="text"
-                          placeholder="Other Department"
-                          value={formData.areaOfWork || ""}
-                          onChange={(e) =>
-                            setFormData((prevState) => ({
-                              ...prevState,
-                              areaOfWork: e.target.value,
-                            }))
-                          }
-                          className=" p-2 border border-gray-300 rounded mt-2"
-                        />
-                      )}
-                    </div>
-                  </div>
-                  {/* Company Name */}
-                  <div className="mb-4">
-                    {/* <label htmlFor="companyName" className="block mb-2 font-semibold">Company Name</label> */}
-                    <input
-                      type="text"
-                      id="companyName"
-                      placeholder="Company Name"
-                      value={formData.companyName}
-                      onChange={(e) =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          companyName: e.target.value,
-                        }))
-                      }
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
-                  </div>
-                  
-                </div>
+  {/* Area of Work Selection */}
+  <div className="mb-4">
+    <select
+      value={formData?.areaOfWork || ""}
+      onChange={(e) => {
+        setFormData((prevState) => ({
+          ...prevState,
+          areaOfWork: e.target.value,
+        }));
+      }}
+      className="w-full p-2 border border-gray-300 rounded"
+    >
+      <option value="">Select Area of Work*</option>
+      <option value="Cab Vendor">Cab / Tempo Travelers</option>
+      <option value="Hotel Vendor">Hotel Vendor</option>
+      <option value="Air Vendor">Air Vendor</option>
+      <option value="Train Vendor">Train Vendor</option>
+      <option value="Visa Vendor">Visa Vendor</option>
+      <option value="Insurance Vendor">Insurance Vendor</option>
+      <option value="Volvo Bus Vendor">Volvo Bus Vendor</option>
+      <option value="Foreign Exchange Vendor">Foreign Exchange Vendor</option>
+      <option value="Tour Guide Vendor">Tour Guide Vendor</option>
+      <option value="Travel DMC">DMC (Direct Marketing Company)</option>
+      <option value="Travel agents">Travel Agents</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  {/* Other Department Field (Conditional) */}
+  {formData.areaOfWork.trim() === "Other" && (
+    <div className="mb-4">
+      <input
+        type="text"
+        placeholder="Other Department"
+        value={formData.otherDepartment || ""}
+        onChange={(e) =>
+          setFormData((prevState) => ({
+            ...prevState,
+            otherDepartment: e.target.value,
+          }))
+        }
+        className="w-full p-2 border border-gray-300 rounded"
+      />
+    </div>
+  )}
+
+  {/* Company Name Field */}
+  <div className="mb-4">
+    <input
+      type="text"
+      id="companyName"
+      placeholder="Company Name"
+      value={formData.companyName}
+      onChange={(e) =>
+        setFormData((prevState) => ({
+          ...prevState,
+          companyName: e.target.value,
+        }))
+      }
+      className="w-full p-2 border border-gray-300 rounded"
+    />
+  </div>
+</div>
+
                 {/* Address 1 */}
                 <div className="mb-4">
                   {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}

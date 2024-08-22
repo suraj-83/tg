@@ -33,6 +33,17 @@ export const fetchCabRateCard = createAsyncThunk('vendorDashboard/fetchCabRateCa
   }
 });
 
+// Async thunk to submit a new hotel rate card
+export const submitHotelRateCard = createAsyncThunk('vendorDashboard/submitHotelRateCard', async (formData, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.post('/vendorDashboard/submitHotelRateCard', formData);
+    return response.data.data;
+  } catch (error) {
+    toast.error(error.response?.data?.message || 'Failed to submit hotel rate card');
+    return rejectWithValue(error.response?.data?.message || 'Failed to submit hotel rate card');
+  }
+});
+
 // Async thunk to fetch hotel rate card
 export const fetchHotelRateCard = createAsyncThunk('vendorDashboard/fetchHotelRateCard', async () => {
   try {
@@ -44,6 +55,16 @@ export const fetchHotelRateCard = createAsyncThunk('vendorDashboard/fetchHotelRa
   }
 });
 
+// Async thunk to submit a new event rate card
+export const submitEventRateCard = createAsyncThunk('vendorDashboard/submitEventRateCard', async (rateCardData, { rejectWithValue }) => {
+    try {
+        const response = await axiosInstance.post('/vendorDashboard/submitEventRateCard', rateCardData);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error.response?.data?.message || 'Failed to submit event rate card');
+        return rejectWithValue(error.response?.data?.message || 'Failed to submit event rate card');
+    }
+});
 // Async thunk to fetch event rate card
 export const fetchEventRateCard = createAsyncThunk('vendorDashboard/fetchEventRateCard', async () => {
   try {
