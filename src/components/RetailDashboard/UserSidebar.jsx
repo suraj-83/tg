@@ -34,8 +34,8 @@ function RetailDashboard() {
         <div className="flex items-center space-x-2">
           <Link to="/">
             {/* <img src={logo} alt="TGES" className="w-16 object-contain" /> */}
-          </Link>
           <span className="text-xl font-bold">TGES RETAIL</span>
+          </Link>
         </div>
         <span
           className={`absolute h-16 w-16 z-20 top-2 rounded-full bg-slate-800 flex items-center justify-center cursor-pointer ${

@@ -53,16 +53,24 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await dispatch(vendorSignup(formData));
-    console.log(response);
+    const isAllFieldsFilled =
+      Object.values(formData).every((value) => value !== "") &&
+      formData.phoneNumber !== "" &&
+      formData.landlineNumber !== "";
+    if (isAllFieldsFilled) {
+      const response = await dispatch(vendorSignup(formData));
+      console.log(response);
 
-    if (response?.payload?.data?.success) {
-      navigate("/vendor-login");
+      if (response?.payload?.data?.success) {
+        navigate("/vendor-login");
+      }
+
+      console.log(formData);
+      // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
+      setFormData(initialFormData); // Reset form data to initial state
+    } else {
+      alert("Please fill all the fields");
     }
-
-    console.log(formData);
-    // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
-    setFormData(initialFormData); // Reset form data to initial state
   };
 
   return (
@@ -551,6 +559,7 @@ function Form() {
               <div className="mb-4">
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                 >
                   Register

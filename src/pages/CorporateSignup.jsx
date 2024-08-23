@@ -53,15 +53,24 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    const isAllFieldsFilled =
+      Object.values(formData).every((value) => value !== "") &&
+      formData.phoneNumber !== "" &&
+      formData.landlineNumber !== "";
 
-    const response = await dispatch(corporateSignup(formData));
+    if (isAllFieldsFilled) {
+      console.log(formData);
 
-    if (response?.payload?.data?.success) {
-      navigate("/corporate-login");
+      const response = await dispatch(corporateSignup(formData));
+
+      if (response?.payload?.data?.success) {
+        navigate("/corporate-login");
+      }
+
+      setFormData(initialFormData); // Reset form data to initial state
+    } else {
+      alert("Please fill all the fields");
     }
-
-    setFormData(initialFormData); // Reset form data to initial state
   };
 
   return (
@@ -471,9 +480,14 @@ function Form() {
                               phoneNumber: e.target.value,
                             }))
                           }
-                          className="w-full p-2 border border-gray-300 rounded"
+                          className="w-40 p-2 border border-gray-300 rounded"
                           placeholder="Phone Number"
                         />
+                        {formData.phoneNumber.length < 10 && (
+                          <p className="text-red-600 text-sm">
+                            Please enter a valid phone number.
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
@@ -530,6 +544,11 @@ function Form() {
                         className="w-40 p-2 border border-gray-300 rounded"
                         placeholder="Landline Number"
                       />
+                      {formData.landlineNumber.length < 7 && (
+                        <p className="text-red-500 text-sm">
+                          Landline Number should have at least 7 digits
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>
@@ -584,6 +603,7 @@ function Form() {
               <div className="mb-4">
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                 >
                   Register

@@ -54,12 +54,12 @@ function App() {
                 <Route path="admin/healthinsurance-details" element={<HealthInsuranceDetails />} />
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
                 {/* retaildashboard    */}
-                <Route
+                {/* <Route
                     path="retaildashboard/*"
                     element={<RequireRetailAuth><RetailDashboard /></RequireRetailAuth>}
                     
-                />  
-                {/* <Route path="retaildashboard" element={<RetailDashboard />} /> */}
+                />   */}
+                <Route path="retaildashboard" element={<RetailDashboard />} />
                 <Route path="retaildashboard/cab-details" element={<CabDetails />} />
                 <Route path="retaildashboard/train-status" element={<TrainStatus />} />
                 <Route path="retaildashboard/volvobus-details" element={<VolvoBus />} />
@@ -87,8 +87,8 @@ function App() {
                 <Route path="employeedashboard/employee-volvobus-details" element={<EmployeeVolvoBusDetails />} />
                 <Route path="corporatedashboard/add-branch" element={<AddBranchForm />} />
                 {/* VendorDashboard */}
-                {/* <Route path="vendordashboard/*" element={<RequireAuth><VendorDashboard /></RequireAuth>} /> */}
-                <Route path="vendordashboard"element={<VendorDashboard />} /> 
+                <Route path="vendordashboard/*" element={<RequireVendorAuth><VendorDashboard /></RequireVendorAuth>} />
+                {/* <Route path="vendordashboard"element={<VendorDashboard />} />  */}
                 <Route path="vendordashboard/vendor-cab-management" element={<VendorCabManagement />} />
                 <Route path="vendordashboard/vendor-bus-management" element={<VendorBusManagement />} />
                 <Route path="vendordashboard/vendor-hotel-management" element={<VendorHotelManagement />} /> 
@@ -128,7 +128,10 @@ const RequireCorporateAuth = ({ children }) => {
     const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
     return isCorporate ? children : <Navigate to="/corporate-login" replace />;
 };
-
+const RequireVendorAuth = ({ children }) => {
+    const isVendor = localStorage.getItem('isVendor') === 'true'; 
+    return isVendor ? children : <Navigate to="/vendor-login" replace />;
+};
 const RequireAuth = ({ children }) => {
     const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
     return isAdmin ? children : <Navigate to="/admin/login" replace />;
