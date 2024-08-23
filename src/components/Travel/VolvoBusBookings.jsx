@@ -56,11 +56,21 @@ const BusBookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await dispatch(createVolvoBusTravel(formData));
-    console.log(response);
+    const isAllFieldsFilled =
+      formData.every(
+        (person) =>
+          Object.values(person).every((value) => value !== "")
+      );
 
-    if (response?.payload?.data?.success) {
-      navigate("/");
+    if (isAllFieldsFilled) {
+      const response = await dispatch(createVolvoBusTravel(formData));
+      console.log(response);
+
+      if (response?.payload?.data?.success) {
+        navigate("/");
+      }
+    } else {
+      alert("Please fill all the fields");
     }
   };
 
@@ -217,6 +227,7 @@ const BusBookingForm = () => {
           )}
           <button
             type="submit"
+            onClick={handleSubmit}
             className="bg-blue-500 uppercase
             text-white px-4 py-2 mt-4 mb-4 mr-3 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
           >
@@ -409,6 +420,7 @@ const BusBookingForm = () => {
             )}
         <button
           type="submit"
+          onClick={handleSubmit}
           className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
         >
           Submit

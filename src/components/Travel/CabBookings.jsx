@@ -42,12 +42,22 @@ const CabBookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    const response = await dispatch(createCabTravel(formData));
-    console.log(response);
 
-    if (response?.payload?.data?.success) {
-      navigate("/");
+    const isAllFieldsFilled =
+      Object.values(formData).every((value) => value !== "") &&
+      formData.phoneNumber !== "" &&
+      formData.landlineNumber !== "";
+
+    if (isAllFieldsFilled) {
+      console.log(formData);
+      const response = await dispatch(createCabTravel(formData));
+      console.log(response);
+
+      if (response?.payload?.data?.success) {
+        navigate("/");
+      }
+    } else {
+      alert("Please fill all the fields");
     }
   };
 

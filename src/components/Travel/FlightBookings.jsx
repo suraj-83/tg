@@ -62,9 +62,17 @@ const FlightBookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await dispatch(createAirTravel(formData));
-    if (response?.payload?.data?.success) {
-      navigate("/");
+    const isAllFieldsFilled = formData.every(
+      (person) =>
+        Object.values(person).every((value) => value !== "")
+    );
+    if (isAllFieldsFilled) {
+      const response = await dispatch(createAirTravel(formData));
+      if (response?.payload?.data?.success) {
+        navigate("/");
+      }
+    } else {
+      alert("Please fill all the fields");
     }
   };
 
@@ -289,6 +297,7 @@ const FlightBookingForm = () => {
           )}
           <button
             type="submit"
+            onClick={handleSubmit}
             className="bg-blue-500 text-white px-4 mb-4 py-2 mt-4 mr-4 uppercase rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
           >
             Book Now
@@ -595,6 +604,7 @@ const FlightBookingForm = () => {
             )}
             <button
               type="submit"
+              onClick={handleSubmit}
               className="bg-blue-500 text-white px-4 py-2 mt-4 w-full rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Submit
