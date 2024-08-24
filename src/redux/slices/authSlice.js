@@ -53,6 +53,7 @@ export const corporateSignup = createAsyncThunk(
     }
   }
 );
+
 export const employeeSignup = createAsyncThunk(
   "auth/employee-signup",
   async (data) => {
@@ -75,6 +76,7 @@ export const employeeSignup = createAsyncThunk(
     }
   }
 );
+
 export const branchSignup = createAsyncThunk(
   "auth/branch-signup",
   async (data) => {
@@ -97,6 +99,7 @@ export const branchSignup = createAsyncThunk(
     }
   }
 );
+
 export const vendorSignup = createAsyncThunk(
   "auth/vendor-signup",
   async (data) => {
@@ -167,6 +170,7 @@ export const corporateLogin = createAsyncThunk(
     }
   }
 );
+
 export const employeeLogin = createAsyncThunk(
   "auth/employee-login",
   async (data) => {
@@ -190,6 +194,7 @@ export const employeeLogin = createAsyncThunk(
     }
   }
 );
+
 export const vendorLogin = createAsyncThunk(
   "auth/vendor-login",
   async (data) => {
@@ -359,6 +364,7 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isVendor", true);
           state.isLoggedIn = true;
           state.user = action?.payload?.data?.data;
           // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);

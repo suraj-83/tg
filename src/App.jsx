@@ -128,10 +128,12 @@ const RequireCorporateAuth = ({ children }) => {
     const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
     return isCorporate ? children : <Navigate to="/corporate-login" replace />;
 };
+
 const RequireVendorAuth = ({ children }) => {
     const isVendor = localStorage.getItem('isVendor') === 'true'; 
     return isVendor ? children : <Navigate to="/vendor-login" replace />;
 };
+
 const RequireAuth = ({ children }) => {
     const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
     return isAdmin ? children : <Navigate to="/admin/login" replace />;
