@@ -1,66 +1,66 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { corporateLogin } from "../redux/slices/authSlice";
+import { useNavigate, Link } from "react-router-dom";
+import { vendorLogin, corporateLogin, retailLogin } from "../redux/slices/authSlice";
 
-function CorporateLogin() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const initialFormData = {
-    email: "",
-    password: "",
-  };
-
-  const [formData, setFormData] = useState(initialFormData);
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await dispatch(corporateLogin(formData));
+    const formData = { email, password };
+    let response;
 
-    if (response?.payload?.data?.success) {
-      navigate("/corporatedashboard");
+    // Assuming backend will determine user type based on email and return appropriate response
+    if (email.includes("vendor")) {
+      response = await dispatch(vendorLogin(formData));
+      if (response?.payload?.data?.success) {
+        navigate("/vendordashboard");
+      }
+    } else if (email.includes("corporate")) {
+      response = await dispatch(corporateLogin(formData));
+      if (response?.payload?.data?.success) {
+        navigate("/corporatedashboard");
+      }
     } else {
+      response = await dispatch(retailLogin(formData));
+      if (response?.payload?.data?.success) {
+        navigate("/retaildashboard");
+      }
+    }
+
+    if (!response?.payload?.data?.success) {
       setIsValid(false);
     }
   };
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
-      <div className="bg-white/50 rounded-lg shadow-lg p-5 z-10 flex items-center justify-center border border-gray-100  flex-col w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
+      <div className="bg-white/50 rounded-lg shadow-lg p-5 z-10 flex items-center justify-center border border-gray-100 flex-col w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
         <form onSubmit={handleSubmit} className="flex flex-col w-full">
-          <h1 className="mb-3 font-bold  text-center uppercase text-2xl underline">
-            Corporate Login
+          <h1 className="mb-3 font-bold text-center uppercase text-2xl underline">
+            Login
           </h1>
           <div className="mb-4">
             <input
               type="email"
-              id="email"
               placeholder="Email Address"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData((prevState) => ({
-                  ...prevState,
-                  email: e.target.value,
-                }))
-              }
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
           <div className="mb-4">
             <input
               type="password"
-              id="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData((prevState) => ({
-                  ...prevState,
-                  password: e.target.value,
-                }))
-              }
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
@@ -81,7 +81,7 @@ function CorporateLogin() {
               >
                 Forgot Password?
               </Link>
-              <Link to="/corporate" className="text-blue-500 hover:underline">
+              <Link to="/signup" className="text-blue-500 hover:underline">
                 Don't have an account? Sign up
               </Link>
             </div>
@@ -92,4 +92,4 @@ function CorporateLogin() {
   );
 }
 
-export default CorporateLogin;
+export default Login;

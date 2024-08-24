@@ -14,13 +14,7 @@ import {
   FaAngleRight,
   FaUserCircle,
 } from "react-icons/fa";
-import {
-  FaTrainSubway,
-  FaBus,
-  FaCarRear,
-  FaCar,
-  FaEarthAsia,
-} from "react-icons/fa6";
+import {FaTrainSubway,FaBus,FaCarRear,FaCar,FaEarthAsia,} from "react-icons/fa6";
 import { IoMenu, IoAirplane } from "react-icons/io5";
 import { TbSettingsPlus } from "react-icons/tb";
 

@@ -18,7 +18,7 @@ function Login() {
     const response = await dispatch(vendorLogin(formData));
 
     if (response?.payload?.data?.success) {
-      navigate("/");
+      navigate("/vendordashboard");
     }
   };
 

@@ -171,13 +171,13 @@ export const corporateLogin = createAsyncThunk(
   }
 );
 
-export const employeeLogin = createAsyncThunk(
-  "auth/employee-login",
+export const vendorLogin = createAsyncThunk(
+  "auth/vendor-login",
   async (data) => {
     try {
-      const response = axiosInstance.post("/user/employee-login", data);
+      const response = axiosInstance.post("/user/vendor-login", data);
 
-      console.log("Employee Login: ", (await response).data);
+      console.log("Vendor Login: ", (await response).data);
 
       toast.promise(response, {
         loading: "Authenticating account...",
@@ -195,13 +195,13 @@ export const employeeLogin = createAsyncThunk(
   }
 );
 
-export const vendorLogin = createAsyncThunk(
-  "auth/vendor-login",
+export const employeeLogin = createAsyncThunk(
+  "auth/employee-login",
   async (data) => {
     try {
-      const response = axiosInstance.post("/user/vendor-login", data);
+      const response = axiosInstance.post("/user/employee-login", data);
 
-      console.log("Vendor Login: ", (await response).data);
+      console.log("Employee Login: ", (await response).data);
 
       toast.promise(response, {
         loading: "Authenticating account...",
@@ -325,6 +325,20 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(employeeLogin.fulfilled, (state, action) => {
+        console.log("Employee Login Details: ", action.payload.data);
+
+        if (action.payload.status === 200) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify(action?.payload?.data?.data)
+          );
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isEmployee", true);
+          state.isLoggedIn = true;
+          state.user = action?.payload?.data?.data;
+        }
+      })
       .addCase(retailLogin.fulfilled, (state, action) => {
         console.log("Login Details: ", action.payload.data);
 
@@ -333,7 +347,8 @@ const authSlice = createSlice({
             "user",
             JSON.stringify(action?.payload?.data?.data)
           );
-          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isLoggedIn", true);          
+          localStorage.setItem("isRetail", true);
           state.isLoggedIn = true;
           state.user = action?.payload?.data?.data;
           // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
@@ -349,6 +364,7 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isCorporate", true);
           state.isLoggedIn = true;
           state.user = action?.payload?.data?.data;
           // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
@@ -364,6 +380,7 @@ const authSlice = createSlice({
             JSON.stringify(action?.payload?.data?.data)
           );
           localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isEmployee", true);
           localStorage.setItem("isVendor", true);
           state.isLoggedIn = true;
           state.user = action?.payload?.data?.data;

@@ -22,7 +22,7 @@ function EmployeeLogin() {
         const response = await dispatch(employeeLogin(formData));
 
         if (response?.payload?.data?.success) {
-            navigate("/")
+            navigate("/employeedashboard");
         } else {
             setIsValid(false);
         }

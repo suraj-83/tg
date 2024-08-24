@@ -30,7 +30,7 @@ function Login() {
     const response = await dispatch(retailLogin(formData));
 
     if (response?.payload?.data?.success) {
-      navigate("/");
+      navigate("/retaildashboard");
     } else {
       setIsValid(false);
     }

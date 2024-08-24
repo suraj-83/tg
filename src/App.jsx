@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,MainLogin,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
 import CorporateDashboard from './components/CorporateDashboard/CorporateDashboard' // Import the CorporateDashboard component
@@ -41,6 +41,7 @@ function App() {
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
                 <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
+                <Route path="main-login" element={<MainLogin />} />
                 {/* Admin */}
                 <Route path="admin/corporate-users" element={<CorporateUsers />} />
                 <Route path="admin/vendor-details" element={<VendorDetails />} />
@@ -54,20 +55,20 @@ function App() {
                 <Route path="admin/healthinsurance-details" element={<HealthInsuranceDetails />} />
                 <Route path="admin/travelinsurance-details" element={<TravelInsunranceDetails />} />
                 {/* retaildashboard    */}
-                {/* <Route
+                <Route
                     path="retaildashboard/*"
                     element={<RequireRetailAuth><RetailDashboard /></RequireRetailAuth>}
                     
-                />   */}
-                <Route path="retaildashboard" element={<RetailDashboard />} />
+                />  
+                {/* <Route path="retaildashboard" element={<RetailDashboard />} /> */}
                 <Route path="retaildashboard/cab-details" element={<CabDetails />} />
                 <Route path="retaildashboard/train-status" element={<TrainStatus />} />
                 <Route path="retaildashboard/volvobus-details" element={<VolvoBus />} />
                 <Route path="retaildashboard/flightbooking-details" element={<Flights />} />
                 <Route path="retaildashboard/hotelstatus" element={<HotelStatus />} />
                 {/* CorporateDashboard */}
-                {/* <Route path="corporatedashboard/*" element={<RequireCorporateAuth><CorporateDashboard /></RequireCorporateAuth>} /> */}
-                <Route path="corporatedashboard" element={<CorporateDashboard />} />
+                <Route path="corporatedashboard/*" element={<RequireCorporateAuth><CorporateDashboard /></RequireCorporateAuth>} />
+                {/* <Route path="corporatedashboard" element={<CorporateDashboard />} /> */}
                 <Route path="corporatedashboard/branch-details" element={<BranchDetails />} />
                 <Route path="corporatedashboard/corporate-cab-details" element={<CabBookingDetail />} />
                 <Route path="corporatedashboard/train-details" element={<TrainDetails />} />
