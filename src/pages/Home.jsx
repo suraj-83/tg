@@ -1,4 +1,5 @@
 import React from 'react';
+import Img from '../assets/Image/pxfuel.jpg';
 
 import { Footer, Header } from '../components';
 const LandingPage = () => {
@@ -16,14 +17,14 @@ const LandingPage = () => {
     ];
 
     return (
-        <div className="bg-gray-100 w-full min-h-screen">
+        <div className=" w-full min-h-screen">
             <Header />            
 
             {/* Hero Section */}
-            <header className="py-20 bg-cover bg-center " style={{ backgroundImage: "url('https://img.goodfon.com/wallpaper/nbig/2/42/vernazza-cinque-terre-liguria.webp')" }}>
+            <header className="py-40 -mt-44 bg-cover bg-center " style={{ backgroundImage: `url(${Img})` }}>
                 <div className="max-w-7xl mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Plan Your Dream Vacation</h1>
-                    <p className="text-lg md:text-xl text-white mb-8">Discover amazing destinations with us</p>
+                    <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Plan Your Dream Vacation</h1>
+                    <p className="text-lg md:text-xl text-gray-800 mb-8">Discover amazing destinations with us</p>
                     <a href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full inline-block transition duration-300">Explore Now</a>
                 </div>
             </header>
