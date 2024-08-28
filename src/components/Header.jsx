@@ -232,9 +232,9 @@ const Header = () => {
                                     >
                                         <button 
                                             type="button" 
-                                            className="block w-full py-4 px-2 text-blue-950 hover:bg-blue-900 hover:text-white text-left md:text-center md:whitespace-nowrap transition-colors"
+                                            className="block w-full py-4 lg:px-7 md:px-7 px-2 pr-20 text-blue-950 hover:bg-blue-900 hover:text-white text-left md:text-center md:whitespace-nowrap transition-colors"
                                         >
-                                            Login <span className="right-0 text-gray-400">▾</span>
+                                            Login<span className="right-0 text-gray-400">▾</span>
                                         </button>
                                         {login && (
                                             <ul className="absolute w-full left-full bg-white text-gray-600 border pt-2 md:right-0 md:w-auto md:left-auto">
@@ -242,7 +242,7 @@ const Header = () => {
                                                     <Link 
                                                         to="/main-login" 
                                                         onClick={closeMobileMenu} 
-                                                        className="block px-5 py-2 hover:bg-gray-200"
+                                                        className="block px-5 py-2 bg-white hover:bg-gray-200"
                                                     >
                                                         Retail
                                                     </Link>
@@ -281,7 +281,7 @@ const Header = () => {
                                             Register With Us<span className="right-0 text-gray-400">▾</span>
                                         </button>
                                         {register && (
-                                            <ul className="absolute w-full left-full bg-white text-gray-600 border pt-2 md:right-0 md:w-auto md:left-auto">
+                                            <ul className="absolute w-full left-full bg-white text-gray-600 border px-3 pt-2 md:right-0 md:w-auto md:left-auto">
                                                 <li>
                                                     <Link 
                                                         to="/retail" 
