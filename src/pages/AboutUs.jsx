@@ -3,7 +3,7 @@ import { Header, Footer } from "../components"
 
 const AboutPage = () => {
     return (
-        <div className="bg-gray-100 w-full min-h-screen">
+        <div className="bg-[#EEEFF3] w-full min-h-screen">
             <Header />
 
             {/* About Section */}

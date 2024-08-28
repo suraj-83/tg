@@ -13,7 +13,6 @@ const Header = () => {
     const [travelMode, setTravelMode] = useState(false);
     const [services, setServices] = useState(false);
     const [insurance, setInsurance] = useState(false);
-    const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
     const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
@@ -225,50 +224,15 @@ const Header = () => {
                                 </li>
                             ) : (
                                 <div className="flex flex-col md:flex-row items-start md:items-center">
-                                    <li 
-                                        className="relative border-b md:border-none" 
-                                        onMouseEnter={() => setLogin(true)} 
-                                        onMouseLeave={() => setTimeout(() => setLogin(false), 100)}
-                                    >
-                                        <button 
-                                            type="button" 
-                                            className="block w-full py-4 lg:px-7 md:px-7 px-2 pr-20 text-blue-950 hover:bg-blue-900 hover:text-white text-left md:text-center md:whitespace-nowrap transition-colors"
+                                    <li className="border-b md:border-none">
+                                        <Link 
+                                            to="/main-login" 
+                                            onClick={closeMobileMenu} 
+                                            className="block w-full py-4 px-2 text-blue-950 hover:bg-blue-900 hover:text-white text-left md:text-center md:whitespace-nowrap transition-colors"
                                         >
-                                            Login<span className="right-0 text-gray-400">▾</span>
-                                        </button>
-                                        {login && (
-                                            <ul className="absolute w-full left-full bg-white text-gray-600 border pt-2 md:right-0 md:w-auto md:left-auto">
-                                                <li>
-                                                    <Link 
-                                                        to="/main-login" 
-                                                        onClick={closeMobileMenu} 
-                                                        className="block px-5 py-2 bg-white hover:bg-gray-200"
-                                                    >
-                                                        Retail
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link 
-                                                        to="/main-login" 
-                                                        onClick={closeMobileMenu} 
-                                                        className="block px-5 py-2 hover:bg-gray-200"
-                                                    >
-                                                        Vendor
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link 
-                                                        to="/main-login" 
-                                                        onClick={closeMobileMenu} 
-                                                        className="block px-5 py-2 hover:bg-gray-200"
-                                                    >
-                                                        Corporate
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        )}
+                                            Login
+                                        </Link>
                                     </li>
-
                                     <li 
                                         className="relative border-b md:border-none" 
                                         onMouseEnter={() => setRegister(true)} 
