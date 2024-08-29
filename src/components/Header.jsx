@@ -277,7 +277,7 @@ const Header = () => {
                                         )}
                                     </li>
                                     
-                                    <li className="border-b rounded-r-full md:border-none md:flex md:items-center md:justify-center md:w-auto md:whitespace-nowrap hover:bg-blue-900 hover:opacity-95 hover:text-white"><Link to="/contact" onClick={closeMobileMenu} className="block py-4 px-2 pr-4 text-blue-950 hover:text-white">Contact Us</Link></li>
+                                    <li className="border-b rounded-r-full md:border-none md:flex md:items-center md:justify-center md:w-auto md:whitespace-nowrap hover:bg-blue-900 hover:opacity-95 hover:text-white"><Link to="/contact-us" onClick={closeMobileMenu} className="block py-4 px-2 pr-4 text-blue-950 hover:text-white">Contact Us</Link></li>
                 </div>
                             )}
                         </div>

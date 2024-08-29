@@ -16,7 +16,7 @@ const Footer = () => {
             <li><a href="#" className="hover:underline">Bank details</a></li>
             <li><a href="#" className="hover:underline">Gst details</a></li>
             <li><a href="#" className="hover:underline">FAQ'S</a></li>
-            <li><a href="#" className="hover:underline">Contact Us</a></li>
+            <li><a href="contact-us" className="hover:underline">Contact Us</a></li>
           </ul>
         </div>
         
@@ -65,7 +65,7 @@ const Footer = () => {
           <h2 className="font-bold text-white mb-4">Get in touch</h2>
           <p>Speak with a vacation expert.<br />Toll free number</p>
           <h3 className="text-white text-2xl my-4">8744002341</h3>
-          <button className="bg-white text-gray-900 px-4 py-2 mt-2">Contact Us</button>
+          <a href="contact-us" className="bg-white text-gray-900 px-4 py-2 mt-2">Contact Us</a>
         </div>
       </div>
       

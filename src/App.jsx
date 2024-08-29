@@ -13,6 +13,7 @@ import CabRateForm from './components/VendorDashboard/CabRateForm';
 import HotelRateCardForm from './components/VendorDashboard/HotelRateForm';
 import EventRateCardForm from './components/VendorDashboard/EventRateForm';
 import EventRateCard from './components/VendorDashboard/EventRateCard';
+import ContactUs from './components/ContactUs';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="contact-us" element={<ContactUs />} />
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path="about" element={<AboutUs />} />
                 <Route path="retail" element={<SignUp />} />
