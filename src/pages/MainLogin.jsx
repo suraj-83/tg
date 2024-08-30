@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { RETAIL_TYPE_NAME, CORPORATE_TYPE_NAME, VENDOR_TYPE_NAME } from '../config/config';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
@@ -21,20 +22,22 @@ function Login() {
     }
   };
 
+
   useEffect(() => {
     if (user) {
       // Navigate to the appropriate dashboard based on the user type
-      const dashboardRoute = user.userType === 'vendor' 
+      const dashboardRoute = user.userType === VENDOR_TYPE_NAME 
         ? '/vendor-dashboard' 
-        : user.userType === 'corporate' 
+        : user.userType === CORPORATE_TYPE_NAME 
         ? '/corporatedashboard' 
-        : user.userType === 'retail'
+        : user.userType === RETAIL_TYPE_NAME
         ? '/retaildashboard'
         : '';
+        
       navigate(dashboardRoute);
     }
   }, [user, navigate]);
-
+  
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
       <div className="bg-white/50 rounded-lg shadow-lg p-5 z-10 flex items-center justify-center border border-gray-100 flex-col w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
