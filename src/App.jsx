@@ -125,16 +125,16 @@ const RequireEmployeeAuth = ({ children }) => {
 };
 const RequireRetailAuth = ({ children }) => {
     const isRetail = localStorage.getItem('isRetail') === 'true'; 
-    return isRetail ? children : <Navigate to="/retail-login" replace />;
+    return isRetail ? children : <Navigate to="/main-login" replace />;
 };
 const RequireCorporateAuth = ({ children }) => {
     const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
-    return isCorporate ? children : <Navigate to="/corporate-login" replace />;
+    return isCorporate ? children : <Navigate to="/main-login" replace />;
 };
 
 const RequireVendorAuth = ({ children }) => {
     const isVendor = localStorage.getItem('isVendor') === 'true'; 
-    return isVendor ? children : <Navigate to="/vendor-login" replace />;
+    return isVendor ? children : <Navigate to="/main-login" replace />;
 };
 
 const RequireAuth = ({ children }) => {

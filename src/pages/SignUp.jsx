@@ -133,7 +133,7 @@ function RetailForm() {
       const response = await dispatch(retailSignup(formData));
 
       if (response?.payload?.data?.success) {
-        navigate("/retail-login");
+        navigate("/main-login");
       }
 
       console.log(JSON.stringify(formData, null, 4)); // Log the consolidated form data to the console

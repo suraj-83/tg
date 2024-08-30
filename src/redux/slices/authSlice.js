@@ -8,6 +8,7 @@ const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || {},
 };
 
+// Retail Signup
 export const retailSignup = createAsyncThunk(
   "auth/retail-signup",
   async (data) => {
@@ -18,55 +19,7 @@ export const retailSignup = createAsyncThunk(
 
       toast.promise(response, {
         loading: "Creating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
-        error: "Failed to create your account",
-      });
-
-      return await response;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  }
-);
-
-export const corporateSignup = createAsyncThunk(
-  "auth/corporate-signup",
-  async (data) => {
-    try {
-      const response = axiosInstance.post("/user/corporate-register", data);
-
-      console.log("Corporate User: ", (await response).data);
-
-      toast.promise(response, {
-        loading: "Creating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
-        error: "Failed to create your account",
-      });
-
-      return await response;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  }
-);
-
-export const employeeSignup = createAsyncThunk(
-  "auth/employee-signup",
-  async (data) => {
-    try {
-      const response = axiosInstance.post("/user/employee-register", data);
-
-      console.log("Employee User: ", (await response).data);
-
-      toast.promise(response, {
-        loading: "Creating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
+        success: (data) => data?.data?.message,
         error: "Failed to create your account",
       });
 
@@ -100,19 +53,19 @@ export const branchSignup = createAsyncThunk(
   }
 );
 
-export const vendorSignup = createAsyncThunk(
-  "auth/vendor-signup",
+
+// Corporate Signup
+export const corporateSignup = createAsyncThunk(
+  "auth/corporate-signup",
   async (data) => {
     try {
-      const response = axiosInstance.post("/user/vendor-register", data);
+      const response = axiosInstance.post("/user/corporate-register", data);
 
-      console.log("Vendor User: ", (await response).data);
+      console.log("Corporate User: ", (await response).data);
 
       toast.promise(response, {
         loading: "Creating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
+        success: (data) => data?.data?.message,
         error: "Failed to create your account",
       });
 
@@ -123,132 +76,94 @@ export const vendorSignup = createAsyncThunk(
   }
 );
 
-export const retailLogin = createAsyncThunk(
-  "auth/retail-login",
+// Vendor Signup
+export const vendorSignup = createAsyncThunk(
+  "auth/vendor-signup",
   async (data) => {
     try {
-      const response = axiosInstance.post("/user/retail-login", data);
+      const response = axiosInstance.post("/user/vendor-register", data);
 
-      console.log("Retail Login: ", (await response).data);
+      console.log("Vendor User: ", (await response).data);
 
       toast.promise(response, {
-        loading: "Authenticating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
-        error: "Error Logging In",
+        loading: "Creating account...",
+        success: (data) => data?.data?.message,
+        error: "Failed to create your account",
       });
 
       return await response;
     } catch (error) {
-      console.log(error);
       toast.error(error?.response?.data?.message);
     }
   }
 );
 
-export const corporateLogin = createAsyncThunk(
-  "auth/corporate-login",
+// Employee Signup
+export const employeeSignup = createAsyncThunk(
+  "auth/employee-signup",
   async (data) => {
     try {
-      const response = axiosInstance.post("/user/corporate-login", data);
+      const response = axiosInstance.post("/user/employee-register", data);
 
-      console.log("Corprate Login: ", (await response).data);
+      console.log("Employee User: ", (await response).data);
 
       toast.promise(response, {
-        loading: "Authenticating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
-        error: "Error Logging In",
+        loading: "Creating account...",
+        success: (data) => data?.data?.message,
+        error: "Failed to create your account",
       });
 
       return await response;
     } catch (error) {
-      console.log(error);
       toast.error(error?.response?.data?.message);
     }
   }
 );
 
-export const vendorLogin = createAsyncThunk(
-  "auth/vendor-login",
-  async (data) => {
-    try {
-      const response = axiosInstance.post("/user/vendor-login", data);
-
-      console.log("Vendor Login: ", (await response).data);
-
-      toast.promise(response, {
-        loading: "Authenticating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
-        error: "Error Logging In",
-      });
-
-      return await response;
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message);
-    }
-  }
-);
-
+// Unified Login
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/user/login", {
-        email,
-        password,
+      const response = await axiosInstance.post("/user/login", { email, password });
+
+      console.log("Login Details: ", response.data);
+
+      toast.promise(response, {
+        loading: "Authenticating account...",
+        success: (data) => data?.data?.message,
+        error: "Error Logging In",
       });
 
-      const { data } = response;
-
-      if (data?.success) {
-        const token = data?.data?.token;
-        const cookieOptions = {
-          httpOnly: true,
-          secure: true,
-        };
-
-        return {
-          ...data.data,
-          token,
-          cookieOptions,
-        };
-      }
-
-      return rejectWithValue(data?.message);
+      return response.data;
     } catch (error) {
-      console.error("Error during user login:", error);
-      return rejectWithValue(error?.response?.data?.message);
+      return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );
 
-
+// Employee Login
 export const employeeLogin = createAsyncThunk(
   "auth/employee-login",
-  async (data) => {
+  async ({ employeeId, companyId, password }, { rejectWithValue }) => {
     try {
-      const response = axiosInstance.post("/user/employee-login", data);
+      const response = await axiosInstance.post("/user/employee-login", {
+        employeeId,
+        companyId,
+        password,
+      });
 
-      console.log("Employee Login: ", (await response).data);
+      console.log("Employee Login Details: ", response.data);
 
       toast.promise(response, {
         loading: "Authenticating account...",
-        success: (data) => {
-          return data?.data?.message;
-        },
+        success: (data) => data?.data?.message,
         error: "Error Logging In",
       });
 
-      return await response;
+      return response.data;
     } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message);
+      return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );
@@ -277,6 +192,7 @@ export const branchLogin = createAsyncThunk(
   }
 );
 
+
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
     const response = await axiosInstance.get("/user/logout");
@@ -298,6 +214,8 @@ export const getAllUsers = createAsyncThunk("auth/getAllUsers", async () => {
   }
 });
 
+
+// Forget Password
 export const forgotPassword = createAsyncThunk("auth/forgot-password", async (data) => {
     try {
       const response = await axiosInstance.post("/user/forgot-password", data);
@@ -352,6 +270,7 @@ export const resetPassword = createAsyncThunk('auth/reset-password', async (data
     toast.error(error?.response?.data?.message);
   }
 })
+
 export const contactUs = createAsyncThunk('contactUs/contact', async (data) => {
   try {
     const response = await axiosInstance.post("/contact-us", data);
@@ -367,80 +286,40 @@ export const contactUs = createAsyncThunk('contactUs/contact', async (data) => {
     toast.error(error?.response?.data?.message);
   }
 })
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(login.fulfilled, (state, action) => {
+        const { user, role } = action.payload;
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("role", role);
+
+        state.isLoggedIn = true;
+        state.user = user;
+        state.role = role;
+      })
       .addCase(employeeLogin.fulfilled, (state, action) => {
-        console.log("Employee Login Details: ", action.payload.data);
+        const { user, role } = action.payload;
 
-        if (action.payload.status === 200) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify(action?.payload?.data?.data)
-          );
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("isEmployee", true);
-          state.isLoggedIn = true;
-          state.user = action?.payload?.data?.data;
-        }
-      })
-      .addCase(retailLogin.fulfilled, (state, action) => {
-        console.log("Login Details: ", action.payload.data);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("role", role);
 
-        if (action.payload.status === 200) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify(action?.payload?.data?.data)
-          );
-          localStorage.setItem("isLoggedIn", true);          
-          localStorage.setItem("isRetail", true);
-          state.isLoggedIn = true;
-          state.user = action?.payload?.data?.data;
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
-          // state.role = action?.payload?.data?.data?.user?.role;
-        }
-      })
-      .addCase(corporateLogin.fulfilled, (state, action) => {
-        console.log("Login Details: ", action.payload.data);
-
-        if (action.payload.status === 200) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify(action?.payload?.data?.data)
-          );
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("isCorporate", true);
-          state.isLoggedIn = true;
-          state.user = action?.payload?.data?.data;
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
-          // state.role = action?.payload?.data?.data?.user?.role;
-        }
-      })
-      .addCase(vendorLogin.fulfilled, (state, action) => {
-        console.log("Login Details: ", action.payload.data);
-
-        if (action.payload.status === 200) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify(action?.payload?.data?.data)
-          );
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("isEmployee", true);
-          localStorage.setItem("isVendor", true);
-          state.isLoggedIn = true;
-          state.user = action?.payload?.data?.data;
-          // localStorage.setItem("role", action?.payload?.data?.data?.user?.role);
-          // state.role = action?.payload?.data?.data?.user?.role;
-        }
+        state.isLoggedIn = true;
+        state.user = user;
+        state.role = role;
       })
       .addCase(logout.fulfilled, (state) => {
         localStorage.clear();
         state.isLoggedIn = false;
         state.role = "";
-        state.data = {};
+        state.user = {};
       });
   },
 });

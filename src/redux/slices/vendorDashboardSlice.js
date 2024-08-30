@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 import axiosInstance from '../../config/axiosInstance.js';
-import { vendorLogin, logout } from './authSlice.js';
+import { login, logout } from './authSlice.js';
 
 const initialState = {
   isVendor: localStorage.getItem('isVendor') || false,
@@ -82,7 +82,7 @@ const vendorDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(vendorLogin.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         if (action.payload.statusCode === 200) {
           localStorage.setItem('isVendor', true);
           state.isVendor = true;

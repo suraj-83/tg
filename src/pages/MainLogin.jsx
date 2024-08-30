@@ -1,43 +1,39 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { vendorLogin, corporateLogin, retailLogin } from "../redux/slices/authSlice";
+import { login } from "../redux/slices/authSlice";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, user, error } = useSelector((state) => state.auth, shallowEqual);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const formData = { email, password };
-    let response;
-
-    // Assuming backend will determine user type based on email and return appropriate response
-    if (email.includes("vendor")) {
-      response = await dispatch(vendorLogin(formData));
-      if (response?.payload?.data?.success) {
-        navigate("/vendordashboard");
-      }
-    } else if (email.includes("corporate")) {
-      response = await dispatch(corporateLogin(formData));
-      if (response?.payload?.data?.success) {
-        navigate("/corporatedashboard");
-      }
+    if (email && password) {
+      dispatch(login({ email, password }));
     } else {
-      response = await dispatch(retailLogin(formData));
-      if (response?.payload?.data?.success) {
-        navigate("/retaildashboard");
-      }
-    }
-
-    if (!response?.payload?.data?.success) {
       setIsValid(false);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      // Navigate to the appropriate dashboard based on the user type
+      const dashboardRoute = user.userType === 'vendor' 
+        ? '/vendor-dashboard' 
+        : user.userType === 'corporate' 
+        ? '/corporatedashboard' 
+        : user.userType === 'retail'
+        ? '/retaildashboard'
+        : '';
+      navigate(dashboardRoute);
+    }
+  }, [user, navigate]);
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
@@ -67,12 +63,16 @@ function Login() {
           {!isValid && (
             <p className="text-red-500 mt-1">Invalid email or password</p>
           )}
+          {error && (
+            <p className="text-red-500 mt-1">{error}</p>
+          )}
           <div className="mb-4 flex justify-between items-center">
             <button
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              disabled={loading}
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </button>
             <div className="flex items-center">
               <Link

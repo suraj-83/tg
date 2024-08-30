@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { retailLogin } from "../redux/slices/authSlice";
+// import { retailLogin } from "../redux/slices/authSlice";
 // import { Lumiflex, Novatrix, Velustro, Zenitho } from "uvcanvas";
 
 function Login() {
