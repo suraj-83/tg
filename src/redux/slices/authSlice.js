@@ -195,6 +195,40 @@ export const vendorLogin = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("/user/login", {
+        email,
+        password,
+      });
+
+      const { data } = response;
+
+      if (data?.success) {
+        const token = data?.data?.token;
+        const cookieOptions = {
+          httpOnly: true,
+          secure: true,
+        };
+
+        return {
+          ...data.data,
+          token,
+          cookieOptions,
+        };
+      }
+
+      return rejectWithValue(data?.message);
+    } catch (error) {
+      console.error("Error during user login:", error);
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
+);
+
+
 export const employeeLogin = createAsyncThunk(
   "auth/employee-login",
   async (data) => {
@@ -318,7 +352,21 @@ export const resetPassword = createAsyncThunk('auth/reset-password', async (data
     toast.error(error?.response?.data?.message);
   }
 })
+export const contactUs = createAsyncThunk('contactUs/contact', async (data) => {
+  try {
+    const response = await axiosInstance.post("/contact-us", data);
 
+    if (response.status === 200) {
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.data.message);
+    }
+
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+})
 const authSlice = createSlice({
   name: "auth",
   initialState,
