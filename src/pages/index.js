@@ -64,6 +64,7 @@ import BranchDetails from "./Branches"
 import EmployeeDetails from "./Employees"
 import HotelRateCard from "../components/VendorDashboard/HotelRateCard"
 import MainLogin from "../pages/MainLogin"
+import CreateAccount from "../pages/CreateAccount"
 
 export {
     Home,
@@ -131,5 +132,6 @@ export {
     BranchDetails,
     EmployeeDetails,
     HotelRateCard,
-    MainLogin
+    MainLogin,
+    CreateAccount
 }

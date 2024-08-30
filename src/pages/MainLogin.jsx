@@ -81,7 +81,7 @@ function Login() {
               >
                 Forgot Password?
               </Link>
-              <Link to="/signup" className="text-blue-500 hover:underline">
+              <Link to="/create-account" className="text-blue-500 hover:underline">
                 Don't have an account? Sign up
               </Link>
             </div>
