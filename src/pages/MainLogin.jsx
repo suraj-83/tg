@@ -27,7 +27,7 @@ function Login() {
     if (user) {
       // Navigate to the appropriate dashboard based on the user type
       const dashboardRoute = user.userType === VENDOR_TYPE_NAME 
-        ? '/vendor-dashboard' 
+        ? '/vendordashboard' 
         : user.userType === CORPORATE_TYPE_NAME 
         ? '/corporatedashboard' 
         : user.userType === RETAIL_TYPE_NAME
