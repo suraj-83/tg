@@ -211,13 +211,13 @@ const Header = () => {
                                     </ul>
                                 )}
                             </li>
-
+                            
                             {isLoggedIn ? (
                                 <li className="border-b md:border-none">
                                     <button 
                                         type="button" 
                                         onClick={(e) => { handleLogout(e); closeMobileMenu(); }} 
-                                        className="block w-full py-4 px-2 text-white bg-red-600 rounded-md hover:bg-red-800 transition-colors text-left md:text-center"
+                                        className="border-b rounded-r-full md:border-none md:flex md:items-center md:justify-center md:w-auto md:whitespace-nowrap hover:opacity-95 hover:text-white block w-full py-4 px-2 text-white bg-red-600 rounded-md hover:bg-red-800 transition-colors text-left md:text-center"
                                     >
                                         Logout
                                     </button>
