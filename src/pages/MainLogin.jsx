@@ -26,14 +26,13 @@ function Login() {
       });
 
       if (response?.payload?.data?.success) {
+        const userType = response?.payload?.data?.data?.userType;
+        console.log(userType)
         // Navigate to the appropriate dashboard based on the user type
-        const dashboardRoute = user?.userType === VENDOR_TYPE_NAME 
-          ? '/vendordashboard' 
-          : user?.userType === CORPORATE_TYPE_NAME 
-          ? '/corporatedashboard' 
-          : user?.userType === RETAIL_TYPE_NAME
-          ? '/retaildashboard'
-          : '';
+        const dashboardRoute = userType === VENDOR_TYPE_NAME 
+          ? '/venderdashboard' : (userType === CORPORATE_TYPE_NAME
+            ? '/corporatedashboard' : (userType === RETAIL_TYPE_NAME ? '/retaildashboard' : '')
+          )
         
         navigate(dashboardRoute);
       }
