@@ -27,10 +27,10 @@ function Login() {
 
       if (response?.payload?.data?.success) {
         const userType = response?.payload?.data?.data?.userType;
-        console.log(userType)
+        // console.log(userType)
         // Navigate to the appropriate dashboard based on the user type
         const dashboardRoute = userType === VENDOR_TYPE_NAME 
-          ? '/venderdashboard' : (userType === CORPORATE_TYPE_NAME
+          ? '/vendordashboard' : (userType === CORPORATE_TYPE_NAME
             ? '/corporatedashboard' : (userType === RETAIL_TYPE_NAME ? '/retaildashboard' : '')
           )
         

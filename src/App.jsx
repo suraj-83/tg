@@ -31,11 +31,11 @@ function App() {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="verify-otp" element={<VerifyOtp />} />
                 <Route path="reset-password" element={<ResetPassword />} />
-                <Route path="retail-login" element={<RetailLogin />} />
+                {/* <Route path="retail-login" element={<RetailLogin />} /> */}
                 <Route path="retail-profile" element={<RetailProfile />} />
-                <Route path="corporate-login" element={<CorporateLogin />} /> 
+                {/* <Route path="corporate-login" element={<CorporateLogin />} />  */}
                 <Route path="corporate-profile" element={<CorporateProfile />} />
-                <Route path="vendor-login" element={<VendorLogin />} />
+                {/* <Route path="vendor-login" element={<VendorLogin />} /> */}
                 <Route path="flightbookings" element={<FlightBookings />} />
                 <Route path="trainbookings" element={<TrainBookings />} />
                 <Route path="cabbookings" element={<CabBookings />} />
@@ -44,7 +44,7 @@ function App() {
                 <Route path="passport" element={<Passport />} /> {/* Add this line for admin route */}
                 <Route path="travelinsurance" element={<TravelInsuranceForm />} />
                 <Route path="healthlifeinsurance" element={<HealthLifeInsuranceForm />} />
-                <Route path="main-login" element={<MainLogin />} />
+                {!localStorage.getItem("isLoggedIn") && <Route path="main-login" element={<MainLogin />} />}
                 {/* Admin */}
                 <Route path="admin/corporate-users" element={<CorporateUsers />} />
                 <Route path="admin/vendor-details" element={<VendorDetails />} />
@@ -125,16 +125,17 @@ const RequireEmployeeAuth = ({ children }) => {
     return isEmployee ? children : <Navigate to="/employeelogin" replace />;
 };
 const RequireRetailAuth = ({ children }) => {
-    const isRetail = localStorage.getItem('isRetail') === 'true'; 
+    // const isRetail = localStorage.getItem('isRetail') === 'true'; 
+    const isRetail = localStorage.getItem('isLoggedIn') === 'true';
     return isRetail ? children : <Navigate to="/main-login" replace />;
 };
 const RequireCorporateAuth = ({ children }) => {
-    const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
+    const isCorporate = localStorage.getItem('isLoggedIn') === 'true'; 
     return isCorporate ? children : <Navigate to="/main-login" replace />;
 };
 
 const RequireVendorAuth = ({ children }) => {
-    const isVendor = localStorage.getItem('isVendor') === 'true'; 
+    const isVendor = localStorage.getItem('isLoggedIn') === 'true'; 
     return isVendor ? children : <Navigate to="/main-login" replace />;
 };
 
