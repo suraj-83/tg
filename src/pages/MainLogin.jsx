@@ -11,12 +11,27 @@ function Login() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, user, error } = useSelector((state) => state.auth, shallowEqual);
+  const { loading, user, error } = useSelector((state) => state.auth);
 
-  const handleSubmit = (e) => {
+  console.log("User", user)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      dispatch(login({ email, password }));
+      const response = await dispatch(login({ email, password }));
+
+      if (response?.payload?.data?.success) {
+        // Navigate to the appropriate dashboard based on the user type
+        const dashboardRoute = user.userType === VENDOR_TYPE_NAME 
+          ? '/vendordashboard' 
+          : user.userType === CORPORATE_TYPE_NAME 
+          ? '/corporatedashboard' 
+          : user.userType === RETAIL_TYPE_NAME
+          ? '/retaildashboard'
+          : '';
+        
+        navigate(dashboardRoute);
+      }
     } else {
       setIsValid(false);
     }
