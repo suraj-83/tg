@@ -13,20 +13,25 @@ function Login() {
   const navigate = useNavigate();
   const { loading, user, error } = useSelector((state) => state.auth);
 
-  console.log("User", user)
+  // console.log("User", user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      const response = await dispatch(login({ email, password }));
+      const response = await dispatch(login({ email, password })).catch((error) => {
+        if (error.response?.status === 401) {
+          toast.error("Invalid credentials");
+          throw error;
+        }
+      });
 
       if (response?.payload?.data?.success) {
         // Navigate to the appropriate dashboard based on the user type
-        const dashboardRoute = user.userType === VENDOR_TYPE_NAME 
+        const dashboardRoute = user?.userType === VENDOR_TYPE_NAME 
           ? '/vendordashboard' 
-          : user.userType === CORPORATE_TYPE_NAME 
+          : user?.userType === CORPORATE_TYPE_NAME 
           ? '/corporatedashboard' 
-          : user.userType === RETAIL_TYPE_NAME
+          : user?.userType === RETAIL_TYPE_NAME
           ? '/retaildashboard'
           : '';
         
@@ -41,13 +46,14 @@ function Login() {
   useEffect(() => {
     if (user) {
       // Navigate to the appropriate dashboard based on the user type
-      const dashboardRoute = user.userType === VENDOR_TYPE_NAME 
-        ? '/vendordashboard' 
-        : user.userType === CORPORATE_TYPE_NAME 
-        ? '/corporatedashboard' 
-        : user.userType === RETAIL_TYPE_NAME
-        ? '/retaildashboard'
-        : '';
+      const dashboardRoute = user?.userType === VENDOR_TYPE_NAME 
+          ? '/vendordashboard' 
+          : user?.userType === CORPORATE_TYPE_NAME 
+          ? '/corporatedashboard' 
+          : user?.userType === RETAIL_TYPE_NAME
+          ? '/retaildashboard'
+          : '';
+        
         
       navigate(dashboardRoute);
     }
