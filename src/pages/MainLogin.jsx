@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { RETAIL_TYPE_NAME, CORPORATE_TYPE_NAME, VENDOR_TYPE_NAME } from '../config/config';
+import {
+  RETAIL_TYPE_NAME,
+  CORPORATE_TYPE_NAME,
+  VENDOR_TYPE_NAME,
+} from "../config/config";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, user, error } = useSelector((state) => state.auth);
@@ -18,46 +22,59 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      const response = await dispatch(login({ email, password })).catch((error) => {
-        if (error.response?.status === 401) {
-          toast.error("Invalid credentials");
-          throw error;
+      const response = await dispatch(login({ email, password })).catch(
+        (error) => {
+          if (error.response?.status === 401) {
+            toast.error("Invalid credentials");
+            throw error;
+          }
         }
-      });
+      );
 
       if (response?.payload?.data?.success) {
         const userType = response?.payload?.data?.data?.userType;
         // console.log(userType)
         // Navigate to the appropriate dashboard based on the user type
-        const dashboardRoute = userType === VENDOR_TYPE_NAME 
-          ? '/vendordashboard' : (userType === CORPORATE_TYPE_NAME
-            ? '/corporatedashboard' : (userType === RETAIL_TYPE_NAME ? '/retaildashboard' : '')
-          )
-        
+        const dashboardRoute =
+          userType === VENDOR_TYPE_NAME
+            ? "/vendordashboard"
+            : userType === CORPORATE_TYPE_NAME
+            ? "/corporatedashboard"
+            : userType === RETAIL_TYPE_NAME
+            ? "/retaildashboard"
+            : "";
+
         navigate(dashboardRoute);
+
+        if (userType === VENDOR_TYPE_NAME) {
+          localStorage.setItem("isVendor", true);
+        } else if (userType === CORPORATE_TYPE_NAME) {
+          localStorage.setItem("isCorporate", true);
+        } else if (userType === RETAIL_TYPE_NAME) {
+          localStorage.setItem("isRetail", true);
+        }
       }
     } else {
       setIsValid(false);
     }
   };
 
-
   useEffect(() => {
     if (user) {
       // Navigate to the appropriate dashboard based on the user type
-      const dashboardRoute = user?.userType === VENDOR_TYPE_NAME 
-          ? '/vendordashboard' 
-          : user?.userType === CORPORATE_TYPE_NAME 
-          ? '/corporatedashboard' 
+      const dashboardRoute =
+        user?.userType === VENDOR_TYPE_NAME
+          ? "/vendordashboard"
+          : user?.userType === CORPORATE_TYPE_NAME
+          ? "/corporatedashboard"
           : user?.userType === RETAIL_TYPE_NAME
-          ? '/retaildashboard'
-          : '';
-        
-        
+          ? "/retaildashboard"
+          : "";
+
       navigate(dashboardRoute);
     }
   }, [user, navigate]);
-  
+
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 animate-gradient-x">
       <div className="bg-white/50 rounded-lg shadow-lg p-5 z-10 flex items-center justify-center border border-gray-100 flex-col w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
@@ -86,16 +103,14 @@ function Login() {
           {!isValid && (
             <p className="text-red-500 mt-1">Invalid email or password</p>
           )}
-          {error && (
-            <p className="text-red-500 mt-1">{error}</p>
-          )}
+          {error && <p className="text-red-500 mt-1">{error}</p>}
           <div className="mb-4 flex justify-between items-center">
             <button
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
               disabled={loading}
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? "Logging in..." : "Login"}
             </button>
             <div className="flex items-center">
               <Link
@@ -104,7 +119,10 @@ function Login() {
               >
                 Forgot Password?
               </Link>
-              <Link to="/create-account" className="text-blue-500 hover:underline">
+              <Link
+                to="/create-account"
+                className="text-blue-500 hover:underline"
+              >
                 Don't have an account? Sign up
               </Link>
             </div>
