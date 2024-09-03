@@ -126,16 +126,16 @@ const RequireEmployeeAuth = ({ children }) => {
 };
 const RequireRetailAuth = ({ children }) => {
     // const isRetail = localStorage.getItem('isRetail') === 'true'; 
-    const isRetail = localStorage.getItem('isLoggedIn') === 'true';
+    const isRetail = localStorage.getItem('isRetail') === 'true';
     return isRetail ? children : <Navigate to="/main-login" replace />;
 };
 const RequireCorporateAuth = ({ children }) => {
-    const isCorporate = localStorage.getItem('isLoggedIn') === 'true'; 
+    const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
     return isCorporate ? children : <Navigate to="/main-login" replace />;
 };
 
 const RequireVendorAuth = ({ children }) => {
-    const isVendor = localStorage.getItem('isLoggedIn') === 'true'; 
+    const isVendor = localStorage.getItem('isVendor') === 'true'; 
     return isVendor ? children : <Navigate to="/main-login" replace />;
 };
 
