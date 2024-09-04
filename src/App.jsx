@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,CreateAccount,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,MainLogin,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,AccessDenied,CreateAccount,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,MainLogin,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
 import CorporateDashboard from './components/CorporateDashboard/CorporateDashboard' // Import the CorporateDashboard component
@@ -105,6 +105,8 @@ function App() {
                 <Route path="vendordashboard/vendor-hotelratecard" element={<HotelRateCard />} />
                 <Route path="vendordashboard/vendor-eventratecardform" element={<EventRateCardForm />} />
                 <Route path="vendordashboard/vendor-eventratecard" element={<EventRateCard />} />
+
+                <Route path="access-denied" element={<AccessDenied />} />
                 
 
                 <Route
@@ -127,16 +129,16 @@ const RequireEmployeeAuth = ({ children }) => {
 const RequireRetailAuth = ({ children }) => {
     // const isRetail = localStorage.getItem('isRetail') === 'true'; 
     const isRetail = localStorage.getItem('isRetail') === 'true';
-    return isRetail ? children : <Navigate to="/main-login" replace />;
+    return isRetail ? children : <Navigate to="/access-denied" replace />;
 };
 const RequireCorporateAuth = ({ children }) => {
     const isCorporate = localStorage.getItem('isCorporate') === 'true'; 
-    return isCorporate ? children : <Navigate to="/main-login" replace />;
+    return isCorporate ? children : <Navigate to="/access-denied" replace />;
 };
 
 const RequireVendorAuth = ({ children }) => {
     const isVendor = localStorage.getItem('isVendor') === 'true'; 
-    return isVendor ? children : <Navigate to="/main-login" replace />;
+    return isVendor ? children : <Navigate to="/access-denied" replace />;
 };
 
 const RequireAuth = ({ children }) => {

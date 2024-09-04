@@ -65,6 +65,7 @@ import EmployeeDetails from "./Employees"
 import HotelRateCard from "../components/VendorDashboard/HotelRateCard"
 import MainLogin from "../pages/MainLogin"
 import CreateAccount from "../pages/CreateAccount"
+import AccessDenied from "./AccessDenied"
 
 export {
     Home,
@@ -133,5 +134,6 @@ export {
     EmployeeDetails,
     HotelRateCard,
     MainLogin,
-    CreateAccount
+    CreateAccount,
+    AccessDenied
 }
