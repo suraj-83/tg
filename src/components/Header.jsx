@@ -34,6 +34,13 @@ const Header = () => {
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
     };
+    const handleProtectedRoute = (route) => {
+        if (!isLoggedIn) {
+            navigate("/main-login");
+        } else {
+            navigate(route);
+        }
+    };
 
     return (
         <nav className="shadow-md">
@@ -70,7 +77,7 @@ const Header = () => {
                             </div>
                         )}
                         
-                        <div className="lg:flex md:flex lg:ml-auto items-center">
+                        <div className="lg:flex md:flex lg:ml-auto md:ml-auto items-center">
                             <li className="border-b md:border-none">
                                 <Link 
                                     to="/" 
@@ -104,46 +111,42 @@ const Header = () => {
                                 {travelMode && (
                                     <ul className="lg:absolute md:absolute w-full bg-white text-gray-600 border pt-2 left-0 md:right-0 md:w-auto md:left-auto">
                                         <li>
-                                            <Link 
-                                                to="/flightbookings" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/flightbookings")} 
+                                                className="block px-10 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Flight
-                                            </Link>
+                                            </button>
                                         </li>
                                         <li>
-                                            <Link 
-                                                to="/trainbookings" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/trainbookings")} 
+                                                className="block px-10 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Train
-                                            </Link>
+                                            </button>
                                         </li>
                                         <li>
-                                            <Link 
-                                                to="/cabbookings" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/cabbookings")} 
+                                                className="block px-10 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Cab
-                                            </Link>
+                                            </button>
                                         </li>
                                         <li>
-                                            <Link 
-                                                to="/volvobusbookings" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/volvobusbookings")} 
+                                                className="block px-10 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Volvo Bus
-                                            </Link>
+                                            </button>
                                         </li>
                                     </ul>
                                 )}
                             </li>
-                            
-                            <li 
+                                 {/* Travel Services Dropdown */}
+                                 <li 
                                 className="relative border-b md:border-none" 
                                 onMouseEnter={() => setServices(true)} 
                                 onMouseLeave={() => setTimeout(() => setServices(false), 100)}
@@ -157,23 +160,22 @@ const Header = () => {
                                 {services && (
                                     <ul className="w-full lg:absolute md:absolute bg-white text-gray-600 border pt-2 md:right-0 md:w-auto md:left-auto">
                                         <li>
-                                            <Link 
-                                                to="/hotelbookings" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/hotelbookings")} 
+                                                className="block px-5 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Hotel
-                                            </Link>
+                                            </button>
                                         </li>
                                         <li>
-                                            <Link 
-                                                to="/passport" 
-                                                onClick={closeMobileMenu} 
-                                                className="block px-5 py-2 hover:bg-gray-200"
+                                            <button 
+                                                onClick={() => handleProtectedRoute("/passport")} 
+                                                className="block px-5 py-2 hover:bg-gray-200 w-full text-left"
                                             >
                                                 Passport
-                                            </Link>
+                                            </button>
                                         </li>
+                                        {/* Insurance Submenu */}
                                         <li 
                                             className="relative" 
                                             onMouseEnter={() => setInsurance(true)} 
@@ -186,24 +188,22 @@ const Header = () => {
                                                 Insurance <span>▾</span>
                                             </button>
                                             {insurance && (
-                                                <ul className="w-full lg:absolute md:absolute lg:left-full md:left-full lg:-top-[0.5px] md:-top-[0.8px] bg-white text-gray-600 border">
+                                                <ul className=" lg:absolute md:absolute lg:left-full md:left-full lg:-top-[0.5px] md:-top-[0.8px] bg-white text-gray-600 border">
                                                     <li>
-                                                        <Link 
-                                                            to="/travelinsurance" 
-                                                            onClick={closeMobileMenu} 
-                                                            className="block px-5 py-2 hover:bg-gray-200"
+                                                        <button 
+                                                            onClick={() => handleProtectedRoute("/travelinsurance")} 
+                                                            className="block px-2 py-2 hover:bg-gray-200"
                                                         >
                                                             Travel
-                                                        </Link>
+                                                        </button>
                                                     </li>
                                                     <li>
-                                                        <Link 
-                                                            to="/healthlifeinsurance" 
-                                                            onClick={closeMobileMenu} 
-                                                            className="block px-5 py-2 hover:bg-gray-200"
+                                                        <button 
+                                                            onClick={() => handleProtectedRoute("/healthlifeinsurance")} 
+                                                            className="block px-2 py-2 hover:bg-gray-200"
                                                         >
                                                             Health
-                                                        </Link>
+                                                        </button>
                                                     </li>
                                                 </ul>
                                             )}

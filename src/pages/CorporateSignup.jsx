@@ -64,7 +64,7 @@ function Form() {
       const response = await dispatch(corporateSignup(formData));
 
       if (response?.payload?.data?.success) {
-        navigate("/corporate-login");
+        navigate("/main-login");
       }
 
       setFormData(initialFormData); // Reset form data to initial state

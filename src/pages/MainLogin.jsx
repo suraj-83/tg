@@ -4,7 +4,7 @@ import {
   CORPORATE_TYPE_NAME,
   VENDOR_TYPE_NAME,
 } from "../config/config";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
 
@@ -16,8 +16,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, user, error } = useSelector((state) => state.auth);
-
-  // console.log("User", user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +31,6 @@ function Login() {
 
       if (response?.payload?.data?.success) {
         const userType = response?.payload?.data?.data?.userType;
-        // console.log(userType)
-        // Navigate to the appropriate dashboard based on the user type
         const dashboardRoute =
           userType === VENDOR_TYPE_NAME
             ? "/vendordashboard"
@@ -61,7 +57,6 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      // Navigate to the appropriate dashboard based on the user type
       const dashboardRoute =
         user?.userType === VENDOR_TYPE_NAME
           ? "/vendordashboard"
@@ -80,9 +75,8 @@ function Login() {
       <div className="bg-white/50 rounded-lg shadow-lg p-5 z-10 flex items-center justify-center border border-gray-100 flex-col w-full md:w-1/2 lg:w-1/3 backdrop-blur-md">
         <form onSubmit={handleSubmit} className="flex flex-col w-full">
           <h1 className="mb-3 font-bold text-center uppercase text-2xl underline">
-            Login
-          </h1>
-          <div className="mb-4">
+    Login</h1>
+    <div className="mb-4">
             <input
               type="email"
               placeholder="Email Address"
@@ -100,32 +94,30 @@ function Login() {
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
+
+
           {!isValid && (
-            <p className="text-red-500 mt-1">Invalid email or password</p>
+            <p className="text-red-500 text-sm">Invalid email or password</p>
           )}
-          {error && <p className="text-red-500 mt-1">{error}</p>}
-          <div className="mb-4 flex justify-between items-center">
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
+          <div className="flex items-center mt-2 justify-between">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-            <div className="flex items-center">
-              <Link
-                to="/forgot-password"
-                className="text-blue-500 hover:underline mr-2"
-              >
-                Forgot Password?
-              </Link>
-              <Link
-                to="/create-account"
-                className="text-blue-500 hover:underline"
-              >
-                Don't have an account? Sign up
-              </Link>
-            </div>
+          </div>
+
+          <div className="flex justify-between mt-4">
+            <Link to="/forgot-password" className="text-sm text-indigo-600 hover:underline">
+              Forgot Password?
+            </Link>
+            <Link to="/create-account" className="text-sm text-indigo-600 hover:underline">
+              Don't have an account? Sign up
+            </Link>
           </div>
         </form>
       </div>

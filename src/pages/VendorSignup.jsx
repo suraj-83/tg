@@ -62,7 +62,7 @@ function Form() {
       console.log(response);
 
       if (response?.payload?.data?.success) {
-        navigate("/vendor-login");
+        navigate("/main-login");
       }
 
       console.log(formData);
