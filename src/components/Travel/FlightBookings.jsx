@@ -90,7 +90,27 @@ const FlightBookingForm = () => {
         className="bg-blue-100 bg-opacity-75 rounded-lg min-w-screen min-h-screen shadow-[0_0_10px_black]"
       >
         <h1 className="pb-4 font-bold pt-4 text-center bg-blue-100 text-blue-700 uppercase text-2xl underline">
-          Flight Booking Request Form
+                    {/* Back icon */}
+
+    <button type="button" onClick={() => navigate(-1)} className="flex items-center text-blue-500 hover:text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 ml-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span className="no-underline block">Go Back</span>
+    </button>
+  
+Flight Booking Request Form
         </h1>
         <div className="overflow-auto">
           <table className="min-w-full bg-blue-100 text-sm">
@@ -313,9 +333,29 @@ const FlightBookingForm = () => {
           className="bg-blue-100 bg-opacity-95 p-5 rounded-lg  w-full shadow-[0_0_10px_black]"
         >
           <div>
-            <h1 className="pb-4 font-bold  text-center text-blue-700 uppercase sm:text-sm md:text-2xl underline">
-              Flight Booking Request Form
-            </h1>            
+          <h1 className="pb-4 font-bold pt-4 text-center bg-blue-100 text-blue-700 uppercase text-sm underline">
+                    {/* Back icon */}
+
+    <button type="button" onClick={() => navigate(-1)} className="flex items-center text-blue-500 hover:text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 ml-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span className="no-underline block">Go Back</span>
+    </button>
+  
+Flight Booking Request Form
+        </h1>        
             {formData.map((person, index) => (
               <div
                 key={index}

@@ -209,11 +209,15 @@ export const logout = createAsyncThunk("auth/logout", async () => {
     const response = await axiosInstance.get("/user/logout");
     console.log(response);
     toast.success(response.data.message);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
     return response.data;
   } catch (error) {
     toast.error(error?.response?.data?.message);
   }
 });
+
 
 // Get All Users
 export const getAllUsers = createAsyncThunk("auth/getAllUsers", async () => {

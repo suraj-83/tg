@@ -74,15 +74,33 @@ const PassportForm = () => {
         backgroundImage: `url('https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?q=80&w=1812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
       }}
     >
-      <div className="min-h-[100vh] flex items-start justify-start py-5 px-10">
+      <div>
         <form
           onSubmit={handleSubmit}
-          className="bg-blue-100 bg-opacity-65 p-5 rounded-lg w-full lg:w-1/2 shadow-[0_0_10px_black]"
+          className="bg-blue-100 bg-opacity-65 p-5 rounded-lg w-screen min-h-screen shadow-[0_0_10px_black]"
         >
           <h1 className="pb-4 font-bold text-center text-blue-700 uppercase text-2xl underline">
+          
+    <button type="button" onClick={() => navigate(-1)} className="flex items-center text-blue-950 hover:text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 ml-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span className="no-underline block">Go Back</span>
+    </button>
             Traveller Information
           </h1>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
             {/* Other form fields */}
             <div>
               <label className="block text-sm font-medium">

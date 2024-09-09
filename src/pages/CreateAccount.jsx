@@ -37,7 +37,7 @@ const UserTypeSelection = () => {
         </button>
         <button
           onClick={() => handleUserTypeClick('corporate')}
-          className="px-6 py-3 bg-white bg-opacity-20 uppercase text-white rounded-lg shadow-md hover:bg-opacity-30 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 transition ease-in-out delay-150 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-950 hover:opacity-100 duration-300 ..."
+          className="px-2 py-3 bg-white bg-opacity-20 uppercase text-white rounded-lg shadow-md hover:bg-opacity-30 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 transition ease-in-out delay-150 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-950 hover:opacity-100 duration-300 ..."
         >
           Corporate
         </button>

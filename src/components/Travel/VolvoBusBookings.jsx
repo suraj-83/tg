@@ -84,6 +84,24 @@ const BusBookingForm = () => {
         >
           <div>
             <h1 className="pb-4 font-bold pt-4 text-center bg-blue-100 text-blue-700 uppercase text-2xl underline">
+            
+    <button type="button" onClick={() => navigate(-1)} className="flex items-center text-blue-500 hover:text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 ml-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span className="no-underline block">Go Back</span>
+    </button>
               Volvo Bus Booking Request Form
             </h1>
           </div>
@@ -245,6 +263,24 @@ const BusBookingForm = () => {
     >
         <div>
         <h1 className="pb-4 font-bold text-sm text-center text-blue-700 uppercase md:text-2xl underline">
+        
+    <button type="button" onClick={() => navigate(-1)} className="flex items-center text-blue-500 hover:text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 ml-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span className="no-underline block">Go Back</span>
+    </button>
         Volvo Bus Booking Request Form
           </h1>
         </div>        
