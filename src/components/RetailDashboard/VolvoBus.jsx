@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
 import Img from "../../assets/volvo-bus.webp";
 import UserSidebar from "./UserSidebar";
-import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
+import { getVolvoBusTravelDetails, deleteBusTravel } from "../../redux/slices/travelSlice";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
@@ -17,16 +16,20 @@ const VolvoBusBookingDetails = () => {
     fetchData();
   }, [dispatch]);
 
-  const handleCancel = (index) => {
-    const updatedDetails = travelDetails.map((booking, i) => {
-      if (i === index) {
-        return { ...booking, status: "Cancelled" };
+  const handleCancel = async (id) => {
+    try {
+      const response = await dispatch(deleteBusTravel(id));
+      if (response.payload.success) {
+        setTravelDetails(
+          travelDetails.map((booking) =>
+            booking.id === id ? { ...booking, status: "Cancelled" } : booking
+          )
+        );
       }
-      return booking;
-    });
-    setTravelDetails(updatedDetails);
+    } catch (error) {
+      console.error("Failed to cancel bus travel:", error);
+    }
   };
-
   return (
           <div className="flex">
         <UserSidebar />

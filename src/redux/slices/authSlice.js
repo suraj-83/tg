@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance.js";
+import { VENDOR_TYPE_NAME } from "../../config/config.js";
 
 let parsedUser = {};
 try {
@@ -204,6 +205,7 @@ export const branchLogin = createAsyncThunk(
   }
 );
 
+
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
@@ -316,6 +318,10 @@ const authSlice = createSlice({
           localStorage.setItem("user", JSON.stringify(data));
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("role", data.userType);
+
+          if (data.userType === VENDOR_TYPE_NAME) {
+            localStorage.setItem("services", JSON.stringify(data.services));
+          }
 
           state.isLoggedIn = true;
           state.user = data;

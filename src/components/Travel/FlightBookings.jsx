@@ -72,7 +72,7 @@ const FlightBookingForm = () => {
         navigate("/");
       }
     } else {
-      alert("Please fill all the fields");
+      toast.error("Please fill all the fields");
     }
   };
 

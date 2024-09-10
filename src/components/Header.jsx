@@ -22,7 +22,6 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   const userType =
     useSelector((state) => state?.auth?.role) || localStorage.getItem("role");
-    console.log(userType);
 
   // Add userType from the Redux store or local storage
 

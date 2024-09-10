@@ -40,6 +40,42 @@ export const getTrainTravelDetails = createAsyncThunk('travel/getTrainTravelDeta
     }
 })
 
+export const updateTrainTravel = createAsyncThunk('travel/update-train', async (data) => {
+    try {
+      const response = axiosInstance.put(`/travel/train/${data.id}`, data);
+  
+      toast.promise(response, {
+        loading: 'Updating train travel...',
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to update train travel"
+      });
+  
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    }
+});
+
+export const deleteTrainTravel = createAsyncThunk('travel/delete-train', async (id) => {
+    try {
+      const response = axiosInstance.delete(`/travel/train/${id}`);
+  
+      toast.promise(response, {
+        loading: 'Deleting train travel...',
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to delete train travel"
+      });
+  
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    }
+});
+
 export const createAirTravel = createAsyncThunk('travel/create-air', async (data) => {
     try {
         const response = axiosInstance.post("/travel/air", data)
@@ -71,6 +107,41 @@ export const getAirTravelDetails = createAsyncThunk('travel/getAirTravelDetails'
         toast.error(error?.response?.data?.message)
     }
 })
+
+// Air Travel PUT
+export const updateAirTravel = createAsyncThunk('travel/update-air', async (data) => {
+    try {
+    const response = axiosInstance.put(`/travel/air/${data.id}`, data);
+    
+    toast.promise(response, {
+    loading: 'Updating air travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to update air travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
+// Air Travel DELETE
+export const deleteAirTravel = createAsyncThunk('travel/delete-air', async (id) => {
+    try {
+    const response = axiosInstance.delete(`/travel/air/${id}`);
+    
+    toast.promise(response, {
+    loading: 'Deleting air travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to delete air travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
 
 export const createVolvoBusTravel = createAsyncThunk('travel/create-volvoBus', async (data) => {
     try {
@@ -104,6 +175,41 @@ export const getVolvoBusTravelDetails = createAsyncThunk('travel/getVolvoBusTrav
     }
 })
 
+// Bus Travel PUT
+export const updateBusTravel = createAsyncThunk('travel/update-bus', async (data) => {
+    try {
+    const response = axiosInstance.put(`/travel/bus/${data.id}`, data);
+    
+    toast.promise(response, {
+    loading: 'Updating bus travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to update bus travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
+// Bus Travel DELETE
+export const deleteBusTravel = createAsyncThunk('travel/delete-bus', async (id) => {
+    try {
+    const response = axiosInstance.delete(`/travel/bus/${id}`);
+    
+    toast.promise(response, {
+    loading: 'Deleting bus travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to delete bus travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
+
 export const createCabTravel = createAsyncThunk('travel/create-cab', async (data) => {
     try {
         const response = axiosInstance.post("/travel/cab", data)
@@ -134,6 +240,41 @@ export const getCabTravelDetails = createAsyncThunk('travel/getCabTravelDetails'
         toast.error(error?.message)
     }
 })
+
+// Cab Travel PUT
+export const updateCabTravel = createAsyncThunk('travel/update-cab', async (data) => {
+    try {
+    const response = axiosInstance.put(`/travel/cab/${data.id}`, data);
+    
+    toast.promise(response, {
+    loading: 'Updating cab travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to update cab travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
+// Cab Travel DELETE
+export const deleteCabTravel = createAsyncThunk('travel/delete-cab', async (id) => {
+    try {
+    const response = axiosInstance.delete(`/travel/cab/${id}`);
+    
+    toast.promise(response, {
+    loading: 'Deleting cab travel...',
+    success: (data) => { return data?.data?.message; },
+    error: "Failed to delete cab travel"
+    });
+    
+    return await response;
+    } catch (error) {
+    toast.error(error?.response?.data?.message);
+    }
+});
+
 
 export const createHotelBooking = createAsyncThunk('travel/create-hotel-booking', async (data) => {
     try {
