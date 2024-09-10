@@ -132,6 +132,7 @@ export const employeeSignup = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async (data) => {
   try {
     const response = await axiosInstance.post("/user/login", data).catch((error) => {
+      console.log("user =", data);
       if (error.response.status === 401) {
         toast.error("Invalid credentials");
         throw error;
@@ -146,7 +147,7 @@ export const login = createAsyncThunk('auth/login', async (data) => {
       success: (data) => data?.data?.message,
       error: "Error Logging In",
     });
-
+localStorage.setItem("role", data);
     return response;
   } catch (error) {
     console.log(error);
@@ -309,16 +310,16 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        const { user, role } = action.payload.data;
+        const { data } = action.payload.data;
 
         if (action.payload.data.success) {
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(data));
           localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("role", role);
+          localStorage.setItem("role", data.userType);
 
           state.isLoggedIn = true;
-          state.user = user;
-          state.role = role;
+          state.user = data;
+          state.role = data.userType;
         }
       })
       .addCase(employeeLogin.fulfilled, (state, action) => {

@@ -11,6 +11,7 @@ const RateCardForm = () => {
       vehicleType: "",
       fourHours: "",
       eightHours: "",
+      twelveHours: "",  // Added for the 12 hrs / 120 kms option
       extraHour: "",
       extraKm: "",
       nightCharge: "",
@@ -22,7 +23,14 @@ const RateCardForm = () => {
   const handleChange = (index, e) => {
     const { name, value } = e.target;
     const newFormData = [...formData];
-    newFormData[index][name] = value;
+
+    // Enforce the max limit for "outstationKm"
+    if (name === "outstationKm" && value > 250) {
+      newFormData[index][name] = 250;
+    } else {
+      newFormData[index][name] = value;
+    }
+
     setFormData(newFormData);
   };
 
@@ -33,6 +41,7 @@ const RateCardForm = () => {
         vehicleType: "",
         fourHours: "",
         eightHours: "",
+        twelveHours: "",  // Added for the 12 hrs / 120 kms option
         extraHour: "",
         extraKm: "",
         nightCharge: "",
@@ -60,6 +69,7 @@ const RateCardForm = () => {
             vehicleType: "",
             fourHours: "",
             eightHours: "",
+            twelveHours: "",  // Reset for the 12 hrs / 120 kms option
             extraHour: "",
             extraKm: "",
             nightCharge: "",
@@ -97,6 +107,7 @@ const RateCardForm = () => {
                   <th className="py-2 px-4 border min-w-[100px]">Vehicle Type</th>
                   <th className="py-2 px-4 border min-w-[100px]">4 Hrs / 40 Kms</th>
                   <th className="py-2 px-4 border min-w-[100px]">8 Hrs / 80 Kms</th>
+                  <th className="py-2 px-4 border min-w-[100px]">12 Hrs / 120 Kms</th> {/* Added header */}
                   <th className="py-2 px-4 border min-w-[100px]">Extra Hour</th>
                   <th className="py-2 px-4 border min-w-[100px]">Extra Km</th>
                   <th className="py-2 px-4 border min-w-[100px]">Night Charge</th>
@@ -111,7 +122,7 @@ const RateCardForm = () => {
                     {Object.keys(data).map((field) => (
                       <td key={field} className="border p-2">
                         <input
-                          type="text"
+                          type="text" // Keep input type as text
                           name={field}
                           value={data[field]}
                           onChange={(e) => handleChange(index, e)}
