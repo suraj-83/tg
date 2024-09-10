@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import UserSidebar from "./UserSidebar.jsx";
-import UserHeader from "./UserHeader.jsx";
-import { getAirTravelDetails } from "../../redux/slices/travelSlice.js";
+import { getAirTravelDetails,deleteAirTravel } from "../../redux/slices/travelSlice.js";
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
@@ -16,9 +15,15 @@ const FlightBookingDetails = () => {
     fetchData();
   }, []);
 
-  const handleCancel = (bookingId) => {
-    // Simulate canceling a booking
-    // setTravelDetails(travelDetails.filter(detail => detail.id !== bookingId));
+  const handleCancel = async (bookingId) => {
+    try {
+      const response = await dispatch(deleteAirTravel(bookingId));
+      if (response.payload.success) {
+        setTravelDetails(travelDetails.filter(detail => detail.id !== bookingId));
+      }
+    } catch (error) {
+      console.error("Failed to cancel air travel:", error);
+    }
   };
 
 

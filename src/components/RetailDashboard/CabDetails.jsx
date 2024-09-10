@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import UserHeader from "./UserHeader";
 import UserSidebar from "./UserSidebar";
-import { getCabTravelDetails } from "../../redux/slices/travelSlice";
+import { getCabTravelDetails,deleteCabTravel } from "../../redux/slices/travelSlice";
 
 const CabBookingDetails = () => {
   const dispatch = useDispatch();
@@ -16,8 +15,16 @@ const CabBookingDetails = () => {
     fetchData();
   }, []);
 
+
   const cancelBooking = async (id) => {
-    // TODO: Implement cancel booking logic
+    try {
+      const response = await dispatch(deleteCabTravel(id));
+      if (response.payload.success) {
+        setTravelDetails(travelDetails.filter((booking) => booking.id !== id));
+      }
+    } catch (error) {
+      console.error("Failed to cancel cab booking:", error);
+    }
   };
 
   return (
