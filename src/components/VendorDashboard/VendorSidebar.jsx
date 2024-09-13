@@ -17,7 +17,6 @@ import {
 import { FaCar } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import { TbSettingsPlus } from "react-icons/tb";
-import { VENDOR_TYPE_NAME } from "../../config/config";
 
 function VendorDashboard() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -25,22 +24,30 @@ function VendorDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   const servicesFromStorage = JSON.parse(localStorage.getItem("services")) || [];
-    
-  //   if (user?.userType === VENDOR_TYPE_NAME) {
-  //     setServices(servicesFromStorage);
-  //   } else {
-  //     setServices([]); // or handle other cases if needed
-  //   }
-  // }, []);
+  // Get services from localStorage and parse them
+  useEffect(() => {
+    const servicesFromStorage = localStorage.getItem("services");
+    console.log("Raw services from localStorage:", servicesFromStorage);
+
+    if (servicesFromStorage) {
+      try {
+        const parsedServices = JSON.parse(servicesFromStorage);
+        console.log("Parsed services:", parsedServices);
+        setServices(parsedServices); // Assuming parsedServices is an array
+      } catch (error) {
+        console.error("Error parsing services:", error);
+        setServices([]);
+      }
+    } else {
+      console.log("No services found in localStorage, setting empty array.");
+      setServices([]);
+    }
+  }, []);
 
   const handleLogout = async (e) => {
     e.preventDefault();
     const response = await dispatch(logout());
-    console.log("Logout");
-
+    console.log("Logout", response);
     if (response?.payload?.success) {
       navigate("/");
     }
@@ -77,8 +84,6 @@ function VendorDashboard() {
               <MdSpaceDashboard size={25} />
               <span>Dashboard</span>
             </Link>
-
-            {/* Management section that displays conditionally based on services */}
             <div className="group">
               <Link
                 to="#"
@@ -91,7 +96,8 @@ function VendorDashboard() {
                 <FaAngleRight className="h-5 w-5 group-hover:rotate-90 transition-transform" />
               </Link>
               <div className="ml-4 space-y-2 hidden group-hover:block">
-                {services.includes("Cab Vendor") && (
+                {/* Conditionally render only Cab Vendor routes */}
+                {services.includes("Cab") && (
                   <>
                     <Link
                       to="/vendordashboard/vendor-addcabrate"
@@ -101,7 +107,7 @@ function VendorDashboard() {
                       <span>Add Cab Rate</span>
                     </Link>
                     <Link
-                      to="/vendordashboard/vendor-CabRateCard"
+                      to="/vendordashboard/vendor-cabratecard"
                       className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
                     >
                       <FaCar size={22} />
@@ -110,7 +116,8 @@ function VendorDashboard() {
                   </>
                 )}
 
-                {services.includes("Hotel Vendor") && (
+                {/* Conditionally render only Hotel Vendor routes */}
+                {services.includes("Hotel") && (
                   <>
                     <Link
                       to="/vendordashboard/vendor-addhotelratecard"
@@ -129,7 +136,8 @@ function VendorDashboard() {
                   </>
                 )}
 
-                {services.includes("Event Vendor") && (
+                {/* Conditionally render only Event Vendor routes */}
+                {services.includes("Event") && (
                   <>
                     <Link
                       to="/vendordashboard/vendor-eventratecardform"
@@ -149,7 +157,6 @@ function VendorDashboard() {
                 )}
               </div>
             </div>
-
             <Link
               to="#"
               className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
@@ -161,7 +168,7 @@ function VendorDashboard() {
         </div>
         <div className="space-y-2">
           <Link
-            to="#"
+            to="/vendordashboard/vendor-profile"
             className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
           >
             <FaUserCircle size={22} />

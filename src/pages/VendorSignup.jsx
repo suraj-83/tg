@@ -33,6 +33,7 @@ function Form() {
     contactPersonSecondName: "",
     contactPersonLastName: "",
     contactPersonGender: "",
+    services: [],
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -49,6 +50,23 @@ function Form() {
       state: zipCodeMapping[zipCode]?.state || "",
     }));
   };
+
+ // Handle the selection of services
+ const handleServiceChange = (e) => {
+  const { value, checked } = e.target;
+  if (checked) {
+    setFormData((prevState) => ({
+      ...prevState,
+      services: [...prevState.services, value],
+    }));
+  } else {
+    setFormData((prevState) => ({
+      ...prevState,
+      services: prevState.services.filter((service) => service !== value),
+    }));
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,6 +118,25 @@ function Form() {
       readOnly
       className="w-full p-2 border border-gray-300 rounded"
     />
+  </div>
+
+  <div className="mb-4">
+    {/* <label className="block mb-2 font-semibold">Services</label> */}
+    <select
+      value={formData.services.join(",")}
+      onChange={(e) =>
+        setFormData((prevState) => ({
+          ...prevState,
+          services: e.target.value.split(","),
+        }))
+      }
+      className="w-full p-2 border border-gray-300 rounded"
+    >
+      <option value="">Select Services</option>
+      <option value="Cab">Cab</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Event">Event</option>
+    </select>
   </div>
 
   {/* Area of Work Selection */}

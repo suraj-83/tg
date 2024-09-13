@@ -76,6 +76,18 @@ export const fetchEventRateCard = createAsyncThunk('vendorDashboard/fetchEventRa
   }
 });
 
+export const updateVendorProfile = createAsyncThunk('vendorDashboard/updateVendorProfile', async (data, { rejectWithValue }) => {
+  try {
+      const response = await axiosInstance.put('/vendorDashboard/update-profile', data);
+      return response.data.data;
+  } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to update vendor profile');
+      return rejectWithValue(error.response?.data?.message || 'Failed to update vendor profile');
+  }
+});
+
+
+
 const vendorDashboardSlice = createSlice({
   name: 'vendorDashboard',
   initialState,
@@ -124,6 +136,17 @@ const vendorDashboardSlice = createSlice({
       .addCase(fetchEventRateCard.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch event rate card';
+      })
+      .addCase(updateVendorProfile.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateVendorProfile.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.vendorProfile = action.payload;
+      })
+      .addCase(updateVendorProfile.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'Failed to update vendor profile';
       });
   },
 });
