@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCabRateCard } from './../../redux/slices/vendorDashboardSlice';
 import FileUpload from './FileUpload';
+import BillUpload from './BillImgUpload';
+import ServiceTermsConditions from './CabTnC';
 import VendorSidebar from './VendorSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -44,7 +46,11 @@ const CabRateCard = () => {
       <VendorSidebar />
       <main className="min-h-screen bg-gradient-to-r from-blue-300 to-purple-500 w-full overflow-auto">
         <div className="pl-24 max-h-[90vh] overflow-auto">
+          <div className="flex gap-4 items-center mb-4">
           <FileUpload />
+        <BillUpload />
+        <ServiceTermsConditions />
+          </div>
           <div className="pr-4 max-h-[75vh] border-purple-500 border-b-2 border-t-2 overflow-auto">
             {status === 'loading' && <p>Loading...</p>}
             {status === 'failed' && <p>{error}</p>}

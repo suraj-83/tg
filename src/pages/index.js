@@ -66,6 +66,10 @@ import HotelRateCard from "../components/VendorDashboard/HotelRateCard"
 import MainLogin from "../pages/MainLogin"
 import CreateAccount from "../pages/CreateAccount"
 import AccessDenied from "./AccessDenied"
+import EventTnC from "../components/VendorDashboard/Tnc/EventTnC"
+import HotelTnC from "../components/VendorDashboard/Tnc/HotelTnC"
+import CabTnC from "../components/VendorDashboard/Tnc/CabTnC"
+
 
 export {
     Home,
@@ -135,5 +139,9 @@ export {
     HotelRateCard,
     MainLogin,
     CreateAccount,
-    AccessDenied
+    AccessDenied,
+    EventTnC,
+    HotelTnC,
+    CabTnC,
+
 }
