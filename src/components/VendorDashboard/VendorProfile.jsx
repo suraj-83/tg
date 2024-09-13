@@ -309,7 +309,7 @@ function VendorProfile() {
         <div className="mt-6">
           <h3 className="text-xl font-semibold">Services</h3>
           <ul className="list-disc pl-6">
-            {profileData.services.map((service, index) => (
+            {JSON.parse(profileData.services).map((service, index) => (
               <li key={index}>{service}</li>
             ))}
           </ul>
