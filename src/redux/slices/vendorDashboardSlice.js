@@ -78,7 +78,8 @@ export const fetchEventRateCard = createAsyncThunk('vendorDashboard/fetchEventRa
 
 export const updateVendorProfile = createAsyncThunk('vendorDashboard/updateVendorProfile', async (data, { rejectWithValue }) => {
   try {
-      const response = await axiosInstance.put('/vendorDashboard/update-profile', data);
+      const response = await axiosInstance.put('/vendor/update-profile', data);
+      console.log(response)
       return response.data.data;
   } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to update vendor profile');
