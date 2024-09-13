@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home, AboutUs, SignUp,ForgotPassword,HotelDetails,AccessDenied,CreateAccount,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,MainLogin,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
+import { Home, AboutUs,EventTnC,HotelTnC,CabTnC, SignUp,ForgotPassword,HotelDetails,AccessDenied,CreateAccount,HotelRateCard,AddBranchForm,BranchDetails,EmployeeLogin,EmployeeDetails,EmployeeCabDetails,EmployeeFlightDetails,EmployeeHotelDetails, EmployeeTrainDetails,EmployeeVolvoBusDetails,VendorHotelManagement,VendorBusManagement,VolvoBusDetails,HotelStatus,VendorTrainManagement,MainLogin,TrainStatus,TrainDetails, VolvoBus,VendorFlightManagement,AddCabs,Flights,FlightDetails,VendorCabManagement,VerifyOtp,ResetPassword,CabDetails,CabBookingDetail,PassportBookingsDetails,RetailLogin,RetailProfile,RetailUsers,AdminLogin, TrainBookingDetails,FlightBookingDetails,CorporateSignup,CorporateProfile,CorporateUsers, NotFound, VendorSignup,VendorLogin,VendorDetails,FlightBookings, TrainBookings, CabBookings,CabBookingDetails, VolvoBusBookings,VolvoBusBookingDetails, HotelBookings,HotelBookingDetails,CorporateLogin,Passport,TravelInsuranceForm,HealthLifeInsuranceForm,HealthInsuranceDetails,TravelInsunranceDetails } from "./pages";
 import AdminDashboard from './components/admin/AdminDashboard' // Import the AdminDashboard component
 import RetailDashboard from './components/RetailDashboard/RetailDashboard' // Import the RetailDashboard component
 import CorporateDashboard from './components/CorporateDashboard/CorporateDashboard' // Import the CorporateDashboard component
@@ -14,6 +14,7 @@ import HotelRateCardForm from './components/VendorDashboard/HotelRateForm';
 import EventRateCardForm from './components/VendorDashboard/EventRateForm';
 import EventRateCard from './components/VendorDashboard/EventRateCard';
 import ContactUs from './components/ContactUs';
+import VendorProfile from './components/VendorDashboard/VendorProfile';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="event-terms-and-conditions" element={<EventTnC />} />
+                <Route path="hotel-terms-and-conditions" element={<HotelTnC />} />
+                <Route path="cab-terms-and-conditions" element={<CabTnC />} />
                 <Route path="contact-us" element={<ContactUs />} />
                 <Route path="create-account" element={<CreateAccount />} />
                 <Route path='/dashboard' element={<Dashboard />} />
@@ -105,6 +109,8 @@ function App() {
                 <Route path="vendordashboard/vendor-hotelratecard" element={<HotelRateCard />} />
                 <Route path="vendordashboard/vendor-eventratecardform" element={<EventRateCardForm />} />
                 <Route path="vendordashboard/vendor-eventratecard" element={<EventRateCard />} />
+                
+                <Route path="vendordashboard/vendor-profile" element={<VendorProfile />} />
 
                 <Route path="access-denied" element={<AccessDenied />} />
                 

@@ -4,6 +4,8 @@ import { fetchEventRateCard } from '../../redux/slices/vendorDashboardSlice';
 import FileUpload from './FileUpload';
 import VendorSidebar from './VendorSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import EventTermsConditions from './EventTnC';
+import BillUpload from './BillImgUpload';
 
 const EventRateCard = () => {
   const dispatch = useDispatch();
@@ -43,7 +45,11 @@ const EventRateCard = () => {
       <VendorSidebar />
       <main className="min-h-screen bg-gradient-to-r from-green-300 to-blue-500 w-full overflow-auto">
         <div className="pl-24 max-h-[90vh] overflow-auto">
+        <div className="flex gap-4 items-center mb-4">
           <FileUpload />
+          <BillUpload />
+          <EventTermsConditions />      
+        </div>
           <div className="pr-4 max-h-[75vh] border-blue-500 border-b-2 border-t-2 overflow-auto">
             {paginatedData.map((event) => (
               <div key={event.id} className="mb-8">
