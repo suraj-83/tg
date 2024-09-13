@@ -5,73 +5,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const BranchDetails = () => {
   const dispatch = useDispatch();
-  const [branches, setBranches] = useState([
-    {
-      id: 1,
-      name: "Branch 1",
-      addLine1: "123 Main St",
-      addLine2: "Apt 1",
-      city: "City",
-      state: "State",
-      zipcode: "12345",
-      contactNo: "1234567890",
-      email: "branch1@example.com",
-      phoneNumber: "1234567890",
-      landlineNumber: "0987654321",
-    },
-    {
-      id: 2,
-      name: "Branch 2",
-      addLine1: "456 Elm St",
-      addLine2: " Apt 2",
-      city: "City",
-      state: "State",
-      zipcode: "54321",
-      contactNo: "9876543210",
-      email: "branch2@example.com",
-      phoneNumber: "9876543210",
-      landlineNumber: "0123456789",
-    },
-    {
-      id: 3,
-      name: "Branch 3",
-      addLine1: "789 Oak St",
-      addLine2: "Apt 3",
-      city: "City",
-      state: "State",
-      zipcode: "67890",
-      contactNo: "1234567890",
-      email: "branch3@example.com",
-      phoneNumber: "1234567890",
-      landlineNumber: "0987654321",
-    },
-    {
-      id: 4,
-      name: "Branch 4",
-      addLine1: "321 Pine St",
-      addLine2: "Apt 4",
-      city: "City",
-      state: "State",
-      zipcode: "98765",
-      contactNo: "9876543210",
-      email: "branch4@example.com",
-      phoneNumber: "9876543210",
-      landlineNumber: "0123456789",
-    },
-    {
-      id: 5,
-      name: "Branch 5",
-      addLine1: "654 Cedar St",
-      addLine2: "Apt 5",
-      city: "City",
-      state: "State",
-      zipcode: "54321",
-      contactNo: "1234567890",
-      email: "branch5@example.com",
-      phoneNumber: "1234567890",
-      landlineNumber: "0987654321",
-    },
-  ]);
+  const [branches, setBranches] = useState([]);
 
   const [editBranch, setEditBranch] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(5);

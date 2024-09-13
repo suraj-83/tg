@@ -46,7 +46,7 @@ export const branchSignup = createAsyncThunk(
   "auth/branch-signup",
   async (data) => {
     try {
-      const response = await axiosInstance.post("/user/branch-register", data);
+      const response = await axiosInstance.post("/corporate/branch", data);
 
       console.log("Branch User: ", response.data);
 
@@ -112,7 +112,7 @@ export const employeeSignup = createAsyncThunk(
   "auth/employee-signup",
   async (data) => {
     try {
-      const response = await axiosInstance.post("/user/employee-register", data);
+      const response = await axiosInstance.post(`/corporate/employee/${data.branchId}`, data);
 
       console.log("Employee User: ", response.data);
 
@@ -161,7 +161,7 @@ export const employeeLogin = createAsyncThunk(
   "auth/employee-login",
   async ({ employeeId, companyId, password }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/user/employee-login", {
+      const response = await axiosInstance.post("/corporate/employee-login", {
         employeeId,
         companyId,
         password,
@@ -315,6 +315,21 @@ export const getProfile = createAsyncThunk('auth/getProfile', async () => {
     toast.error(error?.response?.data?.message);
   }
 })
+
+export const updateCorporateProfile = createAsyncThunk('auth/updateCorporateProfile', async (data) => {
+  try {
+    const response = await axiosInstance.put("/corporate/update-profile", data);
+
+    if (response?.data?.success) {
+      toast.success(response?.data?.message);
+      return response.data;
+    } else {
+      toast.error(response?.data?.message);
+    }
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
 
 const authSlice = createSlice({
   name: "auth",

@@ -15,7 +15,7 @@ const initialState = {
 // Async thunk to submit a new cab rate card
 export const submitCabRateCard = createAsyncThunk('vendorDashboard/submitCabRateCard', async (rateCardData, { rejectWithValue }) => {
     try {
-        const response = await axiosInstance.post('/vendorDashboard/submitCabRateCard', rateCardData);
+        const response = await axiosInstance.post('/vendor/ratecard/cab', rateCardData)
         return response.data.data;
     } catch (error) {
         toast.error(error.response?.data?.message || 'Failed to submit cab rate card');
@@ -25,7 +25,7 @@ export const submitCabRateCard = createAsyncThunk('vendorDashboard/submitCabRate
 // Async thunk to fetch cab rate card
 export const fetchCabRateCard = createAsyncThunk('vendorDashboard/fetchCabRateCard', async () => {
   try {
-    const response = await axiosInstance.get('/vendorDashboard/cabRateCard');
+    const response = await axiosInstance.get('/vendor/ratecard/cab');
     return response.data.data;
   } catch (error) {
     toast.error(error.response?.data?.message || 'Failed to fetch cab rate card');

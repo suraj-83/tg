@@ -1,69 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CorporateSidebar from "./CorporateSidebar.jsx";
-import { getAirTravelDetails } from "../../redux/slices/travelSlice.js";
+import { getAirTravelDetails, deleteAirTravel } from "../../redux/slices/travelSlice.js";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([
-    {
-      id: 1,
-      fullName: "John Doe",
-      dob: "1990-01-01",
-      gender: "Male",
-      contactNo: "1234567890",
-      email: "john@example.com",
-      travelFrom: "Delhi",
-      travelTo: "Mumbai",
-      classOfTravel: "AC",
-      travelDate: "2023-01-01",
-      flightNo: "12345",
-      timePreference: "10:00 AM",
-    },
-    {
-      id: 2,
-      fullName: "Jane Smith",
-      dob: "1995-05-15",
-      gender: "Female",
-      contactNo: "9876543210",
-      email: "jane@example.com",
-      travelFrom: "Chennai",
-      travelTo: "Kolkata",
-      classOfTravel: "Non-AC",
-      travelDate: "2023-02-01",
-      flightNo: "23456",
-      timePreference: "12:00 PM",
-    },
-    {
-      id: 3,
-      fullName: "Alice Wilson",
-      dob: "1980-07-15",
-      gender: "Female",
-      contactNo: "0987654321",
-      email: "alice@example.com",
-      travelFrom: "Mumbai",
-      travelTo: "Bangalore",
-      classOfTravel: "AC",
-      travelDate: "2023-03-01",
-      flightNo: "34567",
-      timePreference: "02:00 PM",
-    },
-    {
-      id: 4,
-      fullName: "Bob Johnson",
-      dob: "1998-12-31",
-      gender: "Male",
-      contactNo: "5555555555",  
-      email: "bob@example.com",
-      travelFrom: "Pune",
-      travelTo: "Hyderabad",
-      classOfTravel: "Non-AC",
-      travelDate: "2023-04-01",
-      flightNo: "45678",
-      timePreference: "08:00 AM",
-    },
-  ]);
+  const [travelDetails, setTravelDetails] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -78,9 +21,15 @@ const FlightBookingDetails = () => {
     fetchData();
   }, [rowsPerPage]);
 
-  const handleCancel = (bookingId) => {
-    // Simulate canceling a booking
-    // setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
+  const handleCancel = async (bookingId) => {
+    try {
+      const response = await dispatch(deleteAirTravel(bookingId));
+      if (response.payload.success) {
+        setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
+      }
+    } catch (error) {
+      console.error("Failed to cancel air travel:", error);
+    }
   };
 
 
