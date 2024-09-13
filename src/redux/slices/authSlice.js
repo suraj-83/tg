@@ -305,6 +305,17 @@ export const contactUs = createAsyncThunk('contactUs/contact', async (data) => {
     toast.error(error?.response?.data?.message);
   }
 });
+
+export const getProfile = createAsyncThunk('auth/getProfile', async () => {
+  try {
+    const response = await axiosInstance.get("/user/profile");
+    console.log("USER PROFILE", response.data);
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+})
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -356,7 +367,10 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = {};
         state.role = "USER";
-      });
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
   },
 });
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {updateVendorProfile} from "../../redux/slices/vendorDashboardSlice";
+import { updateVendorProfile } from "../../redux/slices/vendorDashboardSlice";
 import VendorSidebar from "./VendorSidebar";
+import { getProfile } from "../../redux/slices/authSlice";
 
 function VendorProfile() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  console.log(user);
+  // const user = useSelector((state) => state.auth.user);
+  // console.log(user);
 
   // const initialProfileData = {
   //   areaOfWork: user?.areaOfWork || "",
@@ -34,17 +35,20 @@ function VendorProfile() {
   //   services: user?.services || [], // Services section
   // };
 
-  const [profileData, setProfileData] = useState(user ||{});
+  const [profileData, setProfileData] = useState({});
   const [newService, setNewService] = useState(""); // For adding new services
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setProfileData({
-        ...user,
-      });
-    }
-  }, [user]);
+    const fetchData = async () => {
+      const response = await dispatch(getProfile());
+      console.log(response);
+      setProfileData(response.payload.data);
+    };
+    fetchData();
+  }, [dispatch]);
+
+  console.log(profileData);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +57,7 @@ function VendorProfile() {
       [name]: value,
     }));
   };
+
   const handleAddService = () => {
     if (newService && !profileData.services.includes(newService)) {
       setProfileData((prevState) => ({
@@ -78,7 +83,9 @@ function VendorProfile() {
         <div className="grid grid-cols-4 gap-4">
           {/* Existing Form Fields */}
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Area of Work</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Area of Work
+            </label>
             <input
               type="text"
               name="areaOfWork"
@@ -89,7 +96,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Company Name</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Company Name
+            </label>
             <input
               type="text"
               name="companyName"
@@ -100,7 +109,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Website</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Website
+            </label>
             <input
               type="url"
               name="website"
@@ -113,7 +124,9 @@ function VendorProfile() {
 
           {/* New Address and Location Fields */}
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Address Line 1</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Address Line 1
+            </label>
             <input
               type="text"
               name="address1"
@@ -124,7 +137,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Address Line 2</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Address Line 2
+            </label>
             <input
               type="text"
               name="address2"
@@ -135,7 +150,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Address Line 3</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Address Line 3
+            </label>
             <input
               type="text"
               name="address3"
@@ -144,21 +161,24 @@ function VendorProfile() {
               disabled={!isEditing}
               className="w-full p-2 border border-gray-300 rounded"
             />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-900 font-extrabold uppercase">Address Line 4</label>
-              <input
-                type="text"
-                name="address4"
-                value={profileData.address4}
-                onChange={handleInputChange}
-                disabled={!isEditing}
-                className="w-full p-2 border border-gray-300 rounded"
-              />
-
-            </div>
+          </div>
           <div className="mb-4">
-            <label className="block text-gr9y- font-extrabold uppercase">Zip Code</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Address Line 4
+            </label>
+            <input
+              type="text"
+              name="address4"
+              value={profileData.address4}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gr9y- font-extrabold uppercase">
+              Zip Code
+            </label>
             <input
               type="text"
               name="zipCode"
@@ -169,7 +189,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Country</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Country
+            </label>
             <input
               type="text"
               name="country"
@@ -180,7 +202,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">City</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              City
+            </label>
             <input
               type="text"
               name="city"
@@ -191,7 +215,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">State</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              State
+            </label>
             <input
               type="text"
               name="state"
@@ -202,7 +228,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Email</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -213,7 +241,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Country Code</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Country Code
+            </label>
             <input
               type="text"
               name="countryCode"
@@ -224,7 +254,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Phone Number</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Phone Number
+            </label>
             <input
               type="text"
               name="phoneNumber"
@@ -235,7 +267,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Landline Country Code</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Landline Country Code
+            </label>
             <input
               type="text"
               name="landlineCountryCode"
@@ -246,7 +280,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Landline City Code</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Landline City Code
+            </label>
             <input
               type="text"
               name="landlineCityCode"
@@ -257,7 +293,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Landline Number</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Landline Number
+            </label>
             <input
               type="text"
               name="landlineNumber"
@@ -269,7 +307,9 @@ function VendorProfile() {
           </div>
           {/* Contact Person Fields (existing) */}
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Contact Person First Name</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Contact Person First Name
+            </label>
             <input
               type="text"
               name="contactPersonFirstName"
@@ -280,7 +320,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Contact Person Middle Name</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Contact Person Middle Name
+            </label>
             <input
               type="text"
               name="contactPersonSecondName"
@@ -291,7 +333,9 @@ function VendorProfile() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 font-extrabold uppercase">Contact Person Last Name</label>
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Contact Person Last Name
+            </label>
             <input
               type="text"
               name="contactPersonLastName"
@@ -302,17 +346,17 @@ function VendorProfile() {
             />
           </div>
           {/* ...other fields for contact person */}
-          
         </div>
 
         {/* Add Services Section */}
         <div className="mt-6">
           <h3 className="text-xl font-semibold">Services</h3>
-          <ul className="list-disc pl-6">
-            {JSON.parse(profileData.services).map((service, index) => (
-              <li key={index}>{service}</li>
-            ))}
-          </ul>
+          {/* <ul className="list-disc pl-6">
+            {profileData.services &&
+              JSON.parse(profileData.services).map((service, index) => (
+                <li key={index}>{service}</li>
+              ))}
+          </ul> */}
           {isEditing && (
             <div className="mt-4 flex">
               <input
