@@ -38,9 +38,6 @@ function RetailForm() {
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
     }
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
-    }
     if (!formData.country.trim()) {
       newErrors.country = "Country is required";
     }

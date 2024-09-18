@@ -5,20 +5,17 @@ import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar"
 
 function CorporateProfile() {
   const dispatch = useDispatch();
-
   const [profileData, setProfileData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [gstError, setGstError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getProfile());
-      console.log(response);
       setProfileData(response.payload.data);
     };
     fetchData();
   }, [dispatch]);
-
-  // console.log(profileData);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +25,22 @@ function CorporateProfile() {
     }));
   };
 
+  // Function to validate GST number
+  const validateGSTNumber = (gstNumber) => {
+    const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    return gstRegex.test(gstNumber);
+  };
+
   const handleSave = () => {
+    // Validate GST Number before saving
+    if (!validateGSTNumber(profileData.gstNumber)) {
+      setGstError("Invalid GST Number. Please enter a valid 15-character GST.");
+      return;
+    } else {
+      setGstError("");
+    }
+
+    // Proceed to save the profile
     dispatch(updateCorporateProfile(profileData));
     setIsEditing(false);
   };
@@ -360,9 +372,13 @@ function CorporateProfile() {
               value={profileData.gstNumber}
               onChange={handleInputChange}
               disabled={!isEditing}
-              className="w-full p-2 border border-gray-300 rounded"
+              className={`w-full p-2 border ${
+                gstError ? "border-red-500" : "border-gray-300"
+              } rounded`}
             />
+            {gstError && <p className="text-red-500 text-xs">{gstError}</p>}
           </div>
+
           {/* Repeat for all other fields like zipCode, country, etc. */}
         </div>
 
