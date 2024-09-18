@@ -129,7 +129,7 @@ function RetailDashboard() {
       </div>
       <div className="space-y-2">
         <Link
-          to="#"
+          to="/retail-profile"
           className="flex items-center space-x-2 p-2 hover:bg-[#2b2b3e] rounded"
         >
           <FaUserCircle size={22} />

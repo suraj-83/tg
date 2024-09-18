@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { zipCodeMapping, industryOptions } from "../data.js";
 import corprateImg from "../assets/Image/y.jpg";
-import {  vendorSignup } from "../redux/slices/authSlice.js";
+import { vendorSignup } from "../redux/slices/authSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 
 function Form() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function Form() {
   const [formData, setFormData] = useState(initialFormData);
   const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
   const [landlineNumberVisible, setLandLineNumberVisible] = useState(false);
+  
 
   const handleZipCodeChange = (e) => {
     const zipCode = e.target.value;
@@ -51,44 +53,53 @@ function Form() {
     }));
   };
 
- // Handle the selection of services
- const handleServiceChange = (e) => {
-  const { value, checked } = e.target;
-  if (checked) {
-    setFormData((prevState) => ({
-      ...prevState,
-      services: [...prevState.services, value],
-    }));
-  } else {
-    setFormData((prevState) => ({
-      ...prevState,
-      services: prevState.services.filter((service) => service !== value),
-    }));
-  }
-};
+  // Handle the selection of services
+  const handleServiceChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setFormData((prevState) => ({
+        ...prevState,
+        services: [...prevState.services, value],
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        services: prevState.services.filter((service) => service !== value),
+      }));
+    }
+  };
 
+  const [currentAddressStep, setCurrentAddressStep] = useState(1);
 
+  const handleNextAddress = () => {
+    setCurrentAddressStep((prevStep) => prevStep + 1);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isAllFieldsFilled =
-      Object.values(formData).every((value) => value !== "") &&
-      formData.phoneNumber !== "" &&
-      formData.landlineNumber !== "";
-    if (isAllFieldsFilled) {
-      const response = await dispatch(vendorSignup(formData));
-      console.log(response);
+    const isAllFieldsFilled = Object.entries(formData)
+  .filter(
+    ([key]) =>
+      !["address2", "address3", "address4", "contactPersonSecondName"].includes(
+        key
+      )
+  )
+  .every(([, value]) => value !== "") && formData.phoneNumber !== "" && formData.landlineNumber !== "";
 
-      if (response?.payload?.data?.success) {
-        navigate("/main-login");
-      }
+// Now you can run the signup logic if fields are filled
+if (isAllFieldsFilled) {
+  console.log(formData);
 
-      console.log(formData);
-      // console.log(JSON.stringify(formattedData, null, 4)); // Log formatted form data to the console
-      setFormData(initialFormData); // Reset form data to initial state
-    } else {
-      alert("Please fill all the fields");
-    }
+  const response = await dispatch(vendorSignup(formData));
+
+  if (response?.payload?.data?.success) {
+    navigate("/main-login");
+  }
+  setFormData(initialFormData); // Reset form data to initial state
+} else {
+  alert("Please fill all the required fields");
+}
+
   };
 
   return (
@@ -97,9 +108,9 @@ function Form() {
 
       <div className="h-screen w-full mx-auto flex">
         <div className="w-1/2 h-screen hidden md:block">
-          <img src={corprateImg} alt="" className="bg-contain h-full" />
+          <img src={corprateImg} alt="" className="bg-contain w-full h-full" />
         </div>
-        <div className="w-full lg:-ml-10 md:-ml-0  lg:w-1/2 h-screen overflow-y-scroll">
+        <div className="w-full lg:-ml- md:-ml-0  lg:w-1/2 h-screen overflow-y-scroll">
           <form onSubmit={handleSubmit} className="bg-gray-100 p-6 ">
             <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline">
               Vendor Sign Up
@@ -107,129 +118,144 @@ function Form() {
 
             <div className="min-h-[90vh]">
               <div className="flex flex-wrap sm:flex-wrap gap-3">
-              <div className="grid lg:grid-cols-3 gap-2">
-  {/* Country Field */}
-  <div className="mb-4">
-    <input
-      type="text"
-      id="country"
-      placeholder="Country"
-      value={formData.country || "India"}
-      readOnly
-      className="w-full p-2 border border-gray-300 rounded"
-    />
-  </div>
+                <div className="grid lg:grid-cols-3 grid-cols-2 gap-2">
+                  {/* Country Field */}
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      id="country"
+                      placeholder="Country"
+                      value={formData.country || "India"}
+                      readOnly
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                  </div>
 
-  <div className="mb-4">
-    {/* <label className="block mb-2 font-semibold">Services</label> */}
-    <select
-      value={formData.services.join(",")}
-      onChange={(e) =>
-        setFormData((prevState) => ({
-          ...prevState,
-          services: e.target.value.split(","),
-        }))
-      }
-      className="w-full p-2 border border-gray-300 rounded"
-    >
-      <option value="">Select Services</option>
-      <option value="Cab">Cab</option>
-      <option value="Hotel">Hotel</option>
-      <option value="Event">Event</option>
-    </select>
-  </div>
+                  <div className="mb-4">
+                    {/* <label className="block mb-2 font-semibold">Services</label> */}
+                    <select
+                      value={formData.services.join(",")}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          services: e.target.value.split(","),
+                        }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    >
+                      <option value="">Select Services</option>
+                      <option value="Cab">Cab</option>
+                      <option value="Hotel">Hotel</option>
+                      <option value="Event">Event</option>
+                    </select>
+                  </div>
 
-  {/* Area of Work Selection */}
-  <div className="mb-4">
-    <select
-      value={formData?.areaOfWork || ""}
-      onChange={(e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          areaOfWork: e.target.value,
-        }));
-      }}
-      className="w-full p-2 border border-gray-300 rounded"
-    >
-      <option value="">Select Area of Work*</option>
-      <option value="Cab Vendor">Cab / Tempo Travelers</option>
-      <option value="Hotel Vendor">Hotel Vendor</option>
-      <option value="Air Vendor">Air Vendor</option>
-      <option value="Train Vendor">Train Vendor</option>
-      <option value="Visa Vendor">Visa Vendor</option>
-      <option value="Insurance Vendor">Insurance Vendor</option>
-      <option value="Volvo Bus Vendor">Volvo Bus Vendor</option>
-      <option value="Foreign Exchange Vendor">Foreign Exchange Vendor</option>
-      <option value="Tour Guide Vendor">Tour Guide Vendor</option>
-      <option value="Travel DMC">DMC (Direct Marketing Company)</option>
-      <option value="Travel agents">Travel Agents</option>
-      <option value="Other">Other</option>
-    </select>
-  </div>
+                  {/* Area of Work Selection */}
+                  <div className="mb-4">
+                    <select
+                      value={formData?.areaOfWork || ""}
+                      onChange={(e) => {
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          areaOfWork: e.target.value,
+                        }));
+                      }}
+                      className="w-full p-2 border border-gray-300 rounded"
+                    >
+                      <option value="">Select Area of Work*</option>
+                      <option value="Cab Vendor">Cab / Tempo Travelers</option>
+                      <option value="Hotel Vendor">Hotel Vendor</option>
+                      <option value="Air Vendor">Air Vendor</option>
+                      <option value="Train Vendor">Train Vendor</option>
+                      <option value="Visa Vendor">Visa Vendor</option>
+                      <option value="Insurance Vendor">Insurance Vendor</option>
+                      <option value="Volvo Bus Vendor">Volvo Bus Vendor</option>
+                      <option value="Foreign Exchange Vendor">
+                        Foreign Exchange Vendor
+                      </option>
+                      <option value="Tour Guide Vendor">
+                        Tour Guide Vendor
+                      </option>
+                      <option value="Travel DMC">
+                        DMC (Direct Marketing Company)
+                      </option>
+                      <option value="Travel agents">Travel Agents</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
 
-  {/* Other Department Field (Conditional) */}
-  {formData.areaOfWork.trim() === "Other" && (
-    <div className="mb-4">
-      <input
-        type="text"
-        placeholder="Other Department"
-        value={formData.otherDepartment || ""}
-        onChange={(e) =>
-          setFormData((prevState) => ({
-            ...prevState,
-            otherDepartment: e.target.value,
-          }))
-        }
-        className="w-full p-2 border border-gray-300 rounded"
-      />
-    </div>
-  )}
+                  {/* Other Department Field (Conditional) */}
+                  {formData.areaOfWork.trim() === "Other" && (
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        placeholder="Other Department"
+                        value={formData.otherDepartment || ""}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            otherDepartment: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                    </div>
+                  )}
 
-  {/* Company Name Field */}
-  <div className="mb-4">
-    <input
-      type="text"
-      id="companyName"
-      placeholder="Company Name"
-      value={formData.companyName}
-      onChange={(e) =>
-        setFormData((prevState) => ({
-          ...prevState,
-          companyName: e.target.value,
-        }))
-      }
-      className="w-full p-2 border border-gray-300 rounded"
-    />
-  </div>
-</div>
-
-                {/* Address 1 */}
-                <div className="mb-4">
-                  {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}
-                  <input
-                    type="text"
-                    id="address1"
-                    placeholder="Address-1"
-                    value={formData.address1 || ""}
-                    onChange={(e) =>
-                      setFormData((prevState) => ({
-                        ...prevState,
-                        address1: e.target.value,
-                      }))
-                    }
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
+                  {/* Company Name Field */}
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      id="companyName"
+                      placeholder="Company Name"
+                      value={formData.companyName}
+                      onChange={(e) =>
+                        setFormData((prevState) => ({
+                          ...prevState,
+                          companyName: e.target.value,
+                        }))
+                      }
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                  </div>
                 </div>
 
-                {formData.address1 && (
-                  <>
-                    <div className="mb-4">
-                      {/* <label htmlFor="address2" className="block mb-2 font-semibold">Address Line 2</label> */}
+                {/* Address 1 */}
+                <div className="grid lg:grid-cols-3 grid-cols-3 gap-2">
+                  {currentAddressStep >= 1 && (
+                    <div className="mb-4 flex gap-2">
+                      <input
+                        type="text"
+                        id="address1"
+                        placeholder="Address-1"
+                        value={formData.address1}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address1: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                      {formData.address1 && currentAddressStep === 1 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded shadow-md hover:shadow-lg transition duration-200"
+                          onClick={handleNextAddress}
+                        >
+                          <FaPlus />
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {currentAddressStep >= 2 && formData.address1 && (
+                    <div className="mb-4 flex gap-2">
                       <input
                         type="text"
                         id="address2"
                         placeholder="Address-2"
-                        value={formData.address2 || ""}
+                        value={formData.address2}
                         onChange={(e) =>
                           setFormData((prevState) => ({
                             ...prevState,
@@ -238,51 +264,62 @@ function Form() {
                         }
                         className="w-full p-2 border border-gray-300 rounded"
                       />
+                      {formData.address2 && currentAddressStep === 2 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded"
+                          onClick={handleNextAddress}
+                        >
+                          <FaPlus />
+                        </button>
+                      )}
                     </div>
+                  )}
 
-                    {formData.address2 && (
-                      <>
-                        <div className="mb-4">
-                          {/* <label htmlFor="address3" className="block mb-2 font-semibold">Address Line 3</label> */}
-                          <input
-                            type="text"
-                            id="address3"
-                            placeholder="Address-3"
-                            value={formData.address3 || ""}
-                            onChange={(e) =>
-                              setFormData((prevState) => ({
-                                ...prevState,
-                                address3: e.target.value,
-                              }))
-                            }
-                            className="w-full p-2 border border-gray-300 rounded"
-                          />
-                        </div>
+                  {currentAddressStep >= 3 && formData.address2 && (
+                    <div className="mb-4 flex gap-2">
+                      <input
+                        type="text"
+                        id="address3"
+                        placeholder="Address-3"
+                        value={formData.address3}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address3: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                      {formData.address3 && currentAddressStep === 3 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded"
+                          onClick={handleNextAddress}
+                        > <FaPlus />
+                        </button>
+                      )}
+                    </div>
+                  )}
 
-                        {formData.address3 && (
-                          <>
-                            <div className="mb-4">
-                              {/* <label htmlFor="address4" className="block mb-2 font-semibold">Address Line 4</label> */}
-                              <input
-                                type="text"
-                                id="address4"
-                                placeholder="Address-4"
-                                value={formData.address4 || ""}
-                                onChange={(e) =>
-                                  setFormData((prevState) => ({
-                                    ...prevState,
-                                    address4: e.target.value,
-                                  }))
-                                }
-                                className="w-full p-2 border border-gray-300 rounded"
-                              />
-                            </div>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
+                  {currentAddressStep >= 4 && formData.address3 && (
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        id="address4"
+                        placeholder="Address-4"
+                        value={formData.address4}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address4: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="flex items-center gap-3 w-full">
                 {/* ZIP Code */}
@@ -470,8 +507,8 @@ function Form() {
                                 .replace(/\D/g, ""),
                             }))
                           }
-                          className="w-28 p-2 border border-gray-300 rounded"
-                          placeholder="CountryCode"
+                          className="w-32 p-2 border border-gray-300 rounded"
+                          placeholder="Country Code"
                         />
                         <input
                           type="text"
@@ -508,8 +545,8 @@ function Form() {
                               .replace(/\D/g, ""),
                           }))
                         }
-                        className="w-20 p-2 border border-gray-300 rounded mr-2"
-                        placeholder="CountryCode"
+                        className="w-32 p-2 border border-gray-300 rounded mr-2"
+                        placeholder="Country Code"
                         style={{ color: "gray" }}
                         aria-label="CountryCode"
                       />
@@ -525,8 +562,8 @@ function Form() {
                             landlineCityCode: e.target.value,
                           }))
                         }
-                        className="w-20 p-2 border border-gray-300 rounded mr-2"
-                        placeholder="CityCode"
+                        className="w-28 p-2 border border-gray-300 rounded mr-2"
+                        placeholder="City Code"
                       />
                       <input
                         type="text"

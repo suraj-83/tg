@@ -5,6 +5,7 @@ import corprateImg from "../assets/img.jpg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { corporateSignup } from "../redux/slices/authSlice.js";
+import { FaPlus } from "react-icons/fa";
 
 function Form() {
   const dispatch = useDispatch();
@@ -39,7 +40,11 @@ function Form() {
   const [formData, setFormData] = useState(initialFormData);
   const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
   const [landlineNumberVisible, setLandLineNumberVisible] = useState(false);
+  const [currentAddressStep, setCurrentAddressStep] = useState(1);
 
+  const handleNextAddress = () => {
+    setCurrentAddressStep((prevStep) => prevStep + 1);
+  };
   const handleZipCodeChange = (e) => {
     const zipCode = e.target.value;
     setFormData((prevState) => ({
@@ -53,24 +58,29 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isAllFieldsFilled =
-      Object.values(formData).every((value) => value !== "") &&
-      formData.phoneNumber !== "" &&
-      formData.landlineNumber !== "";
+    const isAllFieldsFilled = Object.entries(formData)
+  .filter(
+    ([key]) =>
+      !["address2", "address3", "address4", "contactPersonSecondName"].includes(
+        key
+      )
+  )
+  .every(([, value]) => value !== "") && formData.phoneNumber !== "" && formData.landlineNumber !== "";
 
-    if (isAllFieldsFilled) {
-      console.log(formData);
+// Now you can run the signup logic if fields are filled
+if (isAllFieldsFilled) {
+  console.log(formData);
 
-      const response = await dispatch(corporateSignup(formData));
+  const response = await dispatch(corporateSignup(formData));
 
-      if (response?.payload?.data?.success) {
-        navigate("/main-login");
-      }
+  if (response?.payload?.data?.success) {
+    navigate("/main-login");
+  }
+  setFormData(initialFormData); // Reset form data to initial state
+} else {
+  alert("Please fill all the required fields");
+}
 
-      setFormData(initialFormData); // Reset form data to initial state
-    } else {
-      alert("Please fill all the fields");
-    }
   };
 
   return (
@@ -83,8 +93,9 @@ function Form() {
         </div>
         <div className="w-full  lg:w-1/2 h-screen overflow-y-scroll">
           <form onSubmit={handleSubmit} className="bg-gray-100 p-6 ">
-            <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline">
+            <h1 className="pb-9 font-bold  text-center uppercase text-2xl underline"><a href="/">
               Corporate Sign Up
+            </a>
             </h1>
 
             <div className=" min-h-[90vh]">
@@ -139,32 +150,41 @@ function Form() {
                 </div>
 
                 {/* Address 1 */}
-                <div className="mb-4">
-                  {/* <label htmlFor="address1" className="block mb-2 font-semibold">Address Line 1</label> */}
-                  <input
-                    type="text"
-                    id="address1"
-                    placeholder="Address-1"
-                    value={formData.address1 || ""}
-                    onChange={(e) =>
-                      setFormData((prevState) => ({
-                        ...prevState,
-                        address1: e.target.value,
-                      }))
-                    }
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
-                </div>
+                <div className="grid lg:grid-cols-3 grid-cols-1 gap-2">
+                  {currentAddressStep >= 1 && (
+                    <div className="mb-4 flex gap-2">
+                      <input
+                        type="text"
+                        id="address1"
+                        placeholder="Address-1"
+                        value={formData.address1}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address1: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                      {formData.address1 && currentAddressStep === 1 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded shadow-md hover:shadow-lg transition duration-200"
+                          onClick={handleNextAddress}
+                        >
+                          <FaPlus />
+                        </button>
+                      )}
+                    </div>
+                  )}
 
-                {formData.address1 && (
-                  <>
-                    <div className="mb-4">
-                      {/* <label htmlFor="address2" className="block mb-2 font-semibold">Address Line 2</label> */}
+                  {currentAddressStep >= 2 && formData.address1 && (
+                    <div className="mb-4 flex gap-2">
                       <input
                         type="text"
                         id="address2"
                         placeholder="Address-2"
-                        value={formData.address2 || ""}
+                        value={formData.address2}
                         onChange={(e) =>
                           setFormData((prevState) => ({
                             ...prevState,
@@ -173,51 +193,63 @@ function Form() {
                         }
                         className="w-full p-2 border border-gray-300 rounded"
                       />
+                      {formData.address2 && currentAddressStep === 2 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded"
+                          onClick={handleNextAddress}
+                        >
+                          <FaPlus />
+                        </button>
+                      )}
                     </div>
+                  )}
 
-                    {formData.address2 && (
-                      <>
-                        <div className="mb-4">
-                          {/* <label htmlFor="address3" className="block mb-2 font-semibold">Address Line 3</label> */}
-                          <input
-                            type="text"
-                            id="address3"
-                            placeholder="Address-3"
-                            value={formData.address3 || ""}
-                            onChange={(e) =>
-                              setFormData((prevState) => ({
-                                ...prevState,
-                                address3: e.target.value,
-                              }))
-                            }
-                            className="w-full p-2 border border-gray-300 rounded"
-                          />
-                        </div>
+                  {currentAddressStep >= 3 && formData.address2 && (
+                    <div className="mb-4 flex gap-2">
+                      <input
+                        type="text"
+                        id="address3"
+                        placeholder="Address-3"
+                        value={formData.address3}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address3: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                      {formData.address3 && currentAddressStep === 3 && (
+                        <button
+                          type="button"
+                          className="p-2 bg-blue-500 text-white rounded"
+                          onClick={handleNextAddress}
+                        >
+                          <FaPlus />
+                        </button>
+                      )}
+                    </div>
+                  )}
 
-                        {formData.address3 && (
-                          <>
-                            <div className="mb-4">
-                              {/* <label htmlFor="address4" className="block mb-2 font-semibold">Address Line 4</label> */}
-                              <input
-                                type="text"
-                                id="address4"
-                                placeholder="Address-4"
-                                value={formData.address4 || ""}
-                                onChange={(e) =>
-                                  setFormData((prevState) => ({
-                                    ...prevState,
-                                    address4: e.target.value,
-                                  }))
-                                }
-                                className="w-full p-2 border border-gray-300 rounded"
-                              />
-                            </div>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
+                  {currentAddressStep >= 4 && formData.address3 && (
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        id="address4"
+                        placeholder="Address-4"
+                        value={formData.address4}
+                        onChange={(e) =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            address4: e.target.value,
+                          }))
+                        }
+                        className="w-full p-2 border border-gray-300 rounded"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="flex items-center gap-3 w-full">
                 {/* ZIP Code */}
@@ -467,8 +499,8 @@ function Form() {
                                 .replace(/\D/g, ""),
                             }))
                           }
-                          className="w-28 p-2 border border-gray-300 rounded"
-                          placeholder="CountryCode"
+                          className="w-32 p-2 border border-gray-300 rounded"
+                          placeholder="Country Code"
                         />
                         <input
                           type="text"
@@ -492,7 +524,7 @@ function Form() {
                     </div>
                   )}
                   {landlineNumberVisible && (
-                    <div className="flex mt-2">
+                    <div className="flex flex-wrap mt-2">
                       <input
                         type="text"
                         maxLength={4}
@@ -510,10 +542,10 @@ function Form() {
                               .replace(/\D/g, ""),
                           }))
                         }
-                        className="w-20 p-2 border border-gray-300 rounded mr-2"
+                        className="w-32 p-2 border border-gray-300 rounded mr-2"
                         placeholder="CountryCode"
                         style={{ color: "gray" }}
-                        aria-label="CountryCode"
+                        aria-label="Country Code"
                       />
 
                       <input
@@ -527,8 +559,8 @@ function Form() {
                             landlineCityCode: e.target.value,
                           }))
                         }
-                        className="w-20 p-2 border border-gray-300 rounded mr-2"
-                        placeholder="CityCode"
+                        className="w-28 p-2 border border-gray-300 rounded mr-2"
+                        placeholder="City Code"
                       />
                       <input
                         type="text"

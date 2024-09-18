@@ -331,6 +331,21 @@ export const updateCorporateProfile = createAsyncThunk('auth/updateCorporateProf
   }
 });
 
+export const updateRetailProfile = createAsyncThunk('auth/updateRetailProfile', async (data) => {
+  try {
+    const response = await axiosInstance.put("/user/update-profile", data);
+
+    if (response?.data?.success) {
+      toast.success(response?.data?.message);
+      return response.data;
+    } else {
+      toast.error(response?.data?.message);
+    }
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
