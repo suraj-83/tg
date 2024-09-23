@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance.js";
-import { VENDOR_TYPE_NAME } from "../../config/config.js";
+import { VENDOR_TYPE_NAME,CORPORATE_TYPE_NAME } from "../../config/config.js";
 
 let parsedUser = {};
 try {
@@ -107,7 +107,7 @@ export const vendorSignup = createAsyncThunk(
   }
 );
 
-// Employee Signup
+// Add Employe
 export const employeeSignup = createAsyncThunk(
   "auth/employee-signup",
   async (data) => {
@@ -129,7 +129,20 @@ export const employeeSignup = createAsyncThunk(
   }
 );
 
-// Unified Login
+// Get All Branch Employees
+export const getEmployees = createAsyncThunk("auth/getEmployees", async (branchId) => {
+  try {
+    const response = await axiosInstance.get(`/corporate/employee/${branchId}`);
+
+    console.log("Branch Employees: ", response.data);
+
+    return response.data.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
+
+// // Unified Login
 export const login = createAsyncThunk('auth/login', async (data) => {
   try {
     const response = await axiosInstance.post("/user/login", data).catch((error) => {
@@ -148,13 +161,62 @@ export const login = createAsyncThunk('auth/login', async (data) => {
       success: (data) => data?.data?.message,
       error: "Error Logging In",
     });
+     // Extract role and companyId from the response data
+     const { role, companyId } = response.data.data;
 localStorage.setItem("role", data);
+if (role === CORPORATE_TYPE_NAME) {
+  localStorage.setItem("companyId", companyId); // Store companyId in localStorage for corporate users
+}
+
     return response;
   } catch (error) {
     console.log(error);
     toast.error(error?.response?.data?.message);
   }
 });
+
+// Unified Login
+// export const login = createAsyncThunk('auth/login', async (data) => {
+//   try {
+//     const response = await axiosInstance.post("/user/login", data).catch((error) => {
+//       console.log("User Data =", data);
+      
+//       if (error.response?.status === 401) {
+//         toast.error("Invalid credentials");
+//         throw error;
+//       } else if (error.response?.status === 404) {
+//         toast.error("User not found");
+//         throw error;
+//       } else {
+//         toast.error("An unexpected error occurred");
+//         throw error;
+//       }
+//     });
+
+//     // Toast for promise handling
+//     toast.promise(Promise.resolve(response), {
+//       loading: 'Authenticating account...',
+//       success: (data) => data?.data?.message || "Login Successful",
+//       error: "Error Logging In",
+//     });
+
+//     // Extract role and companyId from response data
+//     const { role, companyId } = response.data;
+
+//     // Store role and companyId in localStorage
+//     localStorage.setItem("role", role); // Assuming role is something like 'corporate', 'vendor', etc.
+//     if (role === "corporate") {
+//       localStorage.setItem("companyId", companyId); // Only for corporate users
+//     }
+
+//     return response.data; // Return the relevant data for further usage
+
+//   } catch (error) {
+//     console.log("Login Error:", error);
+//     toast.error(error?.response?.data?.message || "Error during login");
+//     throw error; // Re-throw the error for the rejected state handling in Redux
+//   }
+// });
 
 // Employee Login
 export const employeeLogin = createAsyncThunk(
@@ -205,6 +267,20 @@ export const branchLogin = createAsyncThunk(
   }
 );
 
+// // Get All Corporate Branch Details
+// export const getAllBranches = createAsyncThunk(
+//   "auth/getAllBranches",
+//   async () => {
+//     try {
+//       const response = await axiosInstance.get("/corporate/branch/all");
+//       console.log("All Corporate Branches: ", response.data);
+//       return response.data.data;
+//     } catch (error) {
+//       console.log(error);
+//       toast.error(error?.response?.data?.message);
+//     }
+//   }
+// );
 
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -315,7 +391,6 @@ export const getProfile = createAsyncThunk('auth/getProfile', async () => {
     toast.error(error?.response?.data?.message);
   }
 })
-
 export const updateCorporateProfile = createAsyncThunk('auth/updateCorporateProfile', async (data) => {
   try {
     const response = await axiosInstance.put("/corporate/update-profile", data);
@@ -363,7 +438,11 @@ const authSlice = createSlice({
           if (data.userType === VENDOR_TYPE_NAME) {
             localStorage.setItem("services", JSON.stringify(data.services));
           }
-
+          if (data.userType === CORPORATE_TYPE_NAME) {
+            localStorage.setItem("companyId", data.companyId); // Store companyId in localStorage for corporate users
+            state.user.companyId = data.companyId; // Store companyId in Redux state
+          }
+          
           state.isLoggedIn = true;
           state.user = data;
           state.role = data.userType;

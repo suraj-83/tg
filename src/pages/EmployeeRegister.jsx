@@ -5,20 +5,20 @@ import {
   departmentOptions,
   positionOptions,
 } from "../data.js";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { employeeSignup } from "../redux/slices/authSlice.js";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 
 function EmployeeForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const initialFormData = {
-    empId: "",
+    branchId: "",
+    employeeId: "",
     name: "",
     gender: "",
     dob: "",
+    age: "",
     zipCode: "",
     country: "",
     city: "",
@@ -26,7 +26,7 @@ function EmployeeForm() {
     email: "",
     password: "",
     countryCode: "",
-    phoneNo: "",
+    contactNo: "",
     branch: "",
     department: "",
     position: "",
@@ -50,7 +50,7 @@ function EmployeeForm() {
     console.log(formData);
     const response = await dispatch(employeeSignup(formData));
     if (response?.payload?.data?.success) {
-      navigate("/employee-login");
+      alert("Employee added successfully");
     }
     setFormData(initialFormData); // Reset form data to initial state
   };
@@ -68,13 +68,28 @@ function EmployeeForm() {
               <div className="mb-4 w-full">
                 <input
                   type="text"
-                  id="empId"
+                  id="employeeId"
                   placeholder="Employee ID"
-                  value={formData.empId}
+                  value={formData.employeeId}
                   onChange={(e) =>
                     setFormData((prevState) => ({
                       ...prevState,
-                      empId: e.target.value,
+                      employeeId: e.target.value,
+                    }))
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <input
+                  type="text"
+                  id="branchId"
+                  placeholder="Branch ID"
+                  value={formData.branchId}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      branchId: e.target.value,
                     }))
                   }
                   className="w-full p-2 border border-gray-300 rounded"
@@ -118,12 +133,27 @@ function EmployeeForm() {
                   type="date"
                   id="dob"
                   value={formData.dob}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const today = new Date();
+                    const birthDate = new Date(e.target.value);
+                    const age = Math.floor(
+                      (today - birthDate) / (1000 * 60 * 60 * 24 * 365.25)
+                    );
                     setFormData((prevState) => ({
                       ...prevState,
                       dob: e.target.value,
-                    }))
-                  }
+                      age,
+                    }));
+                  }}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <input
+                  type="text"
+                  id="age"
+                  value={formData.age || ""}
+                  readOnly
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
@@ -216,13 +246,15 @@ function EmployeeForm() {
                 />{" "}
                 <input
                   type="text"
-                  id="phoneNo"
-                  placeholder="Phone Number"
-                  value={formData.phoneNo}
+                  id="contactNo"
+                  maxLength={10}
+                  minLength={10}
+                  placeholder="Contact Number"
+                  value={formData.contactNo}
                   onChange={(e) =>
                     setFormData((prevState) => ({
                       ...prevState,
-                      phoneNo: e.target.value,
+                      contactNo: e.target.value,
                     }))
                   }
                   className="w-full p-2 border border-gray-300 rounded"

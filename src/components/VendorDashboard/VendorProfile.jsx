@@ -1,39 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { updateVendorProfile } from "../../redux/slices/vendorDashboardSlice";
 import VendorSidebar from "./VendorSidebar";
 import { getProfile } from "../../redux/slices/authSlice";
 
 function VendorProfile() {
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.auth.user);
-  // console.log(user);
-
-  // const initialProfileData = {
-  //   areaOfWork: user?.areaOfWork || "",
-  //   companyName: user?.companyName || "",
-  //   zipCode: user?.zipCode || "",
-  //   country: user?.country || "",
-  //   city: user?.city || "",
-  //   state: user?.state || "",
-  //   email: user?.email || "",
-  //   password: "", // Omitted for security, handle separately
-  //   website: user?.website || "",
-  //   address1: user?.address1 || "",
-  //   address2: user?.address2 || "",
-  //   address3: user?.address3 || "",
-  //   address4: user?.address4 || "",
-  //   countryCode: user?.countryCode || "",
-  //   phoneNumber: user?.phoneNumber || "",
-  //   landlineCountryCode: user?.landlineCountryCode || "",
-  //   landlineCityCode: user?.landlineCityCode || "",
-  //   landlineNumber: user?.landlineNumber || "",
-  //   contactPersonFirstName: user?.contactPersonFirstName || "",
-  //   contactPersonSecondName: user?.contactPersonSecondName || "",
-  //   contactPersonLastName: user?.contactPersonLastName || "",
-  //   contactPersonGender: user?.contactPersonGender || "",
-  //   services: user?.services || [], // Services section
-  // };
 
   const [profileData, setProfileData] = useState({});
   const [newService, setNewService] = useState(""); // For adding new services
@@ -42,12 +14,19 @@ function VendorProfile() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getProfile());
-      console.log(response);
-      setProfileData(response.payload.data);
+      const profile = response.payload.data;
+      
+      // Ensure services is an array
+      const services = Array.isArray(profile.services) ? profile.services : [];
+      
+      setProfileData({
+        ...profile,
+        services,
+      });
     };
     fetchData();
   }, [dispatch]);
-
+  
   console.log(profileData);
 
   const handleInputChange = (e) => {
@@ -69,14 +48,34 @@ function VendorProfile() {
   };
 
   const handleSave = () => {
-    dispatch(updateVendorProfile(profileData)); // Dispatch to save the updated profile
-    setIsEditing(false);
+    // Dispatch to save the updated profile
+    dispatch(updateVendorProfile({
+      ...profileData, 
+      services: profileData.services // Ensure services array is passed
+    })).then(response => {
+      console.log("Profile updated successfully:", response);
+      
+      dispatch(getProfile()).then(response => {
+        const profile = response.payload.data;
+        setProfileData({
+          ...profile,
+          services: Array.isArray(profile.services) ? profile.services : [],
+        });
+        setIsEditing(false);
+      }).catch(error => {
+        console.error("Failed to fetch updated profile:", error);
+      });
+    }).catch(error => {
+      console.error("Failed to update profile:", error);
+    });
   };
+  
 
   return (
-    <div className="h-screen w-full flex items-center justify-center  bg-gradient-to-r from-blue-300 to-purple-500 ">
-      <VendorSidebar />
-      <div className="mx-auto opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80">
+    <div className="flex bg-gradient-to-r from-green-300 to-blue-500">
+    <VendorSidebar />
+    <main className="min-h-screen w-full overflow-auto opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80 p-6">
+   
         <h2 className="text-2xl font-bold mb-4 text-center uppercase">
           <a href="vendordashboard">Vendor Profile</a>
         </h2>
@@ -356,16 +355,29 @@ function VendorProfile() {
               JSON.parse(profileData.services).map((service, index) => (
                 <li key={index}>{service}</li>
               ))}
-          </ul> */}
-          {isEditing && (
-            <div className="mt-4 flex">
-              <input
-                type="text"
-                placeholder="Add new service (e.g., Hotel)"
+          </ul> */} 
+<ul className="list-disc pl-6">
+  {profileData.services && profileData.services.length > 0 ? (
+    profileData.services.map((service, index) => (
+      <li key={index}>{service}</li>
+    ))
+  ) : (
+    <li>No services added yet.</li>
+  )}
+</ul>
+
+{isEditing && (
+            <div className="mt-4">
+              <select
                 value={newService}
                 onChange={(e) => setNewService(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mr-2"
-              />
+                className="p-2 border border-gray-300 rounded mr-2"
+              >
+                <option value="">Select Service</option>
+                <option value="Cab">Cab</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Event">Event</option>
+              </select>
               <button
                 onClick={handleAddService}
                 className="px-4 py-2 bg-blue-600 text-white rounded"
@@ -400,7 +412,7 @@ function VendorProfile() {
             Edit Profile
           </button>
         )}
-      </div>
+      </main>
     </div>
   );
 }

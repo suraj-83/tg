@@ -6,60 +6,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const CabBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([
-    {
-      id: 1,
-      pickupCountry: "India",
-      nationality: "Indian",
-      tourPlan: "Business",
-      name: "John Doe",
-      contactNo: "1234567890",
-      alternateContactNo: "0987654321",
-      email: "john@example.com",
-      cabRequiredAt: "Mumbai",
-      cabRequiredFor: "Office",
-      localTravelKmsLimit: "100",
-      pickupDateTime: "2023-01-01 10:00 AM",
-      pickupAddress: "123, ABC Street",
-      pickupLandmark: "Near XYZ Building",
-      dropDateTime: "2023-01-01 6:00 PM",
-      dropAddress: "456, DEF Street",
-      dropLandmark: "Opposite GHI Mall",
-      cabDuration: "8 hours",
-      noOfCabsRequired: 1,
-      typeOfCabRequired: "Sedan",
-      noOfPersonsTravelling: 4,
-      noOfInfants: 0,
-      noOfChildren: 1,
-      otherRequirements: "Child seat required",
-    },
-    {
-      id: 2,
-      pickupCountry: "India",
-      nationality: "Indian",
-      tourPlan: "Leisure",
-      name: "Jane Smith",
-      contactNo: "9876543210",
-      alternateContactNo: "0123456789",
-      email: "jane@example.com",
-      cabRequiredAt: "Chennai",
-      cabRequiredFor: "City Tour",
-      localTravelKmsLimit: "150",
-      pickupDateTime: "2023-02-01 12:00 PM",
-      pickupAddress: "789, GHI Street",
-      pickupLandmark: "Near JKL Park",
-      dropDateTime: "2023-02-01 8:00 PM",
-      dropAddress: "321, MNO Street",
-      dropLandmark: "Opposite PQR Tower",
-      cabDuration: "8 hours",
-      noOfCabsRequired: 2,
-      typeOfCabRequired: "SUV",
-      noOfPersonsTravelling: 6,
-      noOfInfants: 1,
-      noOfChildren: 2,
-      otherRequirements: "Extra luggage space required",
-    },
-  ]);
+  const [travelDetails, setTravelDetails] = useState([]);
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);

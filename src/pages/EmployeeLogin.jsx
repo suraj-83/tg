@@ -8,7 +8,7 @@ function EmployeeLogin() {
     const navigate = useNavigate();
 
     const initialFormData = {
-        empId: '',
+        employeeId: '',
         companyId: '',
         password: ''
     };
@@ -35,9 +35,9 @@ function EmployeeLogin() {
                 <div className="mb-4">
                     <input
                         type="text"
-                        id="empId"
+                        id="employeeId"
                         placeholder='Employee ID'
-                        value={formData.empId}
+                        value={formData.employeeId}
                         onChange={(e) => setFormData(prevState => ({ ...prevState, empId: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     />

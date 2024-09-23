@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { branchSignup } from "../redux/slices/authSlice.js"
+import { branchSignup } from "../redux/slices/authSlice.js";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 import { zipCodeMapping } from "../data";
 
@@ -8,24 +8,20 @@ function AddBranchForm() {
   const dispatch = useDispatch();
   const initialFormData = {
     name: "",
-    address: "",
+    address1: "",
+    address2: "",
     city: "",
     state: "",
-    zipcode: "",
-    addLine1: "",
-    addLine2: "",
-    contactNo: "",
-    email: "",
+    zipCode: "",
     countryCode: "",
-    phoneNumber: "",
+    contactNo: "",
     landlineCountryCode: "",
     landlineCityCode: "",
-    landlineNumber: ""
+    landlineNumber: "",
+    email: ""
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [phoneNumberVisible, setPhoneNumberVisible] = useState(false);
-  const [landlineNumberVisible, setLandLineNumberVisible] = useState(false);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -39,7 +35,7 @@ function AddBranchForm() {
     const zipCode = e.target.value;
     setFormData((prevState) => ({
       ...prevState,
-      zipcode: zipCode,
+      zipCode: zipCode,
       city: zipCodeMapping[zipCode]?.city || "",
       state: zipCodeMapping[zipCode]?.state || "",
     }));
@@ -48,7 +44,7 @@ function AddBranchForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const response = await dispatch(branchSignup(formData))
+    const response = await dispatch(branchSignup(formData));
     if (response?.payload?.data?.success) {
       alert("Branch added successfully!");
     }
@@ -63,8 +59,8 @@ function AddBranchForm() {
           <h1 className="pb-9 font-bold text-center uppercase text-2xl underline">
             Add Branch
           </h1>
-          <div className="min-h-[90vh]">
-            <div className="grid grid-cols-3 gap-3">
+          <div className="min-h-screen">
+            <div className="grid grid-cols-4 gap-3">
               <div className="mb-4 w-full">
                 <input
                   type="text"
@@ -78,9 +74,9 @@ function AddBranchForm() {
               <div className="mb-4 w-full">
                 <input
                   type="text"
-                  id="zipcode"
+                  id="zipCode"
                   placeholder="ZIP/PIN Code"
-                  value={formData.zipcode}
+                  value={formData.zipCode}
                   onChange={handleZipCodeChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
@@ -108,9 +104,9 @@ function AddBranchForm() {
               <div className="mb-4 w-full">
                 <input
                   type="text"
-                  id="addLine1"
+                  id="address1"
                   placeholder="Address Line 1"
-                  value={formData.addLine1}
+                  value={formData.address1}
                   onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
@@ -118,110 +114,13 @@ function AddBranchForm() {
               <div className="mb-4 w-full">
                 <input
                   type="text"
-                  id="addLine2"
+                  id="address2"
                   placeholder="Address Line 2"
-                  value={formData.addLine2}
+                  value={formData.address2}
                   onChange={handleInputChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-              <div className="flex items-center mb-4 w-full">
-                <input
-                  type="checkbox"
-                  checked={phoneNumberVisible}
-                  onChange={() => setPhoneNumberVisible((prevVisible) => !prevVisible)}
-                  className="mr-2"
-                />
-                Mobile Number
-                <input
-                  type="checkbox"
-                  checked={landlineNumberVisible}
-                  onChange={() => setLandLineNumberVisible((prevVisible) => !prevVisible)}
-                  className="ml-4 mr-2"
-                />
-                Landline Number
-              </div>
-              {phoneNumberVisible && (
-                <div className="mb-4 w-full flex flex-wrap">
-                  <div className="flex mt-2 gap-2 w-full">
-                  <input
-                          type="text"
-                          maxLength={4}
-                          minLength={3}
-                          value={
-                            formData.countryCode
-                              ? `+${formData.countryCode}`
-                              : ""
-                          }
-                          onChange={(e) =>
-                            setFormData((prevState) => ({
-                              ...prevState,
-                              countryCode: e.target.value
-                                .replace(/^0+/, "")
-                                .replace(/\D/g, ""),
-                            }))
-                          }
-                          className="w-28 p-2 border border-gray-300 rounded"
-                          placeholder="CountryCode"
-                        />
-                    <input
-                      type="text"
-                      id="phoneNumber"
-                      maxLength={10}
-                      value={formData.phoneNumber}
-                      onChange={handleInputChange}
-                      className="w-full p-2 border border-gray-300 rounded"
-                      placeholder="Phone Number"
-                    />
-                  </div>
-                </div>
-              )}
-              {landlineNumberVisible && (
-                <div className="mb-4 w-full flex mt-2">
-                  <input
-                        type="text"
-                        maxLength={4}
-                        minLength={3}
-                        value={
-                          formData.landlineCountryCode
-                            ? `+${formData.landlineCountryCode}`
-                            : ""
-                        }
-                        onChange={(e) =>
-                          setFormData((prevState) => ({
-                            ...prevState,
-                            landlineCountryCode: e.target.value
-                              .replace(/^0+/, "")
-                              .replace(/\D/g, ""),
-                          }))
-                        }
-                        className="w-20 p-2 border border-gray-300 rounded mr-2"
-                        placeholder="CountryCode"
-                        style={{ color: "gray" }}
-                        aria-label="CountryCode"
-                      />
-                  <input
-                    type="text"
-                    id="landlineCityCode"
-                    maxLength={4}
-                    minLength={3}
-                    value={formData.landlineCityCode}
-                    onChange={handleInputChange}
-                    className="w-20 p-2 border border-gray-300 rounded mr-2"
-                    placeholder="City Code"
-                  />
-                  <input
-                    type="text"
-                    id="landlineNumber"
-                    maxLength={7}
-                    minLength={6}
-                    value={formData.landlineNumber}
-                    onChange={handleInputChange}
-                    className="w-52 p-2 border border-gray-300 rounded"
-                    placeholder="Landline Number"
-                  />
-                </div>
-              )}
               <div className="mb-4 w-full">
                 <input
                   type="email"
@@ -237,14 +136,68 @@ function AddBranchForm() {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
-              <div className="mb-4">
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                >
-                  Add Branch
-                </button>
+              <div className="mb-4 w-full">
+                <input
+                  type="text"
+                  id="contactNo"
+                  placeholder="Contact Number"
+                  value={formData.contactNo}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
               </div>
+              <div className="mb-4 flex gap-2">
+                <input
+                  type="text"
+                  maxLength={4}
+                  minLength={1}
+                  value={
+                    formData.landlineCountryCode
+                      ? `+${formData.landlineCountryCode}`
+                      : ""
+                  }
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      landlineCountryCode: e.target.value
+                        .replace(/^0+/, "")
+                        .replace(/\D/g, ""),
+                    }))
+                  }
+                  className="w-28 text-sm text-center p-2 border border-gray-300 rounded "
+                  placeholder="Country Code"
+                  style={{ color: "gray" }}
+                  aria-label="CountryCode"
+                />
+                <input
+                  type="text"
+                  id="landlineCityCode"
+                  maxLength={4}
+                  minLength={3}
+                  value={formData.landlineCityCode}
+                  onChange={handleInputChange}
+                  className="w-24 text-center text-sm p-2 border border-gray-300 rounded"
+                  placeholder="City Code"
+                />
+                <input
+                  type="text"
+                  id="landlineNumber"
+                  maxLength={7}
+                  minLength={6}
+                  value={formData.landlineNumber}
+                  onChange={handleInputChange}
+                  className="w-40 p-2 text-sm border border-gray-300 rounded"
+                  placeholder="Landline Number"
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              >
+                Add Branch
+              </button>
             </div>
           </div>
         </form>

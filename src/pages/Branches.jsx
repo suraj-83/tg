@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+// import { getAllBranches } from "../redux/slices/authSlice";
 
 const BranchDetails = () => {
   const dispatch = useDispatch();
   const [branches, setBranches] = useState([]);
-
   const [editBranch, setEditBranch] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await dispatch(fetchBranches());
+      const response = await dispatch(getAllBranches());
       if (response?.payload?.data) setBranches(response.payload.data);
     };
     fetchData();
@@ -65,11 +65,7 @@ const BranchDetails = () => {
   return (
     <div className="flex">
       <CorporateSidebar />
-      <main className="w-full p-6
-      bg-gray-900
-        overflow-auto
-      
-      text-gray-100">
+      <main className="w-full p-6 bg-gray-900 overflow-auto text-gray-100">
         <h1 className="pb-9 font-bold text-center uppercase text-2xl underline">
           Branch Details
         </h1>
@@ -234,9 +230,9 @@ const BranchDetails = () => {
               </tbody>
             </table>
           )}
-             {/* Pagination controls */}
-             <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
-          <div className="flex items-center gap-4 px-5 select-none">
+          {/* Pagination controls */}
+          <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+            <div className="flex items-center gap-4 px-5 select-none">
             <p className='text-white'>Rows per page</p>
             <select
               className="px-2 py-1 rounded-md border border-[#BEBEBE]"

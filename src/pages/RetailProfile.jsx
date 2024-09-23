@@ -5,16 +5,18 @@ import RetailSidebar from "../components/RetailDashboard/UserSidebar"; // Retail
 
 function RetailProfile() {
   const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.auth);
 
   const [profileData, setProfileData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-
+  const [profilePhoto, setProfilePhoto] = useState(null); // Store the uploaded profile photo
+  const [previewPhoto, setPreviewPhoto] = useState(null); // Store preview of the profile photo
 
   useEffect(() => {
     setProfileData(user);
+    setPreviewPhoto(user?.profilePhoto || ""); // Set the initial profile photo if exists
   }, [user]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prevState) => ({
@@ -23,19 +25,48 @@ function RetailProfile() {
     }));
   };
 
-  const handleSave = () => {
-    dispatch(updateRetailProfile(profileData));
-    setIsEditing(false);
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePhoto(file); // Store the selected file
+    setPreviewPhoto(URL.createObjectURL(file)); // Preview the selected image
   };
 
+  const handleSave = () => {
+    const updatedData = { ...profileData, profilePhoto }; // Include profilePhoto in the update
+    dispatch(updateRetailProfile(updatedData));
+    setIsEditing(false);
+  };
   return (
-    <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-green-300 to-blue-500">
+    <div className="flex bg-gradient-to-r from-green-300 to-blue-500">
       <RetailSidebar />
-      <div className="mx-auto opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80">
-        <h2 className="text-2xl font-bold mb-4 text-center uppercase">
+      <main className="min-h-screen w-full overflow-auto opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80 p-6">
+      <h2 className="text-2xl font-bold mb-4 text-center uppercase">
           <a href="retaildashboard">Retail Profile</a>
         </h2>
-        <div className="grid grid-cols-4 gap-4">
+        {/* Profile Photo Upload */}
+        <div className="flex flex-col items-center mb-4">
+          <div className="relative">
+            <img
+              src={previewPhoto || "https://via.placeholder.com/150"} // Placeholder if no photo
+              alt="Profile"
+              className="w-32 h-32 rounded-full object-cover"
+            />
+            {isEditing && (
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePhotoChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            )}
+          </div>
+          {isEditing && (
+            <p className="text-sm text-gray-600">
+              Click to upload a new photo
+            </p>
+          )}
+        </div>
+        <div className="grid grid-cols-5 gap-2">
           <div className="mb-4">
             <label className="block text-gray-900 font-extrabold uppercase">First Name</label>
             <input
@@ -290,11 +321,11 @@ function RetailProfile() {
           </div>
         </div>
 
-        <div className="mt-4 flex justify-center">
+        <div className="flex justify-between">
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700"
+              className="bg-blue-600 text-white px-4 py-2 w-full rounded-lg shadow-md hover:bg-blue-700"
             >
               Edit
             </button>
@@ -315,7 +346,7 @@ function RetailProfile() {
             </>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

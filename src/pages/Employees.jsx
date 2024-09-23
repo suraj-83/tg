@@ -1,138 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { getEmployees } from '../redux/slices/authSlice';
 import CorporateSidebar from '../components/CorporateDashboard/CorporateSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const EmployeeDetails = () => {
   const dispatch = useDispatch();
-  const [employees, setEmployees] = useState([
-    {
-      empId: "E001",
-      name: "John Doe",
-      gender: "male",
-      dob: "1990-01-01",
-      zipCode: "10001",
-      country: "USA",
-      city: "New York",
-      state: "NY",
-      email: "john.doe@example.com",
-      countryCode: "1",
-      phoneNo: "1234567890",
-      branch: "Main",
-      department: "IT",
-      position: "Developer",
-    },
-    {
-      empId: "E002",
-      name: "Jane Smith",
-      gender: "female",
-      dob: "1985-05-15",
-      zipCode: "20001",
-      country: "USA",
-      city: "Washington",
-      state: "DC",
-      email: "jane.smith@example.com",
-      countryCode: "100001",
-      phoneNo: "0987654321",
-      branch: "Main",
-      department: "HR",
-      position: "Manager",
-    },
-    {
-      empId: "E003",
-      name: "Michael Johnson",
-      gender: "male",
-      dob: "1995-08-20",
-      zipCode: "30001",
-      country: "USA",
-      city: "Chicago",
-      state: "IL",
-      email: "michael.johnson@example.com",
-      countryCode: "100001",
-      phoneNo: "9876543210",
-      branch: "Main",
-      department: "Sales",
-      position: "Sales Representative",
-    },
-    {
-      empId: "E004",
-      name: "Emily Davis",
-      gender: "female",
-      dob: "1998-12-31",
-      zipCode: "40001",
-      country: "USA",
-      city: "Los Angeles",
-      state: "CA",
-      email: "emily.davis@example.com",
-      countryCode: "100001",
-      phoneNo: "4567890123",
-      branch: "Main",
-      department: "Marketing",
-      position: "Marketing Manager",
-    },
-    {
-      empId: "E005",
-      name: "David Wilson",
-      gender: "male",
-      dob: "1980-11-11",
-      zipCode: "50001",
-      country: "USA",
-      city: "Houston",
-      state: "TX",
-      email: "david.wilson@example.com",
-      countryCode: "100001",
-      phoneNo: "1234567890",
-      branch: "Main",
-      department: "Finance",
-      position: "Accountant",
-    },
-    {
-      empId: "E006",
-      name: "Sarah Thompson",
-      gender: "female",
-      dob: "1992-02-02",
-      zipCode: "60001",
-      country: "USA",
-      city: "Phoenix",
-      state: "AZ",
-      email: "sarah.thompson@example.com",
-      countryCode: "100001",
-      phoneNo: "9876543210",
-      branch: "Main",
-      department: "IT",
-      position: "Software Engineer",
-    },
-    {
-      empId: "E007",
-      name: "James Brown",
-      gender: "male",
-      dob: "1988-07-07",
-      zipCode: "70001",
-      country: "USA",
-      city: "San Francisco",
-      state: "CA",
-      email: "james.brown@example.com",
-      countryCode: "100001",
-      phoneNo: "1234567890",
-      branch: "Main",
-      department: "HR",
-      position: "HR Representative",
-    },
-    // Add more employee data here
-  ]);
+  const [employees, setEmployees] = useState([]);
   
   const [editingEmployee, setEditingEmployee] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const {branchId} = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await dispatch(fetchEmployees());
-      if (response?.payload?.data) setEmployees(response.payload.data);
+      const response = await dispatch(getEmployees(branchId));
+      if (response?.payload) {
+        setEmployees(response.payload); // Set employees from the response
+      }
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, branchId]);
 
   const handleRemove = (id) => {
     setEmployees((prevEmployees) => prevEmployees.filter((emp) => emp.empId !== id));
@@ -150,8 +40,8 @@ const EmployeeDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEmployees((prevEmployees) =>
-      prevEmployees.map((emp) =>
-        emp.empId === editingEmployee.empId ? editingEmployee : emp
+      prevEmployees.map((employee) =>
+        employee.employeeId === editingEmployee.employeeId ? editingEmployee : employee
       )
     );
     setEditingEmployee(null);
@@ -164,7 +54,7 @@ const EmployeeDetails = () => {
   const filteredEmployees = employees.filter(
     (employee) =>
       employee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      employee.empId.toLowerCase().includes(searchQuery.toLowerCase())
+      employee.employeeId.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Pagination logic
@@ -212,7 +102,7 @@ const EmployeeDetails = () => {
           {currentEmployees.map((employee) => (
             <div key={employee.empId} className="border border-gray-700 text-white mx-auto bg-[#20354b] rounded-xl px-4 py-4 shadow-lg">
               <h2 className="font-bold text-xl mb-2">{employee.name}</h2>
-              <p><strong>EmpId:</strong> {employee.empId}</p>
+              <p><strong>EmpId:</strong> {employee.employeeId}</p>
               <p><strong>Gender:</strong> {employee.gender}</p>
               <p><strong>DOB:</strong> {employee.dob}</p>
               <p><strong>ZipCode:</strong> {employee.zipCode}</p>
@@ -231,7 +121,7 @@ const EmployeeDetails = () => {
                 Edit
               </button>
               <button
-                onClick={() => handleRemove(employee.empId)}
+                onClick={() => handleRemove(employee.employeeId)}
                 className='border border-red-500 hover:border-red-700 text-white font-bold py-2 px-4 rounded mt-4 ml-2'>
                 Remove
               </button>

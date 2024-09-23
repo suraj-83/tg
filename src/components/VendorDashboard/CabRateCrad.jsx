@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCabRateCard } from './../../redux/slices/vendorDashboardSlice';
 import FileUpload from './FileUpload';
-import BillUpload from './BillImgUpload';
 import ServiceTermsConditions from './CabTnC';
 import VendorSidebar from './VendorSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
@@ -34,7 +33,7 @@ const CabRateCard = () => {
 
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to the first page
   };
 
   const startIdx = (currentPage - 1) * rowsPerPage;
@@ -47,46 +46,51 @@ const CabRateCard = () => {
       <main className="min-h-screen bg-gradient-to-r from-blue-300 to-purple-500 w-full overflow-auto">
         <div className="pl-24 max-h-[90vh] overflow-auto">
           <div className="flex gap-4 items-center mb-4">
-          <FileUpload />
-        <BillUpload />
-        <ServiceTermsConditions />
+            <FileUpload />
+            <ServiceTermsConditions />
           </div>
           <div className="pr-4 max-h-[75vh] border-purple-500 border-b-2 border-t-2 overflow-auto">
             {status === 'loading' && <p>Loading...</p>}
             {status === 'failed' && <p>{error}</p>}
-            {status === 'succeeded' && paginatedData.map((cityData, index) => (
-              <div key={index} className="mb-8">
-                <table className="min-w-full bg-white border border-gray-200 bg-opacity-30 rounded-lg shadow-lg backdrop-blur-xl backdrop-filter">
-                  <thead>
-                    <h2 className="text-xl font-bold p-1 text-center">{cityData.city}</h2>
-                    <tr className="text-center text-sm">
-                      <th className="py-2 px-4 border min-w-[100px]">Vehicle Type</th>
-                      <th className="py-2 px-4 border min-w-[100px]">4 Hrs / 40 Kms</th>
-                      <th className="py-2 px-4 border min-w-[100px]">8 Hrs / 80 Kms</th>
-                      <th className="py-2 px-4 border min-w-[100px]">Extra Hour</th>
-                      <th className="py-2 px-4 border min-w-[100px]">Extra Km</th>
-                      <th className="py-2 px-4 border min-w-[100px]">Night Charge</th>
-                      <th className="py-2 px-4 border min-w-[100px]">Outstation Km</th>
-                      <th className="py-2 px-4 border min-w-[100px]">Driver Allowance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cityData.rates.map((rate, idx) => (
-                      <tr key={idx} className="text-center text-sm">
-                        <td className="py-2 px-4 border min-w-[100px]">{rate.vehicle}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.fourHours}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.eightHours}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.extraHour}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.extraKm}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.nightCharge}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.outstationKm}</td>
-                        <td className="py-2 px-4 border min-w-[100px]">₹ {rate.driverAllowance}</td>
+            {status === 'succeeded' && paginatedData.length > 0 ? (
+              paginatedData.map((cityData, index) => (
+                <div key={index} className="mb-8">
+                  <table className="min-w-full bg-white border border-gray-200 bg-opacity-30 rounded-lg shadow-lg backdrop-blur-xl backdrop-filter">
+                    <thead>
+                      <h2 className="text-xl font-bold p-1 text-center">{cityData.city}</h2>
+                      <tr className="text-center text-sm">
+                        <th className="py-2 px-4 border min-w-[100px]">Vehicle Type</th>
+                        <th className="py-2 px-4 border min-w-[100px]">4 Hrs / 40 Kms</th>
+                        <th className="py-2 px-4 border min-w-[100px]">8 Hrs / 80 Kms</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Extra Hour</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Extra Km</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Night Charge</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Outstation Km</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Driver Allowance</th>
+                        <th className="py-2 px-4 border min-w-[100px]">Upload Bill</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ))}
+                    </thead>
+                    <tbody>
+                      {cityData.rates.map((rate, idx) => (
+                        <tr key={idx} className="text-center text-sm">
+                          <td className="py-2 px-4 border min-w-[100px]">{rate.vehicle}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.fourHours}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.eightHours}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.extraHour}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.extraKm}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.nightCharge}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.outstationKm}</td>
+                          <td className="py-2 px-4 border min-w-[100px]">₹ {rate.driverAllowance}</td>
+                          <td className="py-2 px-4 border min-w-[100px]"></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))
+            ) : (
+              <p>No data available</p>
+            )}
           </div>
           {/* Pagination controls */}
           <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">

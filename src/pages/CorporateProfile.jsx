@@ -46,9 +46,9 @@ function CorporateProfile() {
   };
 
   return (
-    <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-blue-300 to-purple-500">
+    <div className="flex bg-gradient-to-r from-blue-300 to-purple-500">
       <CorporateSidebar />
-      <div className="mx-auto opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80">
+      <main className="min-h-screen overflow-auto w-full opacity-85 filter backdrop-blur-md dark:backdrop-blur-md dark:opacity-80 p-8">
         <h2 className="text-2xl font-bold mb-4 text-center uppercase">
           <a href="corporatedashboard">Corporate Profile</a>
         </h2>
@@ -75,6 +75,19 @@ function CorporateProfile() {
               type="text"
               name="companyName"
               value={profileData.companyName}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-900 font-extrabold uppercase">
+              Company ID
+            </label>
+            <input
+              type="text"
+              name="companyId"
+              value={localStorage.getItem("companyId") || ""}
               onChange={handleInputChange}
               disabled={!isEditing}
               className="w-full p-2 border border-gray-300 rounded"
@@ -405,7 +418,7 @@ function CorporateProfile() {
             Edit Profile
           </button>
         )}
-      </div>
+      </main>
     </div>
   );
 }

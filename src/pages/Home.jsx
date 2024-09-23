@@ -93,7 +93,7 @@ const LandingPage = () => {
     </div>
     
             {/* Newsletter Section */}
-            <section className="bg-gray-800 py-20 text-white">
+            {/* <section className="bg-gray-800 py-20 text-white">
                 <div className="max-w-7xl mx-auto px-4">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Subscribe to Our Newsletter</h2>
                     <p className="text-lg text-center mb-8">Stay updated with our latest offers and travel deals</p>
@@ -106,7 +106,7 @@ const LandingPage = () => {
                         </form>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Footer */}
             <Footer />

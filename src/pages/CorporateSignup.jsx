@@ -323,7 +323,7 @@ if (isAllFieldsFilled) {
                       }}
                       className=" p-2 border border-gray-300 rounded"
                     >
-                      <option value="">-- Select Deparment --</option>
+                      <option value="">-- Select Department --</option>
                       <option value="Administrator">Administrator</option>
                       <option value="Hr/Human Resources">
                         Hr/Human Resources

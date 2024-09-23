@@ -32,7 +32,6 @@ export const fetchCabRateCard = createAsyncThunk('vendorDashboard/fetchCabRateCa
     throw error;
   }
 });
-
 // Async thunk to submit a new hotel rate card
 export const submitHotelRateCard = createAsyncThunk('vendorDashboard/submitHotelRateCard', async (formData, { rejectWithValue }) => {
   try {
