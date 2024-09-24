@@ -13,6 +13,7 @@ function AddBranchForm() {
     city: "",
     state: "",
     zipCode: "",
+    country: "",
     countryCode: "",
     contactNo: "",
     landlineCountryCode: "",
@@ -36,6 +37,7 @@ function AddBranchForm() {
     setFormData((prevState) => ({
       ...prevState,
       zipCode: zipCode,
+      country: zipCodeMapping[zipCode]?.country || "",
       city: zipCodeMapping[zipCode]?.city || "",
       state: zipCodeMapping[zipCode]?.state || "",
     }));
@@ -71,6 +73,16 @@ function AddBranchForm() {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               </div>
+              <div className="mb-4">
+                    <input
+                      type="text"
+                      id="country"
+                      placeholder="Country"
+                      value={formData.country || "India"}
+                      readOnly
+                      className="w-full p-2 border border-gray-300 rounded"
+                    />
+                  </div>
               <div className="mb-4 w-full">
                 <input
                   type="text"
@@ -140,6 +152,8 @@ function AddBranchForm() {
                 <input
                   type="text"
                   id="contactNo"
+                  maxLength={10}
+                  minLength={10}
                   placeholder="Contact Number"
                   value={formData.contactNo}
                   onChange={handleInputChange}

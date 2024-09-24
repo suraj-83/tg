@@ -43,7 +43,7 @@ export const retailSignup = createAsyncThunk(
 
 // Branch Signup
 export const branchSignup = createAsyncThunk(
-  "auth/branch-signup",
+  "auth/add-branch",
   async (data) => {
     try {
       const response = await axiosInstance.post("/corporate/branch", data);
@@ -130,7 +130,7 @@ export const employeeSignup = createAsyncThunk(
 );
 
 // Get All Branch Employees
-export const getEmployees = createAsyncThunk("auth/getEmployees", async (branchId) => {
+export const getEmployees = createAsyncThunk("auth/getEmployees", async ({branchId}) => {
   try {
     const response = await axiosInstance.get(`/corporate/employee/${branchId}`);
 
@@ -141,7 +141,6 @@ export const getEmployees = createAsyncThunk("auth/getEmployees", async (branchI
     toast.error(error?.response?.data?.message);
   }
 });
-
 // // Unified Login
 export const login = createAsyncThunk('auth/login', async (data) => {
   try {
@@ -267,21 +266,20 @@ export const branchLogin = createAsyncThunk(
   }
 );
 
-// // Get All Corporate Branch Details
-// export const getAllBranches = createAsyncThunk(
-//   "auth/getAllBranches",
-//   async () => {
-//     try {
-//       const response = await axiosInstance.get("/corporate/branch/all");
-//       console.log("All Corporate Branches: ", response.data);
-//       return response.data.data;
-//     } catch (error) {
-//       console.log(error);
-//       toast.error(error?.response?.data?.message);
-//     }
-//   }
-// );
-
+// Get All Corporate Branch Details
+export const getAllBranches = createAsyncThunk(
+  "auth/getAllBranches",
+  async () => {
+    try {
+      const response = await axiosInstance.get("/corporate/branch/all");
+      console.log("All Corporate Branches: ", response.data);
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {

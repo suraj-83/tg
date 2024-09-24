@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-// import { getAllBranches } from "../redux/slices/authSlice";
+import { getAllBranches } from "../redux/slices/authSlice";
 
 const BranchDetails = () => {
   const dispatch = useDispatch();
@@ -14,11 +14,11 @@ const BranchDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getAllBranches());
+      console.log(response);
       if (response?.payload?.data) setBranches(response.payload.data);
     };
     fetchData();
-  }, [dispatch]);
-
+  }, [dispatch] );
   const handleEdit = (branch) => {
     setEditBranch(branch);
   };
