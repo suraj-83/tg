@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CorporateSidebar from "../components/CorporateDashboard/CorporateSidebar";
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { getAllBranches } from "../redux/slices/authSlice";
+import { getAllBranches, updateBranchDetails } from "../redux/slices/authSlice";
 
 const BranchDetails = () => {
   const dispatch = useDispatch();
   const [branches, setBranches] = useState([]);
   const [editBranch, setEditBranch] = useState(null);
+  const handleUpdateBranch = async (updatedBranch) => {
+    const response = await dispatch(updateBranchDetails({ branchId: editBranch.id, data: updatedBranch }));
+    if (response?.payload?.success) {
+      setBranches((prevBranches) =>
+        prevBranches.map((branch) =>
+          branch.id === editBranch.id ? updatedBranch : branch
+        )
+      );
+      setEditBranch(null);
+    }
+  };
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -61,7 +72,6 @@ const BranchDetails = () => {
   // Calculate the branches to display on the current page
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentBranches = branches.slice(startIndex, startIndex + rowsPerPage);
-
   return (
     <div className="flex">
       <CorporateSidebar />

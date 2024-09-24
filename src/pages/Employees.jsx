@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getEmployees } from '../redux/slices/authSlice';
+import { getAllEmployees, updateEmployee } from '../redux/slices/authSlice';
 import CorporateSidebar from '../components/CorporateDashboard/CorporateSidebar';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -9,20 +9,32 @@ const EmployeeDetails = () => {
   const [employees, setEmployees] = useState([]);
   
   const [editingEmployee, setEditingEmployee] = useState(null);
+  const handleUpdateEmployee = async (updatedEmployee) => {
+    const response = await dispatch(updateEmployee({ employeeId: editingEmployee.employeeId, data: updatedEmployee }));
+    if (response?.payload?.success) {
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((employee) =>
+          employee.employeeId === editingEmployee.employeeId ? updatedEmployee : employee
+        )
+      );
+      setEditingEmployee(null);
+    }
+  };
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const {branchId} = JSON.parse(localStorage.getItem('user'));
+  // const {branchId} = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await dispatch(getEmployees(branchId));
+      const response = await dispatch(getAllEmployees());
+      console.log(response);
       if (response?.payload) {
         setEmployees(response.payload); // Set employees from the response
       }
     };
     fetchData();
-  }, [dispatch, branchId]);
+  }, [dispatch]);
 
   const handleRemove = (id) => {
     setEmployees((prevEmployees) => prevEmployees.filter((emp) => emp.empId !== id));
@@ -105,6 +117,7 @@ const EmployeeDetails = () => {
               <p><strong>EmpId:</strong> {employee.employeeId}</p>
               <p><strong>Gender:</strong> {employee.gender}</p>
               <p><strong>DOB:</strong> {employee.dob}</p>
+              <p><strong>Age:</strong> {employee.age}</p>
               <p><strong>ZipCode:</strong> {employee.zipCode}</p>
               <p><strong>Country:</strong> {employee.country}</p>
               <p><strong>City:</strong> {employee.city}</p>
@@ -112,7 +125,7 @@ const EmployeeDetails = () => {
               <p><strong>Email:</strong> {employee.email}</p>
               <p><strong>CountryCode:</strong> {employee.countryCode}</p>
               <p><strong>Phone No.:</strong> {employee.phoneNo}</p>
-              <p><strong>Branch:</strong> {employee.branch}</p>
+              <p><strong>Branch:</strong> {employee.branchId}</p>
               <p><strong>Department:</strong> {employee.department}</p>
               <p><strong>Position:</strong> {employee.position}</p>
               <button

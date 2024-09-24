@@ -130,7 +130,7 @@ export const employeeSignup = createAsyncThunk(
 );
 
 // Get All Branch Employees
-export const getEmployees = createAsyncThunk("auth/getEmployees", async ({branchId}) => {
+export const getAllBranchEmployees = createAsyncThunk("auth/getAllBranchEmployees", async ({branchId}) => {
   try {
     const response = await axiosInstance.get(`/corporate/employee/${branchId}`);
 
@@ -141,6 +141,39 @@ export const getEmployees = createAsyncThunk("auth/getEmployees", async ({branch
     toast.error(error?.response?.data?.message);
   }
 });
+
+// Get All Corporate Employees
+export const getAllEmployees = createAsyncThunk("auth/getAllEmployees", async () => {
+  try {
+    const response = await axiosInstance.get("/corporate/employees");
+
+    console.log("Corporate Employees: ", response.data);
+
+    return response.data.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
+
+// Update Employee
+export const updateEmployee = createAsyncThunk('auth/updateEmployee', async ({employeeId, data}) => {
+  try {
+    const response = await axiosInstance.put(`/corporate/employee/${employeeId}`, data);
+
+    console.log("Updated Employee: ", response.data);
+
+    toast.promise(Promise.resolve(response), {
+      loading: "Updating employee...",
+      success: (data) => data?.data?.message,
+      error: "Failed to update employee",
+    });
+
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
+
 // // Unified Login
 export const login = createAsyncThunk('auth/login', async (data) => {
   try {
@@ -280,6 +313,31 @@ export const getAllBranches = createAsyncThunk(
     }
   }
 );
+
+
+// Update Branch Details
+export const updateBranchDetails = createAsyncThunk(
+  "auth/updateBranchDetails",
+  async ({branchId, data}) => {
+    try {
+      const response = await axiosInstance.put(`/corporate/branch/${branchId}`, data);
+
+      console.log("Branch Details Update: ", response.data);
+
+      toast.promise(Promise.resolve(response), {
+        loading: "Updating branch details...",
+        success: (data) => data?.data?.message,
+        error: "Error updating branch details",
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
+
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
