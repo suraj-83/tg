@@ -6,20 +6,26 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]);
+  const [travelDetails, setTravelDetails] = useState([]); // Initialize as an empty array
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getAirTravelDetails());
-      if (response?.payload?.data) {
-        setTravelDetails(response.payload.data);
-        setTotalPages(Math.ceil(response.payload.data.length / rowsPerPage));
+      const fetchedData = response?.payload?.data?.data; // Access the 'data' property inside 'payload.data'
+
+      // Ensure that travelDetails is an array
+      if (Array.isArray(fetchedData)) {
+        setTravelDetails(fetchedData);
+        setTotalPages(Math.ceil(fetchedData.length / rowsPerPage));
+      } else {
+        console.error("Expected an array for travel details, but got:", fetchedData);
       }
     };
     fetchData();
-  }, [rowsPerPage]);
+  }, [dispatch, rowsPerPage]);
 
   const handleCancel = async (bookingId) => {
     try {
@@ -31,7 +37,6 @@ const FlightBookingDetails = () => {
       console.error("Failed to cancel air travel:", error);
     }
   };
-
 
   const handleRowsPerPageChange = (e) => {
     setRowsPerPage(Number(e.target.value));
@@ -46,12 +51,10 @@ const FlightBookingDetails = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  const paginatedDetails = travelDetails.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
-  const totalPages = Math.ceil(travelDetails.length / rowsPerPage);
-
+  // Safeguard against undefined or non-array travelDetails
+  const paginatedDetails = Array.isArray(travelDetails)
+    ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    : [];
 
   return (
     <div className="flex">
@@ -65,7 +68,7 @@ const FlightBookingDetails = () => {
         <h1 className="pb-4 font-bold text-center bg-white w-full pt-5 text-blue-700 uppercase text-2xl underline">
           Flight Booking Details
         </h1>
-        {paginatedDetails.length > 0 && (
+        {paginatedDetails.length > 0 ? (
           <div className="overflow-auto">
             <table className="min-w-full text-sm text-center bg-white">
               <thead>
@@ -115,9 +118,11 @@ const FlightBookingDetails = () => {
               </tbody>
             </table>
           </div>
+        ) : (
+          <p className="text-center text-gray-500">No booking details available.</p>
         )}
-      {/* Pagination controls */}
-      <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
+        {/* Pagination controls */}
+        <div className="absolute right-4 bottom-0 bg-gray-100 w-full flex items-center bg-inherit justify-end text-[#4B4747] py-5">
           <div className="flex items-center gap-4 px-5 select-none">
             <p>Rows per page</p>
             <select
@@ -137,7 +142,6 @@ const FlightBookingDetails = () => {
                   : "text-gray-400 cursor-pointer"
               }`}
               onClick={handlePreviousPage}
-              disabled={currentPage === 1}
             />
             <FaAngleRight
               size={25}
@@ -147,7 +151,6 @@ const FlightBookingDetails = () => {
                   : "text-gray-400 cursor-pointer"
               }`}
               onClick={handleNextPage}
-              disabled={currentPage === totalPages}
             />
             <span>
               Page {currentPage} of {totalPages}
