@@ -1,83 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchBusDetails } from "../../redux/slices/dashboardSlice";
+import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
 import Img from "../../assets/volvo-bus.webp";
 import CorporateSidebar from "./CorporateSidebar";
-import { getVolvoBusTravelDetails } from "../../redux/slices/travelSlice";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([
-    {
-      id: 1,
-      fullName: "John Doe",
-      dob: "1990-01-01",
-      gender: "Male",
-      contactNo: "1234567890",
-      email: "john@example.com",
-      travelFrom: "Delhi",
-      travelTo: "Mumbai",
-      classOfTravel: "AC",
-      travelDate: "2023-01-01",
-      busNo: "12345",
-      timePreference: "10:00 AM",
-    },
-    {
-      id: 2,
-      fullName: "Jane Smith",
-      dob: "1995-05-15",
-      gender: "Female",
-      contactNo: "9876543210",
-      email: "jane@example.com",
-      travelFrom: "Chennai",
-      travelTo: "Kolkata",
-      classOfTravel: "Non-AC",
-      travelDate: "2023-02-01",
-      busNo: "23456",
-      timePreference: "12:00 PM",
-    },
-    {
-      id: 3,
-      fullName: "Alice Wilson",
-      dob: "1980-07-15",
-      gender: "Female",
-      contactNo: "0987654321",
-      email: "alice@example.com",
-      travelFrom: "Mumbai",
-      travelTo: "Bangalore",
-      classOfTravel: "AC",  
-      travelDate: "2023-03-01",
-      busNo: "34567",
-      timePreference: "02:00 PM", 
-    },
-    {
-      id: 4,
-      fullName: "Bob Johnson",
-      dob: "1998-12-31",
-      gender: "Male",
-      contactNo: "5555555555",
-      email: "bob@example.com",
-      travelFrom: "Pune",
-      travelTo: "Hyderabad",
-      classOfTravel: "Non-AC",
-      travelDate: "2023-04-01",
-      busNo: "45678",
-      timePreference: "08:00 AM",
-    },
-  ]);
+  const [travelDetails, setTravelDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await dispatch(getVolvoBusTravelDetails());
+  //       console.log("Full response:", response); // Log the full response
+  //       const data = response?.payload?.data || [];
+  //       console.log("Travel data:", data); // Log the actual data
+        
+  //       if (Array.isArray(data)) {
+  //         setTravelDetails(data);
+  //         setTotalPages(Math.ceil(data.length / rowsPerPage));
+  //       } else {
+  //         console.warn("Data is not an array:", data); // Add warning if data is not an array
+  //         setTravelDetails([]); // Set to empty array if response is unexpected
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching travel details", error);
+  //       setTravelDetails([]);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [dispatch, rowsPerPage]);
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await dispatch(getVolvoBusTravelDetails());
-      setTravelDetails(response.payload.data);
-      setTotalPages(Math.ceil(response.payload.data.length / rowsPerPage));
+      try {
+        const response = await dispatch(getVolvoBusTravelDetails());
+        console.log("Full response:", response); // Check the full response
+  
+        // Extracting data and pagination info correctly
+        const data = response?.payload?.data?.data || []; // Adjust to get the data array
+        const pagination = response?.payload?.data?.pagination || {}; // Get pagination details
+        console.log("Travel data:", data);
+  
+        if (Array.isArray(data)) {
+          setTravelDetails(data);
+          setTotalPages(pagination.total_pages || 1); // Use pagination info for total pages
+        } else {
+          console.warn("Data is not an array:", data);
+          setTravelDetails([]);
+        }
+      } catch (error) {
+        console.error("Error fetching travel details", error);
+        setTravelDetails([]);
+      }
     };
     fetchData();
   }, [dispatch, rowsPerPage]);
+  
 
   const handleCancel = (index) => {
     const updatedDetails = travelDetails.map((booking, i) => {
@@ -104,22 +88,20 @@ const VolvoBusBookingDetails = () => {
     }
   };
 
-
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  const paginatedDetails = travelDetails.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
-  const totalPages = Math.ceil(travelDetails.length / rowsPerPage);
-  const filteredDetails = travelDetails.filter(
+  // Check if travelDetails is an array before slicing
+  const paginatedDetails = Array.isArray(travelDetails)
+    ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    : [];
+
+  const filteredDetails = paginatedDetails.filter(
     (booking) =>
       booking.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       booking.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
 
   return (
     <div className="flex">
@@ -141,53 +123,57 @@ const VolvoBusBookingDetails = () => {
           />
         </div>
         <div className="overflow-auto">
-          <table className="text-center text-sm bg-white">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border">Booking</th>
-                <th className="py-2 px-4 border">Full_Name</th>
-                <th className="py-2 px-4 border">Date_of_Birth</th>
-                <th className="py-2 px-4 border">Gender</th>
-                <th className="py-2 px-4 border">Contact_No</th>
-                <th className="py-2 px-4 border">Email</th>
-                <th className="py-2 px-4 border">Pickup_Location</th>
-                <th className="py-2 px-4 border">Destination</th>
-                <th className="py-2 px-4 border">Travel_Date</th>
-                <th className="py-2 px-4 border">Seat_Type</th>
-                <th className="py-2 px-4 border">Bus_No</th>
-                <th className="py-2 px-4 border">Status</th>
-                <th className="py-2 px-4 border">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedDetails.map((booking, index) => (
-                <tr key={index}>
-                  <td className="py-2 px-4 border">{index + 1}</td>
-                  <td className="py-2 px-4 border">{booking.fullName}</td>
-                  <td className="py-2 px-4 border">{booking.dob}</td>
-                  <td className="py-2 px-4 border">{booking.gender}</td>
-                  <td className="py-2 px-4 border">{booking.contactNo}</td>
-                  <td className="py-2 px-4 border">{booking.email}</td>
-                  <td className="py-2 px-4 border">{booking.pickupLocation}</td>
-                  <td className="py-2 px-4 border">{booking.destination}</td>
-                  <td className="py-2 px-4 border">{booking.travelDate}</td>
-                  <td className="py-2 px-4 border">{booking.seatType}</td>
-                  <td className="py-2 px-4 border">{booking.busNo}</td>
-                  <td className="py-2 px-4 border">{booking.status}</td>
-                  <td className="py-2 px-4 border">
-                    {booking.status !== "Cancelled" && (
-                      <button
-                        className="bg-red-500 text-white px-4 py-2 rounded"
-                        onClick={() => handleCancel(index)}
-                      >
-                        Cancel
-                      </button>
-                    )}
-                  </td>
+          {filteredDetails.length > 0 ? (
+            <table className="text-center text-sm bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border">Booking</th>
+                  <th className="py-2 px-4 border">Full_Name</th>
+                  <th className="py-2 px-4 border">Date_of_Birth</th>
+                  <th className="py-2 px-4 border">Gender</th>
+                  <th className="py-2 px-4 border">Contact_No</th>
+                  <th className="py-2 px-4 border">Email</th>
+                  <th className="py-2 px-4 border">Pickup_Location</th>
+                  <th className="py-2 px-4 border">Destination</th>
+                  <th className="py-2 px-4 border">Travel_Date</th>
+                  <th className="py-2 px-4 border">Seat_Type</th>
+                  <th className="py-2 px-4 border">Bus_No</th>
+                  <th className="py-2 px-4 border">Status</th>
+                  <th className="py-2 px-4 border">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredDetails.map((booking, index) => (
+                  <tr key={index}>
+                    <td className="py-2 px-4 border">{index + 1}</td>
+                    <td className="py-2 px-4 border">{booking.fullName}</td>
+                    <td className="py-2 px-4 border">{booking.dob}</td>
+                    <td className="py-2 px-4 border">{booking.gender}</td>
+                    <td className="py-2 px-4 border">{booking.contactNo}</td>
+                    <td className="py-2 px-4 border">{booking.email}</td>
+                    <td className="py-2 px-4 border">{booking.travelFrom}</td>
+                    <td className="py-2 px-4 border">{booking.travelTo}</td>
+                    <td className="py-2 px-4 border">{booking.travelDate}</td>
+                    <td className="py-2 px-4 border">{booking.classOfTravel}</td>
+                    <td className="py-2 px-4 border">{booking.busNo}</td>
+                    <td className="py-2 px-4 border">{booking.status}</td>
+                    <td className="py-2 px-4 border">
+                      {booking.status !== "Cancelled" && (
+                        <button
+                          className="bg-red-500 text-white px-4 py-2 rounded"
+                          onClick={() => handleCancel(index)}
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="text-center">No booking details found.</p>
+          )}
         </div>
         {/* Pagination controls */}
         <div className="absolute right-4 bottom-0 bg-gray-100 flex w-full items-center bg-inherit justify-end text-[#4B4747] py-5">
