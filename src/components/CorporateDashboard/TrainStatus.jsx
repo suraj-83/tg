@@ -34,7 +34,7 @@ const TrainBookingDetails = () => {
         setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
       }
     } catch (error) {
-      console.error("Failed to cancel air travel:", error);
+      console.error("Failed to cancel train travel:", error);
     }
   };
 
