@@ -129,7 +129,7 @@ const EmployeeDetails = () => {
                     <p><strong>State:</strong> {employee.state}</p>
                     <p><strong>Email:</strong> {employee.email}</p>
                     <p><strong>CountryCode:</strong> {employee.countryCode}</p>
-                    <p><strong>Phone No.:</strong> {employee.phoneNo}</p>
+                    <p><strong>Phone No.:</strong> {employee.contactNo}</p>
                     <p><strong>Branch:</strong> {employee.branchId}</p>
                     <p><strong>Department:</strong> {employee.department}</p>
                     <p><strong>Position:</strong> {employee.position}</p>
@@ -240,7 +240,7 @@ const EmployeeDetails = () => {
                       <input
                         type="text"
                         name="phoneNo"
-                        value={editingEmployee.phoneNo}
+                        value={editingEmployee.contactNo}
                         onChange={handleChange}
                         className="block bg-[#20354b] w-full mt-1 p-2 border rounded"
                       />
