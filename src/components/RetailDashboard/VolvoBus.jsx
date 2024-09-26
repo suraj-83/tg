@@ -2,27 +2,51 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Img from "../../assets/volvo-bus.webp";
 import UserSidebar from "./UserSidebar";
-import { getVolvoBusTravelDetails, deleteBusTravel } from "../../redux/slices/travelSlice";
+import { getVolvoBusTravelDetails, deleteBusTravel,updateBusTravel } from "../../redux/slices/travelSlice";
 
 const VolvoBusBookingDetails = () => {
   const dispatch = useDispatch();
   const [travelDetails, setTravelDetails] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
 
+  
   useEffect(() => {
     const fetchData = async () => {
-      let response = await dispatch(getVolvoBusTravelDetails());
-      setTravelDetails(response.payload.data);
+      try {
+        const response = await dispatch(getVolvoBusTravelDetails());
+        console.log("Full response:", response); // Check the full response
+  
+        // Extracting data and pagination info correctly
+        const data = response?.payload?.data?.data || []; // Adjust to get the data array
+        const pagination = response?.payload?.data?.pagination || {}; // Get pagination details
+        console.log("Travel data:", data);
+  
+        if (Array.isArray(data)) {
+          setTravelDetails(data);
+          setTotalPages(pagination.total_pages || 1); // Use pagination info for total pages
+        } else {
+          console.warn("Data is not an array:", data);
+          setTravelDetails([]);
+        }
+      } catch (error) {
+        console.error("Error fetching travel details", error);
+        setTravelDetails([]);
+      }
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, rowsPerPage]);
+  
 
-  const handleCancel = async (id) => {
+  const handleCancel = async (index) => {
     try {
-      const response = await dispatch(deleteBusTravel(id));
+      const response = await dispatch(deleteBusTravel(travelDetails[index].id));
       if (response.payload.success) {
         setTravelDetails(
-          travelDetails.map((booking) =>
-            booking.id === id ? { ...booking, status: "Cancelled" } : booking
+          travelDetails.map((booking, i) =>
+            i === index ? { ...booking, status: "Cancelled" } : booking
           )
         );
       }
@@ -30,6 +54,37 @@ const VolvoBusBookingDetails = () => {
       console.error("Failed to cancel bus travel:", error);
     }
   };
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  // Check if travelDetails is an array before slicing
+  const paginatedDetails = Array.isArray(travelDetails)
+    ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    : [];
+
+  const filteredDetails = paginatedDetails.filter(
+    (booking) =>
+      booking.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      booking.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
           <div className="flex">
         <UserSidebar />
@@ -65,23 +120,23 @@ const VolvoBusBookingDetails = () => {
                 <tbody>
                   {travelDetails.map((booking, index) => (
                     <tr key={index}>
-                      <td className="py-2 px-4 border">{index + 1}</td>
-                      <td className="py-2 px-4 border">{booking.fullName}</td>
-                      <td className="py-2 px-4 border">{booking.dob}</td>
-                      <td className="py-2 px-4 border">{booking.gender}</td>
-                      <td className="py-2 px-4 border">{booking.contactNo}</td>
-                      <td className="py-2 px-4 border">{booking.email}</td>
-                      <td className="py-2 px-4 border">
+                      <td className="py-2 px-4 border whitespace-nowrap">{index + 1}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.fullName}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.dob}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.gender}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.contactNo}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.email}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">
                         {booking.pickupLocation}
                       </td>
-                      <td className="py-2 px-4 border">
+                      <td className="py-2 px-4 border whitespace-nowrap">
                         {booking.destination}
                       </td>
-                      <td className="py-2 px-4 border">{booking.travelDate}</td>
-                      <td className="py-2 px-4 border">{booking.seatType}</td>
-                      <td className="py-2 px-4 border">{booking.busNo}</td>
-                      <td className="py-2 px-4 border">{booking.status}</td>
-                      <td className="py-2 px-4 border">
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.travelDate}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.seatType}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.busNo}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">{booking.status}</td>
+                      <td className="py-2 px-4 border whitespace-nowrap">
                         {booking.status !== "Cancelled" && (
                           <button
                             className="bg-red-500 text-white px-4 py-2 rounded"

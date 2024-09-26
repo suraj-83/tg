@@ -5,26 +5,55 @@ import { getAirTravelDetails,deleteAirTravel } from "../../redux/slices/travelSl
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]);
+  const [travelDetails, setTravelDetails] = useState([]); // Initialize as an empty array
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getAirTravelDetails());
-      setTravelDetails(response.payload.data);
+      const fetchedData = response?.payload?.data?.data; // Access the 'data' property inside 'payload.data'
+
+      // Ensure that travelDetails is an array
+      if (Array.isArray(fetchedData)) {
+        setTravelDetails(fetchedData);
+        setTotalPages(Math.ceil(fetchedData.length / rowsPerPage));
+      } else {
+        console.error("Expected an array for travel details, but got:", fetchedData);
+      }
     };
     fetchData();
-  }, []);
+  }, [dispatch, rowsPerPage]);
 
   const handleCancel = async (bookingId) => {
     try {
       const response = await dispatch(deleteAirTravel(bookingId));
       if (response.payload.success) {
-        setTravelDetails(travelDetails.filter(detail => detail.id !== bookingId));
+        setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
       }
     } catch (error) {
       console.error("Failed to cancel air travel:", error);
     }
   };
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to the first page when rows per page changes
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  // Safeguard against undefined or non-array travelDetails
+  const paginatedDetails = Array.isArray(travelDetails)
+    ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    : [];
 
 
   return (
@@ -56,29 +85,29 @@ const FlightBookingDetails = () => {
                   <th className="py-2 px-10 border border-gray-200">Class</th>
                   <th className="py-2 px-10 border border-gray-200">Travel_Date</th>
                   <th className="py-2 px-10 border border-gray-200">Flight_No</th>
-                  <th className="py-2 px-10 border border-gray-200">Time_Preference</th>
                   <th className="py-2 px-10 border border-gray-200">Adult</th>
                   <th className="py-2 px-10 border border-gray-200">Children</th>
+                  <th className="py-2 px-10 border border-gray-200">Time_Preference</th>
                   <th className="py-2 px-10 border border-gray-200">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {travelDetails.map((detail, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.fullName}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.dob}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.gender}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.contactNo}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.email}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.travelFrom}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.travelTo}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.classOfTravel}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.travelDate}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.flightNo}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.timePreference}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.adult}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">{detail.children}</td>
-                    <td className="py-2 px-4 text-center border border-gray-200">
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.fullName}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.dob}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.gender}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.contactNo}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.email}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.travelFrom}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.travelTo}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.classOfTravel}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.travelDate}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.flightNo}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.adult}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.children}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.timePreference}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">
                       <button
                         className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-700"
                         onClick={() => handleCancel(detail.id)}

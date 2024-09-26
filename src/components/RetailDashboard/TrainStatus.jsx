@@ -1,26 +1,60 @@
 import React, { useEffect, useState } from "react";
-import UserHeader from "./UserHeader";
 import UserSidebar from "./UserSidebar";
-import { getTrainTravelDetails } from "../../redux/slices/travelSlice";
+import { getTrainTravelDetails , deleteTrainTravel } from "../../redux/slices/travelSlice";
 import { useDispatch } from "react-redux";
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]);
+  const [travelDetails, setTravelDetails] = useState([]); // Initialize as an empty array
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getTrainTravelDetails());
-      setTravelDetails(response.payload.data);
+      const fetchedData = response?.payload?.data?.data; // Access the 'data' property inside 'payload.data'
+
+      // Ensure that travelDetails is an array
+      if (Array.isArray(fetchedData)) {
+        setTravelDetails(fetchedData);
+        setTotalPages(Math.ceil(fetchedData.length / rowsPerPage));
+      } else {
+        console.error("Expected an array for travel details, but got:", fetchedData);
+      }
     };
     fetchData();
-  }, []);
+  }, [dispatch, rowsPerPage]);
 
-  const handleCancel = (bookingId) => {
-    setTravelDetails((prevDetails) =>
-      prevDetails.filter((booking) => booking.id !== bookingId)
-    );
+  const handleCancel = async (bookingId) => {
+    try {
+      const response = await dispatch(deleteTrainTravel(bookingId));
+      if (response.payload.success) {
+        setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
+      }
+    } catch (error) {
+      console.error("Failed to cancel train travel:", error);
+    }
   };
+
+  const handleRowsPerPageChange = (e) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to the first page when rows per page changes
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  // Safeguard against undefined or non-array travelDetails
+  const paginatedDetails = Array.isArray(travelDetails)
+    ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+    : [];
+
 
   return (
       <div className="flex">
@@ -50,6 +84,8 @@ const TrainBookingDetails = () => {
                   <th className="py-2 px-14 border">Class</th>
                   <th className="py-2 px-14 border">Date</th>
                   <th className="py-2 px-4 border">Train_No</th>
+                  <th className="py-2 px-4 border">Adults</th>
+                  <th className="py-2 px-4 border">Children</th>
                   <th className="py-2 px-4 border">Time</th>
                   <th className="py-2 px-4 border">Actions</th>
                 </tr>
@@ -57,18 +93,20 @@ const TrainBookingDetails = () => {
               <tbody>
                 {travelDetails.map((booking) => (
                   <tr key={booking.id}>
-                    <td className="py-2 px-4 text-center border">{booking.fullName}</td>
-                    <td className="py-2 px-4 text-center border">{booking.dob}</td>
-                    <td className="py-2 px-4 text-center border">{booking.gender}</td>
-                    <td className="py-2 px-4 text-center border">{booking.contactNo}</td>
-                    <td className="py-2 px-4 text-center border">{booking.email}</td>
-                    <td className="py-2 px-4 text-center border">{booking.travelFrom}</td>
-                    <td className="py-2 px-4 text-center border">{booking.travelTo}</td>
-                    <td className="py-2 px-4 text-center border">{booking.classOfTravel}</td>
-                    <td className="py-2 px-4 text-center border">{booking.travelDate}</td>
-                    <td className="py-2 px-4 text-center border">{booking.trainNo}</td>
-                    <td className="py-2 px-4 text-center border">{booking.timePreference}</td>
-                    <td className="py-2 px-4 text-center border">
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.fullName}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.dob}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.gender}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.contactNo}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.email}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.travelFrom}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.travelTo}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.classOfTravel}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.travelDate}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.trainNo}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.adults}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.children}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.timePreference}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">
                       <button
                         className="bg-red-500 text-white px-4 py-2 rounded"
                         onClick={() => handleCancel(booking.id)}

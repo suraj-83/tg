@@ -44,6 +44,7 @@ function RetailProfile() {
           <a href="retaildashboard">Retail Profile</a>
         </h2>
         {/* Profile Photo Upload */}
+        <div className="grid grid-cols-5 gap-2">
         <div className="flex flex-col items-center mb-4">
           <div className="relative">
             <img
@@ -66,7 +67,6 @@ function RetailProfile() {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-5 gap-2">
           <div className="mb-4">
             <label className="block text-gray-900 font-extrabold uppercase">First Name</label>
             <input
