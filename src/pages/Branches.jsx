@@ -172,6 +172,7 @@ const BranchDetails = () => {
               </span>
             </div>
           </div>
+          
         </div>
       </main>
     </div>
