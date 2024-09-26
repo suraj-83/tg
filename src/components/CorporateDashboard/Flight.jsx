@@ -92,20 +92,20 @@ const FlightBookingDetails = () => {
               <tbody>
                 {paginatedDetails.map((detail) => (
                   <tr key={detail.id}>
-                    <td className="py-2 px-2 border border-gray-200">{detail.fullName}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.dob}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.gender}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.contactNo}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.email}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.travelFrom}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.travelTo}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.classOfTravel}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.travelDate}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.flightNo}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.timePreference}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.adult}</td>
-                    <td className="py-2 px-2 border border-gray-200">{detail.children}</td>
-                    <td className="py-2 px-2 border border-gray-200">
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.fullName}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.dob}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.gender}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.contactNo}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.email}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.travelFrom}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.travelTo}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.classOfTravel}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.travelDate}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.flightNo}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.timePreference}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.adult}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">{detail.children}</td>
+                    <td className="py-2 px-2 border border-gray-200 whitespace-nowrap">
                       <button
                         className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-700"
                         onClick={() => handleCancel(detail.id)}
