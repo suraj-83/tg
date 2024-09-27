@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import UserSidebar from "./UserSidebar";
-import { getTrainTravelDetails , deleteTrainTravel } from "../../redux/slices/travelSlice";
+import { getTrainTravelDetails, deleteTrainTravel } from "../../redux/slices/travelSlice";
 import { useDispatch } from "react-redux";
+import { toast } from 'react-toastify';  // Importing toast
+import 'react-toastify/dist/ReactToastify.css';  // Importing toast styles
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
-  const [travelDetails, setTravelDetails] = useState([]); // Initialize as an empty array
+  const [travelDetails, setTravelDetails] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -13,9 +15,8 @@ const TrainBookingDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(getTrainTravelDetails());
-      const fetchedData = response?.payload?.data?.data; // Access the 'data' property inside 'payload.data'
+      const fetchedData = response?.payload?.data?.data;
 
-      // Ensure that travelDetails is an array
       if (Array.isArray(fetchedData)) {
         setTravelDetails(fetchedData);
         setTotalPages(Math.ceil(fetchedData.length / rowsPerPage));
@@ -26,12 +27,21 @@ const TrainBookingDetails = () => {
     fetchData();
   }, [dispatch, rowsPerPage]);
 
+  
   const handleCancel = async (bookingId) => {
     try {
-      const response = await dispatch(deleteTrainTravel(bookingId));
-      if (response.payload.success) {
-        setTravelDetails(travelDetails.filter((detail) => detail.id !== bookingId));
-      }
+      // Show loading while the promise is being processed
+      toast.promise(
+        dispatch(deleteTrainTravel(bookingId)).unwrap(),  // `unwrap` will help resolve or reject the action
+        {
+          loading: 'Deleting train travel...',
+          success: 'Train travel canceled successfully!',
+          error: 'Failed to cancel train travel. Please try again.'
+        }
+      ).then(() => {
+        // Remove the row immediately after successful deletion
+        setTravelDetails((prevDetails) => prevDetails.filter((detail) => detail.id !== bookingId));
+      });
     } catch (error) {
       console.error("Failed to cancel train travel:", error);
     }
@@ -39,7 +49,7 @@ const TrainBookingDetails = () => {
 
   const handleRowsPerPageChange = (e) => {
     setRowsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to the first page when rows per page changes
+    setCurrentPage(1);
   };
 
   const handlePreviousPage = () => {
@@ -50,27 +60,23 @@ const TrainBookingDetails = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  // Safeguard against undefined or non-array travelDetails
   const paginatedDetails = Array.isArray(travelDetails)
     ? travelDetails.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
     : [];
 
-
   return (
-      <div className="flex">
-        <UserSidebar />
-        <main
-          className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover overflow-auto"
- 
-          style={{
-            backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
-          }}
-        >
-          <div className="container mx-auto bg-gray-100 shadow-md rounded-lg p-6">
-            <h1 className="text-2xl font-bold mb-6 text-center uppercase underline">
-              Train Booking Details
-            </h1>
-            <div className="overflow-x-auto">
+    <div className="flex">
+      <UserSidebar />
+      <main className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover overflow-auto"
+        style={{
+          backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+        }}
+      >
+        <div className="container mx-auto bg-gray-100 shadow-md rounded-lg p-6">
+          <h1 className="text-2xl font-bold mb-6 text-center uppercase underline">
+            Train Booking Details
+          </h1>
+          <div className="overflow-x-auto">
             <table className="min-w-full bg-gray-100 text-sm">
               <thead>
                 <tr>
@@ -91,7 +97,7 @@ const TrainBookingDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {travelDetails.map((booking) => (
+                {paginatedDetails.map((booking) => (
                   <tr key={booking.id}>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.fullName}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.dob}</td>
@@ -118,11 +124,11 @@ const TrainBookingDetails = () => {
                 ))}
               </tbody>
             </table>
-            </div>
           </div>
-        </main>
-      </div>
-      );
+        </div>
+      </main>
+    </div>
+  );
 };
 
 export default TrainBookingDetails;

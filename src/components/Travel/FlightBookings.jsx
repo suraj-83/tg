@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createAirTravel } from "../../redux/slices/travelSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { toast } from 'react-toastify';
 
 const FlightBookingForm = () => {
   const dispatch = useDispatch();
