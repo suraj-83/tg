@@ -80,6 +80,7 @@ const FlightBookingDetails = () => {
                 <tr>
                 <th className="py-2 px-10 border border-gray-200">Full_Name</th>
                   <th className="py-2 px-10 border border-gray-200">DOB</th>
+                  <th className="py-2 px-10 border border-gray-200">Age</th>
                   <th className="py-2 px-10 border border-gray-200">Gender</th>
                   <th className="py-2 px-10 border border-gray-200">Contact_No</th>
                   <th className="py-2 px-10 border border-gray-200">Email</th>
@@ -99,6 +100,7 @@ const FlightBookingDetails = () => {
                   <tr key={detail.id}>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.fullName}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.dob}</td>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.age}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.gender}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.contactNo}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.email}</td>

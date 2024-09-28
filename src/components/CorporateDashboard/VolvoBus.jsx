@@ -130,6 +130,7 @@ const VolvoBusBookingDetails = () => {
                   <th className="py-2 px-4 border">Booking</th>
                   <th className="py-2 px-4 border">Full_Name</th>
                   <th className="py-2 px-4 border">Date_of_Birth</th>
+                  <th className="py-2 px-4 border">Age</th>
                   <th className="py-2 px-4 border">Gender</th>
                   <th className="py-2 px-4 border">Contact_No</th>
                   <th className="py-2 px-4 border">Email</th>
@@ -148,6 +149,7 @@ const VolvoBusBookingDetails = () => {
                     <td className="py-2 px-4 border">{index + 1}</td>
                     <td className="py-2 px-4 border">{booking.fullName}</td>
                     <td className="py-2 px-4 border">{booking.dob}</td>
+                    <td className="py-2 px-4 border">{booking.age}</td>
                     <td className="py-2 px-4 border">{booking.gender}</td>
                     <td className="py-2 px-4 border">{booking.contactNo}</td>
                     <td className="py-2 px-4 border">{booking.email}</td>

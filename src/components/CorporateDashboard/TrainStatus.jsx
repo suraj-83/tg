@@ -75,6 +75,7 @@ const TrainBookingDetails = () => {
                 <tr>
                   <th className="py-2 px-4 border">Full_Name</th>
                   <th className="py-2 px-4 border">Date_of_Birth</th>
+                  <th className="py-2 px-4 border">Age</th>
                   <th className="py-2 px-4 border">Gender</th>
                   <th className="py-2 px-4 border">Contact_No</th>
                   <th className="py-2 px-4 border">Email</th>
@@ -92,6 +93,7 @@ const TrainBookingDetails = () => {
                   <tr key={booking.id}>
                     <td className="py-2 px-4 border-b whitespace-nowrap">{booking.fullName}</td>
                     <td className="py-2 px-4 border-b whitespace-nowrap">{booking.dob}</td>
+                    <td className="py-2 px-4 border-b whitespace-nowrap">{booking.age}</td>
                     <td className="py-2 px-4 border-b whitespace-nowrap">{booking.gender}</td>
                     <td className="py-2 px-4 border-b whitespace-nowrap">{booking.contactNo}</td>
                     <td className="py-2 px-4 border-b whitespace-nowrap">{booking.email}</td>
