@@ -4,6 +4,7 @@ import UserSidebar from "./UserSidebar.jsx";
 import { getAirTravelDetails, deleteAirTravel } from "../../redux/slices/travelSlice.js";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from './Pagination';
 
 const FlightBookingDetails = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const FlightBookingDetails = () => {
   return (
     <div className="flex flex-1">
       <UserSidebar />
-      <main className="min-h-screen bg-gray-100 w-full overflow-auto">
+      <main className="min-h-screen bg-gray-100 w-full overflow-auto relative">
         <h1 className="pb-8 font-bold text-center text-blue-700 bg-white w-full pt-5 uppercase text-2xl underline">
           Flight Booking Details
         </h1>
@@ -124,6 +125,18 @@ const FlightBookingDetails = () => {
           ) : (
             <p className="py-10 text-center bg-white text-red-500">No flight booking details available.</p>
           )}
+        </div>
+        
+        {/* Pagination controls */}
+        <div className="absolute bottom-0 bg-gray-100 flex w-full items-center bg-inherit justify-end text-[#4B4747] py-5">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleRowsPerPageChange}
+          />
         </div>
       </main>
     </div>

@@ -425,106 +425,110 @@ const CabBookingDetails = () => {
           <table className="text-sm bg-white w-full">
             <thead>
               <tr>
-                <th className="py-2 px-10 border border-gray-200">Country</th>
-                <th className="py-2 px-10 border border-gray-200">Nationality</th>
-                <th className="py-2 px-10 border border-gray-200">Tour Plan</th>
-                <th className="py-2 px-10 border border-gray-200">Name</th>
-                <th className="py-2 px-10 border border-gray-200">Contact No</th>
-                <th className="py-2 px-10 border border-gray-200">Alternate No</th>
-                <th className="py-2 px-10 border border-gray-200">Email</th>
-                <th className="py-2 px-10 border border-gray-200">Cab Required At</th>
-                <th className="py-2 px-10 border border-gray-200">Cab Required For</th>
-                <th className="py-2 px-10 border border-gray-200">Local Travel Kms Limit</th>
-                <th className="py-2 px-10 border border-gray-200">Pickup Date & Time</th>
-                <th className="py-2 px-10 border border-gray-200">Pickup Address</th>
-                <th className="py-2 px-10 border border-gray-200">Pickup Landmark</th>
-                <th className="py-2 px-10 border border-gray-200">Drop Date & Time</th>
-                <th className="py-2 px-10 border border-gray-200">Drop Address</th>
-                <th className="py-2 px-10 border border-gray-200">Drop Landmark</th>
-                <th className="py-2 px-10 border border-gray-200">Cab Duration</th>
-                <th className="py-2 px-10 border border-gray-200">No of Cabs Required</th>
-                <th className="py-2 px-10 border border-gray-200">Type of Cab Required</th>
-                <th className="py-2 px-10 border border-gray-200">No of Persons Travelling</th>
-                <th className="py-2 px-10 border border-gray-200">No of Infants</th>
-                <th className="py-2 px-10 border border-gray-200">No of Children</th>
-                <th className="py-2 px-10 border border-gray-200">Other Requirements</th>
-                <th className="py-2 px-10 border border-gray-200">Action</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Booking</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Country</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Nationality</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Tour Plan</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Name</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Contact No</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Alternate No</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Email</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Cab Required At</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Cab Required For</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Local Travel Kms Limit</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Pickup Date & Time</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Pickup Address</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Pickup Landmark</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Drop Date & Time</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Drop Address</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Drop Landmark</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Cab Duration</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">No of Cabs Required</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Type of Cab Required</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">No of Persons Travelling</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">No of Infants</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">No of Children</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Other Requirements</th>
+                <th className="py-2 px-10 border whitespace-nowrap border-gray-200">Action</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(travelDetails) && travelDetails.length > 0 ? (
                 travelDetails.map((detail, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
+                      {index + 1}
+                    </td>
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.pickupCountry}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.nationality}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.tourPlan}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.name}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.contactNo}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.alternateContactNo}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.email}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.cabRequiredAt}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.cabRequiredFor}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.localTravelKmsLimit}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.pickupDateTime}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.pickupAddress}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.pickupLandmark}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.dropDateTime}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.dropAddress}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.dropLandmark}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.cabDuration}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.noOfCabsRequired}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.typeOfCabRequired}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.noOfPersonsTravelling}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.noOfInfants}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.noOfChildren}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       {detail.otherRequirements}
                     </td>
-                    <td className="py-2 px-2 border text-center border-gray-200">
+                    <td className="py-2 px-2 border text-center whitespace-nowrap border-gray-200">
                       <button
                         className="text-red-500 hover:underline"
                         onClick={() => cancelBooking(detail.id)}

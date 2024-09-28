@@ -8,10 +8,10 @@ function EmployeeLogin() {
     const navigate = useNavigate();
 
     const initialFormData = {
-        employeeId: '',
-        companyId: '',
-        password: ''
-    };
+        employeeId: "",
+        email: "",
+        password: ""
+    }
 
     const [formData, setFormData] = useState(initialFormData);
     const [isValid, setIsValid] = useState(true);
@@ -38,17 +38,17 @@ function EmployeeLogin() {
                         id="employeeId"
                         placeholder='Employee ID'
                         value={formData.employeeId}
-                        onChange={(e) => setFormData(prevState => ({ ...prevState, empId: e.target.value }))}
+                        onChange={(e) => setFormData(prevState => ({ ...prevState, employeeId: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
                 <div className="mb-4">
                     <input
                         type="text"
-                        id="companyId"
-                        placeholder='Company ID'
-                        value={formData.companyId}
-                        onChange={(e) => setFormData(prevState => ({ ...prevState, companyId: e.target.value }))}
+                        id="emailId"
+                        placeholder='Email ID'
+                        value={formData.email}
+                        onChange={(e) => setFormData(prevState => ({ ...prevState, email: e.target.value }))}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
@@ -62,7 +62,7 @@ function EmployeeLogin() {
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
-                {!isValid && <p className="text-red-500 mt-1">Invalid Employee ID, Company ID, or Password</p>}
+                {!isValid && <p className="text-red-500 mt-1">Invalid Employee ID, Email ID, or Password</p>}
                 <div className="mb-4 flex justify-between items-center">
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
                     <div className="flex items-center">
