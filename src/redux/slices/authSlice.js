@@ -253,11 +253,11 @@ if (role === CORPORATE_TYPE_NAME) {
 // Employee Login
 export const employeeLogin = createAsyncThunk(
   "auth/employee-login",
-  async ({ employeeId, companyId, password }, { rejectWithValue }) => {
+  async ({ employeeId, email, password }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post("/corporate/employee-login", {
         employeeId,
-        companyId,
+        email,
         password,
       });
 

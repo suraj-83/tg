@@ -4,6 +4,7 @@ import { getTrainTravelDetails, deleteTrainTravel } from "../../redux/slices/tra
 import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';  // Importing toast
 import 'react-toastify/dist/ReactToastify.css';  // Importing toast styles
+import Pagination from './Pagination'; // Import the Pagination component
 
 const TrainBookingDetails = () => {
   const dispatch = useDispatch();
@@ -67,19 +68,20 @@ const TrainBookingDetails = () => {
   return (
     <div className="flex">
       <UserSidebar />
-      <main className="bg-gray-100 w-screen min-h-screen bg-fixed bg-cover overflow-auto"
+      <main className="bg-gray-100 w-screen min-h-screen relative bg-fixed bg-cover overflow-auto"
         style={{
           backgroundImage: `url('https://plus.unsplash.com/premium_photo-1661883997997-99e25dad4ffe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
         }}
       >
-        <div className="container mx-auto bg-gray-100 shadow-md rounded-lg p-6">
-          <h1 className="text-2xl font-bold mb-6 text-center uppercase underline">
-            Train Booking Details
+        <>
+        <h1 className="text-2xl w-full bg-gray-100 text-center pb-8 uppercase pt-4 font-bold ">
+        Train Booking Details
           </h1>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-gray-100 text-sm">
               <thead>
                 <tr>
+                  <th className="py-2 px-4 border">Booking</th>
                   <th className="py-2 px-4 border">Full_Name</th>
                   <th className="py-2 px-4 border">Date_of_Birth</th>
                   <th className="py-2 px-4 border">Gender</th>
@@ -97,8 +99,10 @@ const TrainBookingDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {paginatedDetails.map((booking) => (
-                  <tr key={booking.id}>
+                {paginatedDetails.map((booking, index) => (
+                  <tr key={index}>
+                    
+                    <td className="py-1 px-2 border text-center whitespace-nowrap">{index + 1}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.fullName}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.dob}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.gender}</td>
@@ -109,7 +113,7 @@ const TrainBookingDetails = () => {
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.classOfTravel}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.travelDate}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.trainNo}</td>
-                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.adults}</td>
+                    <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.adult}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.children}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">{booking.timePreference}</td>
                     <td className="py-2 px-4 text-center border whitespace-nowrap">
@@ -125,7 +129,19 @@ const TrainBookingDetails = () => {
               </tbody>
             </table>
           </div>
+          
+        {/* Pagination controls */}
+        <div className="absolute bottom-0 bg-gray-100 flex w-full items-center bg-inherit justify-end text-[#4B4747] py-5">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleRowsPerPageChange}
+          />
         </div>
+        </>
       </main>
     </div>
   );
