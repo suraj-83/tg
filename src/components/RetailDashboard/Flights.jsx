@@ -78,7 +78,8 @@ const FlightBookingDetails = () => {
             <table className="min-w-full text-sm bg-white">
               <thead>
                 <tr>
-                <th className="py-2 px-10 border border-gray-200">Full_Name</th>
+                  <th className="py-2 px-10 border border-gray-200">Sno.</th>
+                  <th className="py-2 px-10 border border-gray-200">Full_Name</th>
                   <th className="py-2 px-10 border border-gray-200">DOB</th>
                   <th className="py-2 px-10 border border-gray-200">Age</th>
                   <th className="py-2 px-10 border border-gray-200">Gender</th>
@@ -96,8 +97,9 @@ const FlightBookingDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {paginatedDetails.map((detail) => (
-                  <tr key={detail.id}>
+                {paginatedDetails.map((detail, index) => (
+                  <tr key={index}>
+                    <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{index + 1}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.fullName}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.dob}</td>
                     <td className="py-2 px-4 text-center border border-gray-200 whitespace-nowrap">{detail.age}</td>

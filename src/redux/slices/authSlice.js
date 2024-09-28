@@ -447,6 +447,8 @@ export const getProfile = createAsyncThunk('auth/getProfile', async () => {
     toast.error(error?.response?.data?.message);
   }
 })
+
+
 export const updateCorporateProfile = createAsyncThunk('auth/updateCorporateProfile', async (data) => {
   try {
     const response = await axiosInstance.put("/corporate/update-profile", data);
@@ -462,20 +464,38 @@ export const updateCorporateProfile = createAsyncThunk('auth/updateCorporateProf
   }
 });
 
-export const updateRetailProfile = createAsyncThunk('auth/updateRetailProfile', async (data) => {
+
+// export const updateRetailProfile = createAsyncThunk('auth/updateRetailProfile', async (data) => {
+//   try {
+//     const response = await axiosInstance.put("/user/update-profile", data);
+
+//     if (response?.data?.success) {
+//       toast.success(response?.data?.message);
+//       return response.data;
+//     } else {
+//       toast.error(response?.data?.message);
+//     }
+//   } catch (error) {
+//     toast.error(error?.response?.data?.message);
+//   }
+// });
+export const updateRetailProfile = createAsyncThunk('auth/updateRetailProfile', async (data, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.put("/user/update-profile", data);
 
     if (response?.data?.success) {
       toast.success(response?.data?.message);
-      return response.data;
+      return response.data.updatedProfile; // Ensure that we return the updated profile data
     } else {
       toast.error(response?.data?.message);
+      return rejectWithValue(response?.data?.message);
     }
   } catch (error) {
     toast.error(error?.response?.data?.message);
+    return rejectWithValue(error?.response?.data?.message);
   }
 });
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -535,6 +555,9 @@ const authSlice = createSlice({
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.user = action.payload;
+      })
+      .addCase(updateRetailProfile.fulfilled, (state, action) => {
+        state.user = action.payload; // Update the user profile data in Redux
       })
   },
 });
